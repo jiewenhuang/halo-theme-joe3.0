@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="https://www.thymeleaf.org"
+  th:replace="~{layout :: html(head = null,content = ~{::content})}"
+>
+  <th:block th:fragment="content">
+    <h1>分类目录</h1>
+    <ul>
+      <li th:each="category : ${categories}">
+        <a
+          th:href="@{${category.status.permalink}}"
+          th:text="${category.spec.displayName}"
+        ></a>
+      </li>
+    </ul>
+  </th:block>
+</html>

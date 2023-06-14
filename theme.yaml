@@ -1,0 +1,17 @@
+apiVersion: theme.halo.run/v1alpha1
+kind: Theme
+metadata:
+  name: theme-starter
+spec:
+  displayName: Theme Starter
+  author:
+    name: halo-dev
+    website: "https://halo.run"
+  description: Halo 2.0 Theme base on Thymeleaf
+  logo: "https://halo.run/logo"
+  website: "https://halo.run"
+  repo: "https://github.com/halo-sigs/theme-starter"
+  settingName: "theme-starter-setting"
+  configMapName: "theme-starter-configMap"
+  version: "1.0"
+  require: "*"

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="https://www.thymeleaf.org"
+  th:replace="~{layout :: html(head = null,content = ~{::content})}"
+>
+  <th:block th:fragment="content">
+    <th:block th:each="archive : ${archives.items}">
+      <h1 th:text="${archive.year}"></h1>
+      <ul class="listing">
+        <th:block th:each="month : ${archive.months}">
+          <li th:each="post : ${month.posts}">
+            <a
+              th:href="@{${post.status.permalink}}"
+              th:title="${post.spec.title}"
+              th:text="${post.spec.title}"
+            ></a>
+          </li>
+        </th:block>
+      </ul>
+    </th:block>
+    <a th:if="${archives.hasPrevious()}" th:href="@{${archives.prevUrl}}">
+      上一页
+    </a>
+    <a th:if="${archives.hasNext()}" th:href="@{${archives.nextUrl}}">下一页</a>
+  </th:block>
+</html>
