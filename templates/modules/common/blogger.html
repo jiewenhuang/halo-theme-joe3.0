@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<th:block th:fragment="blogger">
+  <section class="joe_aside__item author">
+    <img width="100%" height="120" class="image lazyload" th:data-src="${theme.config.blogger.author_bg}" th:src="@{/assets/img/author_bg.jpg}"  alt="博主栏壁纸">
+    <div class="user">
+      <div class="avatar_wrapper"
+      th:classappend="${theme.config.blogger.avatar_type == 'circle' ? 'circle':'round'}">
+        <img class="avatar lazyload" th:data-src="${theme.config.blogger.avatar}" th:src="${theme.config.blogger.lazyload_avatar}"  alt="博主头像"/>
+        <th:block th:if="${theme.config.blogger.avatar_frame != 0}">
+        <img th:class="'avatar_frame '+${theme.config.blogger.avatar_frame}" th:src="@{/assets/frame/}+'/'+${theme.config.blogger.avatar_frame}+'.png'"  alt="挂架"/>
+        </th:block>
+        <th:block th:if="${theme.config.blogger.avatar_widget != 0}">
+      <img th:class="'avatar_widget '+${theme.config.blogger.avatar_widget}" th:src="@{/assets/widget/}+'/'+${theme.config.blogger.avatar_widget}+'.gif'"  alt="相框"/>
+        </th:block>
+    </div>
+    <a class="link" th:href="${site.url}" target="_blank" rel="noopener noreferrer nofollow">
+        [[${theme.config.blogger.nickname ?: site.title}]]
+<!--      这里应该还有一个等级-->
+    </a>
+    <th:block th:if="${theme.config.blogger.motto != ''}">
+    <p class="motto joe_motto">[[${theme.config.blogger.motto}]]</p>
+    </th:block>
+      <th:block th:if="${theme.config.blogger.motto == ''}">
+    <th:block th:if="${theme.config.blogger.enable_day_words}">
+    <img class="motto_day_words" height="14" src="https://v2.jinrishici.com/one.svg?font-size=146&spacing=2&color=grey" />
+    </th:block>
+      </th:block>
+
+<!--    <p class="motto joe_motto">${user.description!'一句话介绍自己吧！'}</p>-->
+</div>
+<div class="count" th:with="stats = ${siteStatsFinder.getStats()}">
+
+  <div class="item" th:title="'累计访问数 '+${stats.visit}">
+    <span class="num">[[${stats.visit}]]</span>
+    <span>访问量</span>
+  </div>
+<!--    搭配A-->
+    <th:block th:if="${theme.config.blogger.overview_type == 'A'}">
+        <div class="item" th:title="'累计分类数 '+${stats.category}">
+          <span class="num">[[${stats.category}]]</span>
+          <span>分类数</span>
+        </div>
+
+        <div class="item" th:title="'累计文章数 '+${stats.post}">
+          <span class="num">[[${stats.post}]]</span>
+          <span>文章数</span>
+        </div>
+<!--        <div class="item" th:title="'累计评论数 '+${stats.comment}">-->
+<!--          <span class="num">[[${stats.comment}]]</span>-->
+<!--          <span>评论数</span>-->
+<!--        </div>-->
+    </th:block>
+    <!--    搭配B-->
+    <th:block th:if="${theme.config.blogger.overview_type == 'B'}">
+        <div class="item" th:title="'累计分类数 '+${stats.category}">
+            <span class="num">[[${stats.category}]]</span>
+            <span>分类数</span>
+        </div>
+
+<!--        <div class="item" th:title="'累计标签数 '+${stats.tag}">-->
+<!--            <span class="num">[[${stats.tag}]]</span>-->
+<!--            <span>标签数</span>-->
+<!--        </div>-->
+
+<!--        <div class="item" th:title="'累计文章数 '+${stats.post}">-->
+<!--            <span class="num">[[${stats.post}]]</span>-->
+<!--            <span>文章数</span>-->
+<!--        </div>-->
+        <div class="item" th:title="'累计评论数 '+${stats.comment}">
+            <span class="num">[[${stats.comment}]]</span>
+            <span>评论数</span>
+        </div>
+    </th:block>
+    <!--    搭配C-->
+    <th:block th:if="${theme.config.blogger.overview_type == 'C'}">
+        <div class="item" th:title="'累计分类数 '+${stats.category}">
+            <span class="num">[[${stats.category}]]</span>
+            <span>分类数</span>
+        </div>
+
+<!--        <div class="item" th:title="'累计标签数 '+${stats.tag}">-->
+<!--            <span class="num">[[${stats.tag}]]</span>-->
+<!--            <span>标签数</span>-->
+<!--        </div>-->
+
+        <div class="item" th:title="'累计文章数 '+${stats.post}">
+            <span class="num">[[${stats.post}]]</span>
+            <span>文章数</span>
+        </div>
+        <div class="item" th:title="'累计评论数 '+${stats.comment}">
+            <span class="num">[[${stats.comment}]]</span>
+            <span>评论数</span>
+        </div>
+    </th:block>
+    <!--    搭配D-->
+    <th:block th:if="${theme.config.blogger.overview_type == 'D'}">
+<!--        <div class="item" th:title="'累计分类数 '+${stats.category}">-->
+<!--            <span class="num">[[${stats.category}]]</span>-->
+<!--            <span>分类数</span>-->
+<!--        </div>-->
+
+<!--        <div class="item" th:title="'累计标签数 '+${stats.tag}">-->
+<!--            <span class="num">[[${stats.tag}]]</span>-->
+<!--            <span>标签数</span>-->
+<!--        </div>-->
+
+        <div class="item" th:title="'累计文章数 '+${stats.post}">
+            <span class="num">[[${stats.post}]]</span>
+            <span>文章数</span>
+        </div>
+        <div class="item" th:title="'累计评论数 '+${stats.comment}">
+            <span class="num">[[${stats.comment}]]</span>
+            <span>评论数</span>
+        </div>
+    </th:block>
+</div>
+<th:block th:if="${theme.config.blogger.enable_weather and theme.config.blogger.weather_key !=''}">
+    <div id="he-plugin-simple"></div>
+</th:block>
+<th:block th:if="${theme.config.blogger.enable_social}">
+    <div class="social-account">
+    <th:block th:each="socials : ${theme.config.blogger.socials}">
+        <th:block th:replace="modules/macro/social :: ${socials.socials_select}" />
+    </th:block>
+    </div>
+</th:block>
+<th:block th:if="${theme.config.blogger.enable_strips}">
+<canvas id="canvas-strips" width="300" height="340"></canvas>
+<script th:src="@{/assets/effect/bg/strips.js}"></script>
+</th:block>
+</section>
+</th:block>
+</html>

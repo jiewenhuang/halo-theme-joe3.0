@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<th:block th:fragment="favorite">
+  <th:block th:fragment="bottom">
+  <div class="joe_detail__agree">
+    <div class="agree">
+      <div class="icon">
+        <i class="joe-font joe-icon-like icon-like"></i>
+        <i class="joe-font joe-icon-like-fill icon-unlike"></i>
+      </div>
+      <span class="nums">[[${post.stats.upvote}]]</span>
+    </div>
+  </div>
+  </th:block>
+  <th:block th:fragment="aside">
+  <li class="post-operate-like">
+    <i class="joe-font joe-icon-dianzan icon-like"></i>
+    <i class="joe-font joe-icon-dianzan-fill icon-unlike"></i>
+    <span class="nums${(post.likes gt 0)?then(' visible','')}" df="">${post.likes!0}</span>
+  </li>
+  </th:block>
+</th:block>
+</html>

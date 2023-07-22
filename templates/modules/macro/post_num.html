@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<th:block th:fragment="post_num">
+  <th:block th:if="${htmlType == 'tags'}">
+    <em class="post-nums">[[${tag.status.postCount +'篇'}]]</em>
+  </th:block>
+  <th:block th:if="${htmlType == 'categories'}">
+    <em class="post-nums">[[${category.status.postCount +'篇'}]]</em>
+  </th:block>
+</th:block>
+</html>

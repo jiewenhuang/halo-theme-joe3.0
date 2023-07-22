@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="tail">
+<!--    ===== 引入脚本 start ===== -->
+<!--    <th:block th:if="${htmlType == 'index' && theme.config.home.enable_index_list_effect == true} or ${htmlType == 'journals' && theme.config.journals.enable_journal_effect == true} or ${htmlType == 'photos' && theme.config.photos.enable_photos_effect == true}">-->
+        <script th:src="@{/assets/lib/wowjs/wow.min.js}"></script>
+<!--    </th:block>-->
+    <script th:src="@{/assets/lib/lazysizes/lazysizes.min.js}"></script>
+    <script th:src="@{/assets/lib/qmsg/qmsg.js}"></script>
+    <th:block th:if="${theme.config.aside.show_newreply == true} or ${htmlType == 'sheet'}">
+        <script th:src="@{/assets/lib/j-marked/marked.min.js}"></script>
+    </th:block>
+    <script th:src="@{/assets/js/min/utils.min.js}"></script>
+
+    <th:block th:if="${htmlType == 'index' && theme.config.carousel.enable_banner}">
+        <script th:src="@{/assets/lib/swiper/swiper.min.js}"></script>
+    </th:block>
+    <th:block th:if="${htmlType == 'post'} and ${theme.config.post.enable_toc == true}">
+        <script th:src="@{/assets/lib/tocbot/tocbot.min.js}"></script>
+    </th:block>
+    <th:block th:if="${theme.config.other.enable_clean_mode != false && (htmlType =='post' || htmlType =='journals' || htmlType =='sheet')}">
+        <script th:src="@{/assets/lib/vue@2.6.10/vue.min.js}"></script>
+        <script th:src="@{/assets/lib/halo-comment/halo-comment.min.js}"></script>
+    </th:block>
+    <script th:src="@{/assets/lib/fancybox/jquery.fancybox.min.js}"></script>
+    <th:block th:if="${theme.config.aside.enable_aside} and ${theme.config.aside.enable_music_player && theme.config.aside.music_id != null && theme.config.aside.music_id != ''}">
+        <link rel="stylesheet" th:href="@{/assets/lib/APlayer/APlayer.min.css}">
+        <script th:src="@{/assets/lib/APlayer/APlayer.min.js}"></script>
+        <script th:src="@{/assets/lib/meting/meting.min.js}"></script>
+    </th:block>
+    <script th:src="@{/assets/js/custom.js}"></script>
+    <th:block th:if="${htmlType == 'post'} or ${htmlType == 'journals'} or ${htmlType == 'sheet'}">
+        <script th:src="@{/assets/lib/clipboard/clipboard.min.js}"></script>
+    </th:block>
+    <th:block th:if="${theme.config.custom.favicon == true && theme.config.custom.favicon != null && theme.config.custom.favicon != ''}">
+        <script th:src="@{/assets/lib/favico/favico.min.js}"></script>
+    </th:block>
+    <th:block th:if="${htmlType == 'post'}">
+        <script th:src="@{/assets/lib/jquery-qrcode/jquery.qrcode.min.js}"></script>
+    </th:block>
+<!--相册-->
+    <th:block th:if="${htmlType == 'photos'}">
+        <script th:src="@{/assets/lib/justifiedGallery/justifiedGallery.min.js}"></script>
+
+    </th:block>
+
+<!--===== 引入页面级js start =====-->
+    <script th:src="@{/assets/js/common.js}"></script>
+    <th:block th:if="${htmlType == 'post'} or ${htmlType == 'journals'} or ${htmlType == 'sheet'}">
+        <script th:src="@{/assets/lib/prism/prism.min.js}"></script>
+    </th:block>
+    <th:block th:if="${htmlType == 'index'}">
+        <script th:src="@{/assets/js/index.js}"></script>
+    </th:block>
+    <th:block th:if="${htmlType == 'archives'}">
+        <script th:src="@{/assets/js/archives.js}"></script>
+    </th:block>
+    <th:block th:if="${htmlType == 'post'}">
+        <script th:src="@{/assets/js/post.js}"></script>
+    </th:block>
+    <th:block th:if="${htmlType == 'journals'}">
+        <script th:src="@{/assets/js/journals.js}"></script>
+    </th:block>
+    <th:block th:if="${htmlType == 'photos'}">
+        <script th:src="@{/assets/js/photos.js}"></script>
+    </th:block>
+    <th:block th:if="${htmlType == 'sheet'}">
+        <script th:src="@{/assets/lib/draggabilly/draggabilly.min.js}"></script>
+        <script th:src="@{/assets/js/leaving.js}"></script>
+    </th:block>
+
+<!-- ===== 引入页面级js end ===== -->
+
+<!-- ===== 引入脚本 start ===== -->
+
+    <th:block th:if="${theme.config.footer.enable_busuanzi}">
+<!-- 卜算子 -->
+        <script th:src="@{/assets/lib/busuanzi/busuanzi.min.js}"></script>
+    </th:block>
+
+<!-- ===== 引入脚本 end =====-->
+
+    <th:block th:if="${theme.config.custom.custom_external_js_body != null} and ${theme.config.custom.custom_external_js_body != ''}">
+<!-- 自定义外部js -->
+        <script th:src="${theme.config.custom.custom_external_js_body}"></script>
+    </th:block>
+    <th:block th:if="${theme.config.custom.custom_js_body != null} and ${theme.config.custom.custom_js_body != ''}">
+
+    <!-- 自定义js -->
+        <script type="text/javascript" th:inline="javascript">/*[[${theme.config.custom.custom_js_body}]]*/</script>
+    </th:block>
+</th:block>
+</html>

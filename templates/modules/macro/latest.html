@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<th:block th:fragment="latest">
+  <section class="joe_aside__item newest">
+    <div class="joe_aside__item-title">
+      <i class="joe-font joe-icon-huo"></i>
+      <span class="text">最新文章</span>
+    </div>
+    <div class="joe_aside__item-contain">
+
+      <ul class="list">
+        <th:block th:with="archives = ${postFinder.archives(1,5)}">
+          <th:block th:each="archive : ${archives.items}">
+            <th:block th:each="month : ${archive.months}">
+
+        <li class="item" th:each="post : ${month.posts}">
+          <a class="link" th:href="@{${post.status.permalink}}" th:text="${post.spec.title}">${post.title!}</a>
+          <i class="joe-font joe-icon-link"></i>
+        </li>
+            </th:block>
+          </th:block>
+        </th:block>
+      </ul>
+  </div>
+  </section>
+</th:block>
+</html>

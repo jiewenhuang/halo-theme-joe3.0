@@ -1,0 +1,70 @@
+@default: url(../../simple_cursor/normal.cur), auto;
+@pointer: url(../../simple_cursor/link.cur), auto;
+@active: url(../../simple_cursor/link.cur), auto;
+
+body {
+  cursor: @default;
+}
+
+a {
+  cursor: @pointer;
+}
+
+a:active {
+  cursor: @active;
+}
+
+p {
+  cursor: @default;
+}
+
+.joe_index {
+  &__title {
+    &-title {
+      .item {
+        cursor: @pointer;
+      }
+
+      &.default {
+        .item {
+          cursor: @default;
+        }
+      }
+    }
+  }
+}
+
+.joe_index__banner {
+  .swiper-slide .item {
+    cursor: @default !important;
+
+    &.clickable {
+      cursor: @pointer !important;
+    }
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    cursor: @pointer;
+  }
+}
+
+.joe_header {
+  .joe_header__above {
+    .joe_header__above-nav .item {
+      cursor: @pointer !important;
+    }
+
+    .submit {
+      cursor: @pointer;
+    }
+  }
+}
+
+.joe_action .joe_action_item {
+  cursor: @pointer;
+}
+
+.joe_load {
+  cursor: @pointer;
+}

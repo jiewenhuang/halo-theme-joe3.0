@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="hot_category">
+  <div class="joe_index__hot">
+    <div class="joe_index__title">
+      <ul class="joe_index__title-title default">
+        <li class="item active" data-type="created">精品分类</li>
+      </ul>
+      <div class="joe_index__title-notice">
+        <a th:href="@{/categories}" target="_blank" rel="noopener noreferrer nofollow"><i class="joe-font joe-icon-application"></i>全部分类</a>
+      </div>
+    </div>
+<th:block th:if="${theme.config.home.hot_category_source == 'category'}">
+    <ul class="joe_index__hot-list hotlist">
+      <th:block th:each="categories : ${theme.config.home.category_data}">
+        <th:block th:with="category = ${categoryFinder.getByName(categories.categoryMetaData)}">
+      <li class="item animated fadeIn">
+        <a class="link" target="_blank" th:href="@{${category.status.permalink}}" th:title="${category.spec.displayName}">
+          <figure class="inner">
+            <img width="100%" height="120" class="image ls-is-cached lazyloaded" th:data-src="@{/assets/img/hot_cover1.jpg}" th:src="${category.spec.cover}" onerror="Joe.errorImg(this)" th:alt="${category.spec.displayName}">
+            <figcaption class="title">[[${category.spec.displayName}]]</figcaption>
+          </figure>
+        </a>
+      </li>
+        </th:block>
+      </th:block>
+    </ul>
+
+</th:block>
+    <th:block th:if="${theme.config.home.hot_category_source == 'custom'}">
+
+      <ul class="joe_index__hot-list hotlist">
+        <th:block th:each="customData : ${theme.config.home.custom_data}">
+        <li class="item animated fadeIn">
+          <a class="link" target="_blank" th:href="${customData.url}" th:title="${customData.title}">
+            <figure class="inner">
+              <img width="100%" height="120" class="image ls-is-cached lazyloaded" th:data-src="@{/assets/img/hot_cover1.jpg}" th:src="${customData.cover}" onerror="Joe.errorImg(this)" th:alt="${customData.title}">
+              <figcaption class="title">[[${customData.title}]]</figcaption>
+            </figure>
+          </a>
+        </li>
+        </th:block>
+      </ul>
+    </th:block>
+  </div>
+</th:block>
+</html>

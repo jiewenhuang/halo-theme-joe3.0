@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<th:block th:fragment="comment">
+<div class="joe_comment_box">
+  <h2>评论区</h2>
+  <halo:comment
+          group="content.halo.run"
+          kind="Post"
+          th:attr="name=${post.metadata.name}"
+          colorScheme="document.documentElement.getAttribute('data-mode')"
+  />
+</div>
+
+</th:block>
+</html>

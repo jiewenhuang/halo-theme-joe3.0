@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<th:block th:fragment="footer">
+  <footer class="joe_footer"
+          th:classappend="|${theme.config.footer.footer_position == 'fixed'? 'fixed' :''} ${theme.config.footer.enable_full_footer ? 'full' :''} |">
+
+    <div class="joe_container"
+         th:classappend="${theme.config.footer.enable_rss == false} and ${theme.config.footer.enable_rss ==false} ?'central':''">
+      <div class="item">
+        <p>
+          [[${#dates.format(new java.util.Date().getTime(), 'yyyy')}]] ©<a th:href="${site.url}" target="_blank" rel="noopener noreferrer">[[${site.title}]]</a>
+          <th:block th:if="${theme.config.footer.enable_icp} and ${theme.config.basic.icp != ''} and ${theme.config.basic.icp != null}">
+           -
+          <a class="icp" href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer nofollow">[[${theme.config.basic.icp}]]</a>
+          </th:block>
+        </p>
+        <th:block th:if="${theme.config.footer.enable_powerby}">
+          <th:block th:with="theme = ${themeFinder.activation()}">
+        <p class="site_powered">Powered by<a class="a-powered" href="https://halo.run/" target="_blank" rel="noopener noreferrer">
+          Halo</a>&nbsp;|&nbsp;🌈 Theme by<a class="a-theme" th:title="${theme.spec.displayName}+'v'+${theme.spec.version}" th:href="${theme.spec.repo}" target="_blank" rel="noopener noreferrer">M酷&Jiewen</a></p>
+          </th:block>
+        </th:block>
+
+
+    <th:block th:if="${theme.config.footer.driven_by != null} and ${theme.config.footer.driven_by != 'none'}">
+      <th:block th:if="${theme.config.footer.driven_by == 'aliyun'}">
+    <p class="site_driven">本站点由
+      <a href="https://www.aliyun.com" target="_blank" rel="noopener noreferrer nofollow">
+      <img th:class="${theme.config.footer.driven_by}" th:src="@{/assets/img/cloud}+'/'+${theme.config.footer.driven_by}+'.svg'"  alt="云服务商"/>
+      </a>提供云服务
+    </p>
+      </th:block>
+      <th:block th:if="${theme.config.footer.driven_by == 'tencent'}">
+        <p class="site_driven">本站点由
+          <a href="https://cloud.tencent.com" target="_blank" rel="noopener noreferrer nofollow">
+            <img th:class="${theme.config.footer.driven_by}" th:src="@{/assets/img/cloud}+'/'+${theme.config.footer.driven_by}+'.svg'"  alt="云服务商"/>
+          </a>提供云服务
+        </p>
+      </th:block>
+      <th:block th:if="${theme.config.footer.driven_by == 'baidu'}">
+        <p class="site_driven">本站点由
+          <a href="https://cloud.baidu.com" target="_blank" rel="noopener noreferrer nofollow">
+            <img th:class="${theme.config.footer.driven_by}" th:src="@{/assets/img/cloud}+'/'+${theme.config.footer.driven_by}+'.svg'"  alt="云服务商"/>
+          </a>提供云服务
+        </p>
+      </th:block>
+      <th:block th:if="${theme.config.footer.driven_by == 'upyun'}">
+        <p class="site_driven">本站点由
+          <a href="https://www.upyun.com" target="_blank" rel="noopener noreferrer nofollow">
+            <img th:class="${theme.config.footer.driven_by}" th:src="@{/assets/img/cloud}+'/'+${theme.config.footer.driven_by}+'.svg'"  alt="云服务商"/>
+          </a>提供云服务
+        </p>
+      </th:block>
+      <th:block th:if="${theme.config.footer.driven_by == 'qiniu'}">
+        <p class="site_driven">本站点由
+          <a href="https://www.qiniu.com" target="_blank" rel="noopener noreferrer nofollow">
+            <img th:class="${theme.config.footer.driven_by}" th:src="@{/assets/img/cloud}+'/'+${theme.config.footer.driven_by}+'.svg'"  alt="云服务商"/>
+          </a>提供云服务
+        </p>
+      </th:block>
+      <th:block th:if="${theme.config.footer.driven_by == 'huawei'}">
+        <p class="site_driven">本站点由
+          <a href="https://www.huaweicloud.com" target="_blank" rel="noopener noreferrer nofollow">
+            <img th:class="${theme.config.footer.driven_by}" th:src="@{/assets/img/cloud}+'/'+${theme.config.footer.driven_by}+'.svg'"  alt="云服务商"/>
+          </a>提供云服务
+        </p>
+      </th:block>
+      <th:block th:if="${theme.config.footer.driven_by == 'jinshan'}">
+        <p class="site_driven">本站点由
+          <a href="https://www.ksyun.com" target="_blank" rel="noopener noreferrer nofollow">
+            <img th:class="${theme.config.footer.driven_by}" th:src="@{/assets/img/cloud}+'/'+${theme.config.footer.driven_by}+'.svg'"  alt="云服务商"/>
+          </a>提供云服务
+        </p>
+      </th:block>
+
+
+    </th:block>
+  <th:block th:if="${theme.config.footer.enable_birthday}">
+  <div class="site_life">
+    <i class="joe-font joe-icon-jiasu"></i>已运行&nbsp;<strong class="joe_run__day">00</strong> 天 <strong class="joe_run__hour">00</strong> 时 <strong class="joe_run__minute">00</strong> 分 <strong class="joe_run__second">00</strong> 秒
+  </div>
+  </th:block>
+<th:block th:if="${theme.config.footer.enable_police} and ${theme.config.basic.police != ''} and ${theme.config.basic.police != null}">
+<p class="site_police">
+
+  <a th:href="'http://www.beian.gov.cn/portal/registerSystemInfo?recordcode='" target="_blank" rel="noopener noreferrer nofollow">[[${theme.config.basic.police}]]</a>
+
+</p>
+</th:block>
+</div>
+<div class="side-col">
+<th:block th:if="${theme.config.footer.enable_rss || theme.config.footer.enable_rss}">
+  <div class="item">
+    <th:block th:if="${theme.config.footer.enable_rss}">
+    <a class="rss" th:href="@{/rss.xml}" target="_blank" rel="noopener noreferrer"><i class="joe-font joe-icon-rss-fill"></i>&nbsp;RSS</a>
+    </th:block>
+    <th:block th:if="${theme.config.footer.enable_rss}">
+      <a th:href="@{/sitemap.xml}" target="_blank" rel="noopener noreferrer">站点地图</a>
+    </th:block>
+</div>
+</th:block>
+<th:block th:if="${theme.config.footer.enable_busuanzi}">
+<div class="item busuanzi-statistic">
+  <span class="site-pv"><i class="joe-font joe-icon-zhexiantu"></i>访问量<em id="busuanzi_value_site_pv">0</em></span>
+  <span class="site-uv"><i class="joe-font joe-icon-monitor"></i>访客量<em id="busuanzi_value_site_uv">0</em></span>
+  <span class="site-page-pv"><i class="joe-font joe-icon-dianji"></i>本页访客<em id="busuanzi_value_page_pv">0</em></span>
+</div>
+</th:block>
+</div>
+</div>
+</footer>
+</th:block>
+</html>

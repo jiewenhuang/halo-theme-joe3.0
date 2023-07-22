@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="banner">
+  <div class="joe_index__banner">
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <th:block th:each="bannerData : ${theme.config.carousel.banner_source}">
+          <th:block th:with="post = ${postFinder.getByName(bannerData.posts)}">
+        <div class="swiper-slide">
+          <a class="item"
+             th:classappend="${post.status.permalink !='' ? 'clickable': ''}"
+             th:href="${post.status.permalink !='' ? post.status.permalink : 'javascript:;'}" target="_blank" rel="noopener noreferrer nofollow">
+          <img width="100%" height="100%" class="thumbnail lazyload" th:data-src="${post.spec.cover}" th:src="${theme.config.carousel.banner_lazyload_img}" th:alt="${post.spec.title}">
+          <div class="title-row">
+            <h3 class="title">[[${post.spec.title}]]</h3>
+            <th:block th:if="${post.status.excerpt != ''}">
+            <p class="subtitle">[[${post.status.excerpt}]]</p>
+            </th:block>
+        </div>
+      <i class="joe-font joe-icon-zhifeiji"></i>
+      </a>
+    </div>
+          </th:block>
+        </th:block>
+</div>
+<th:block th:if="${theme.config.carousel.enable_banner_pagination}">
+<div class="swiper-pagination"></div>
+</th:block>
+<th:block th:if="${theme.config.carousel.enable_banner_handle} and ${theme.config.carousel.enable_banner_switch_button}">
+<div class="swiper-button-next"></div>
+<div class="swiper-button-prev"></div>
+</th:block>
+</div>
+</div>
+</th:block>
+</html>

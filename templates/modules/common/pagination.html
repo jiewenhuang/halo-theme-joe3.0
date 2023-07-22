@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<th:block th:fragment="pagination">
+    <th:block th:if="${htmlType == 'index'}">
+
+        <th:block
+             th:if="${posts.hasPrevious() || posts.hasNext()}"
+             th:with="totalPages = ${posts.totalPages}, pageIndex = ${posts.page}">
+            <!--        页面总数小于等于7-->
+            <ul class="joe_pagination" th:if="${(totalPages le 7) && (totalPages gt 0)}">
+                <li class="prev"
+                th:classappend="${1 eq pageIndex} ? ' disabled':''">
+                    <a th:href="@{${posts.prevUrl}}">
+                        <i class="joe-font joe-icon-prev"></i>
+                    </a>
+                </li>
+                <li th:classappend="${index eq pageIndex} ? 'active'"
+                    th:each="index : ${#numbers.sequence(1, totalPages)}">
+                    <a th:href="${'/page/' + index}"
+                       th:text="${index}"></a>
+                </li>
+                <li class="next"
+                    th:href="@{${posts.nextUrl}}"
+                    th:classappend="${index eq totalPages} ? ' disabled':''">
+                    <a th:href="@{${posts.nextUrl}}">
+                        <i class="joe-font joe-icon-next"></i>
+                    </a
+                    ></li>
+            </ul>
+            <!--        页面总数大于7-->
+            <ul class="joe_pagination" th:if="${totalPages gt 7}">
+                <li class="prev"
+                    th:classappend="${1 eq pageIndex} ? ' disabled':''">
+                    <a th:href="@{${posts.prevUrl}}">
+                        <i class="joe-font joe-icon-prev"></i>
+                    </a>
+                </li>
+
+                <li th:classappend="${1 eq pageIndex} ? 'active':''">
+                    <a href="/">1</a>
+                </li>
+                <!-- 当前页面小于等于4 -->
+                <li th:classappend="${index eq pageIndex} ? 'active':''"
+                    th:each="index : ${#numbers.sequence(2,5)}"
+                    th:if="${pageIndex le 4}">
+                    <a th:href="${'/page/' + index}"
+                       th:text="${index}"></a>
+                </li>
+                <li th:if="${pageIndex le 4}">
+                    <a href="#">...</a>
+                </li>
+                <!-- 最后一页与当前页面之差小于等于3 -->
+                <li th:if="${totalPages - pageIndex le 3}">
+                    <a href="#">...</a>
+                </li>
+                <li th:classappend="${index eq pageIndex} ? 'active':''"
+                    th:each="index : ${#numbers.sequence(totalPages - 4, totalPages - 1)}"
+                    th:if="${totalPages - pageIndex le 3}">
+                    <a th:href="${'/page/' + index}"
+                       th:text="${index}">
+                    </a>
+                </li>
+                <!-- 最后一页与当前页面之差大于3 且当前页面大于4 -->
+                <li th:if="${(pageIndex gt 4) && (totalPages - pageIndex gt 3)}">
+                    <a href="#">...</a>
+                </li>
+                <li th:each="index : ${#numbers.sequence(pageIndex - 1,pageIndex + 1)}"
+                    th:classappend="${index eq pageIndex} ? 'active':''"
+                    th:if="${(pageIndex gt 4) && (totalPages - pageIndex gt 3)}">
+                    <a th:href="${'/page/' + index}"
+                       th:text="${index}">
+                    </a>
+                </li>
+                <li th:if="${(pageIndex gt 4) && (totalPages - pageIndex gt 3)}">
+                    <a href="#">...</a>
+                </li>
+                <!-- 尾页 -->
+                <li th:classappend="${totalPages eq pageIndex} ? 'active':''"
+                    >
+                    <a th:href="${'/page/'+totalPages}"
+                       th:text="${totalPages}">
+                    </a>
+                </li>
+                <li class="next"
+                    th:href="@{${posts.nextUrl}}"
+                    th:classappend="${index eq totalPages} ? ' disabled':''">
+                    <a th:href="@{${posts.nextUrl}}">
+                        <i class="joe-font joe-icon-next"></i>
+                    </a>
+                </li>
+            </ul>
+    </th:block>
+
+    </th:block>
+    <th:block th:if="${htmlType == 'archives'}" th:fragment="archives">
+
+        <th:block
+                th:if="${archives.hasPrevious() || archives.hasNext()}"
+                th:with="totalPages = ${archives.totalPages}, pageIndex = ${archives.page}">
+            <!--        页面总数小于等于7-->
+            <ul class="joe_pagination" th:if="${(totalPages le 7) && (totalPages gt 0)}">
+                <li class="prev"
+                    th:classappend="${1 eq pageIndex} ? ' disabled':''">
+                    <a th:href="@{${archives.prevUrl}}">
+                        <i class="joe-font joe-icon-prev"></i>
+                    </a>
+                </li>
+                <li th:classappend="${index eq pageIndex} ? 'active'"
+                    th:each="index : ${#numbers.sequence(1, totalPages)}">
+                    <a th:href="@{/archives/page/} + ${index}"
+                       th:text="${index}"></a>
+                </li>
+                <li class="next"
+                    th:classappend="${index eq totalPages} ? ' disabled':''">
+                    <a th:href="@{${archives.nextUrl}}">
+                        <i class="joe-font joe-icon-next"></i>
+                    </a
+                    ></li>
+            </ul>
+            <!--        页面总数大于7-->
+            <ul class="joe_pagination" th:if="${totalPages gt 7}">
+                <li class="prev"
+                    th:classappend="${1 eq pageIndex} ? ' disabled':''">
+                    <a th:href="@{${archives.prevUrl}}">
+                        <i class="joe-font joe-icon-prev"></i>
+                    </a>
+                </li>
+
+                <li th:classappend="${1 eq pageIndex} ? 'active':''">
+                    <a href="/">1</a>
+                </li>
+                <!-- 当前页面小于等于4 -->
+                <li th:classappend="${index eq pageIndex} ? 'active':''"
+                    th:each="index : ${#numbers.sequence(2,5)}"
+                    th:if="${pageIndex le 4}">
+                    <a th:href="@{/archives/page/} + ${index}"
+                       th:text="${index}"></a>
+                </li>
+                <li th:if="${pageIndex le 4}">
+                    <a href="#">...</a>
+                </li>
+                <!-- 最后一页与当前页面之差小于等于3 -->
+                <li th:if="${totalPages - pageIndex le 3}">
+                    <a href="#">...</a>
+                </li>
+                <li th:classappend="${index eq pageIndex} ? 'active':''"
+                    th:each="index : ${#numbers.sequence(totalPages - 4, totalPages - 1)}"
+                    th:if="${totalPages - pageIndex le 3}">
+                    <a th:href="@{/archives/page/} + ${index}"
+                       th:text="${index}">
+                    </a>
+                </li>
+                <!-- 最后一页与当前页面之差大于3 且当前页面大于4 -->
+                <li th:if="${(pageIndex gt 4) && (totalPages - pageIndex gt 3)}">
+                    <a href="#">...</a>
+                </li>
+                <li th:each="index : ${#numbers.sequence(pageIndex - 1,pageIndex + 1)}"
+                    th:classappend="${index eq pageIndex} ? 'active':''"
+                    th:if="${(pageIndex gt 4) && (totalPages - pageIndex gt 3)}">
+                    <a th:href="@{/archives/page/} + ${index}"
+                       th:text="${index}">
+                    </a>
+                </li>
+                <li th:if="${(pageIndex gt 4) && (totalPages - pageIndex gt 3)}">
+                    <a href="#">...</a>
+                </li>
+                <!-- 尾页 -->
+                <li th:classappend="${totalPages eq pageIndex} ? 'active':''"
+                >
+                    <a th:href="@{/archives/page/}+${totalPages}"
+                       th:text="${totalPages}">
+                    </a>
+                </li>
+                <li class="next"
+                    th:href="@{${archives.nextUrl}}"
+                    th:classappend="${index eq totalPages} ? ' disabled':''">
+                    <a th:href="@{${archives.nextUrl}}">
+                        <i class="joe-font joe-icon-next"></i>
+                    </a>
+                </li>
+            </ul>
+        </th:block>
+
+    </th:block>
+    <th:block th:if="${htmlType == 'category'}" th:fragment="category">
+
+        <th:block
+                th:if="${posts.hasPrevious() || posts.hasNext()}"
+                th:with="totalPages = ${posts.totalPages}, pageIndex = ${posts.page}">
+            <!--        页面总数小于等于7-->
+            <ul class="joe_pagination" th:if="${(totalPages le 7) && (totalPages gt 0)}">
+                <li class="prev"
+                    th:classappend="${1 eq pageIndex} ? ' disabled':''">
+                    <a th:href="@{${posts.prevUrl}}">
+                        <i class="joe-font joe-icon-prev"></i>
+                    </a>
+                </li>
+                <li th:classappend="${index eq pageIndex} ? 'active'"
+                    th:each="index : ${#numbers.sequence(1, totalPages)}">
+                    <a th:href="@{/categories}+'/'+${category.spec.slug}+'/page/' + ${index}"
+                       th:text="${index}"></a>
+                </li>
+                <li class="next"
+                    th:classappend="${index eq totalPages} ? ' disabled':''">
+                    <a th:href="@{${posts.nextUrl}}">
+                        <i class="joe-font joe-icon-next"></i>
+                    </a
+                    ></li>
+            </ul>
+            <!--        页面总数大于7-->
+            <ul class="joe_pagination" th:if="${totalPages gt 7}">
+                <li class="prev"
+                    th:classappend="${1 eq pageIndex} ? ' disabled':''">
+                    <a th:href="@{${posts.prevUrl}}">
+                        <i class="joe-font joe-icon-prev"></i>
+                    </a>
+                </li>
+
+                <li th:classappend="${1 eq pageIndex} ? 'active':''">
+                    <a href="/">1</a>
+                </li>
+                <!-- 当前页面小于等于4 -->
+                <li th:classappend="${index eq pageIndex} ? 'active':''"
+                    th:each="index : ${#numbers.sequence(2,5)}"
+                    th:if="${pageIndex le 4}">
+                    <a th:href="@{/categories}+'/'+${category.spec.slug}+'/page/' + ${index}"
+                       th:text="${index}"></a>
+                </li>
+                <li th:if="${pageIndex le 4}">
+                    <a href="#">...</a>
+                </li>
+                <!-- 最后一页与当前页面之差小于等于3 -->
+                <li th:if="${totalPages - pageIndex le 3}">
+                    <a href="#">...</a>
+                </li>
+                <li th:classappend="${index eq pageIndex} ? 'active':''"
+                    th:each="index : ${#numbers.sequence(totalPages - 4, totalPages - 1)}"
+                    th:if="${totalPages - pageIndex le 3}">
+                    <a th:href="@{/categories}+'/'+${category.spec.slug}+'/page/' + ${index}"
+                       th:text="${index}">
+                    </a>
+                </li>
+                <!-- 最后一页与当前页面之差大于3 且当前页面大于4 -->
+                <li th:if="${(pageIndex gt 4) && (totalPages - pageIndex gt 3)}">
+                    <a href="#">...</a>
+                </li>
+                <li th:each="index : ${#numbers.sequence(pageIndex - 1,pageIndex + 1)}"
+                    th:classappend="${index eq pageIndex} ? 'active':''"
+                    th:if="${(pageIndex gt 4) && (totalPages - pageIndex gt 3)}">
+                    <a th:href="@{/categories}+'/'+${category.spec.slug}+'/page/' + ${index}"
+                       th:text="${index}">
+                    </a>
+                </li>
+                <li th:if="${(pageIndex gt 4) && (totalPages - pageIndex gt 3)}">
+                    <a href="#">...</a>
+                </li>
+                <!-- 尾页 -->
+                <li th:classappend="${totalPages eq pageIndex} ? 'active':''"
+                >
+                    <a th:href="@{/categories}+'/'+${category.spec.slug}+'/page/' + ${totalPages}"
+                       th:text="${totalPages}">
+                    </a>
+                </li>
+                <li class="next"
+                    th:href="@{${posts.nextUrl}}"
+                    th:classappend="${index eq totalPages} ? ' disabled':''">
+                    <a th:href="@{${posts.nextUrl}}">
+                        <i class="joe-font joe-icon-next"></i>
+                    </a>
+                </li>
+            </ul>
+        </th:block>
+
+    </th:block>
+    <th:block th:if="${htmlType == 'tag'}" th:fragment="tag">
+
+        <th:block
+                th:if="${posts.hasPrevious() || posts.hasNext()}"
+                th:with="totalPages = ${posts.totalPages}, pageIndex = ${posts.page}">
+            <!--        页面总数小于等于7-->
+            <ul class="joe_pagination" th:if="${(totalPages le 7) && (totalPages gt 0)}">
+                <li class="prev"
+                    th:classappend="${1 eq pageIndex} ? ' disabled':''">
+                    <a th:href="@{${posts.prevUrl}}">
+                        <i class="joe-font joe-icon-prev"></i>
+                    </a>
+                </li>
+                <li th:classappend="${index eq pageIndex} ? 'active'"
+                    th:each="index : ${#numbers.sequence(1, totalPages)}">
+                    <a th:href="@{/tags}+'/'+${tag.spec.slug}+'/page/' + ${index}"
+                       th:text="${index}"></a>
+                </li>
+                <li class="next"
+                    th:classappend="${index eq totalPages} ? ' disabled':''">
+                    <a th:href="@{${posts.nextUrl}}">
+                        <i class="joe-font joe-icon-next"></i>
+                    </a
+                    ></li>
+            </ul>
+            <!--        页面总数大于7-->
+            <ul class="joe_pagination" th:if="${totalPages gt 7}">
+                <li class="prev"
+                    th:classappend="${1 eq pageIndex} ? ' disabled':''">
+                    <a th:href="@{${posts.prevUrl}}">
+                        <i class="joe-font joe-icon-prev"></i>
+                    </a>
+                </li>
+
+                <li th:classappend="${1 eq pageIndex} ? 'active':''">
+                    <a href="/">1</a>
+                </li>
+                <!-- 当前页面小于等于4 -->
+                <li th:classappend="${index eq pageIndex} ? 'active':''"
+                    th:each="index : ${#numbers.sequence(2,5)}"
+                    th:if="${pageIndex le 4}">
+                    <a th:href="@{/tags}+'/'+${tag.spec.slug}+'/page/' + ${index}"
+                       th:text="${index}"></a>
+                </li>
+                <li th:if="${pageIndex le 4}">
+                    <a href="#">...</a>
+                </li>
+                <!-- 最后一页与当前页面之差小于等于3 -->
+                <li th:if="${totalPages - pageIndex le 3}">
+                    <a href="#">...</a>
+                </li>
+                <li th:classappend="${index eq pageIndex} ? 'active':''"
+                    th:each="index : ${#numbers.sequence(totalPages - 4, totalPages - 1)}"
+                    th:if="${totalPages - pageIndex le 3}">
+                    <a th:href="@{/tags}+'/'+${tag.spec.slug}+'/page/' + ${index}"
+                       th:text="${index}">
+                    </a>
+                </li>
+                <!-- 最后一页与当前页面之差大于3 且当前页面大于4 -->
+                <li th:if="${(pageIndex gt 4) && (totalPages - pageIndex gt 3)}">
+                    <a href="#">...</a>
+                </li>
+                <li th:each="index : ${#numbers.sequence(pageIndex - 1,pageIndex + 1)}"
+                    th:classappend="${index eq pageIndex} ? 'active':''"
+                    th:if="${(pageIndex gt 4) && (totalPages - pageIndex gt 3)}">
+                    <a th:href="@{/tags}+'/'+${tag.spec.slug}+'/page/' + ${index}"
+                       th:text="${index}">
+                    </a>
+                </li>
+                <li th:if="${(pageIndex gt 4) && (totalPages - pageIndex gt 3)}">
+                    <a href="#">...</a>
+                </li>
+                <!-- 尾页 -->
+                <li th:classappend="${totalPages eq pageIndex} ? 'active':''"
+                >
+                    <a th:href="@{/tags}+'/'+${tag.spec.slug}+'/page/' + ${totalPages}"
+                       th:text="${totalPages}">
+                    </a>
+                </li>
+                <li class="next"
+                    th:href="@{${posts.nextUrl}}"
+                    th:classappend="${index eq totalPages} ? ' disabled':''">
+                    <a th:href="@{${posts.nextUrl}}">
+                        <i class="joe-font joe-icon-next"></i>
+                    </a>
+                </li>
+            </ul>
+        </th:block>
+
+    </th:block>
+
+
+</th:block>
+</html>

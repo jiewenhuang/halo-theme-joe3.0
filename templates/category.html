@@ -1,19 +1,38 @@
 <!DOCTYPE html>
-<html
-  xmlns:th="https://www.thymeleaf.org"
-  th:replace="~{layout :: html(head = null,content = ~{::content})}"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{modules/layout :: html(title = ${category.spec.displayName}+'-'+${site.title},htmlType = category,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
 >
   <th:block th:fragment="content">
-    <h1 th:text="${category.spec.displayName}"></h1>
-    <ul>
-      <li th:each="post : ${posts.items}">
-        <a
-          th:href="@{${post.status.permalink}}"
-          th:text="${post.spec.title}"
-        ></a>
-      </li>
-    </ul>
-    <a th:if="${posts.hasPrevious()}" th:href="@{${posts.prevUrl}}">上一页</a>
-    <a th:if="${posts.hasNext()}" th:href="@{${posts.nextUrl}}">下一页</a>
+    <body>
+    <div id="Joe">
+      <th:block th:replace="~{modules/macro/navbar :: navbar}" />
+      <div class="joe_container joe_main_container page-category"
+           th:classappend="${theme.config.theme.enable_show_in_up ? 'animated fadeIn':''}">
+        <div class="joe_main">
+          <div class="joe_archive">
+            <div class="joe_archive__title">
+              <div class="joe_archive__title-title">
+                <i class="joe-font joe-icon-feather joe_archive__title-icon"></i>以下是
+                <span class="muted ellipsis">[[${category.spec.displayName}]]</span>
+                <span>相关的文章</span>
+              </div>
+            </div>
+
+            <ul class="joe_archive__list joe_list">
+              <th:block th:each="post, iteration : ${posts.items}">
+                <th:block th:replace="~{modules/macro/post_item :: post_item}" />
+              </th:block>
+            </ul>
+            <th:block th:replace="~{modules/common/pagination :: category}" />
+
+
+        </div>
+      </div>
+    </div>
+      <th:block th:replace="~{modules/common/actions :: actions}" />
+      <th:block th:replace="~{modules/common/footer :: footer}" />
+    </div>
+    <th:block th:replace="~{modules/macro/tail :: tail}" />
+    </body>
   </th:block>
 </html>

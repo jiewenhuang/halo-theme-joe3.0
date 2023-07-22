@@ -1,0 +1,317 @@
+/* 首页样式 */
+.joe_index {
+  overflow-y: hidden;
+
+  &__banner {
+    padding: 15px 15px 5px;
+    background: var(--background);
+
+    .swiper-container {
+      flex: 1;
+      min-width: 0;
+      height: 400px;
+      border-radius: 5px;
+      --swiper-theme-color: #fff;
+
+      .swiper-slide {
+        transform: translate3d(0, 0, 0);
+        overflow: hidden;
+      }
+
+      .item {
+        cursor: default;
+        transform: translate3d(0, 0, 0);
+        display: block;
+        height: 400px;
+
+        &.clickable {
+          cursor: pointer;
+        }
+
+        .thumbnail {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: opacity 0.35s;
+
+          &:hover {
+            opacity: 0.85;
+          }
+        }
+
+        .title-row {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          z-index: 1;
+          padding: 10px 80px 10px 14px;
+          user-select: none;
+          text-align: left;
+          font-size: 18px;
+          color: #fff;
+          background: rgba(0, 0, 0, 0.4);
+
+          .title {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            font-weight: bold;
+            font-size: 18px;
+            color: #fff;
+          }
+
+          .subtitle {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            font-size: 14px;
+            color: #b9b9b9;
+          }
+        }
+
+        .joe-font {
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          z-index: 1;
+          color: #fff;
+          font-size: 20px;
+          opacity: 0.5;
+        }
+      }
+
+      &.swiper-container-horizontal {
+        .swiper-pagination-bullets {
+          top: unset;
+          right: 10px;
+          bottom: 10px;
+          left: unset;
+          width: auto;
+        }
+
+        .swiper-pagination-bullet {
+          transition: width 0.3s ease;
+          border-radius: 30px;
+        }
+
+        .swiper-pagination-bullet-active {
+          width: 14px;
+        }
+      }
+
+      &.swiper-container-vertical {
+
+        .swiper-button-next,
+        .swiper-button-prev {
+          display: none;
+        }
+      }
+
+      .swiper-button-next,
+      .swiper-button-prev {
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 2px;
+        transition: background 0.35s, right 0.35s, left 0.35s;
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.25);
+        }
+
+        &::after {
+          font-size: 20px;
+        }
+      }
+
+      .swiper-button-next {
+        opacity: 0;
+        right: -15px;
+      }
+
+      .swiper-button-prev {
+        opacity: 0;
+        left: -15px;
+      }
+
+      &:hover {
+        .swiper-button-next {
+          opacity: 1;
+          right: 10px;
+        }
+
+        .swiper-button-prev {
+          opacity: 1;
+          left: 10px;
+        }
+      }
+    }
+
+    &-recommend {
+      display: flex;
+      flex-direction: column;
+      width: 270px;
+      margin-left: 15px;
+
+      &.noswiper {
+        flex-direction: row;
+        width: 100%;
+        margin-left: 0;
+
+        .item:first-child {
+          margin-right: 7.5px;
+          margin-bottom: 0;
+        }
+
+        .item:last-child {
+          margin-left: 7.5px;
+        }
+      }
+
+      .item {
+        position: relative;
+        width: 100%;
+        height: 160px;
+        margin-bottom: 15px;
+        overflow: hidden;
+        border-radius: var(--radius-inner);
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        .thumbnail {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+
+          &.lazyload,
+          &.lazyloading {
+            object-fit: scale-down;
+          }
+        }
+
+        .information {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          z-index: 1;
+          display: flex;
+          align-items: center;
+          padding: 8px;
+          overflow: hidden;
+          color: #fff;
+          line-height: 20px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          background: linear-gradient(to bottom,
+              rgba(0, 0, 0, 0),
+              rgba(0, 0, 0, 0.5));
+
+          .type {
+            z-index: 2;
+            height: 20px;
+            margin-right: 5px;
+            padding: 0 8px;
+            color: #fff;
+            font-size: 12px;
+            text-align: center;
+            background-color: #8695e6;
+            background-image: linear-gradient(270deg,
+                #986fee,
+                #8695e6,
+                #68b7dd,
+                #18d7d3);
+            border-radius: 2px;
+            user-select: none;
+          }
+
+          .text {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+        }
+      }
+    }
+
+    &-empty {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-radius: var(--radius-inner);
+
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      p {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        padding: 10px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        color: #fff;
+        font-weight: normal;
+        font-size: 15px;
+        text-align: center;
+        background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0),
+            rgba(0, 0, 0, 0.45));
+      }
+    }
+  }
+
+  &__article {
+    padding: 0 15px;
+  }
+
+  &__ad {
+    padding-top: 15px;
+
+    &-link {
+      position: relative;
+      display: block;
+
+      .image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: var(--radius-inner);
+        transition: opacity 0.35s;
+
+        &:hover {
+          opacity: 0.85;
+        }
+      }
+
+      .icon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1;
+        padding: 2px 5px;
+        color: #ebebeb;
+        font-size: 12px;
+        background: rgba(0, 0, 0, 0.25);
+        border-radius: 2px;
+        pointer-events: none;
+      }
+    }
+  }
+
+  .joe_list {
+    &__item {
+      will-change: transform;
+      background: var(--background);
+    }
+  }
+}

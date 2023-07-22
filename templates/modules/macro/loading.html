@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<th:block th:fragment="loading">
+  <div class="joe_loading">
+    <th:block th:if="${htmlType == 'photos'}">
+    <img th:src="@{/assets/svg/loading-ball.svg}"/>
+    </th:block>
+    <th:block th:if="${htmlType != 'photos'}">
+      <img th:src="@{/assets/svg/loading-ball.svg}"/>
+    </th:block>
+  </div>
+</th:block>
+</html>

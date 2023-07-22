@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="list_index_async">
+  <ul class="joe_list"></ul>
+  <ul class="joe_list__loading">
+    <li class="item">
+      <th:block th:if="theme.config.home.enable_post_thumbnail" >
+      <div class="thumbnail"></div>
+      </th:block>
+    <div class="information">
+      <div class="title"></div>
+      <div class="abstract">
+        <p></p>
+        <p></p>
+      </div>
+    </div>
+    </li>
+    <li class="item">
+      <th:block th:if="theme.config.home.enable_post_thumbnail" >
+        <div class="thumbnail"></div>
+      </th:block>
+    <div class="information">
+      <div class="title"></div>
+      <div class="abstract">
+        <p></p>
+        <p></p>
+      </div>
+    </div>
+    </li>
+  </ul>
+  <#include "empty.ftl">
+</th:block>
+</html>

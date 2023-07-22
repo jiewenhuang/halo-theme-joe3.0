@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="banner_item">
+    <th:block th:each="bannerPost : ${theme.config.carousel.banner_source}"
+              th:with="post = ${postFinder.getByName(bannerPost.posts)}">
+
+<div class="swiper-slide">
+
+    <a class="item" th:href="${post.status.permalink}" target="_blank" rel="noopener noreferrer nofollow">
+        <img width="100%" height="100%" class="thumbnail lazyload" th:data-src="${post.spec.cover}" th:src="${theme.config.carousel.banner_lazyload_img}" onerror="Joe.errorImg(this)" alt="${category.spec.displayName}">
+
+        <div class="title-row">
+            <h3 class="title">[[${category.spec.displayName}]]</h3>
+
+            <p class="subtitle">[[${post.status.excerpt}]]</p>
+        </div>
+<i class="joe-font joe-icon-zhifeiji"></i>
+</a>
+</div>
+    </th:block>
+</th:block>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<th:block th:fragment="aside_post">
+  <aside class="joe_aside">
+    <th:block th:if="${theme.config.blogger.show_blogger}">
+      <th:block th:replace="~{modules/common/blogger :: blogger}" />
+  </th:block>
+  <div class="joe_aside_post">
+    <th:block th:if="${theme.config.post.enable_toc} and ${#annotations.getOrDefault(post, 'enable_toc', 'true') == 'true'}">
+    <div class="toc-container">
+      <h3 class="toc-header"><i class="joe-font joe-icon-xiaoxi" title="文章目录"></i>文章目录</h3>
+      <div id="js-toc" class="toc"></div>
+    </div>
+    </th:block>
+    <th:block th:if="${theme.config.post.enable_relate_post == true}">
+      <th:block th:replace="~{modules/macro/relate :: relate}" />
+    </th:block>
+</div>
+</aside>
+</th:block>
+</html>

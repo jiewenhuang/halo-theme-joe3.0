@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<th:block th:fragment="relate">
+  <section class="joe_aside__item newest">
+    <div class="joe_aside__item-title">
+      <i class="joe-font joe-icon-huo"></i>
+      <span class="text">相关文章</span>
+    </div>
+    <div class="joe_aside__item-contain">
+      <ul class="list">
+        <th:block th:each="recommendPosts : ${post.categories[0]}"
+                  th:with="recommendPosts = ${postFinder.listByCategory(1,theme.config.post.relate_post_max,recommendPosts.metadata.name)}">
+        <li class="item"
+            th:each="recommendPost : ${recommendPosts.items}"
+            th:if="${post.metadata.name != recommendPost.metadata.name}">
+          <a class="link" target="_blank" th:href="@{${recommendPost.status.permalink}}" th:title="${recommendPost.spec.title}">[[${recommendPost.spec.title}]]</a>
+          <i class="joe-font joe-icon-link"></i>
+        </li>
+        </th:block>
+    </ul>
+  </div>
+  </section>
+</th:block>
+</html>

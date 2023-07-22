@@ -1,0 +1,70 @@
+@default: url(../../emoji_zip/boring_cursor.cur), auto;
+@pointer: url(../../emoji_zip/satisfied_cursor.cur), auto;
+@active: url(../../emoji_zip/enamored_cursor.cur), auto;
+
+body {
+  cursor: @default;
+}
+
+a {
+  cursor: @pointer;
+}
+
+a:active {
+  cursor: @active;
+}
+
+p {
+  cursor: @default;
+}
+
+.joe_index {
+  &__title {
+    &-title {
+      .item {
+        cursor: @pointer;
+      }
+
+      &.default {
+        .item {
+          cursor: @default;
+        }
+      }
+    }
+  }
+}
+
+.joe_index__banner {
+  .swiper-slide .item {
+    cursor: @default !important;
+
+    &.clickable {
+      cursor: @pointer !important;
+    }
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    cursor: @pointer;
+  }
+}
+
+.joe_header {
+  .joe_header__above {
+    .joe_header__above-nav .item {
+      cursor: @pointer !important;
+    }
+
+    .submit {
+      cursor: @pointer;
+    }
+  }
+}
+
+.joe_action .joe_action_item {
+  cursor: @pointer;
+}
+
+.joe_load {
+  cursor: @pointer;
+}

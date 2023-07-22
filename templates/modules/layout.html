@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" th:fragment="html (title,header,content,head,footer,leftSidebar,htmlType)" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title}"></title>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="format-detection" content="email=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="admin">
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <meta name="site" th:content="${site.url}">
+    <!-- OG -->
+    <meta property="og:image" content="">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="Halo1.6">
+    <meta property="og:url" th:content="${site.url}">
+    <meta property="og:title" th:content="${titlie}">
+    <meta property="twitter:partner" content="ogwp">
+    <!-- /OG -->
+<!--    <link rel="shortcut icon" size="32x32" href="">-->
+<!--    <link rel="apple-touch-icon" sizes="180x180" href="">-->
+<!--    <th:block th:replace="~{modules/themeSettingVariable :: themeSetting}" />-->
+<!--    <style type="text/css">-->
+<!--        @font-face {-->
+<!--            font-family: "Joe Font";-->
+<!--            font-weight: 400;-->
+<!--            font-style: normal;-->
+<!--            font-display: swap;-->
+<!--        }-->
+
+<!--        html body {-->
+<!--            &#45;&#45;theme: #fb6c28;-->
+<!--            &#45;&#45;scroll-bar: #c0c4cc;-->
+<!--            &#45;&#45;loading-bar: var(&#45;&#45;theme);-->
+<!--            &#45;&#45;img-max-width: 100%;-->
+<!--            font-family: "Joe Font", "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, "sans-serif";-->
+<!--            &#45;&#45;res-url: '/themes/joe2.0';-->
+<!--        }-->
+
+<!--        html[data-mode='dark'] body {-->
+<!--            &#45;&#45;theme: #9999ff;-->
+<!--            &#45;&#45;scroll-bar: #666;-->
+<!--            &#45;&#45;loading-bar: var(&#45;&#45;theme);-->
+<!--        }-->
+
+<!--        ::-webkit-scrollbar {-->
+<!--            width: 8px;-->
+<!--        }-->
+
+<!--        ::-webkit-scrollbar-thumb {-->
+<!--            background: var(&#45;&#45;scroll-bar);-->
+<!--        }-->
+
+<!--        html[data-mode="light"] body {-->
+<!--            background-image: none;-->
+<!--        }-->
+
+<!--        html[data-mode="dark"] body {-->
+<!--            background-image: none;-->
+<!--        }-->
+<!--    </style>-->
+<!--    &lt;!&ndash; 加载条 &ndash;&gt;-->
+<!--    <link rel="stylesheet"-->
+<!--          th:if="${theme.config.theme.enable_loading_bar}"-->
+<!--          th:href="@{/assets/lib/nprogress/nprogress.min.css}">-->
+<!--    <style>-->
+<!--        #nprogress .bar {-->
+<!--            height: 3px;-->
+<!--            background: var(&#45;&#45;loading-bar);-->
+<!--        }-->
+
+<!--        #nprogress .peg {-->
+<!--            display: none;-->
+<!--        }-->
+<!--    </style>-->
+<!--    <script th:src="@{/assets/lib/nprogress/nprogress.min.js}"></script>-->
+<!--    <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/normalize.min.css}">-->
+<!--    <link rel="preload stylesheet" as="style" th:href="@{/assets/lib/font-awesome/css/font-awesome.min.css}">-->
+<!--    <link rel="preload stylesheet" as="style" href="http://at.alicdn.com/t/font_2788564_crkap1ed9j5.css">-->
+<!--    <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/theme.min.css}">-->
+<!--    <style>-->
+<!--        #Joe .joe_container {-->
+<!--            max-width: 1320px;-->
+<!--        }-->
+<!--    </style>-->
+<!--    <link rel="stylesheet" th:href="@{/assets/lib/qmsg/qmsg.css}">-->
+<!--    <link rel="preload stylesheet" as="style" th:href="@{/assets/lib/animate/animate.min.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/assets/lib/swiper/swiper.min.css}">-->
+<!--    <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/global.min.css}">-->
+<!--    <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/index.min.css}">-->
+<!--    <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/responsive.min.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/assets/lib/fancybox/jquery.fancybox.min.css}">-->
+    <th:block th:replace="~{modules/link :: links}" />
+    <script th:src="@{/assets/lib/jquery@3.5.1/jquery.min.js}"></script>
+
+
+</head>
+<!-- /OG -->
+<th:block th:replace="${content}"></th:block>
+</html>
