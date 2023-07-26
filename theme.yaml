@@ -1,7 +1,7 @@
 apiVersion: theme.halo.run/v1alpha1
 kind: Theme
 metadata:
-  name: theme-joe3
+  name: theme-joe
 spec:
   displayName: Theme joe3.0
   author:
@@ -11,7 +11,7 @@ spec:
   logo: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/welcome.jpg"
   website: "https://www.jiewen.run"
   repo: "https://github.com/jiewenhuang/halo-theme-joe3.0"
-  settingName: "theme-joe3-setting"
-  configMapName: "theme-joe3-configMap"
+  settingName: "theme-joe-setting"
+  configMapName: "theme-joe-configMap"
   version: "1.0"
   require: "2.0.0"
