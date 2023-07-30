@@ -3,15 +3,15 @@ kind: Theme
 metadata:
   name: theme-joe
 spec:
-  displayName: Theme joe3.0
+  displayName: Theme joe3
   author:
-    name: jiewenhuang
-    website: "https://www.jiewen.run"
+    name: Jiewen
+    website: "https://halo.run"
   description: Halo 2.0 Theme base on Thymeleaf
-  logo: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/welcome.jpg"
-  website: "https://www.jiewen.run"
-  repo: "https://github.com/jiewenhuang/halo-theme-joe3.0"
+  logo: "https://halo.run/logo"
+  website: "https://halo.run"
+  repo: "https://github.com/jiewenhuang/halo-nicetheme-PandaPRO"
   settingName: "theme-joe-setting"
   configMapName: "theme-joe-configMap"
   version: "1.0"
-  require: "2.0.0"
+  require: ">=2.0.0"
