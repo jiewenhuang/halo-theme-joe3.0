@@ -1,17 +1,17 @@
 apiVersion: theme.halo.run/v1alpha1
 kind: Theme
 metadata:
-  name: theme-joe
+  name: theme-Joe3
 spec:
-  displayName: Theme joe3
+  displayName: Theme Joe3
   author:
-    name: Jiewen
+    name: Jiewenhuang
     website: "https://halo.run"
-  description: Halo 2.0 Theme base on Thymeleaf
-  logo: "https://halo.run/logo"
+  description: Halo2.0主题 Joe3
+  logo: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/welcome.jpg"
   website: "https://halo.run"
-  repo: "https://github.com/jiewenhuang/halo-nicetheme-PandaPRO"
-  settingName: "theme-joe-setting"
-  configMapName: "theme-joe-configMap"
+  repo: "https://github.com/jiewenhuang/halo-theme-joe3.0"
+  settingName: "theme-Joe-setting"
+  configMapName: "theme-Joe-configMap"
   version: "1.0"
-  require: ">=2.0.0"
+  require: "2.0.0"

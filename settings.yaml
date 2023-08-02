@@ -1,7 +1,7 @@
 apiVersion: v1alpha1
 kind: Setting
 metadata:
-  name: theme-joe-setting
+  name: theme-Joe-setting
 spec:
   forms:
     - group: basic
@@ -106,16 +106,16 @@ spec:
     - group: home
       label: 首页
       formSchema:
-#        - $formkit: select
-#          name: enable_index_list_ajax
-#          label: 异步加载文章列表
-#          value: true
-#          help: ""
-#          options:
-#            - value: true
-#              label: 是
-#            - value: false
-#              label: 否
+        #        - $formkit: select
+        #          name: enable_index_list_ajax
+        #          label: 异步加载文章列表
+        #          value: true
+        #          help: ""
+        #          options:
+        #            - value: true
+        #              label: 是
+        #            - value: false
+        #              label: 否
         - $formkit: select
           name: enable_post_thumbnail
           label: 开启文章缩略图
@@ -1335,7 +1335,7 @@ spec:
               label: 否
         - $formkit: text
           name: music_id
-#          if: "$get(enable_music_player).value"
+          #          if: "$get(enable_music_player).value"
           label: 歌单ID
           help: "为音乐播放器配置歌单ID，大家在网页歌单页直接复制地址栏id参数后面那串数字即可，不填或填错将不会展示播放器（注意：仅支持网易云歌单ID，且不支持私密歌单）"
           value: ""
@@ -2017,20 +2017,7 @@ spec:
               label: 是
             - value: false
               label: 否
-        - $formkit: radio
-          name: enable_birthday
-          label: 展示博客运行时间
-          value: false
-          options:
-            - value: true
-              label: 是
-            - value: false
-              label: 否
-        - $formkit: text
-          name: custom_birthday
-          label: 自定义博客起始时间
-          value: ""
-          help: "自定义博客的起始时间/安装时间，作为计算博客运行时间的参照值，请严格按照示例格式填写，否则将导致报错（示例：2021/11/11 06:30)"
+
         - $formkit: select
           name: footer_source
           label: 页脚来源
@@ -2137,9 +2124,6 @@ spec:
               label: 是
             - value: false
               label: 否
-
-
-
 
     - group: custom
       label: 自定义
