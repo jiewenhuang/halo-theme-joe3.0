@@ -30,9 +30,9 @@
     <link rel="stylesheet" th:href="${theme.config.custom.iconfont}">
   </th:block>
   <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/theme.min.css}">
-  <style th:inline="javascript">
+  <style th:inline="text">
     #Joe .joe_container {
-      max-width: [[${theme.config.basic.content_max_width ?: '1320px'}]];
+      max-width: [[${theme.config.basic.content_max_width+'px'}]];
     }
   </style>
     <link rel="stylesheet" th:href="@{/assets/lib/qmsg/qmsg.css}">
