@@ -311,7 +311,7 @@ const commonContext = {
 			} else {
 				htmlStr = `
       <div class="joe_pdf">
-        <iframe src="${ThemeConfig_BASE_RES_URL}/source/lib/pdfjs/web/viewer.html?file=${options.src}" style="width:${options.width};height:${options.height}"></iframe>
+        <iframe src="/themes/theme-Joe3/assets/lib/pdfjs/web/viewer.html?file=${options.src}" style="width:${options.width};height:${options.height}"></iframe>
       </div>`;
 			}
 			$(item).replaceWith(htmlStr);
@@ -536,7 +536,7 @@ const commonContext = {
 		)
 			return;
 		$.getScript(
-			`${ThemeConfig_BASE_RES_URL}themes/theme-joe3.0/assets/lib/3dtag/3dtag.min.js`,
+			`/themes/theme-Joe3/assets/lib/3dtag/3dtag.min.js`,
 			(_res) => {
 				const entries = [];
 				const colors = [
@@ -836,7 +836,7 @@ const commonContext = {
 		)
 			return;
 		$.getScript(
-			`${ThemeConfig_BASE_RES_URL}themes/theme-joe3.0/assets/effect/cursor/${ThemeConfig_cursor_effect}.js`
+			`/themes/theme-Joe3/assets/effect/cursor/${ThemeConfig_cursor_effect}.js`
 		);
 	},
 	/* 加载背景特效 */
@@ -848,7 +848,7 @@ const commonContext = {
 		)
 			return;
 		$.getScript(
-			`${ThemeConfig_BASE_RES_URL}themes/theme-joe3.0/assets/effect/backdrop/${ThemeConfig_backdrop}.js`
+			`/themes/theme-Joe3/assets/effect/backdrop/${ThemeConfig_backdrop}.js`
 		);
 	},
 	/* 自定义favicon */

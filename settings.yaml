@@ -129,7 +129,7 @@ spec:
         - $formkit: attachment
           name: lazyload_thumbnail
           label: 文章预载图
-          value: "/themes/theme-joe3.0/assets/img/lazyload.gif"
+          value: "/themes/theme-Joe3/assets/img/lazyload.gif"
           help: "文章配图加载出来之前展示的图片，体积尽可能的小"
         - $formkit: attachment
           name: post_thumbnail
@@ -139,7 +139,7 @@ spec:
         - $formkit: attachment
           name: fallback_thumbnail
           label: 文章错误缺省图
-          value: "/themes/theme-joe3.0/templates/assets/img/default_thumbnail.png"
+          value: "/themes/theme-Joe3/templates/assets/img/default_thumbnail.png"
           help: "文章图片加载出错时生效，可使用占位图服务（350*200）"
         - $formkit: select
           name: enable_index_list_effect
@@ -652,7 +652,7 @@ spec:
           name: banner_lazyload_img
           id: banner_lazyload_img
           label: 图片预载图
-          value: "/themes/theme-joe3.0/assets/img/lazyload_h.gif"
+          value: "/themes/theme-Joe3/assets/img/lazyload_h.gif"
           help: "轮播图默认为懒加载，这里可以为banner图设置加载完之前的加载图（体积尽可能的小）"
         - $formkit: select
           name: link_behavior
@@ -789,7 +789,7 @@ spec:
         - $formkit: attachment
           name: lazyload_avatar
           label: 头像预载图
-          value: "/themes/theme-joe3.0/assets/svg/spinner-preloader.svg"
+          value: "/themes/theme-Joe3/assets/svg/spinner-preloader.svg"
           help: "头像加载出来之前展示的图片"
         - $formkit: attachment
           name: avatar
@@ -799,7 +799,7 @@ spec:
         - $formkit: attachment
           name: default_avatar
           label: 默认头像
-          value: "/themes/theme-joe3.0/templates/assets/img/jiewen_icon.png"
+          value: "/themes/theme-Joe3/templates/assets/img/jiewen_icon.png"
           help: "用于头像未设置或加载出错时显示的图片（注意：主题优先使用后台配置的头像，当后台未配置头像或头像加载出错才会用这里设置的图片。此处是有默认值的）"
         - $formkit: attachment
           name: author_bg
@@ -2206,6 +2206,16 @@ spec:
         - $formkit: select
           name: check_baidu_collect
           label: 检查百度收录情况
+          value: false
+          options:
+            - value: true
+              label: 开启
+            - value: false
+              label: 关闭
+        - $formkit: select
+          name: enable_console_theme
+          label: 控制台输出主题信息
+          help: 是否在控制台输出主题相关信息
           value: false
           options:
             - value: true

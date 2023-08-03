@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <th:block th:fragment="postSetting">
-  <script th:inline="javascript">
+  <script th:inline="javascript" id="theme-config-getter">
     const PageAttrs_metas_enable_read_limit = /*[[${#annotations.get(post, 'enable_read_limit')}]]*/ false;
     const PageAttrs_metas_enable_page_meta = /*[[${#annotations.get(post, 'enable_page_meta')}]]*/ true;
     const PageAttrs_metas_enable_passage_tips = /*[[${#annotations.get(post, 'enable_passage_tips')}]]*/ true;

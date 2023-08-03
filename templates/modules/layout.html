@@ -2,6 +2,7 @@
 <html lang="en" th:fragment="html (title,header,content,head,footer,leftSidebar,htmlType)" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title th:text="${title}"></title>
+
     <meta charset="utf-8">
     <meta name="renderer" content="webkit">
     <meta name="format-detection" content="email=no">
@@ -98,6 +99,7 @@
 <!--    <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/index.min.css}">-->
 <!--    <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/responsive.min.css}">-->
 <!--    <link rel="stylesheet" th:href="@{/assets/lib/fancybox/jquery.fancybox.min.css}">-->
+    <th:block th:replace="~{modules/config :: config}" />
     <th:block th:replace="~{modules/link :: links}" />
     <script th:src="@{/assets/lib/jquery@3.5.1/jquery.min.js}"></script>
 

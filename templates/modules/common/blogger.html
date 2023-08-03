@@ -31,25 +31,29 @@
 </div>
 <div class="count" th:with="stats = ${siteStatsFinder.getStats()}">
 
-  <div class="item" th:title="'累计访问数 '+${stats.visit}">
-    <span class="num">[[${stats.visit}]]</span>
-    <span>访问量</span>
-  </div>
+<!--  <div class="item" th:title="'累计访问数 '+${stats.visit}">-->
+<!--    <span class="num">[[${stats.visit}]]</span>-->
+<!--    <span>访问量</span>-->
+<!--  </div>-->
 <!--    搭配A-->
     <th:block th:if="${theme.config.blogger.overview_type == 'A'}">
         <div class="item" th:title="'累计分类数 '+${stats.category}">
           <span class="num">[[${stats.category}]]</span>
           <span>分类数</span>
         </div>
+        <th:block th:with="tags = ${tagFinder.listAll()}">
+            <div th:with="tagNum = ${#lists.size(tags)}"
+                 class="item" th:title="'累计标签数 '+${tagNum}">
+                <span class="num">[[${tagNum}]]</span>
+                <span>标签数</span>
+            </div>
+        </th:block>
 
         <div class="item" th:title="'累计文章数 '+${stats.post}">
           <span class="num">[[${stats.post}]]</span>
           <span>文章数</span>
         </div>
-<!--        <div class="item" th:title="'累计评论数 '+${stats.comment}">-->
-<!--          <span class="num">[[${stats.comment}]]</span>-->
-<!--          <span>评论数</span>-->
-<!--        </div>-->
+
     </th:block>
     <!--    搭配B-->
     <th:block th:if="${theme.config.blogger.overview_type == 'B'}">
@@ -58,15 +62,13 @@
             <span>分类数</span>
         </div>
 
-<!--        <div class="item" th:title="'累计标签数 '+${stats.tag}">-->
-<!--            <span class="num">[[${stats.tag}]]</span>-->
-<!--            <span>标签数</span>-->
-<!--        </div>-->
-
-<!--        <div class="item" th:title="'累计文章数 '+${stats.post}">-->
-<!--            <span class="num">[[${stats.post}]]</span>-->
-<!--            <span>文章数</span>-->
-<!--        </div>-->
+        <th:block th:with="tags = ${tagFinder.listAll()}">
+            <div th:with="tagNum = ${#lists.size(tags)}"
+                 class="item" th:title="'累计标签数 '+${tagNum}">
+                <span class="num">[[${tagNum}]]</span>
+                <span>标签数</span>
+            </div>
+        </th:block>
         <div class="item" th:title="'累计评论数 '+${stats.comment}">
             <span class="num">[[${stats.comment}]]</span>
             <span>评论数</span>
@@ -78,12 +80,6 @@
             <span class="num">[[${stats.category}]]</span>
             <span>分类数</span>
         </div>
-
-<!--        <div class="item" th:title="'累计标签数 '+${stats.tag}">-->
-<!--            <span class="num">[[${stats.tag}]]</span>-->
-<!--            <span>标签数</span>-->
-<!--        </div>-->
-
         <div class="item" th:title="'累计文章数 '+${stats.post}">
             <span class="num">[[${stats.post}]]</span>
             <span>文章数</span>
@@ -95,15 +91,14 @@
     </th:block>
     <!--    搭配D-->
     <th:block th:if="${theme.config.blogger.overview_type == 'D'}">
-<!--        <div class="item" th:title="'累计分类数 '+${stats.category}">-->
-<!--            <span class="num">[[${stats.category}]]</span>-->
-<!--            <span>分类数</span>-->
-<!--        </div>-->
 
-<!--        <div class="item" th:title="'累计标签数 '+${stats.tag}">-->
-<!--            <span class="num">[[${stats.tag}]]</span>-->
-<!--            <span>标签数</span>-->
-<!--        </div>-->
+        <th:block th:with="tags = ${tagFinder.listAll()}">
+            <div th:with="tagNum = ${#lists.size(tags)}"
+                 class="item" th:title="'累计标签数 '+${tagNum}">
+                <span class="num">[[${tagNum}]]</span>
+                <span>标签数</span>
+            </div>
+        </th:block>
 
         <div class="item" th:title="'累计文章数 '+${stats.post}">
             <span class="num">[[${stats.post}]]</span>

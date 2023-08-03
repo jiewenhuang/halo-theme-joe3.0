@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <th:block th:fragment="themeSetting">
-  <script th:inline="javascript">
+  <script th:inline="javascript" id="theme-config-getter">
     const ThemeConfig_theme_mode = /*[[${theme.config.basic.theme_mode}]]*/ 'user';
     const ThemeConfig_enable_loading_bar = /*[[${theme.config.theme.enable_loading_bar}]]*/ true;
     const ThemeConfig_enable_footer = /*[[${theme.config.footer.enable_footer}]]*/ true;
@@ -21,6 +21,11 @@
     const ThemeConfig_enable_offscreen_tip = /*[[${theme.config.theme.enable_offscreen_tip}]]*/ false;
     const ThemeConfig_enable_birthday = /*[[${theme.config.footer.enable_birthday}]]*/ false;
     const ThemeConfig_birthday = /*[[${theme.config.footer.custom_birthday}]]*/ '';
+    const ThemeConfig_light_time_scope = /*[[${theme.config.basic.light_time_scope}]]*/ '5:00~19:00';
+    const ThemeConfig_enable_console_theme = /*[[${theme.config.other.enable_console_theme}]]*/ false;
+    const ThemeConfig_version = /*[[${theme.spec.version}]]*/ '1.0.0';
+
+
 
 
     const ThemeConfig_enable_banner = /*[[${theme.config.carousel.enable_banner}]]*/ true;
@@ -68,6 +73,7 @@
     const ThemeConfig_enable_like_journal = /*[[${theme.config.journals.enable_like_journal}]]*/ true;
     const ThemeConfig_enable_comment_journal = /*[[${theme.config.journals.enable_comment_journal}]]*/ true;
     const ThemeConfig_journal_block_height = /*[[${theme.config.journals.journal_block_height}]]*/ 300;
+    const ThemeConfig_long_code_height = /*[[${theme.config.code_block.long_code_height}]]*/ '800';
     const ThemeConfig_photos_layout = 'waterfall';
     const ThemeConfig_blog_url = /*[[${site.url}]]*/ '';
     const ThemeConfig_blog_title = /*[[${site.title}]]*/ '';

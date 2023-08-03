@@ -5,21 +5,16 @@ const postContext = {
 	initReadLimit() {
 		if (
 			PageAttrs_metas_enable_read_limit &&
-      PageAttrs_metas_enable_read_limit.trim() !== "true"
+			PageAttrs_metas_enable_read_limit.trim() !== "true"
 		)
 			return;
 		postContext.limited = true;
-		const $article = (".page-post .joe_detail__article");
-		console.log($article)
+		const $article = $(".page-post .joe_detail__article");
 		const $content = $("#post-inner");
 		const $hideMark = $(".page-post .joe_read_limited");
 		const clientHeight =
-      document.documentElement.clientHeight || document.body.clientHeight;
-		const element = document.querySelector(".joe_detail");
-		const cid = element.getAttribute("data-cid");
-		// console.log(cid)
-		// const datacid = $(".joe_detail").attr("data-cid");
-		// console.log(datacid)
+			document.documentElement.clientHeight || document.body.clientHeight;
+		const cid = $(".joe_detail").attr("data-cid");
 
 		// 移除限制
 		const removeLimit = () => {
@@ -67,19 +62,17 @@ const postContext = {
 		};
 
 		// 监听评论成功事件（区分首次和后续提交）
-		// const handleCallback = () => {
-		// 	// console.log("没有评论记录");
-		// 	// const commentClassName = "halo-comment-widget"; // 替换为您想要使用的类名
-		// 	const commentNode = document.querySelector('.comment-form');
-		// 	// const commentNode = document.querySelector(`.${commentClassName}`);
-		// 	commentNode.addEventListener("post-success", (_data) => {
-		// 		// console.log(_data, "评论成功");
-		// 		// 检查是否已经评论过该文章
-		// 		checkPartialIds(cid, updateState);
-		// 	});
-		// };
+		const handleCallback = () => {
+			// console.log("没有评论记录");
+			const commentNode = document.getElementsByTagName("halo-comment")[0];
+			commentNode.addEventListener("post-success", (_data) => {
+				// console.log(_data, "评论成功");
+				// 检查是否已经评论过该文章
+				checkPartialIds(cid, updateState);
+			});
+		};
 
-		// checkPartialIds(cid, handleCallback);
+		checkPartialIds(cid, handleCallback);
 	},
 	/* 文章复制 + 版权文字 */
 	initCopy() {
@@ -92,7 +85,7 @@ const postContext = {
 			const selectionText = selection.toString().replace(/<已自动折叠>/g, "");
 			const appendLink = ThemeConfig_enable_copy_right_text
 				? ThemeConfig_copy_right_text ||
-          `\r\n\r\n====================================\r\n文章作者： ${author}\r\n文章来源： ${ThemeConfig_blog_title}\r\n文章链接： ${curl}\r\n版权声明： 内容遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。`
+				`\r\n\r\n====================================\r\n文章作者： ${author}\r\n文章来源： ${ThemeConfig_blog_title}\r\n文章链接： ${curl}\r\n版权声明： 内容遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。`
 				: "";
 			if (window.clipboardData) {
 				const copytext = selectionText + appendLink;
@@ -141,13 +134,11 @@ const postContext = {
 	initLike() {
 		if (
 			PageAttrs_metas_enable_like === "false" ||
-      !ThemeConfig_enable_like ||
-      !$(".joe_detail__agree").length
+			!ThemeConfig_enable_like ||
+			!$(".joe_detail__agree").length
 		)
 			return;
 		const cid = $(".joe_detail").attr("data-cid");
-		const element = document.querySelector(".joe_detail");
-		const dataCid = element.getAttribute("data-cid");
 		const clikes = +($(".joe_detail").attr("data-clikes") || 0);
 		let agreeArr = localStorage.getItem(encryption("agree"))
 			? JSON.parse(decrypt(localStorage.getItem(encryption("agree"))))
@@ -173,15 +164,12 @@ const postContext = {
 				: [];
 			flag = agreeArr.includes(cid);
 
-			$.ajax({
-				url: "/apis/api.halo.run/v1alpha1/trackers/upvote",
-				type: "post",
-				contentType: "application/json; charset=utf-8",
-				data: JSON.stringify({
-					group: "content.halo.run",
-					plural: "posts",
-					name: dataCid,
-				}),
+			Utils.request({
+				url: "/api/content/posts/" + cid + "/likes",
+				method: "POST",
+				data: {
+					type: flag ? "disagree" : "agree",
+				},
 			})
 				.then((_res) => {
 					let likes = clikes;
@@ -213,8 +201,8 @@ const postContext = {
 	initToc(reload) {
 		if (
 			PageAttrs_metas_enable_toc === "false" ||
-      !ThemeConfig_enable_toc ||
-      !$(".toc-container").length
+			!ThemeConfig_enable_toc ||
+			!$(".toc-container").length
 		)
 			return;
 
@@ -230,8 +218,8 @@ const postContext = {
 		// 回复可见的文章首次不渲染TOC
 		if (
 			PageAttrs_metas_enable_read_limit === "true" &&
-      !reload &&
-      postContext.limited
+			!reload &&
+			postContext.limited
 		) {
 			$("#js-toc").html(
 				"<div class=\"toc-nodata\">文章内容不完整，目录仅评论后可见</div>"
@@ -293,12 +281,12 @@ const postContext = {
 		// 无菜单数据
 		if (Joe.isMobile) {
 			!$tocMobileContainer.children().length &&
-        $tocMobileContainer.html(
-        	"<div class=\"toc-nodata\"><em></em>暂无目录</div>"
-        );
+			$tocMobileContainer.html(
+				"<div class=\"toc-nodata\"><em></em>暂无目录</div>"
+			);
 		} else {
 			!$tocContainer.children().length &&
-        $tocContainer.html("<div class=\"toc-nodata\">暂无目录</div>");
+			$tocContainer.html("<div class=\"toc-nodata\">暂无目录</div>");
 		}
 
 		// 移动端toc菜单交互
@@ -320,17 +308,9 @@ const postContext = {
 		$(".post-operate-comment").on("click", function (e) {
 			const $comment = document.querySelector(".joe_comment");
 			const $header = document.querySelector(".joe_header");
-			console.log($comment)
 			if (!$comment || !$header) return;
 			e.stopPropagation();
-			const element = document.querySelector(".joe_detail");
-			const cid = element.getAttribute("data-cid");
-			console.log(cid)
-			// const commentElementId = "comment-content-halo-run-Post-" + cid; // 使用变量构建完整的元素ID
-			console.log(commentElementId)
-			const commentElement = document.getElementsByClassName(".halo-comment-widget");
-			console.log(commentElement)
-			if (!commentElement) {
+			if (!document.getElementsByTagName("halo-comment").length) {
 				Qmsg.warning("评论功能不可用！");
 				return;
 			}
@@ -396,8 +376,8 @@ const postContext = {
 	async jumpToComment() {
 		if (
 			ThemeConfig_enable_clean_mode ||
-      !ThemeConfig_enable_comment ||
-      PageAttrs_metas_enable_comment === "false"
+			!ThemeConfig_enable_comment ||
+			PageAttrs_metas_enable_comment === "false"
 		)
 			return;
 		const { cid: commentId = "", p: postId = "" } = Utils.getUrlParams();
@@ -479,8 +459,8 @@ const postContext = {
 		Object.keys(postContext).forEach(
 			(c) =>
 				!omits.includes(c) &&
-        typeof postContext[c] === "function" &&
-        postContext[c]()
+				typeof postContext[c] === "function" &&
+				postContext[c]()
 		);
 	});
 

@@ -21,8 +21,8 @@
             [# th:if="${theme.config.custom.custom_font != ''} and ${theme.config.custom.custom_font != null}"]
             src: url("[[${theme.config.custom.custom_font}]]") format("woff2");
             [/]
-            [# th:if="${theme.config.theme.web_font != 'off'} and ${theme.config.custom.custom_font == null} or ${theme.config.custom.custom_font == ''}"]
-            src: url("/themes/theme-joe3.0/assets/[[${theme.config.theme.web_font}]]") format("woff2");
+            [# th:if="${theme.config.theme.web_font != 'off'} and (${theme.config.custom.custom_font != null} or ${theme.config.custom.custom_font != ''})"]
+            src: url("/themes/theme-Joe3/assets/[[${theme.config.theme.web_font}]]") format("woff2");
             [/]
 
         }
