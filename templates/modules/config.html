@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="config">
+    <th:block th:replace="~{modules/themeSettingVariable :: themeSetting}" />
+    <th:block th:if="${htmlType == 'post'}">
+        <th:block th:replace="~{modules/postMetaVariable :: postSetting}" />
+    </th:block>
+    <script id="compatiable-checker">
+        // 兼容性检查
+        function detectIE() {
+            var n = window.navigator.userAgent, e = n.indexOf("MSIE ");
+            if (e > 0) {
+                return parseInt(n.substring(e + 5, n.indexOf(".", e)), 10);
+            }
+            if (n.indexOf("Trident/") > 0) {
+                var r = n.indexOf("rv:");
+                return parseInt(n.substring(r + 3, n.indexOf(".", r)), 10);
+            }
+            var i = n.indexOf("Edge/");
+            return i > 0 && parseInt(n.substring(i + 5, n.indexOf(".", i)), 10);
+        };
+        detectIE() && (alert('当前站点不支持IE浏览器或您开启了兼容模式，请使用其他浏览器访问或关闭兼容模式。'), (location.href = 'https://www.baidu.com'));
+    </script>
+
+
+
+<script id="theme-config-getter" type="text/javascript">
+    // if (ThemeConfig.mode === "development") {
+    //     console.log("Joe2.0主题配置：", ThemeConfig);
+    //     console.log("资源根路径：", ThemeConfig.BASE_RES_URL);
+    // }
+    // 读取主题模式
+    var initThemeMode = function() {
+        try {
+            var curMode = "";
+            if (ThemeConfig_theme_mode === "auto") {
+                var light_scope = ThemeConfig_light_time_scope.split("~");
+                var now = new Date();
+                var today = now.toLocaleString().split(" ")[0];
+                var curMode = now >= new Date(today + " " + light_scope[0]) && now <= new Date(today + " " + light_scope[1]) ? "light" : "dark";
+                localStorage.removeItem("data-mode");
+            } else if (ThemeConfig_theme_mode === "user") {
+                // 用户模式下优先从本地取主题模式，默认为浅色
+                curMode = localStorage.getItem("data-mode") || "light";
+                localStorage.setItem("data-mode", curMode);
+            } else {
+                // 非用户模式下直接取后台配置的模式
+                curMode = ThemeConfig_theme_mode;
+                localStorage.removeItem("data-mode");
+            }
+            document.querySelector("html").setAttribute("data-mode", curMode);
+        } catch(e) {
+            console.log(e);
+        }
+    }
+    initThemeMode();
+    window.Joe = {
+        BASE_API: "",
+        isMobile: /windows phone|iphone|android/gi.test(window.navigator.userAgent),
+        errorImg: function(target, src) {
+            target.setAttribute('src', src || '${EMPTY_IMG}');
+            setTimeout(function () {
+                target.setAttribute('onerror', null);
+            }, 1000)
+        }
+    }
+    ThemeConfig_enable_console_theme && console.log("%cTheme By  Jiewen" + " | 版本 V" + ThemeConfig_version, "padding: 8px 15px;color:#fff;background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3);border-radius: 0 15px 0 15px;");
+</script>
+</th:block>
+</html>
