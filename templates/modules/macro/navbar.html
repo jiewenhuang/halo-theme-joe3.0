@@ -20,7 +20,10 @@
                  th:each="menuItem : ${menuItems}"
                  th:href="@{${menuItem.status.href}}"
                  th:target="${menuItem.spec.target?.value}"
-                 th:title="${menuItem.status.displayName}">[[${menuItem.status.displayName}]]</a>
+                 th:title="${menuItem.status.displayName}">
+                <th:block th:if="${theme.config.navbar.enable_navbar_icon}" > <i th:class="'m-icon '+${#annotations.getOrDefault(menuItem, 'icon','joe-font joe-icon-shouye')}"></i></th:block>
+
+                [[${menuItem.status.displayName}]] </a>
             </th:block>
             <th:block th:if="${not #lists.isEmpty(menuItem.children)}">
 
@@ -38,7 +41,10 @@
               <a class="item"
                  th:href="@{${childMenu.status.href}}"
                  th:target="${childMenu.spec.target?.value}"
-                 th:title="${childMenu.status.displayName}">[[${childMenu.status.displayName}]]</a>
+                 th:title="${childMenu.status.displayName}">
+                <th:block th:if="${theme.config.navbar.enable_navbar_icon}" > <i th:class="'m-icon '+${#annotations.getOrDefault(menuItem, 'icon','joe-font joe-icon-shouye')}"></i></th:block>
+
+                [[${childMenu.status.displayName}]]</a>
             </li>
             </th:block>
           </nav>
@@ -56,7 +62,10 @@
               <a class="item"
                  th:href="@{${menuItem.status.href}}"
                  th:target="${menuItem.spec.target?.value}"
-                 th:title="${menuItem.status.displayName}">[[${menuItem.status.displayName}]]</a>
+                 th:title="${menuItem.status.displayName}">
+                <th:block th:if="${theme.config.navbar.enable_navbar_icon}" > <i th:class="'m-icon '+${#annotations.getOrDefault(menuItem, 'icon','joe-font joe-icon-shouye')}"></i></th:block>
+
+                [[${menuItem.status.displayName}]]</a>
               </th:block>
 
             <th:block th:if="${not #lists.isEmpty(menuItem.children)}">
@@ -65,7 +74,9 @@
                 <div class="joe_dropdown__link">
                   <a class="item" th:href="@{${menuItem.status.href}}"
                      th:target="${menuItem.spec.target?.value}"
-                     th:title="${menuItem.status.displayName}">[[${menuItem.status.displayName}]]</a>
+                     th:title="${menuItem.status.displayName}">
+                    <th:block th:if="${theme.config.navbar.enable_navbar_icon}" > <i th:class="'m-icon '+${#annotations.getOrDefault(menuItem, 'icon','joe-font joe-icon-shouye')}"></i></th:block>
+                    [[${menuItem.status.displayName}]]</a>
                   <i class="joe-font joe-icon-arrow-down joe_dropdown__link-icon" style="color:var(--main)"></i>
                 </div>
 
@@ -75,7 +86,10 @@
                       <a class="item"
                          th:href="@{${childMenu.status.href}}"
                          th:target="${childMenu.spec.target?.value}"
-                         th:title="${childMenu.status.displayName}">[[${childMenu.status.displayName}]]</a>
+                         th:title="${childMenu.status.displayName}">
+                        <th:block th:if="${theme.config.navbar.enable_navbar_icon}" > <i th:class="'m-icon '+${#annotations.getOrDefault(menuItem, 'icon','joe-font joe-icon-shouye')}"></i></th:block>
+
+                        [[${childMenu.status.displayName}]]</a>
                     </li>
                   </th:block>
                 </nav>
@@ -88,9 +102,9 @@
         </th:block>
 
       </nav>
-      <form class="joe_header__above-search" method="get" action="http://localhost:8093/search">
-        <input maxlength="16" autocomplete="off" placeholder="请输入关键字..." name="keyword" value="" class="input" type="text">
-        <button type="submit" class="submit" aria-label="搜索按钮"><i class="joe-font joe-icon-search"></i></button>
+      <div class="joe_header__above-search">
+<!--        <input maxlength="16" autocomplete="off" placeholder="请输入关键字..." name="keyword" value="" class="input" type="text">-->
+        <button type="submit" id="halo-search" class="submit" style="border-radius: 17px 17px 17px 17px" aria-label="搜索按钮"><i class="joe-font joe-icon-search"></i></button>
         <span class="icon"></span>
         <nav class="result">
           <a href="archives/ce-shi-wen-zhang.html" title="测试文章" class="item">
@@ -102,7 +116,7 @@
             <span class="text">Hello Halo</span>
           </a>
         </nav>
-      </form>
+      </div>
       <i class="joe-font joe-icon-search joe_header__above-searchicon"></i>
     </div>
   </div>

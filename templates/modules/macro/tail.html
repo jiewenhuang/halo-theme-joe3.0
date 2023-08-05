@@ -89,5 +89,13 @@
     <!-- 自定义js -->
         <script type="text/javascript" th:inline="javascript">/*[[${theme.config.custom.custom_js_body}]]*/</script>
     </th:block>
+    <script>
+        const searchButton = document.getElementById("halo-search");
+
+        // 添加点击事件处理程序
+        searchButton.addEventListener("click", function() {
+            SearchWidget.open();
+        });
+    </script>
 </th:block>
 </html>

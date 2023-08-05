@@ -2,78 +2,78 @@
 const postContext = {
 	limited: false,
 	/* 初始化评论后可见 */
-	initReadLimit() {
-		if (
-			PageAttrs_metas_enable_read_limit &&
-			PageAttrs_metas_enable_read_limit.trim() !== "true"
-		)
-			return;
-		postContext.limited = true;
-		const $article = $(".page-post .joe_detail__article");
-		const $content = $("#post-inner");
-		const $hideMark = $(".page-post .joe_read_limited");
-		const clientHeight =
-			document.documentElement.clientHeight || document.body.clientHeight;
-		const cid = $(".joe_detail").attr("data-cid");
-
-		// 移除限制
-		const removeLimit = () => {
-			postContext.limited = false;
-			$hideMark.parent().remove();
-			$article.removeClass("limited");
-			postContext.initToc(true); // 重新渲染TOC
-		};
-
-		// 如果文章内容高度小于等于屏幕高度，则自动忽略限制
-		if ($content.height() < clientHeight + 180) {
-			removeLimit();
-			return;
-		}
-
-		// 检查本地的 partialIds
-		const checkPartialIds = (postId, cb) => {
-			const localIds = localStorage.getItem("partialIds");
-			if (localIds && localIds.includes(postId)) {
-				// console.log("已经评论过了");
-				removeLimit(); // 移除限制
-			} else {
-				cb && cb();
-			}
-		};
-
-		// 更新当前评论状态
-		const updateState = async () => {
-			// console.log("评论成功，更新状态");
-			const scrollTop = $hideMark.offset().top - 180;
-			const localIds = localStorage.getItem("partialIds");
-
-			await Utils.sleep(800); // 延迟一下
-			removeLimit(); // 移除限制
-			localStorage.setItem("partialIds", localIds ? localIds + "," + cid : cid); // 记录id
-			Qmsg.success("感谢您的支持");
-
-			// 滚动到原位置
-			$("html,body").animate(
-				{
-					scrollTop,
-				},
-				500
-			);
-		};
-
-		// 监听评论成功事件（区分首次和后续提交）
-		const handleCallback = () => {
-			// console.log("没有评论记录");
-			const commentNode = document.getElementsByTagName("halo-comment")[0];
-			commentNode.addEventListener("post-success", (_data) => {
-				// console.log(_data, "评论成功");
-				// 检查是否已经评论过该文章
-				checkPartialIds(cid, updateState);
-			});
-		};
-
-		checkPartialIds(cid, handleCallback);
-	},
+	// initReadLimit() {
+	// 	if (
+	// 		PageAttrs_metas_enable_read_limit &&
+	// 		PageAttrs_metas_enable_read_limit.trim() !== "true"
+	// 	)
+	// 		return;
+	// 	postContext.limited = true;
+	// 	const $article = $(".page-post .joe_detail__article");
+	// 	const $content = $("#post-inner");
+	// 	const $hideMark = $(".page-post .joe_read_limited");
+	// 	const clientHeight =
+	// 		document.documentElement.clientHeight || document.body.clientHeight;
+	// 	const cid = $(".joe_detail").attr("data-cid");
+	//
+	// 	// 移除限制
+	// 	const removeLimit = () => {
+	// 		postContext.limited = false;
+	// 		$hideMark.parent().remove();
+	// 		$article.removeClass("limited");
+	// 		postContext.initToc(true); // 重新渲染TOC
+	// 	};
+	//
+	// 	// 如果文章内容高度小于等于屏幕高度，则自动忽略限制
+	// 	if ($content.height() < clientHeight + 180) {
+	// 		removeLimit();
+	// 		return;
+	// 	}
+	//
+	// 	// 检查本地的 partialIds
+	// 	const checkPartialIds = (postId, cb) => {
+	// 		const localIds = localStorage.getItem("partialIds");
+	// 		if (localIds && localIds.includes(postId)) {
+	// 			// console.log("已经评论过了");
+	// 			removeLimit(); // 移除限制
+	// 		} else {
+	// 			cb && cb();
+	// 		}
+	// 	};
+	//
+	// 	// 更新当前评论状态
+	// 	const updateState = async () => {
+	// 		// console.log("评论成功，更新状态");
+	// 		const scrollTop = $hideMark.offset().top - 180;
+	// 		const localIds = localStorage.getItem("partialIds");
+	//
+	// 		await Utils.sleep(800); // 延迟一下
+	// 		removeLimit(); // 移除限制
+	// 		localStorage.setItem("partialIds", localIds ? localIds + "," + cid : cid); // 记录id
+	// 		Qmsg.success("感谢您的支持");
+	//
+	// 		// 滚动到原位置
+	// 		$("html,body").animate(
+	// 			{
+	// 				scrollTop,
+	// 			},
+	// 			500
+	// 		);
+	// 	};
+	//
+	// 	// 监听评论成功事件（区分首次和后续提交）
+	// 	const handleCallback = () => {
+	// 		// console.log("没有评论记录");
+	// 		const commentNode = document.getElementsByTagName("halo-comment")[0];
+	// 		commentNode.addEventListener("post-success", (_data) => {
+	// 			// console.log(_data, "评论成功");
+	// 			// 检查是否已经评论过该文章
+	// 			checkPartialIds(cid, updateState);
+	// 		});
+	// 	};
+	//
+	// 	checkPartialIds(cid, handleCallback);
+	// },
 	/* 文章复制 + 版权文字 */
 	initCopy() {
 		if (PageAttrs_metas_enable_copy === "false" || !ThemeConfig_enable_copy)
