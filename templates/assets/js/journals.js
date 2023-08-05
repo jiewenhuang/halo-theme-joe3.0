@@ -13,6 +13,7 @@ const journalContext = {
 			live: true,
 		}).init();
 	},
+
 	/* 日志发布时间格式化 */
 	formatTime() {
 		const $allJournalTime = $(".joe_journal-posttime");

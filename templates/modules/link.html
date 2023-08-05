@@ -23,13 +23,13 @@
     </style>
     <script th:src="@{/assets/lib/nprogress/nprogress.min.js}"></script>
   </th:block>
-  <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/normalize.min.css}">
+  <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/normalize.min.css?v={version}(version=${theme.spec.version})}">
   <link rel="preload stylesheet" as="style" th:href="@{/assets/lib/font-awesome/css/font-awesome.min.css}">
   <link rel="preload stylesheet" as="style" href="//at.alicdn.com/t/font_2788564_crkap1ed9j5.css">
   <th:block th:if="${theme.config.custom.iconfont != '' and theme.config.custom.iconfont != null}">
     <link rel="stylesheet" th:href="${theme.config.custom.iconfont}">
   </th:block>
-  <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/theme.min.css}">
+  <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/theme.min.css?v={version}(version=${theme.spec.version})}">
   <style th:inline="text">
     #Joe .joe_container {
       max-width: [[${theme.config.basic.content_max_width+'px'}]];
@@ -44,24 +44,24 @@
         <link rel="preload stylesheet" as="style" th:href="@{/assets/lib/prism/prism.min.css}">
         <link rel="preload stylesheet" as="style" th:href="@{/assets/lib/prism/themes}+'/prism-'+${theme.config.code_block.code_theme}+'.css'">
     </th:block>
-    <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/global.min.css}">
+    <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/global.min.css?v={version}(version=${theme.spec.version})}">
     <th:block th:if="${htmlType == 'index'}">
-        <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/index.min.css}">
+        <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/index.min.css?v={version}(version=${theme.spec.version})}">
     </th:block>
     <th:block th:if="${htmlType == 'post'}">
-        <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/post.min.css}">
+        <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/post.min.css?v={version}(version=${theme.spec.version})}">
     </th:block>
     <th:block th:if="${htmlType == 'journals'}">
-        <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/journals.min.css}">
+        <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/journals.min.css?v={version}(version=${theme.spec.version})}">
     </th:block>
     <th:block th:if="${htmlType == 'archives'}">
-        <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/archives.min.css}">
+        <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/archives.min.css?v={version}(version=${theme.spec.version})}">
     </th:block>
     <th:block th:if="${htmlType == 'photos'}">
         <link rel="stylesheet" th:href="@{/assets/lib/justifiedGallery/justifiedGallery.min.css}">
-        <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/photos.min.css}">
+        <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/photos.min.css?v={version}(version=${theme.spec.version})}">
     </th:block>
-    <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/responsive.min.css}">
+    <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/responsive.min.css?v={version}(version=${theme.spec.version})}">
     <link rel="stylesheet" th:href="@{/assets/lib/fancybox/jquery.fancybox.min.css}">
     <th:block th:if="${ttheme.config.other.enable_clean_mode != true} and ${theme.config.theme.cursor_skin != 'off'}">
         <link rel="stylesheet" th:href="@{/assets/cursor/style/min}+'/'+${theme.config.theme.cursor_skin}+'.min.css'">

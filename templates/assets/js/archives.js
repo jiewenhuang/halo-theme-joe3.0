@@ -18,7 +18,6 @@ const archivesContext = {
 		});
 	},
 };
-
 document.addEventListener("DOMContentLoaded", function () {
 	archivesContext.initExpander();
 });

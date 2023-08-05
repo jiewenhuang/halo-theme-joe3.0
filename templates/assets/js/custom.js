@@ -258,6 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	);
 
+
 	customElements.define(
 		"joe-read-limited",
 		class JoeReadLimited extends HTMLElement {

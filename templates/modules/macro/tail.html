@@ -20,7 +20,7 @@
     </th:block>
     <th:block th:if="${theme.config.other.enable_clean_mode != false && (htmlType =='post' || htmlType =='journals' || htmlType =='sheet')}">
         <script th:src="@{/assets/lib/vue@2.6.10/vue.min.js}"></script>
-        <script th:src="@{/assets/lib/halo-comment/halo-comment.min.js}"></script>
+
     </th:block>
     <script th:src="@{/assets/lib/fancybox/jquery.fancybox.min.js}"></script>
     <th:block th:if="${theme.config.aside.enable_aside} and ${theme.config.aside.enable_music_player && theme.config.aside.music_id != null && theme.config.aside.music_id != ''}">
@@ -45,28 +45,28 @@
     </th:block>
 
 <!--===== 引入页面级js start =====-->
-    <script th:src="@{/assets/js/common.js}"></script>
+    <script th:src="@{/assets/js/min/common.min.js?v={version}(version=${theme.spec.version})}"></script>
     <th:block th:if="${htmlType == 'post'} or ${htmlType == 'journals'} or ${htmlType == 'sheet'}">
         <script th:src="@{/assets/lib/prism/prism.min.js}"></script>
     </th:block>
     <th:block th:if="${htmlType == 'index'}">
-        <script th:src="@{/assets/js/index.js}"></script>
+        <script th:src="@{/assets/js/min/index.min.js?v={version}(version=${theme.spec.version})}"></script>
     </th:block>
     <th:block th:if="${htmlType == 'archives'}">
-        <script th:src="@{/assets/js/archives.js}"></script>
+        <script th:src="@{/assets/js/min/archives.min.js?v={version}(version=${theme.spec.version})}"></script>
     </th:block>
     <th:block th:if="${htmlType == 'post'}">
-        <script th:src="@{/assets/js/post.js}"></script>
+        <script th:src="@{/assets/js/min/post.min.js?v={version}(version=${theme.spec.version})}"></script>
     </th:block>
     <th:block th:if="${htmlType == 'journals'}">
-        <script th:src="@{/assets/js/journals.js}"></script>
+        <script th:src="@{/assets/js/min/journals.min.js?v={version}(version=${theme.spec.version})}"></script>
     </th:block>
     <th:block th:if="${htmlType == 'photos'}">
-        <script th:src="@{/assets/js/photos.js}"></script>
+        <script th:src="@{/assets/js/min/photos.min.js?v={version}(version=${theme.spec.version})}"></script>
     </th:block>
     <th:block th:if="${htmlType == 'sheet'}">
         <script th:src="@{/assets/lib/draggabilly/draggabilly.min.js}"></script>
-        <script th:src="@{/assets/js/leaving.js}"></script>
+        <script th:src="@{/assets/js/min/leaving.min.js}"></script>
     </th:block>
 
 <!-- ===== 引入页面级js end ===== -->

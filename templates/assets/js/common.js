@@ -9,7 +9,6 @@ const commonContext = {
 		if ("scrollRestoration" in history) {
 			history.scrollRestoration = "manual";
 		}
-
 		if (ThemeConfig_theme_mode !== "user") return;
 		const $html = $("html");
 		const $icon_light = $(".mode-light");
