@@ -106,18 +106,18 @@
 <!--        <input maxlength="16" autocomplete="off" placeholder="请输入关键字..." name="keyword" value="" class="input" type="text">-->
         <button type="submit" id="halo-search" class="submit" style="border-radius: 17px 17px 17px 17px" aria-label="搜索按钮"><i class="joe-font joe-icon-search"></i></button>
         <span class="icon"></span>
-        <nav class="result">
-          <a href="archives/ce-shi-wen-zhang.html" title="测试文章" class="item">
-            <span class="sort">1</span>
-            <span class="text">测试文章</span>
-          </a>
-          <a href="archives/hello-halo.html" title="Hello Halo" class="item">
-            <span class="sort">2</span>
-            <span class="text">Hello Halo</span>
-          </a>
-        </nav>
+<!--        <nav class="result">-->
+<!--          <a href="archives/ce-shi-wen-zhang.html" title="测试文章" class="item">-->
+<!--            <span class="sort">1</span>-->
+<!--            <span class="text">测试文章</span>-->
+<!--          </a>-->
+<!--          <a href="archives/hello-halo.html" title="Hello Halo" class="item">-->
+<!--            <span class="sort">2</span>-->
+<!--            <span class="text">Hello Halo</span>-->
+<!--          </a>-->
+<!--        </nav>-->
       </div>
-      <i class="joe-font joe-icon-search joe_header__above-searchicon"></i>
+      <a href="javascript:SearchWidget.open()" title="搜索"><i class="joe-font joe-icon-search joe_header__above-searchicon"></i></a>
     </div>
   </div>
 
@@ -231,14 +231,16 @@
   </div>
 
   <div class="joe_header__searchout">
-    <div class="joe_container">
-      <div class="joe_header__searchout-inner">
-        <form class="joe_header__above-search-mobile" method="get" action="http://localhost:8093/search">
-          <input maxlength="16" autocomplete="off" placeholder="请输入关键字..." name="keyword" value="" class="input" type="text">
-          <button type="submit" class="submit">搜索</button>
-        </form>
-      </div>
-    </div>
+    <a href="javascript:SearchWidget.open()" title="搜索"></a>
+<!--    <div class="joe_container">-->
+
+<!--      <div class="joe_header__searchout-inner">-->
+<!--        <form class="joe_header__above-search-mobile" method="get" action="http://localhost:8093/search">-->
+<!--          <input maxlength="16" autocomplete="off" placeholder="请输入关键字..." name="keyword" value="" class="input" type="text">-->
+<!--          <button type="submit" class="submit">搜索</button>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
 
   <div class="joe_header__toc">

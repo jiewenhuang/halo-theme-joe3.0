@@ -610,16 +610,16 @@ const commonContext = {
 		);
 	},
 	/* 搜索框弹窗 */
-	searchDialog() {
-		const $result = $(".joe_header__above-search .result");
-		$(".joe_header__above-search .input").on("click", function (e) {
-			e.stopPropagation();
-			$result.addClass("active");
-		});
-		$(document).on("click", function () {
-			$result.removeClass("active");
-		});
-	},
+	// searchDialog() {
+	// 	const $result = $(".joe_header__above-search .result");
+	// 	$(".joe_header__above-search .input").on("click", function (e) {
+	// 		e.stopPropagation();
+	// 		$result.addClass("active");
+	// 	});
+	// 	$(document).on("click", function () {
+	// 		$result.removeClass("active");
+	// 	});
+	// },
 	/* 激活全局下拉框 */
 	initDropMenu() {
 		$(".joe_dropdown").each(function (index, item) {
@@ -679,14 +679,14 @@ const commonContext = {
 			const $search_out = $(".joe_header__searchout");
 			if ($search_out.hasClass("active")) {
 				$html.removeClass("disable-scroll");
-				$mask.removeClass("active slideout");
+				// $mask.removeClass("active slideout");
 				$search_out.removeClass("active");
 				$header_above.removeClass("solid");
 			} else {
 				// 保存滚动位置
 				window.sessionStorage.setItem("lastScroll", $html.scrollTop());
 				$html.addClass("disable-scroll");
-				$mask.addClass("active");
+				// $mask.addClass("active");
 				$header_above.addClass("solid");
 				$search_out.addClass("active");
 			}
