@@ -123,7 +123,7 @@
 
   <div class="joe_header__slideout">
     <div class="joe_header__slideout-wrap">
-      <img width="100%" height="150" class="joe_header__slideout-image" th:src="@{/assets/img/author_bg.jpg}"  alt="侧边栏壁纸">
+      <img width="100%" height="150" class="joe_header__slideout-image" th:src="${theme.config.blogger.author_bg ?: #theme.assets('/img/author_bg.jpg')}"  alt="侧边栏壁纸">
       <div class="joe_header__slideout-author">
         <img width="50" height="50" class="avatar ls-is-cached lazyloaded" th:data-src="${theme.config.blogger.lazyload_avatar}" th:src="${theme.config.blogger.avatar ?: theme.config.blogger.default_avatar}"  alt="博主头像">
         <div class="info">
@@ -132,18 +132,20 @@
           <p class="motto joe_motto">[[${theme.config.blogger.motto}]]</p>
         </div>
       </div>
-      <ul class="joe_header__slideout-count">
+      <ul class="joe_header__slideout-count" th:with="stats = ${siteStatsFinder.getStats()}">
         <li class="item">
           <i class="joe-font joe-icon-riji"></i>
-          <span>累计撰写 <strong>2</strong> 篇文章</span>
+          <span>累计撰写 <strong>[[${stats.post}]]</strong> 篇文章</span>
         </li>
-        <li class="item">
+        <th:block th:with="tags = ${tagFinder.listAll()}">
+        <li class="item" th:with="tagNum = ${#lists.size(tags)}">
           <i class="joe-font joe-icon-remen"></i>
-          <span>累计创建 <strong>0</strong> 个标签</span>
+          <span>累计创建 <strong>[[${tagNum}]]</strong> 个标签</span>
         </li>
+        </th:block>
         <li class="item">
           <i class="joe-font joe-icon-message"></i>
-          <span>累计收到 <strong>1</strong> 条评论</span>
+          <span>累计收到 <strong>[[${stats.comment}]]</strong> 条评论</span>
         </li>
       </ul>
       <ul class="joe_header__slideout-menu panel-box">

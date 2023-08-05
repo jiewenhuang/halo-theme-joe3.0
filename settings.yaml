@@ -883,6 +883,7 @@ spec:
               help: "邮箱填邮箱号，QQ填QQ号，其他填跳转链接"
         - $formkit: radio
           name: enable_weather
+          id: enable_weather
           label: 展示博主信息
           value: false
           help: "是否展示简约版天气信息，必须配置正确的appKey后才可生效"
@@ -893,6 +894,7 @@ spec:
               label: 关闭
         - $formkit: text
           name: weather_key
+          if: "$get(enable_weather).value"
           label: 天气插件appKey
           value: ""
           help: "用于初始化天气插件，请通过 https://widget.qweather.com/create-simple 生成自己的插件，然后复制其中的key值填到这里"
