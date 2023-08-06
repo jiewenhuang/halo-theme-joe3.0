@@ -26,6 +26,7 @@
   <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/normalize.min.css?v={version}(version=${theme.spec.version})}">
   <link rel="preload stylesheet" as="style" th:href="@{/assets/lib/font-awesome/css/font-awesome.min.css}">
   <link rel="preload stylesheet" as="style" href="//at.alicdn.com/t/font_2788564_crkap1ed9j5.css">
+  <link rel="preload stylesheet" as="style" href="//at.alicdn.com/t/c/font_4198339_8a6gq3y0z8h.css">
   <th:block th:if="${theme.config.custom.iconfont != '' and theme.config.custom.iconfont != null}">
     <link rel="stylesheet" th:href="${theme.config.custom.iconfont}">
   </th:block>
@@ -66,5 +67,7 @@
     <th:block th:if="${ttheme.config.other.enable_clean_mode != true} and ${theme.config.theme.cursor_skin != 'off'}">
         <link rel="stylesheet" th:href="@{/assets/cursor/style/min}+'/'+${theme.config.theme.cursor_skin}+'.min.css'">
     </th:block>
+    <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/beauty.min.css?v={version}(version=${theme.spec.version})}">
+
 </th:block>
 </html>

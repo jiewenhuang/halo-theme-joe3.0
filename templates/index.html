@@ -7,6 +7,11 @@
       <div id="Joe">
 <!--          navbar-->
           <th:block th:replace="~{modules/macro/navbar :: navbar}" />
+<!--          首页大图-->
+          <th:block th:if="${theme.config.beauty.enable_big_banner}">
+              <th:block th:replace="~{modules/macro/big_banner :: big_banner(${title})}" />
+          </th:block>
+
           <div class="joe_container joe_main_container page-index"
           th:classappend="|${theme.config.theme.enable_show_in_up ? 'animated showInUp':''} ${theme.config.aside.aside_position == 'left' ? 'revert':''}|">
               <div class="joe_main">
