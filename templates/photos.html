@@ -15,12 +15,12 @@
                 </div>
                 <nav class="joe_photos__filter">
                     <ul>
-                        <li class="active" data-filter="">
-                            <a href="javascript:;">全部</a>
+                        <li data-sjslink="all">
+                            <a >全部</a>
                         </li>
                         <th:block th:each="group : ${groups}">
-                        <li th:data-filter="${group.spec.displayName}">
-                            <a href="javascript:;">[[${group.spec.displayName}]]</a>
+                        <li  th:data-sjslink="${group.metadata.name}">
+                            <a >[[${group.spec.displayName}]]</a>
                         </li>
                         </th:block>
 
@@ -28,19 +28,26 @@
                 </nav>
 
             </div>
-                <div class="joe_photos__gallery grid justified-gallery" th:each="group : ${groups}" >
-                    <a th:each="photo : ${group.photos}" class="item animated wow jg-entry" data-wow-diration="0.3s" data-wow-delay="0.0s" th:href="${photo.spec.url}" data-fancybox="gallery" data-caption="thumbnail_large" style="visibility: visible; animation-delay: 0.2s; width: 338px; height: 171.256px; top: 10px; left: 467px; opacity: 1;">
-                        <img width="100%" height="100%" class="lazyloadx" th:src="${photo.spec.url}" alt="thumbnail_large" style="width: 338px; height: 172px; margin-left: -169px; margin-top: -86px; opacity: 1;">
-                        <span class="team" style="background-color:#682d88"></span>
-                        <p class="tit">[[${photo.spec.displayName}]]</p>
-                        <div class="info">
-                            <p class="animated fadeInRightBig"><i class="joe-font joe-icon-paizhao"></i><span>[[${photo.spec.displayName}]]</span></p>
 
-                            <p class="animated fadeInRightBig"><i class="joe-font joe-icon-shijian"></i>2023-07-12</p>
-                        </div>
-                    </a>
+                            <div class="wrapper">
+                                <div id="sortable" class="sjs-default">
+                                    <div th:data-sjsel="${photo.spec.groupName}" th:each="photo : ${photoFinder.listAll()}">
+                                        <div class="card" >
+                                            <a class="item animated wow jg-entry" th:href="${photo.spec.url}" data-fancybox="gallery">
 
-                </div>
+                                            <img class="card__picture" th:data-src="${photo.spec.url}" th:src="@{/assets/img/lazyload.gif}" th:alt="${photo.spec.displayName}"></a>
+<!--                                            <div class="card-infos">-->
+<!--                                                <h2 class="card__title">Example 1</h2>-->
+<!--                                                <p class="card__text">-->
+<!--                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, eius, asperiores. Incidunt sapiente est quae iure...-->
+<!--                                                </p>-->
+<!--                                            </div>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
 
         </div>
             <th:block th:if="${theme.config.aside.enable_photos_aside}">

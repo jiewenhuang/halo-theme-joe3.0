@@ -621,7 +621,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					src: this.getAttribute("src") || "",
 					player:
             this.getAttribute("player") ||
-            `${ThemeConfig_BASE_RES_URL}/template/module/dplayer.html?url=`,
+            `/themes/theme-Joe3/assets/lib/dplayer/web/dplayer.html?url=`,
 					width: this.getAttribute("width") || "100%",
 					height: this.getAttribute("height") || "500px",
 				};

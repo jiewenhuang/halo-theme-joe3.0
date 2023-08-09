@@ -69,8 +69,9 @@
         <script th:src="@{/assets/js/min/leaving.min.js}"></script>
     </th:block>
     <script th:src="@{/assets/js/min/beauty.min.js}"></script>
+<!--    <script src="http://localhost:8090/upload/masonry.pkgd.min.js"></script>-->
 
-<!-- ===== 引入页面级js end ===== -->
+    <!-- ===== 引入页面级js end ===== -->
 
 <!-- ===== 引入脚本 start ===== -->
 
@@ -118,6 +119,10 @@
         // 以上配置均为默认值，可直接使用进行初始化
         // new EvanBigBanner();
 
+    </script>
+    <th:block th:if="${htmlType == 'photos'}">
+    <script type="text/javascript">
+        document.querySelector('#sortable').sortablejs()
     </script>
 </th:block>
 </html>

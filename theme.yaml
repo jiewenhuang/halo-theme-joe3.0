@@ -9,7 +9,7 @@ spec:
     website: "https://halo.run"
   description: Halo2.0主题 Joe3
   logo: "https://cdn.jsdelivr.net/gh/qinhua/halo-theme-joe2.0@master/source/img/dp/welcome.jpg"
-  website: "https://halo.run"
+  website: "https://www.jiewen.run"
   repo: "https://github.com/jiewenhuang/halo-theme-joe3.0"
   settingName: "theme-Joe-setting"
   configMapName: "theme-Joe-configMap"

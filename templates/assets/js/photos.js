@@ -1,269 +1,230 @@
-/**相册页逻辑 */
-const photosContext = {
-	/* 激活列表特效 */
-	initEffect(type) {
-		if (!ThemeConfig_enable_photos_effect) return;
-		new WOW({
-			boxClass: "wow",
-			animateClass: type === "grid" ? "bounceIn" : "fadeIn",
-			offset: 0,
-			mobile: true,
-			live: true,
-		}).init();
-	},
-	/* 初始化 */
-	initList() {
-		const $domList = $(".joe_photos__gallery");
-		const $domEmpty = $(".joe_empty");
-		const $domLoading = $(".joe_loading");
-		const queryData = {
-			page: 0,
-			// size: ThemeConfig_photos_page_size,
-			size: 10,
-			sort: "createTime,desc",
-		};
-		let isLoading = false;
-		let isFirst = true;
-		let isEnd = false;
-		let listData = [];
-		let curLayout = ThemeConfig_photos_layout;
+class Sortable {
+    constructor({
+                    parent,
+                    links         = document.querySelectorAll('[data-sjslink]'),
+                    active        = 'active',
+                    margin        = 20,
+                    responsive    = {
+                        980: {
+                            columns: 3
+                        },
+                        480: {
+                            columns: 2
+                        },
+                        0: {
+                            columns: 1
+                        }
+                    },
+                    fadeDuration  = {
+                        in: 300,
+                        out: 0
+                    }
+                } = {}) {
+        this.parent           = parent
+        this.links            = Array.from(links)
+        this.active           = active
+        this.margin           = margin
+        this.responsive       = responsive
+        this.fadeDuration     = fadeDuration
+        this.elements         = Array.from(this.parent.children)
+        this.activeElements   = this.elements
+        this.columns          = 1
+        this.dataLink         = 'all'
+        this.winWidth         = window.innerWidth
 
-		// 渲染Grid布局
-		const renderGrid = (data) => {
-			if (data) {
-				const htmlArr = data.reduce((result, item, index) => {
-					return result.concat([
-						`<a class="item animated wow" data-wow-diration="0.3s" data-wow-delay="0.${index}s" href="${
-							item.url
-						}" data-fancybox="gallery" data-caption="${item.name || ""}">
-        <img width="100%" height="100%" class="lazyloadx" src="${
-	item.thumbnail
-}" alt="${item.name || ""}"/>
-        <span class="team" style="background-color:${Utils.getRandomColor(
-		0.2,
-		0.5
-	)}">${item.team}</span>
-        <p class="tit">${item.name}</p>
-        <div class="info">
-          <p class="animated fadeInRightBig"><i class="joe-font joe-icon-paizhao"></i><span>${
-	item.name
-}</span></p>
-          ${
-	item.location
-		? `<p class="animated fadeInRightBig"><i class="joe-font joe-icon-dingwei"></i><span>${item.location}</span></p>`
-		: ""
+        this.init()
+    }
+
+    orderelements(){
+        let {parent, activeElements, columns, blocWidth, responsive, margin} = this
+
+        let arrayRectHeight   = activeElements.reduce((acc, el, id) => {
+            let columnsHeight   = this._sumArrHeight(acc, columns)
+            let positionX       = (id%columns) * (blocWidth + margin)
+            let rectHeight      = (id - columns >= 0) ? (columnsHeight[id%columns] + (margin * Math.floor(id / columns))) : 0
+
+            el.style.transform  = `translate3d(${positionX}px, ${rectHeight}px, 0)`
+
+            acc.push(el.offsetHeight)
+            return acc
+        }, [])
+
+        let columnsMaxHeight    = this._sumArrHeight(arrayRectHeight, columns)
+        let parentHeight        = Math.max(...columnsMaxHeight) + (margin * (Math.floor(activeElements.length / columns) - 1))
+        parent.style.height     = `${parentHeight}px`
+    }
+
+    handleFilterClick(ev, element){
+        ev.preventDefault()
+        let {links, active} = this
+
+        if(element.dataset.sjslink === this.dataLink){
+            return
+        } else {
+            this.dataLink = element.dataset.sjslink
+            links.forEach(el => {
+                el.isEqualNode(element) ? el.classList.add(active) : el.classList.remove(active)
+            })
+            this._filterElements(()=>{
+                this.orderelements()
+            })
+        }
+    }
+
+    resize(){
+        window.addEventListener('resize', () => {
+            clearTimeout(window.sortableResize)
+            window.sortableResize = setTimeout(() => {
+                this.winWidth = window.innerWidth
+                this._setBlocWidth(()=>{
+                    this.orderelements()
+                })
+            }, 500)
+        })
+    }
+
+    init(){
+        let {parent, links, active} = this
+
+        links.forEach((el, id) => {
+            if(id === 0){
+                el.classList.add(active)
+                this.dataLink = el.dataset.sjslink
+            }
+            el.addEventListener('click', ev => {
+                this.handleFilterClick(ev, el)
+            })
+        })
+
+        this._setBlocWidth()
+
+        window.addEventListener('load', () => {
+            this._filterElements(()=>{
+                this.orderelements()
+            })
+            parent.style.opacity = 1
+        })
+
+        this.resize()
+        //使用Intersection Observer API实现懒加载
+        const ob = new IntersectionObserver(
+            (entries)=>{
+                entries.forEach((entry)=>{
+                    if(entry.isIntersecting){
+                        const img = entry.target;
+                        const src = img.getAttribute('data-src');
+                        img.setAttribute('src',src);
+                        ob.unobserve(img);
+                    }
+                })
+        },{
+            threshold:0.5
+        });
+        const imgs = document.querySelectorAll('img.card__picture');
+        imgs.forEach((img)=>{
+            ob.observe(img);
+        })
+
+    }
+
+    _setBlocWidth(callback){
+        let {parent, elements, margin, responsive} = this
+
+        let columns         = this.columns = this._columnsCount(responsive)['columns']
+        let blocWidth       = this.blocWidth = (parent.clientWidth - (margin * (columns - 1))) / columns
+
+        elements.forEach(el=>{
+            el.style.width = `${blocWidth}px`
+        })
+        if(callback){
+            callback()
+        }
+    }
+    _filterElements(callback){
+        let {elements, dataLink, fadeDuration} = this
+
+        this.activeElements = elements.filter(el => {
+            if(dataLink === 'all') {
+                this._fadeIn(el, fadeDuration.in)
+                return true
+            } else {
+                if(el.dataset.sjsel !== dataLink) {
+                    this._fadeOut(el, fadeDuration.out)
+                    return false
+                } else {
+                    this._fadeIn(el, fadeDuration.in)
+                    return true
+                }
+            }
+        })
+
+        if(callback){
+            callback()
+        }
+    }
+    _sumArrHeight(arr, col){
+        return arr.reduce((acc, val, id)=>{
+            let cle = id%col
+            if(!acc[cle]){
+                acc[cle] = 0
+            }
+            acc[cle] = acc[cle]+val
+            return acc
+        }, [])
+    }
+    _columnsCount(obj){
+        let {winWidth} = this
+        return Object.entries(obj).reduce((acc, val)=>{
+            return winWidth > val[0] && val[0] >= Math.max(acc['width'])
+                ? { width: val[0], columns: val[1]['columns'] }
+                : acc
+        }, {width: 0, columns: 4})
+    }
+    _fadeIn(el, duration = 300, callback){
+        let opacity   = parseFloat(window.getComputedStyle(el, null).getPropertyValue("opacity")),
+            interval  = 16,
+            gap       = interval / duration
+
+        el.style.display = 'block'
+
+        function animation(){
+            opacity += gap
+
+            if(opacity <= 1){
+                el.style.opacity = opacity
+                requestAnimationFrame(animation)
+            } else {
+                el.style.opacity = 1
+                if(callback){
+                    callback()
+                }
+            }
+        }
+        requestAnimationFrame(animation)
+    }
+    _fadeOut(el, duration = 300, callback){
+        let opacity   = parseFloat(window.getComputedStyle(el, null).getPropertyValue("opacity")),
+            interval  = 16,
+            gap       = duration ? (interval / duration) : 1
+
+        function animation(){
+            opacity -= gap
+
+            if(opacity >= 0){
+                el.style.opacity = opacity
+                requestAnimationFrame(animation)
+            } else {
+                el.style.opacity = 0
+                el.style.display = 'none'
+                if(callback){
+                    callback()
+                }
+            }
+        }
+        requestAnimationFrame(animation)
+    }
 }
-          <p class="animated fadeInRightBig"><i class="joe-font joe-icon-shijian"></i>${Utils.formatDate(
-		item.takeTime
-	)}</p>
-        </div>
-      </a>`,
-					]);
-				}, []);
-				$domList.append(htmlArr.join(""));
-			}
-			// 文档：http://miromannino.github.io/Justified-Gallery/getting-started/
-			$domList
-				.justifiedGallery({
-					rowHeight: 200,
-					maxRowHeight: false,
-					maxRowsCount: 0,
-					sizeRangeSuffixes: {},
-					lastRow: "nojustify",
-					captions: false,
-					waitThumbnailsLoad: true, //等待图片加载完，这样就可以根据图片比例展示，如果为false，则都是统一比例
-					margins: ThemeConfig_photos_gap,
-					extension: /\.(jpe?g|png|gif|bmp|webp)$/,
-					cssAnimation: false,
-				})
-				.on("jg.complete", function (e) {
-					// console.log("grid layout is complete");
-					isFirst = false;
-					isLoading = false;
-				});
-		};
 
-		// 渲染Waterfall布局
-		let $masonry_instance;
-		const renderWaterfall = (data) => {
-			if (!Masonry || !imagesLoaded) return;
-			if (data) {
-				data.forEach((item, index) => {
-					const $item =
-            $(`<a class="item masonry-item animated wow" style="margin-bottom:${
-            	ThemeConfig_photos_gap || "10"
-            }px" data-wow-diration="0.3s" data-wow-delay="0.${index}s" href="${
-            	item.url
-            }" data-fancybox="gallery" data-caption="${item.name || ""}">
-      <img width="100%" height="100%" class="lazyload" rsrc="${
-	ThemeConfig_photo_lazyload_img || ThemeConfig_LAZY_IMG
-}" src="${item.thumbnail}" alt="${item.name || ""}"/>
-      <span class="team" style="background-color:${Utils.getRandomColor(
-		0.2,
-		0.5
-	)}">${item.team}</span>
-      <p class="tit">${item.name}</p>
-      <div class="info">
-        <p class="animated fadeInRightBig"><i class="joe-font joe-icon-paizhao"></i><span>${
-	item.name
-}</span></p>
-        ${
-	item.location
-		? `<p class="animated fadeInRightBig"><i class="joe-font joe-icon-dingwei"></i><span>${item.location}</span></p>`
-		: ""
+HTMLElement.prototype.sortablejs = HTMLElement.prototype.sortablejs || function(params){
+    return new Sortable({parent: this, ...params})
 }
-        <p class="animated fadeInRightBig"><i class="joe-font joe-icon-shijian"></i>${Utils.formatDate(
-		item.takeTime
-	)}</p>
-      </div>
-    </a>`);
-					$domList.append($item);
-					// add and layout newly appended items
-					$masonry_instance &&
-            $masonry_instance.append($item).masonry("appended", $item);
-				});
-			}
-			// 文档：https://masonry.desandro.com/
-			$domList.imagesLoaded(function () {
-				$masonry_instance = $domList.masonry({
-					itemSelector: ".masonry-item",
-					columnWidth: ThemeConfig_photos_gap,
-					gutter: ThemeConfig_photos_gap,
-					horizontalOrder: true,
-					percentPosition: true,
-					initLayout: true,
-					fitWidth: true,
-					resize: true,
-					transitionDuration: "0.2s",
-				});
-				$masonry_instance.masonry("on", "layoutComplete", function () {
-					console.log("waterfall layout is complete");
-					isFirst = false;
-					isLoading = false;
-				});
-				// $masonry_instance.imagesLoaded().progress(function () {
-				//   $masonry_instance.masonry("layout");
-				// });
-			});
-		};
-
-		/* 渲染列表 */
-		const renderList = (data) => {
-			curLayout === "grid" ? renderGrid(data) : renderWaterfall(data);
-			isFirst && photosContext.initEffect(curLayout);
-		};
-
-		/* 获取相册数据 */
-		const getData = (param) => {
-			return new Promise((resolve, reject) => {
-				isLoading = true;
-				$domLoading.show();
-				const params = { ...queryData, ...(param || {}) };
-				params.team === "" ? delete params.team : null;
-
-				Utils.request({
-					url: "/api/content/photos",
-					method: "GET",
-					data: params,
-				})
-					.then((res) => {
-						const resD = res.content || [];
-						if (resD.length === 0) {
-							if (params.page === 0) {
-								$domList.hide();
-								$domEmpty.removeClass("hide");
-							}
-						} else {
-							renderList(resD);
-							$domEmpty.addClass("hide");
-							$domList.show();
-							if (!res.isLast) {
-								$domEmpty.addClass("hide");
-								// return Qmsg.warning("没有更多内容了");
-							} else {
-								isEnd = true;
-							}
-						}
-						$domLoading.hide();
-						$domList.show();
-						listData = params.page > 0 ? listData.concat(resD) : resD;
-						resolve(resD);
-					})
-					.catch((err) => {
-						$domLoading.hide();
-						$domEmpty.removeClass("hide");
-						isLoading = false;
-						reject(err);
-					});
-			});
-		};
-
-		// 重置列表
-		const reset = (param) => {
-			$domList.empty().hide();
-			isFirst = true;
-			isEnd = false;
-			isLoading = false;
-			queryData.page = 0;
-			getData(param);
-		};
-
-		getData();
-
-		// 滚动加载
-		window.addEventListener(
-			"scroll",
-			Utils.throttle(function () {
-				if (
-					$(window).scrollTop() + $(window).height() >=
-          $(".page-photos").height()
-				) {
-					if (isLoading || isEnd) return;
-					// console.log("需要加载了");
-					queryData.page++;
-					getData({
-						team: $(".joe_photos__filter li.active").attr("data-filter"),
-						size: 10
-					});
-				}
-			})
-		);
-
-		// 加载更多
-		$domLoading.on("click", function (e) {
-			e.stopPropagation();
-			if ($(this).attr("loading")) return;
-			queryData.page++;
-			getData({
-				team: $(".joe_photos__filter li.active").attr("data-filter"),
-			});
-		});
-
-		// 分组过滤
-		$(".joe_photos__filter li").on("click", function (e) {
-			e.stopPropagation();
-			const $this = $(this);
-			if ($this.hasClass("active")) return;
-			$this.addClass("active").siblings("li").removeClass("active");
-			reset({ team: $this.attr("data-filter") });
-		});
-
-		// 布局切换
-		$(".joe_photos__layout-switch i").on("click", function (e) {
-			e.stopPropagation();
-			const $this = $(this);
-			if ($this.hasClass("active")) return;
-			curLayout = $this.attr("data-type");
-			$this.addClass("active").siblings("i").removeClass("active");
-			$masonry_instance = null;
-			$domList
-				.attr({ class: "", style: "" })
-				.attr("class", "joe_photos__gallery " + curLayout);
-			reset({ team: $(".joe_photos__filter li.active").attr("data-filter") });
-		});
-	},
-};
-
-document.addEventListener("DOMContentLoaded", function () {
-	photosContext.initList();
-});

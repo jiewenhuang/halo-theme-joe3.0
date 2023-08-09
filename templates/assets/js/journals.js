@@ -60,12 +60,15 @@ const journalContext = {
 						: [];
 					flag = agreeArr.includes(cid);
 
-					Utils.request({
-						url: "/api/content/journals/" + cid + "/likes",
-						method: "POST",
-						data: {
-							type: flag ? "disagree" : "agree",
-						},
+					$.ajax({
+						url: "/apis/api.halo.run/v1alpha1/trackers/upvote",
+						type: "post",
+						contentType: "application/json; charset=utf-8",
+						data: JSON.stringify({
+							group: "moment.halo.run",
+							plural: "moments",
+							name: cid,
+						}),
 					})
 						.then((_res) => {
 							let likes = clikes;
@@ -101,11 +104,12 @@ const journalContext = {
 			e.stopPropagation();
 			const $this = $(this);
 			const $parent = $this.parents(".footer-wrap");
-			const compComment = $parent.find("halo-comment")[0]._wrapper.$refs.inner;
+			// const compComment = $parent.find("halo-comment")[0]._wrapper.$refs.inner;
 			// 展开加载评论
-			if (!$parent.hasClass("open")) {
-				compComment.loadComments();
-			}
+			// if (!$parent.hasClass("open")) {
+			// 	return;
+			// }
+			console.log("ping")
 			$parent.toggleClass("open");
 			$parent
 				.find(".journal_comment_expander_txt")

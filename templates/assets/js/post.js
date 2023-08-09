@@ -163,13 +163,17 @@ const postContext = {
 				? JSON.parse(decrypt(localStorage.getItem(encryption("agree"))))
 				: [];
 			flag = agreeArr.includes(cid);
+			// console.log(cid)
 
-			Utils.request({
-				url: "/api/content/posts/" + cid + "/likes",
-				method: "POST",
-				data: {
-					type: flag ? "disagree" : "agree",
-				},
+			$.ajax({
+				url: "/apis/api.halo.run/v1alpha1/trackers/upvote",
+				type: "post",
+				contentType: "application/json; charset=utf-8",
+				data: JSON.stringify({
+					group: "content.halo.run",
+					plural: "posts",
+					name: cid,
+				}),
 			})
 				.then((_res) => {
 					let likes = clikes;
