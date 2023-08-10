@@ -50,8 +50,8 @@
 
   </th:block>
       <th:block th:if="${theme.config.archives.archives_list_type =='timeline'}">
-    <ul class="joe_archives-timelist">
-      <th:block th:each="archive : ${archives.items}">
+    <ul class="joe_archives-timelist" th:with="allArchives = ${postFinder.archives(1,9999)}">
+      <th:block th:each="archive : ${allArchives.items}">
         <th:block th:if="${theme.config.archives.archives_timeline_metric == 'month'}"
                   th:each="month : ${archive.months}">
       <li class="item">
