@@ -17,7 +17,7 @@
               <div class="joe_main">
                   <div class="joe_index">
 <!--                      轮播图-->
-                      <th:block th:if="${theme.config.carousel.enable_banner}">
+                      <th:block th:if="${theme.config.carousel.enable_banner} and ${not #lists.isEmpty(theme.config.carousel.banner_source)}">
                           <th:block th:replace="~{modules/macro/banner :: banner}" />
                       </th:block>
 

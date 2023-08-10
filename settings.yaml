@@ -2030,6 +2030,20 @@ spec:
           label: 图片间距
           value: "10"
           help: "请输入图片间距值，默认10（请填数字）"
+    - group: links
+      label: 友链
+      formSchema:
+        - $formkit: text
+          name: links_title
+          label: 友链页标题
+          value: "友情链接"
+        - $formkit: code
+          name: links_article
+          height: 200
+          label: 底部显示内容
+          value: ""
+          language: html
+
     - group: footer
       label: 页脚
       formSchema:
