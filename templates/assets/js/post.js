@@ -4,8 +4,8 @@ const postContext = {
 	/* 初始化评论后可见 */
 	// initReadLimit() {
 	// 	if (
-	// 		PageAttrs_metas_enable_read_limit &&
-	// 		PageAttrs_metas_enable_read_limit.trim() !== "true"
+	// 		PageAttrs.metas_enable_read_limit &&
+	// 		PageAttrs.metas_enable_read_limit.trim() !== "true"
 	// 	)
 	// 		return;
 	// 	postContext.limited = true;
@@ -76,16 +76,16 @@ const postContext = {
 	// },
 	/* 文章复制 + 版权文字 */
 	initCopy() {
-		if (PageAttrs_metas_enable_copy === "false" || !ThemeConfig_enable_copy)
+		if (PageAttrs.metas_enable_copy === "false" || !ThemeConfig.enable_copy)
 			return;
 		const curl = location.href;
 		const author = $(".joe_detail").attr("data-author");
 		$(".joe_detail__article").on("copy", function (e) {
 			const selection = window.getSelection();
 			const selectionText = selection.toString().replace(/<已自动折叠>/g, "");
-			const appendLink = ThemeConfig_enable_copy_right_text
-				? ThemeConfig_copy_right_text ||
-				`\r\n\r\n====================================\r\n文章作者： ${author}\r\n文章来源： ${ThemeConfig_blog_title}\r\n文章链接： ${curl}\r\n版权声明： 内容遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。`
+			const appendLink = ThemeConfig.enable_copy_right_text
+				? ThemeConfig.copy_right_text ||
+				`\r\n\r\n====================================\r\n文章作者： ${author}\r\n文章来源： ${ThemeConfig.blog_title}\r\n文章链接： ${curl}\r\n版权声明： 内容遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。`
 				: "";
 			if (window.clipboardData) {
 				const copytext = selectionText + appendLink;
@@ -108,16 +108,16 @@ const postContext = {
 	},
 	/* 初始化文章分享 */
 	initShare() {
-		if (PageAttrs_metas_enable_share === "false" || !ThemeConfig_enable_share)
+		if (PageAttrs.metas_enable_share === "false" || !ThemeConfig.enable_share)
 			return;
-		if (ThemeConfig_enable_share_link && $(".icon-share-link").length) {
+		if (ThemeConfig.enable_share_link && $(".icon-share-link").length) {
 			$(".icon-share-link").each((_index, item) => {
 				new ClipboardJS($(item)[0], {
 					text: () => location.href,
 				}).on("success", () => Qmsg.success("文章链接已复制"));
 			});
 		}
-		if (ThemeConfig_enable_share_weixin && $(".qrcode_wx").length) {
+		if (ThemeConfig.enable_share_weixin && $(".qrcode_wx").length) {
 			$(".qrcode_wx").qrcode({
 				width: 140,
 				height: 140,
@@ -133,8 +133,8 @@ const postContext = {
 	/* 文章点赞 */
 	initLike() {
 		if (
-			PageAttrs_metas_enable_like === "false" ||
-			!ThemeConfig_enable_like ||
+			PageAttrs.metas_enable_like === "false" ||
+			!ThemeConfig.enable_like ||
 			!$(".joe_detail__agree").length
 		)
 			return;
@@ -204,14 +204,14 @@ const postContext = {
 	/* 文章目录 */
 	initToc(reload) {
 		if (
-			PageAttrs_metas_enable_toc === "false" ||
-			!ThemeConfig_enable_toc ||
+			PageAttrs.metas_enable_toc === "false" ||
+			!ThemeConfig.enable_toc ||
 			!$(".toc-container").length
 		)
 			return;
 
 		// 原始内容的文章不支持TOC
-		if (PageAttrs_metas_use_raw_content === "true") {
+		if (PageAttrs.metas_use_raw_content === "true") {
 			$("#js-toc").html(
 				"<div class=\"toc-nodata\">暂不支持解析原始内容目录</div>"
 			);
@@ -221,7 +221,7 @@ const postContext = {
 
 		// 回复可见的文章首次不渲染TOC
 		if (
-			PageAttrs_metas_enable_read_limit === "true" &&
+			PageAttrs.metas_enable_read_limit === "true" &&
 			!reload &&
 			postContext.limited
 		) {
@@ -246,7 +246,7 @@ const postContext = {
 			contentSelector: ".joe_detail__article",
 			ignoreSelector: ".js-toc-ignore",
 			headingSelector: "h1,h2,h3,h4,h5,h6",
-			collapseDepth: +(PageAttrs_metas_toc_depth || ThemeConfig_toc_depth || 0),
+			collapseDepth: +(PageAttrs.metas_toc_depth || ThemeConfig.toc_depth || 0),
 			scrollSmooth: true,
 			includeTitleTags: true,
 			// scrollSmoothDuration: 400,
@@ -343,7 +343,7 @@ const postContext = {
 	},
 	/* 阅读进度条 */
 	initProgress() {
-		if (!ThemeConfig_enable_progress_bar) return;
+		if (!ThemeConfig.enable_progress_bar) return;
 		$(window).off("scroll");
 		const progress_bar = $(".joe_progress_bar");
 		let win_h, body_h, sHeight;
@@ -379,9 +379,9 @@ const postContext = {
 	/*跳转到指定评论 */
 	async jumpToComment() {
 		if (
-			ThemeConfig_enable_clean_mode ||
-			!ThemeConfig_enable_comment ||
-			PageAttrs_metas_enable_comment === "false"
+			ThemeConfig.enable_clean_mode ||
+			!ThemeConfig.enable_comment ||
+			PageAttrs.metas_enable_comment === "false"
 		)
 			return;
 		const { cid: commentId = "", p: postId = "" } = Utils.getUrlParams();

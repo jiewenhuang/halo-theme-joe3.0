@@ -72,29 +72,29 @@ const homeContext = {
 	// getDefaultThumbnail(postId) {
 	// 	// 如果配置了随机图，则从随机图获取
 	// 	if (
-	// 		ThemeConfig_enable_random_img_api &&
-    //   ThemeConfig_random_img_api.trim()
+	// 		ThemeConfig.enable_random_img_api &&
+    //   ThemeConfig.random_img_api.trim()
 	// 	) {
-	// 		return `${ThemeConfig_random_img_api}${
-	// 			ThemeConfig_random_img_api.includes("?") ? "&" : "?"
+	// 		return `${ThemeConfig.random_img_api}${
+	// 			ThemeConfig.random_img_api.includes("?") ? "&" : "?"
 	// 		}_r=${postId}`;
 	// 	} else {
-	// 		return ThemeConfig_post_thumbnail;
+	// 		return ThemeConfig.post_thumbnail;
 	// 	}
 	// },
 	/* 初始化首页列表 */
 	initList() {
-		if (!ThemeConfig_enable_index_list_ajax) return;
+		if (!ThemeConfig.enable_index_list_ajax) return;
 		const MapTypes = {
 			1: "createTime",
 			2: "visits",
 			3: "updateTime",
 			4: "likes",
 		};
-		const pageSize = ThemeConfig_post_index_page_size;
+		const pageSize = ThemeConfig.post_index_page_size;
 		const $el = $(".joe_index__list");
 		const $headerHeight =
-      ThemeConfig_enable_fixed_header || Joe.isMobile
+      ThemeConfig.enable_fixed_header || Joe.isMobile
       	? $(".joe_header").height()
       	: 0;
 		const $navItems = $(".passage-list-tabs .item");
@@ -174,22 +174,22 @@ const homeContext = {
 		const getListNode = (post, index) => {
 			const thumbnail = homeContext.getThumbnail(post);
 			const link_behavior =
-        ThemeConfig_link_behavior !== "default"
-        	? ThemeConfig_link_behavior === "new"
+        ThemeConfig.link_behavior !== "default"
+        	? ThemeConfig.link_behavior === "new"
         		? "_blank"
         		: ""
         	: "_blank";
 
 			return `<li class="joe_list__item default animated wow" data-wow-delay="0.${index}s">
             ${
-	ThemeConfig_enable_post_thumbnail
+	ThemeConfig.enable_post_thumbnail
 		? `<a href="${post.fullPath}" class="thumbnail" title="${
 			post.title
 		}" target="${link_behavior}" rel="noopener noreferrer">
                       <img width="100%" height="100%" class="lazyload" src="${
-	ThemeConfig_lazyload_thumbnail
+	ThemeConfig.lazyload_thumbnail
 }" data-src="${thumbnail}" onerror="Joe.errorImg(this,${
-	ThemeConfig_fallback_thumbnail
+	ThemeConfig.fallback_thumbnail
 })" alt="${post.title}">
                       <time datetime="${Utils.formatDate(
 		post.createTime
@@ -246,7 +246,7 @@ const homeContext = {
 		// 切换文章类型
 		$navItems.on("click", function (e) {
 			e.stopPropagation();
-			if (!ThemeConfig_enable_index_list_ajax) return;
+			if (!ThemeConfig.enable_index_list_ajax) return;
 			const typeId = $(this).attr("data-type");
 			const typeName = MapTypes[typeId];
 			if (queryData.sort.includes(typeName)) return;
@@ -282,10 +282,10 @@ const homeContext = {
 	},
 	/* 激活列表特效 */
 	initListEffect() {
-		if (!ThemeConfig_enable_index_list_effect) return;
+		if (!ThemeConfig.enable_index_list_effect) return;
 		new WOW({
 			boxClass: "wow",
-			animateClass: ThemeConfig_index_list_effect_class || "fadeIn",
+			animateClass: ThemeConfig.index_list_effect_class || "fadeIn",
 			offset: 0,
 			mobile: true,
 			live: true,

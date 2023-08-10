@@ -2,85 +2,83 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <th:block th:fragment="themeSetting">
   <script th:inline="javascript" id="theme-config-getter">
-    const ThemeConfig_theme_mode = /*[[${theme.config.basic.theme_mode}]]*/ 'user';
-    const ThemeConfig_enable_loading_bar = /*[[${theme.config.theme.enable_loading_bar}]]*/ true;
-    const ThemeConfig_enable_footer = /*[[${theme.config.footer.enable_footer}]]*/ true;
-    const ThemeConfig_footer_position = /*[[${theme.config.footer.footer_position}]]*/ 'none';
-    const ThemeConfig_check_baidu_collect = /*[[${theme.config.other.check_baidu_collect}]]*/ false;
-    const ThemeConfig_enable_global_music_player = /*[[${theme.config.other.check_baidu_collect}]]*/ false;
-    const ThemeConfig_enable_back2top = /*[[${theme.config.theme.enable_back2top}]]*/ true;
-    const ThemeConfig_enable_back2top_smooth = /*[[${theme.config.theme.enable_back2top_smooth}]]*/ true;
-    const ThemeConfig_enable_weather = /*[[${theme.config.blogger.enable_weather}]]*/ false;
-    const ThemeConfig_weather_key = /*[[${theme.config.blogger.weather_key}]]*/ '';
-    const ThemeConfig_link_behavior = /*[[${theme.config.theme.link_behavior}]]*/ 'default';
-    const ThemeConfig_enable_tag_cloud = /*[[${theme.config.aside.enable_tag_cloud}]]*/ 'false';
-    const ThemeConfig_tag_cloud_type = /*[[${theme.config.aside.tag_cloud_type}]]*/ '3d';
-    const ThemeConfig_enable_fixed_header = /*[[${theme.config.navbar.enable_fixed_header}]]*/ true;
-    const ThemeConfig_enable_clean_mode = /*[[${theme.config.other.enable_clean_mode}]]*/ false;
-    const ThemeConfig_cursor_effect = /*[[${theme.config.theme.cursor_effect}]]*/ 'off';
-    const ThemeConfig_enable_offscreen_tip = /*[[${theme.config.theme.enable_offscreen_tip}]]*/ false;
-    const ThemeConfig_enable_birthday = /*[[${theme.config.footer.enable_birthday}]]*/ false;
-    const ThemeConfig_birthday = /*[[${theme.config.footer.custom_birthday}]]*/ '';
-    const ThemeConfig_light_time_scope = /*[[${theme.config.basic.light_time_scope}]]*/ '5:00~19:00';
-    const ThemeConfig_enable_console_theme = /*[[${theme.config.other.enable_console_theme}]]*/ false;
-    const ThemeConfig_version = /*[[${theme.spec.version}]]*/ '1.0.0';
+     const ThemeConfig = {
+       theme_mode : /*[[${theme.config.basic.theme_mode}]]*/ 'user',
+       enable_loading_bar : /*[[${theme.config.theme.enable_loading_bar}]]*/ true,
+       enable_footer : /*[[${theme.config.footer.enable_footer}]]*/ true,
+       footer_position : /*[[${theme.config.footer.footer_position}]]*/ 'none',
+       check_baidu_collect : /*[[${theme.config.other.check_baidu_collect}]]*/ false,
+       enable_global_music_player : /*[[${theme.config.other.check_baidu_collect}]]*/ false,
+       enable_back2top : /*[[${theme.config.theme.enable_back2top}]]*/ true,
+       enable_back2top_smooth : /*[[${theme.config.theme.enable_back2top_smooth}]]*/ true,
+       enable_weather : /*[[${theme.config.blogger.enable_weather}]]*/ false,
+       weather_key : /*[[${theme.config.blogger.weather_key}]]*/ '',
+       link_behavior : /*[[${theme.config.theme.link_behavior}]]*/ 'default',
+       enable_tag_cloud : /*[[${theme.config.aside.enable_tag_cloud}]]*/ 'false',
+       tag_cloud_type : /*[[${theme.config.aside.tag_cloud_type}]]*/ '3d',
+       enable_fixed_header : /*[[${theme.config.navbar.enable_fixed_header}]]*/ true,
+       enable_clean_mode : /*[[${theme.config.other.enable_clean_mode}]]*/ false,
+       cursor_effect : /*[[${theme.config.theme.cursor_effect}]]*/ 'off',
+       enable_offscreen_tip : /*[[${theme.config.theme.enable_offscreen_tip}]]*/ false,
+       enable_birthday : /*[[${theme.config.footer.enable_birthday}]]*/ false,
+       birthday : /*[[${theme.config.footer.custom_birthday}]]*/ '',
+       light_time_scope : /*[[${theme.config.basic.light_time_scope}]]*/ '5:00~19:00',
+       enable_console_theme : /*[[${theme.config.other.enable_console_theme}]]*/ false,
+       version : /*[[${theme.spec.version}]]*/ '1.0.0',
 
-
-
-
-    const ThemeConfig_enable_banner = /*[[${theme.config.carousel.enable_banner}]]*/ true;
-    const ThemeConfig_banner_direction = /*[[${theme.config.carousel.banner_direction}]]*/ 'horizontal';
-    const ThemeConfig_enable_banner_loop = /*[[${theme.config.carousel.enable_banner_loop}]]*/ true;
-    const ThemeConfig_banner_effect = /*[[${theme.config.carousel.banner_effect}]]*/ 'slide';
-    const ThemeConfig_banner_speed = /*[[${theme.config.carousel.banner_speed}]]*/ 500;
-    const ThemeConfig_enable_banner_handle = /*[[${theme.config.carousel.enable_banner_handle}]]*/ true;
-    const ThemeConfig_enable_banner_autoplay = /*[[${theme.config.carousel.enable_banner_autoplay}]]*/ true;
-    const ThemeConfig_banner_delay = /*[[${theme.config.carousel.banner_delay}]]*/ 3500;
-    const ThemeConfig_enable_banner_switch_button = /*[[${theme.config.carousel.enable_banner_switch_button}]]*/ true;
-    const ThemeConfig_enable_banner_pagination = /*[[${theme.config.carousel.enable_banner_pagination}]]*/ true;
-    const ThemeConfig_enable_index_list_ajax = /*[[${theme.config.home.enable_index_list_ajax}]]*/ false;
-    const ThemeConfig_post_index_page_size = /*[[${theme.config.home.enable_index_list_ajax}]]*/ false;
-    const ThemeConfig_backdrop = /*[[${theme.config.theme.backdrop}]]*/ 'off';
-    const ThemeConfig_favicon = /*[[${theme.config.custom.favicon}]]*/ '';
-    const ThemeConfig_enable_index_list_effect = /*[[${theme.config.home.enable_index_list_effect}]]*/ true;
-    const ThemeConfig_index_list_effect_class = /*[[${theme.config.home.index_list_effect_class}]]*/ 'fadeInUp';
-    const ThemeConfig_show_loaded_time = /*[[${theme.config.custom.show_loaded_time}]]*/ false;
-    const ThemeConfig_enable_debug = /*[[${theme.config.custom.show_loaded_time}]]*/ false;
-    const ThemeConfig_access_key = /*[[${theme.config.custom.show_loaded_time}]]*/ false;
-    const ThemeConfig_enable_copy = /*[[${theme.config.post.enable_copy}]]*/ true;
-    const ThemeConfig_enable_share = /*[[${theme.config.post.enable_share}]]*/ true;
-    const ThemeConfig_enable_share_link = /*[[${theme.config.post.enable_share_link}]]*/ true;
-    const ThemeConfig_enable_share_weixin = /*[[${theme.config.post.enable_share_weixin}]]*/ true;
-    const ThemeConfig_enable_like = /*[[${theme.config.post.enable_like}]]*/ true;
-    const ThemeConfig_enable_toc = /*[[${theme.config.post.enable_toc}]]*/ true;
-    const ThemeConfig_enable_progress_bar = /*[[${theme.config.post.enable_progress_bar}]]*/ true;
-    const ThemeConfig_enable_code_expander = /*[[${theme.config.code_block.enable_code_expander}]]*/ false;
-    const ThemeConfig_enable_fold_long_code = /*[[${theme.config.code_block.enable_fold_long_code}]]*/ false;
-    const ThemeConfig_enable_comment = /*[[${theme.config.post.enable_comment}]]*/ true;
-    const ThemeConfig_toc_depth = /*[[${theme.config.post.toc_depth}]]*/ 0;
-    const ThemeConfig_enable_code_title = /*[[${theme.config.code_block.enable_code_title}]]*/ true;
-    const ThemeConfig_enable_code_hr = /*[[${theme.config.code_block.enable_code_hr}]]*/ true;
-    const ThemeConfig_enable_code_macdot = /*[[${theme.config.code_block.enable_code_macdot}]]*/ true;
-    const ThemeConfig_enable_code_newline = /*[[${theme.config.code_block.enable_code_newline}]]*/ false;
-    const ThemeConfig_show_tools_when_hover = /*[[${theme.config.code_block.show_tools_when_hover}]]*/ true;
-    const ThemeConfig_enable_code_copy = /*[[${theme.config.code_block.enable_code_copy}]]*/ true;
-    const ThemeConfig_enable_copy_right_text = /*[[${theme.config.post.enable_copy_right_text}]]*/ true;
-    const ThemeConfig_copy_right_text = /*[[${theme.config.post.copy_right_text}]]*/ '';
-    const ThemeConfig_offscreen_title_leave = /*[[${theme.config.theme.offscreen_title_leave}]]*/ '';
-    const ThemeConfig_offscreen_title_back = /*[[${theme.config.theme.offscreen_title_back}]]*/ '';
-    const ThemeConfig_enable_journal_effect = /*[[${theme.config.journals.enable_journal_effect}]]*/ true;
-    const ThemeConfig_journal_list_effect_class = /*[[${theme.config.journals.index_list_effect_class}]]*/ 'fadeInUp';
-    const ThemeConfig_enable_like_journal = /*[[${theme.config.journals.enable_like_journal}]]*/ true;
-    const ThemeConfig_enable_comment_journal = /*[[${theme.config.journals.enable_comment_journal}]]*/ true;
-    const ThemeConfig_journal_block_height = /*[[${theme.config.journals.journal_block_height}]]*/ 300;
-    const ThemeConfig_long_code_height = /*[[${theme.config.code_block.long_code_height}]]*/ '800';
-    const ThemeConfig_photos_layout = 'waterfall';
-    const ThemeConfig_blog_url = /*[[${site.url}]]*/ '';
-    const ThemeConfig_blog_title = /*[[${site.title}]]*/ '';
-    const ThemeConfig_BASE_RES_URL = /*[[${site.url}]]*/ '';
-
-
-
+       enable_banner : /*[[${theme.config.carousel.enable_banner}]]*/ true,
+       banner_direction : /*[[${theme.config.carousel.banner_direction}]]*/ 'horizontal',
+       enable_banner_loop : /*[[${theme.config.carousel.enable_banner_loop}]]*/ true,
+       banner_effect : /*[[${theme.config.carousel.banner_effect}]]*/ 'slide',
+       banner_speed : /*[[${theme.config.carousel.banner_speed}]]*/ 500,
+       enable_banner_handle : /*[[${theme.config.carousel.enable_banner_handle}]]*/ true,
+       enable_banner_autoplay : /*[[${theme.config.carousel.enable_banner_autoplay}]]*/ true,
+       banner_delay : /*[[${theme.config.carousel.banner_delay}]]*/ 3500,
+       enable_banner_switch_button : /*[[${theme.config.carousel.enable_banner_switch_button}]]*/ true,
+       enable_banner_pagination : /*[[${theme.config.carousel.enable_banner_pagination}]]*/ true,
+       enable_index_list_ajax : /*[[${theme.config.home.enable_index_list_ajax}]]*/ false,
+       post_index_page_size : /*[[${theme.config.home.enable_index_list_ajax}]]*/ false,
+       backdrop : /*[[${theme.config.theme.backdrop}]]*/ 'off',
+       favicon : /*[[${theme.config.custom.favicon}]]*/ '',
+       enable_index_list_effect : /*[[${theme.config.home.enable_index_list_effect}]]*/ true,
+       index_list_effect_class : /*[[${theme.config.home.index_list_effect_class}]]*/ 'fadeInUp',
+       show_loaded_time : /*[[${theme.config.custom.show_loaded_time}]]*/ false,
+       enable_debug : /*[[${theme.config.custom.show_loaded_time}]]*/ false,
+       access_key : /*[[${theme.config.custom.show_loaded_time}]]*/ false,
+       enable_copy : /*[[${theme.config.post.enable_copy}]]*/ true,
+       enable_share : /*[[${theme.config.post.enable_share}]]*/ true,
+       enable_share_link : /*[[${theme.config.post.enable_share_link}]]*/ true,
+       enable_share_weixin : /*[[${theme.config.post.enable_share_weixin}]]*/ true,
+       enable_like : /*[[${theme.config.post.enable_like}]]*/ true,
+       enable_toc : /*[[${theme.config.post.enable_toc}]]*/ true,
+       enable_progress_bar : /*[[${theme.config.post.enable_progress_bar}]]*/ true,
+       enable_code_expander : /*[[${theme.config.code_block.enable_code_expander}]]*/ false,
+       enable_fold_long_code : /*[[${theme.config.code_block.enable_fold_long_code}]]*/ false,
+       enable_comment : /*[[${theme.config.post.enable_comment}]]*/ true,
+       toc_depth : /*[[${theme.config.post.toc_depth}]]*/ 0,
+       enable_code_title : /*[[${theme.config.code_block.enable_code_title}]]*/ true,
+       enable_code_hr : /*[[${theme.config.code_block.enable_code_hr}]]*/ true,
+       enable_code_macdot : /*[[${theme.config.code_block.enable_code_macdot}]]*/ true,
+       enable_code_newline : /*[[${theme.config.code_block.enable_code_newline}]]*/ false,
+       show_tools_when_hover : /*[[${theme.config.code_block.show_tools_when_hover}]]*/ true,
+       enable_code_copy : /*[[${theme.config.code_block.enable_code_copy}]]*/ true,
+       enable_copy_right_text : /*[[${theme.config.post.enable_copy_right_text}]]*/ true,
+       copy_right_text : /*[[${theme.config.post.copy_right_text}]]*/ '',
+       offscreen_title_leave : /*[[${theme.config.theme.offscreen_title_leave}]]*/ '',
+       offscreen_title_back : /*[[${theme.config.theme.offscreen_title_back}]]*/ '',
+       enable_journal_effect : /*[[${theme.config.journals.enable_journal_effect}]]*/ true,
+       journal_list_effect_class : /*[[${theme.config.journals.index_list_effect_class}]]*/ 'fadeInUp',
+       enable_like_journal : /*[[${theme.config.journals.enable_like_journal}]]*/ true,
+       enable_comment_journal : /*[[${theme.config.journals.enable_comment_journal}]]*/ true,
+       journal_block_height : /*[[${theme.config.journals.journal_block_height}]]*/ 300,
+       long_code_height : /*[[${theme.config.code_block.long_code_height}]]*/ '800',
+       photos_layout : 'waterfall',
+       blog_url : /*[[${site.url}]]*/ '',
+       blog_title : /*[[${site.title}]]*/ '',
+       BASE_RES_URL : /*[[${site.url}]]*/ '',
+       
+      
+    }
   </script>
 </th:block>
 

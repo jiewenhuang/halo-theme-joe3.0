@@ -4,10 +4,10 @@ const journalContext = {
 	initEffect() {
 		$(".joe_loading").remove();
 		$(".joe_journals__list").removeClass("hidden");
-		if (!ThemeConfig_enable_journal_effect) return;
+		if (!ThemeConfig.enable_journal_effect) return;
 		new WOW({
 			boxClass: "wow",
-			animateClass: ThemeConfig_journal_list_effect_class || "fadeIn",
+			animateClass: ThemeConfig.journal_list_effect_class || "fadeIn",
 			offset: 0,
 			mobile: true,
 			live: true,
@@ -24,7 +24,7 @@ const journalContext = {
 	},
 	/* 点赞 */
 	initLike() {
-		if (!ThemeConfig_enable_like_journal) return;
+		if (!ThemeConfig.enable_like_journal) return;
 		const $allItems = $(".joe_journal__item");
 		if ($allItems.length) {
 			$allItems.each(function (_, item) {
@@ -98,7 +98,7 @@ const journalContext = {
 	},
 	/* 评论及折叠 */
 	initComment() {
-		if (ThemeConfig_enable_clean_mode || !ThemeConfig_enable_comment_journal)
+		if (ThemeConfig.enable_clean_mode || !ThemeConfig.enable_comment_journal)
 			return;
 		$(".journal_comment_expander,.journal-comment").on("click", function (e) {
 			e.stopPropagation();
@@ -130,7 +130,7 @@ const journalContext = {
 			const $this = $(this);
 			if (
 				$this[0].getBoundingClientRect().height >=
-        ThemeConfig_journal_block_height
+        ThemeConfig.journal_block_height
 			) {
 				$this.siblings(".journal_content_expander").show();
 			}

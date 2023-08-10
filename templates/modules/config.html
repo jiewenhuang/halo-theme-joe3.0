@@ -5,6 +5,9 @@
     <th:block th:if="${htmlType == 'post'}">
         <th:block th:replace="~{modules/postMetaVariable :: postSetting}" />
     </th:block>
+    <th:block th:if="${htmlType == 'sheet'}">
+        <th:block th:replace="~{modules/pageMetaVariable :: pageSetting}" />
+    </th:block>
     <script id="compatiable-checker">
         // 兼容性检查
         function detectIE() {
@@ -33,19 +36,19 @@
     var initThemeMode = function() {
         try {
             var curMode = "";
-            if (ThemeConfig_theme_mode === "auto") {
-                var light_scope = ThemeConfig_light_time_scope.split("~");
+            if (ThemeConfig.theme_mode === "auto") {
+                var light_scope = ThemeConfig.light_time_scope.split("~");
                 var now = new Date();
                 var today = now.toLocaleString().split(" ")[0];
                 var curMode = now >= new Date(today + " " + light_scope[0]) && now <= new Date(today + " " + light_scope[1]) ? "light" : "dark";
                 localStorage.removeItem("data-mode");
-            } else if (ThemeConfig_theme_mode === "user") {
+            } else if (ThemeConfig.theme_mode === "user") {
                 // 用户模式下优先从本地取主题模式，默认为浅色
                 curMode = localStorage.getItem("data-mode") || "light";
                 localStorage.setItem("data-mode", curMode);
             } else {
                 // 非用户模式下直接取后台配置的模式
-                curMode = ThemeConfig_theme_mode;
+                curMode = ThemeConfig.theme_mode;
                 localStorage.removeItem("data-mode");
             }
             document.querySelector("html").setAttribute("data-mode", curMode);
@@ -64,7 +67,7 @@
             }, 1000)
         }
     }
-    ThemeConfig_enable_console_theme && console.log("%cTheme By  Jiewen" + " | 版本 V" + ThemeConfig_version, "padding: 8px 15px;color:#fff;background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3);border-radius: 0 15px 0 15px;");
+    ThemeConfig.enable_console_theme && console.log("%cTheme By  Jiewen" + " | 版本 V" + ThemeConfig.version, "padding: 8px 15px;color:#fff;background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3);border-radius: 0 15px 0 15px;");
 </script>
 </th:block>
 </html>

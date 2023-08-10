@@ -9,7 +9,7 @@ const commonContext = {
 		if ("scrollRestoration" in history) {
 			history.scrollRestoration = "manual";
 		}
-		if (ThemeConfig_theme_mode !== "user") return;
+		if (ThemeConfig.theme_mode !== "user") return;
 		const $html = $("html");
 		const $icon_light = $(".mode-light");
 		const $icon_dark = $(".mode-dark");
@@ -51,7 +51,7 @@ const commonContext = {
 	/* 加载条 */
 	loadingBar: {
 		show() {
-			if (!ThemeConfig_enable_loading_bar) return;
+			if (!ThemeConfig.enable_loading_bar) return;
 			NProgress.configure({
 				easing: "ease",
 				speed: 500,
@@ -60,7 +60,7 @@ const commonContext = {
 			NProgress.start();
 		},
 		hide() {
-			if (!ThemeConfig_enable_loading_bar) return;
+			if (!ThemeConfig.enable_loading_bar) return;
 			NProgress.done(true);
 		},
 	},
@@ -93,7 +93,7 @@ const commonContext = {
 	},
 	/* 页脚位置 */
 	initFooter() {
-		if (!ThemeConfig_enable_footer || ThemeConfig_footer_position !== "fixed")
+		if (!ThemeConfig.enable_footer || ThemeConfig.footer_position !== "fixed")
 			return;
 		$("#Joe").css("margin-bottom", $(".joe_footer").height() + 30);
 	},
@@ -142,18 +142,18 @@ const commonContext = {
 				// ) {
 				// 	$($curCode[0]).addClass("language-text");
 				// }
-				ThemeConfig_enable_code_title ? $item.addClass("c_title") : null;
-				ThemeConfig_enable_code_hr ? $item.addClass("c_hr") : null;
-				ThemeConfig_enable_code_macdot ? $item.addClass("c_macdot") : null;
-				ThemeConfig_enable_code_newline ? $item.addClass("c_newline") : null;
-				ThemeConfig_show_tools_when_hover
+				ThemeConfig.enable_code_title ? $item.addClass("c_title") : null;
+				ThemeConfig.enable_code_hr ? $item.addClass("c_hr") : null;
+				ThemeConfig.enable_code_macdot ? $item.addClass("c_macdot") : null;
+				ThemeConfig.enable_code_newline ? $item.addClass("c_newline") : null;
+				ThemeConfig.show_tools_when_hover
 					? $item.addClass("c_hover_tools")
 					: null;
-				// ThemeConfig_enable_code_line_number
+				// ThemeConfig.enable_code_line_number
 				// 	? $item.addClass("line-numbers")
 				// 	: null;
 				// 代码折叠
-				if (ThemeConfig_enable_code_expander) {
+				if (ThemeConfig.enable_code_expander) {
 					$item
 						.prepend(
 							"<i class=\"joe-font joe-icon-arrow-downb code-expander\" title=\"折叠/展开\"></i>"
@@ -171,13 +171,13 @@ const commonContext = {
 					});
 				}
 				// 代码复制
-				if (ThemeConfig_enable_code_copy) {
+				if (ThemeConfig.enable_code_copy) {
 					const text = $item.find("code[class*='language-']").text();
 					const span = $(
 						"<span class=\"copy-button\"><i class=\"joe-font joe-icon-copy\" title=\"复制代码\"></i></span>"
 					);
 					new ClipboardJS(span[0], {
-						// text: () => text + "\r\n\r\n" + ThemeConfig_copy_right_text,
+						// text: () => text + "\r\n\r\n" + ThemeConfig.copy_right_text,
 						text: () => text,
 					}).on("success", () => Qmsg.success("复制成功！"));
 					$item.addClass("c_copy").append(span);
@@ -189,13 +189,13 @@ const commonContext = {
 	foldCode() {
 		if (!$(".page-post").length) return; // 仅针对文章页
 		if (
-			ThemeConfig_enable_code_expander &&
-      ThemeConfig_enable_fold_long_code &&
-      PageAttrs_metas_enable_fold_long_code !== "false"
+			ThemeConfig.enable_code_expander &&
+      ThemeConfig.enable_fold_long_code &&
+      PageAttrs.metas_enable_fold_long_code !== "false"
 		) {
 			$(".page-post pre[class*='language-']").each(function (_index, item) {
 				const $item = $(item);
-				if ($item.height() > ThemeConfig_long_code_height) {
+				if ($item.height() > ThemeConfig.long_code_height) {
 					const $title = $item
 						.siblings(".toolbar")
 						.find(".toolbar-item span")
@@ -208,14 +208,14 @@ const commonContext = {
 	},
 	/* 获取页面百度收录情况 */
 	initBaidu() {
-		if (!ThemeConfig_check_baidu_collect || !$("#joe_baidu_record").length)
+		if (!ThemeConfig.check_baidu_collect || !$("#joe_baidu_record").length)
 			return;
 		Utils.request({
-			url: ThemeConfig_BASE_URL + "/halo-api/bd/iscollect",
+			url: ThemeConfig.BASE_URL + "/halo-api/bd/iscollect",
 			method: "GET",
 			returnRaw: true,
 			data: {
-				url: ThemeConfig_blog_url + window.location.pathname,
+				url: ThemeConfig.blog_url + window.location.pathname,
 			},
 		})
 			.then((res) => {
@@ -223,18 +223,18 @@ const commonContext = {
 					$("#joe_baidu_record").css("color", "#67c23a").html("已收录");
 				} else {
 					/* 如果填写了Token，则自动推送给百度 */
-					if (ThemeConfig_baidu_token) {
+					if (ThemeConfig.baidu_token) {
 						$("#joe_baidu_record").html(
 							"<span style=\"color: #e6a23c\">未收录，推送中...</span>"
 						);
 						let _timer = setTimeout(function () {
 							Utils.request({
-								url: ThemeConfig_BASE_URL + "/halo-api/bd/push",
+								url: ThemeConfig.BASE_URL + "/halo-api/bd/push",
 								method: "POST",
 								returnRaw: true,
 								data: {
-									site: ThemeConfig_blog_url,
-									token: ThemeConfig_baidu_token,
+									site: ThemeConfig.blog_url,
+									token: ThemeConfig.baidu_token,
 									urls: window.location.href,
 								},
 							})
@@ -271,9 +271,9 @@ const commonContext = {
 	},
 	/* 音乐播放器 */
 	initMusic() {
-		if (!ThemeConfig_enable_global_music_player) return;
+		if (!ThemeConfig.enable_global_music_player) return;
 		Utils.request({
-			url: `${ThemeConfig_music_api}?server=${ThemeConfig_music_source}&type=${ThemeConfig_music_player_type}&id=${ThemeConfig_music_list_id}`,
+			url: `${ThemeConfig.music_api}?server=${ThemeConfig.music_source}&type=${ThemeConfig.music_player_type}&id=${ThemeConfig.music_list_id}`,
 			type: "GET",
 			returnRaw: true,
 		})
@@ -282,10 +282,10 @@ const commonContext = {
 					container: document.getElementById("global-aplayer"),
 					fixed: true,
 					lrcType: 0,
-					theme: ThemeConfig_music_player_theme,
-					autoplay: ThemeConfig_music_auto_play,
-					volume: ThemeConfig_music_player_volume,
-					loop: ThemeConfig_music_loop_play,
+					theme: ThemeConfig.music_player_theme,
+					autoplay: ThemeConfig.music_auto_play,
+					volume: ThemeConfig.music_player_volume,
+					loop: ThemeConfig.music_loop_play,
 					audio: res,
 				});
 			})
@@ -318,7 +318,7 @@ const commonContext = {
 	},
 	/* 全局返回顶 */
 	back2Top() {
-		if (!ThemeConfig_enable_back2top) return;
+		if (!ThemeConfig.enable_back2top) return;
 		const $el = $(".joe_action_item.back2top");
 		const handleScroll = () => {
 			const scrollTop =
@@ -335,7 +335,7 @@ const commonContext = {
 				{
 					scrollTop: 0,
 				},
-				ThemeConfig_enable_back2top_smooth ? 500 : 0
+				ThemeConfig.enable_back2top_smooth ? 500 : 0
 			);
 		});
 	},
@@ -429,8 +429,8 @@ const commonContext = {
 	initWeather() {
 		if (
 			Joe.isMobile ||
-      !ThemeConfig_enable_weather ||
-      !ThemeConfig_weather_key ||
+      !ThemeConfig.enable_weather ||
+      !ThemeConfig.weather_key ||
       !$("#he-plugin-simple").length
 		)
 			return;
@@ -453,7 +453,7 @@ const commonContext = {
 				fixed: "true",
 				vertical: "top",
 				horizontal: "left",
-				key: ThemeConfig_weather_key,
+				key: ThemeConfig.weather_key,
 			},
 		};
 		$.getScript(
@@ -482,7 +482,7 @@ const commonContext = {
 	initExternalLink() {
 		let $allLink;
 
-		if (ThemeConfig_link_behavior !== "default") {
+		if (ThemeConfig.link_behavior !== "default") {
 			// 自定义行为（全局处理，不包括导航条和页脚，导航条可以在后台管理-菜单中配置）
 			$allLink = $(".joe_main_container a[href]"); // 页面中所有a标签
 
@@ -494,7 +494,7 @@ const commonContext = {
 				if(!curHref.includes("javascript:;")){
 					let target = "";
 					target =
-          ThemeConfig_link_behavior === "new" &&
+          ThemeConfig.link_behavior === "new" &&
           !$this.attr("href").startsWith("#")
           	? "_blank"
           	: "";
@@ -529,8 +529,8 @@ const commonContext = {
 	init3dTag() {
 		if (
 			Joe.isMobile ||
-      !ThemeConfig_enable_tag_cloud ||
-      ThemeConfig_tag_cloud_type !== "3d" ||
+      !ThemeConfig.enable_tag_cloud ||
+      ThemeConfig.tag_cloud_type !== "3d" ||
       !$(".tags-cloud-list").length
 		)
 			return;
@@ -735,7 +735,7 @@ const commonContext = {
 	},
 	/* 头部滚动 */
 	initHeadScroll() {
-		if (Joe.isMobile || ThemeConfig_enable_fixed_header) return;
+		if (Joe.isMobile || ThemeConfig.enable_fixed_header) return;
 		let last_scroll_position = 0;
 		let new_scroll_position = 0;
 		const $joeHeader = $(".joe_header__above");
@@ -830,54 +830,54 @@ const commonContext = {
 	loadMouseEffect() {
 		if (
 			Joe.isMobile ||
-      ThemeConfig_enable_clean_mode ||
-      ThemeConfig_cursor_effect === "off"
+      ThemeConfig.enable_clean_mode ||
+      ThemeConfig.cursor_effect === "off"
 		)
 			return;
 		$.getScript(
-			`/themes/theme-Joe3/assets/effect/cursor/${ThemeConfig_cursor_effect}.js`
+			`/themes/theme-Joe3/assets/effect/cursor/${ThemeConfig.cursor_effect}.js`
 		);
 	},
 	/* 加载背景特效 */
 	loadBackdropEffect() {
 		if (
 			Joe.isMobile ||
-      ThemeConfig_enable_clean_mode ||
-      ThemeConfig_backdrop === "off"
+      ThemeConfig.enable_clean_mode ||
+      ThemeConfig.backdrop === "off"
 		)
 			return;
 		$.getScript(
-			`/themes/theme-Joe3/assets/effect/backdrop/${ThemeConfig_backdrop}.js`
+			`/themes/theme-Joe3/assets/effect/backdrop/${ThemeConfig.backdrop}.js`
 		);
 	},
 	/* 自定义favicon */
 	setFavicon() {
-		if (!ThemeConfig_favicon) return;
+		if (!ThemeConfig.favicon) return;
 		const favicon = new Favico();
 		const image = new Image();
 		image.onload = function () {
 			favicon.image(image);
 		};
-		image.src = ThemeConfig_favicon;
+		image.src = ThemeConfig.favicon;
 	},
 	/* 首页离屏提示 */
 	offscreenTip() {
-		if (Joe.isMobile || !ThemeConfig_enable_offscreen_tip) return;
+		if (Joe.isMobile || !ThemeConfig.enable_offscreen_tip) return;
 		const OriginTitile = document.title;
 		let timer = null;
 		document.addEventListener("visibilitychange", function () {
 			if (
-				location.href.indexOf(ThemeConfig_blog_url) > 0 ||
+				location.href.indexOf(ThemeConfig.blog_url) > 0 ||
         location.pathname !== "/"
 			)
 				return;
 			if (document.hidden) {
 				document.title =
-          ThemeConfig_offscreen_title_leave || "歪，你去哪里了？";
+          ThemeConfig.offscreen_title_leave || "歪，你去哪里了？";
 				clearTimeout(timer);
 			} else {
 				document.title =
-          ThemeConfig_offscreen_title_back || "(つェ⊂)咦，又回来了!";
+          ThemeConfig.offscreen_title_back || "(つェ⊂)咦，又回来了!";
 				timer = setTimeout(function () {
 					document.title = OriginTitile;
 				}, 2000);
@@ -886,7 +886,7 @@ const commonContext = {
 	},
 	/* 总访问量 */
 	// initUV() {
-	// 	if (!ThemeConfig_enable_visit_number) return;
+	// 	if (!ThemeConfig.enable_visit_number) return;
 	// 	Utils.request({
 	// 		url: "/api/content/statistics/user",
 	// 	}).then((res) => {
@@ -895,20 +895,20 @@ const commonContext = {
 	// },
 	/* 初始化网站运行时间 */
 	initBirthday() {
-		if (!ThemeConfig_enable_birthday) return;
+		if (!ThemeConfig.enable_birthday) return;
 		if (
-			!/^\d+$/.test(ThemeConfig_birthday) &&
+			!/^\d+$/.test(ThemeConfig.birthday) &&
       !/^(\d{4}\/\d{1,2}\/\d{1,2}\s\d{1,2}:\d{1,2}(:\d{0,2})?)$/.test(
-      	ThemeConfig_birthday
+      	ThemeConfig.birthday
       )
 		) {
 			Qmsg.error("“自定义博客起始时间” 格式错误，请检查！");
 			return;
 		}
 		const birthDay = new Date(
-			/^\d+$/g.test(ThemeConfig_birthday)
-				? +ThemeConfig_birthday
-				: ThemeConfig_birthday
+			/^\d+$/g.test(ThemeConfig.birthday)
+				? +ThemeConfig.birthday
+				: ThemeConfig.birthday
 		);
 		const $day = $(".joe_run__day");
 		const $hour = $(".joe_run__hour");
@@ -939,7 +939,7 @@ const commonContext = {
 	},
 	/* 页面加载耗时（控制台） */
 	showLoadTime() {
-		if (Joe.isMobile || !ThemeConfig_show_loaded_time) return;
+		if (Joe.isMobile || !ThemeConfig.show_loaded_time) return;
 		const consume_time = performance.now();
 		consume_time &&
       console.log(
@@ -949,7 +949,7 @@ const commonContext = {
 	},
 	/* 调试模式 */
 	debug() {
-		if (!ThemeConfig_enable_debug) return;
+		if (!ThemeConfig.enable_debug) return;
 		new window.VConsole();
 	},
 	/* 清理工作 */

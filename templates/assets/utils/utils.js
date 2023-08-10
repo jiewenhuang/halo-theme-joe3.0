@@ -630,7 +630,7 @@ var Utils = {
 				url: `${url}${method === "GET" ? `${url.indexOf("?")===-1?"?":"&"}_r=${Date.now()}` : ""}`,
 				type: method,
 				headers: {
-					"API-Authorization": ThemeConfig_access_key || "joe2.0",
+					"API-Authorization": ThemeConfig.access_key || "joe2.0",
 					...headers,
 				},
 				async: true,
