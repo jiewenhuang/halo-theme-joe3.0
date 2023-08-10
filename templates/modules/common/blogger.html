@@ -7,10 +7,10 @@
       <div class="avatar_wrapper"
       th:classappend="${theme.config.blogger.avatar_type == 'circle' ? 'circle':'round'}">
         <img class="avatar lazyload" th:data-src="${theme.config.blogger.avatar}" th:src="${theme.config.blogger.lazyload_avatar}"  alt="博主头像"/>
-        <th:block th:if="${theme.config.blogger.avatar_frame != 0}">
+        <th:block th:if="${theme.config.blogger.avatar_frame != '0'}">
         <img th:class="'avatar_frame '+${theme.config.blogger.avatar_frame}" th:src="@{/assets/frame/}+'/'+${theme.config.blogger.avatar_frame}+'.png'"  alt="挂架"/>
         </th:block>
-        <th:block th:if="${theme.config.blogger.avatar_widget != 0}">
+        <th:block th:if="${theme.config.blogger.avatar_widget != '0'}">
       <img th:class="'avatar_widget '+${theme.config.blogger.avatar_widget}" th:src="@{/assets/widget/}+'/'+${theme.config.blogger.avatar_widget}+'.gif'"  alt="相框"/>
         </th:block>
     </div>
