@@ -70,12 +70,11 @@
           <span class="date">[[${#temporals.format(result.spec.creationTime, 'yyyy-MM-dd HH:mm:ss')}]]</span>
         </div>
       </div>
-      <div class="reply"
-           th:with="postMate = ${result.spec.subjectRef}">
-        <th:block th:with="post = ${postFinder.getByName(postMate.name)}">
+      <div class="reply">
+<!--        <th:block th:with="post = ${postFinder.getByName(postMate.name)}">-->
 
-        <a class="link aside-reply-content" th:href="${post.status.permalink}">[[${result.spec.content}]]</a>
-        </th:block>
+        <a class="link aside-reply-content" href="#">[[${result.spec.content}]]</a>
+<!--        </th:block>-->
       </div>
     </li>
     </th:block>
