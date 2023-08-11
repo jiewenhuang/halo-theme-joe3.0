@@ -1,4 +1,7 @@
 {
+  "name": "halo-theme-joe3.0",
+  "version": "1.0.1",
+  "description": "Theme of Halo2",
   "devDependencies": {
     "uglify-js": "^3.17.4"
   }

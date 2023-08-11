@@ -13,5 +13,5 @@ spec:
   repo: "https://github.com/jiewenhuang/halo-theme-joe3.0"
   settingName: "theme-Joe-setting"
   configMapName: "theme-Joe-configMap"
-  version: "1.0"
+  version: "1.0.1"
   require: "2.0.0"
