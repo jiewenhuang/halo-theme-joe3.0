@@ -55,22 +55,12 @@
             <h3>申请格式</h3>
             <div class="link-requirement">
               <th:block th:if="${not #strings.isEmpty(theme.config.links.links_article)}" th:utext="${theme.config.links.links_article}">
-              <p>
-                <joe-message type="info" content="<em style=&quot;font-style:normal;font-weight:bold;&quot;>< 博客名称 + 博客地址 + 博客Logo + 博客简介 ></em><br>博客名称：M酷的前端Blog<br>博客地址：<a href=&quot;https://bbchin.com&quot;>https://bbchin.com</a><br>博客Logo：<a href=&quot;https://bbchin.com/logo&quot;>https://bbchin.com/logo</a><br>博客简介：一个专注分享前端技术和趋势的博客<br>(大家在留言栏目中留言即可)">
-					<span class="joe_message info">
-						<span class="joe_message__icon"></span>
-						<span class="joe_message__content"><em style="font-style:normal;font-weight:bold;">&lt; 博客名称 + 博客地址 + 博客Logo + 博客简介 &gt;</em><br>博客名称：M酷的前端Blog<br>博客地址：<a href="https://bbchin.com">https://bbchin.com</a><br>博客Logo：<a href="https://bbchin.com/logo">https://bbchin.com/logo</a><br>博客简介：一个专注分享前端技术和趋势的博客<br>(大家在留言栏目中留言即可)</span>
-					</span>
-                </joe-message>
-              </p>
+
               </th:block>
               <th:block th:if="${#strings.isEmpty(theme.config.links.links_article)}">
                 <p>
                   <joe-message type="info" content="<em style=&quot;font-style:normal;font-weight:bold;&quot;>< 博客名称 + 博客地址 + 博客Logo + 博客简介 ></em><br>博客名称：<br>博客地址：<a href=&quot;&quot;></a><br>博客Logo：<a href=&quot;&quot;></a><br>博客简介：<br>(大家在留言栏目中留言即可)">
-					<span class="joe_message info">
-						<span class="joe_message__icon"></span>
-						<span class="joe_message__content"><em style="font-style:normal;font-weight:bold;">&lt; 博客名称 + 博客地址 + 博客Logo + 博客简介 &gt;</em><br>博客名称：M酷的前端Blog<br>博客地址：<a href="https://bbchin.com">https://bbchin.com</a><br>博客Logo：<a href="https://bbchin.com/logo">https://bbchin.com/logo</a><br>博客简介：一个专注分享前端技术和趋势的博客<br>(大家在留言栏目中留言即可)</span>
-					</span>
+
                   </joe-message>
                 </p>
               </th:block>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<th:block th:fragment="menu-item(menuItem)">
+  <a class="item"
+     th:href="@{${menuItem.status.href}}"
+     th:target="${menuItem.spec.target?.value}"
+     th:title="${menuItem.status.displayName}">
+    <th:block th:if="${theme.config.navbar.enable_navbar_icon}" >
+      <i th:class="'m-icon '+${#annotations.getOrDefault(menuItem, 'icon','joe-font joe-icon-shouye')}"></i>
+    </th:block>
+
+    [[${menuItem.status.displayName}]]</a>
+</th:block>
+</html>
