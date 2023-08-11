@@ -8,7 +8,7 @@
     <th:block th:if="${theme.config.navbar.enable_navbar_icon}" >
       <i th:class="'m-icon '+${#annotations.getOrDefault(menuItem, 'icon','joe-font joe-icon-shouye')}"></i>
     </th:block>
-
-    [[${menuItem.status.displayName}]]</a>
+    [[${menuItem.status.displayName}]]
+  </a>
 </th:block>
 </html>
