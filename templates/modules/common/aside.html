@@ -61,7 +61,7 @@
   </div>
 
   <ul class="joe_aside__item-contain">
-    <th:block th:each="result : ${commentFinder.list(null,1,5)}">
+    <th:block th:each="result : ${commentFinder.list(null,1,theme.config.aside.show_newreply_num)}">
     <li class="item">
       <div class="user">
         <img width="35" height="35" class="avatar lazyload" th:data-src="${result.owner.avatar}" th:src="${theme.config.blogger.lazyload_avatar}"  alt="头像">

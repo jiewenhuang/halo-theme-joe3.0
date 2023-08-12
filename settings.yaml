@@ -1330,6 +1330,16 @@ spec:
             - value: false
               label: 否
         - $formkit: select
+          name: enable_sheet_aside
+          label: 自定义页侧边栏
+          value: false
+          help: "自定义页面右侧是否展示侧边栏，默认关闭。开启后，所有自定义页面都会展示侧边栏（若部分页面不想展示，可以配置对应页面的元数据 enable_aside 为 false ）"
+          options:
+            - value: true
+              label: 是
+            - value: false
+              label: 否
+        - $formkit: select
           name: enable_notice
           label: 展示网站公告
           value: false
@@ -1414,6 +1424,12 @@ spec:
               label: 是
             - value: false
               label: 否
+        - $formkit: number
+          if: "$get(show_newreply).value"
+          name: show_newreply_num
+          label: 展示最新评论
+          value: 3
+          help: "在侧边栏展示最新评论的数量"
         - $formkit: radio
           name: enable_tag_cloud
           id: enable_tag_cloud
