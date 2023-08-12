@@ -13,5 +13,11 @@ spec:
   repo: "https://github.com/jiewenhuang/halo-theme-joe3.0"
   settingName: "theme-Joe-setting"
   configMapName: "theme-Joe-configMap"
-  version: "1.0.1"
+  version: "1.0.2"
   require: "2.0.0"
+  customTemplates:
+    page:
+      - name: 留言板
+        description: 留言板文章
+        screenshot:
+        file: page_leaving.html
