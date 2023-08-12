@@ -17,19 +17,19 @@
             <th:block th:if="${#lists.isEmpty(menuItem.children)}"
                       th:with="menuItems = ${menu.menuItems}">
               <th:block th:each="menuItem : ${menuItems}">
-                <th:block th:replace="modules/macro/menu-item :: menu-item(${menuItem})" />
+                <th:block th:replace="~{modules/macro/menu-item :: menu-item(${menuItem})}" />
               </th:block>
             </th:block>
             <th:block th:if="${not #lists.isEmpty(menuItem.children)}">
         <div class="joe_dropdown" trigger="hover" placement="60px">
           <div class="joe_dropdown__link">
-            <th:block th:replace="modules/macro/menu-item :: menu-item(${menuItem})" />
+            <th:block th:replace="~{modules/macro/menu-item :: menu-item(${menuItem})}" />
             <i class="joe-font joe-icon-arrow-down joe_dropdown__link-icon" style="color:var(--main)"></i>
           </div>
           <nav class="joe_dropdown__menu" style="top: 60px;">
             <th:block th:each="childMenu : ${menuItem.children}">
             <li>
-              <th:block th:replace="modules/macro/menu-item :: menu-item(${childMenu})" />
+              <th:block th:replace="~{modules/macro/menu-item :: menu-item(${childMenu})}" />
             </li>
             </th:block>
           </nav>
@@ -44,17 +44,17 @@
               <th:block th:with="menuItems = ${menu.menuItems}">
                 <th:block th:each="menuItem : ${menuItems}">
                 <th:block th:if="${#lists.isEmpty(menuItem.children)}">
-                  <th:block th:replace="modules/macro/menu-item :: menu-item(${menuItem})" />
+                  <th:block th:replace="~{modules/macro/menu-item :: menu-item(${menuItem})}" />
               </th:block>
             <th:block th:if="${not #lists.isEmpty(menuItem.children)}">
               <div class="joe_dropdown" trigger="hover" placement="60px">
                 <div class="joe_dropdown__link">
-                  <th:block th:replace="modules/macro/menu-item :: menu-item(${menuItem})" />
+                  <th:block th:replace="~{modules/macro/menu-item :: menu-item(${menuItem})}" />
                   <i class="joe-font joe-icon-arrow-down joe_dropdown__link-icon" style="color:var(--main)"></i>
                 </div>
                 <nav class="joe_dropdown__menu" style="top: 60px;">
                     <li th:each="childMenu : ${menuItem.children}">
-                      <th:block th:replace="modules/macro/menu-item :: menu-item(${childMenu})" />
+                      <th:block th:replace="~{modules/macro/menu-item :: menu-item(${childMenu})}" />
                     </li>
                 </nav>
               </div>
