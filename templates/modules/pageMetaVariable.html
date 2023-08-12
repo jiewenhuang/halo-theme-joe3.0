@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<th:block th:fragment="pageSetting">
+  <script th:inline="javascript" id="theme-config-getter">
+    const PageAttrs = {
+      enable_read_limit: /*[[${#annotations.getOrDefault(singlePage, 'enable_read_limit', 'false')}]]*/ false,
+      enable_page_meta: /*[[${#annotations.getOrDefault(singlePage, 'enable_page_meta','true')}]]*/ true,
+      enable_passage_tips: /*[[${#annotations.getOrDefault(singlePage, 'enable_passage_tips', 'true')}]]*/ true,
+      enable_collect_check: /*[[${#annotations.getOrDefault(singlePage, 'enable_collect_check', 'true')}]]*/ true,
+      use_raw_content: /*[[${#annotations.getOrDefault(singlePage, 'use_raw_content', 'true')}]]*/ false,
+      enable_comment: /*[[${#annotations.getOrDefault(singlePage, 'enable_comment', 'true')}]]*/ true,
+      enable_toc: /*[[${#annotations.getOrDefault(singlePage, 'enable_comment', 'true')}]]*/ true,
+      toc_depth: /*[[${#annotations.getOrDefault(singlePage, 'toc_depth', 0)}]]*/ 0,
+      img_max_width: /*[[${#annotations.getOrDefault(singlePage, 'img_max_width', '100%')}]]*/ '100%',
+      img_align: /*[[${#annotations.getOrDefault(singlePage, 'img_align', 'center')}]]*/ 'center',
+      enable_copy: /*[[${#annotations.getOrDefault(singlePage, 'enable_copy', 'true')}]]*/ true,
+      enable_donate: /*[[${#annotations.getOrDefault(singlePage, 'enable_donate', 'true')}]]*/ true,
+      enable_share: /*[[${#annotations.getOrDefault(singlePage, 'enable_share', 'true')}]]*/ true,
+      enable_like: /*[[${#annotations.getOrDefault(singlePage, 'enable_like', 'true')}]]*/ true,
+      enable_fold_long_code: /*[[${#annotations.getOrDefault(singlePage, 'enable_fold_long_code', 'true')}]]*/ true
+    };
+  </script>
+</th:block>
+</html>
