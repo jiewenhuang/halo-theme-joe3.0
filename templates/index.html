@@ -21,7 +21,7 @@
                           <th:block th:replace="~{modules/macro/banner :: banner}" />
                       </th:block>
 
-                      <th:block th:if="${theme.config.home.enable_hot_category} and (${not #lists.isEmpty(theme.config.home.category_data)} or ${not #lists.isEmpty(theme.config.home.category_data)})">
+                      <th:block th:if="${theme.config.home.enable_hot_category} and (${not #lists.isEmpty(theme.config.home.category_data)} or ${not #lists.isEmpty(theme.config.home.custom_data)})">
                           <th:block th:replace="~{modules/macro/hot_category :: hot_category}" />
                       </th:block>
 
