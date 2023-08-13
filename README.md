@@ -3,7 +3,7 @@
 
 <p class="badge-row" align="center">
   <a href="https://halo.run" target="_blank">
-    <img src="https://img.shields.io/badge/Halo-2.8.x-p" alt="Halo"/>
+    <img src="https://img.shields.io/badge/dynamic/yaml?label=Halo&query=%24.spec.require&url=https://raw.githubusercontent.com/jiewenhuang/halo-theme-joe3.0/main/theme.yaml&color=113,195,71" alt="Halo"/>
   </a>
   <a href="https://github.com/jiewenhuang/halo-theme-joe3.0" target="_blank">
     <img src="https://img.shields.io/github/v/release/jiewenhuang/halo-theme-joe3.0" alt="Release"/>
@@ -14,7 +14,9 @@
 </p>
 
 ---
-![logo](https://wmimg.com/i/70/2023/08/64d3c41d5bde2.webp)
+<p align="center">
+<img width="100%" src="https://wmimg.com/i/70/2023/08/64d3c41d5bde2.webp">
+</p>
 
 预览：[Jiewen's Blog](https://www.jiewen.run/?preview-theme=theme-Joe3)
 
@@ -51,11 +53,37 @@
 ## 预览
 WIP
 ## TODO
-- [ ] 留言板
+- [ ] 首页加载
 - [ ] ......
 
 
-## 其他
+### 🏭 贡献
 
-如果你对主题有什么建议或者意见，欢迎提 PR & issue。
+> 如果你想帮助完善 `Joe3.0` 主题，请：
+
+- 点 `star`
+- 提 `issue`
+- 修 `bugs`
+- 推 `pr`
+
+<br>
+
+### 🙆‍♂️ 感谢
+
+在此感谢以下项目提供的支持：
+
+- [Halo](https://halo.run)
+- [theme-starter](https://github.com/halo-dev/theme-starter)
+- [Typecho Themes Joe](https://github.com/HaoOuBa/Joe)
+- [Halo-theme-Joe2.0](https://github.com/qinhua/halo-theme-joe2.0)
+- [Halo-theme-hao](https://github.com/liuzhihang/halo-theme-hao)
+- [Halo-theme-sakura](https://github.com/LIlGG/halo-theme-sakura/tree/next)
+- [plugin-links](https://github.com/halo-sigs/plugin-links)
+- [plugin-comment-widget](https://github.com/halo-sigs/plugin-comment-widget)
+- [plugin-search-widget](https://github.com/halo-sigs/plugin-search-widget)
+- [plugin-moments](https://github.com/halo-sigs/plugin-moments)
+- [plugin-photos](https://github.com/halo-sigs/plugin-photos)
+- ......
+
+<br>
 
