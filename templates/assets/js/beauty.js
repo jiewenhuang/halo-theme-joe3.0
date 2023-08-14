@@ -92,3 +92,16 @@
     };
     window.EvanBigBanner = EvanBigBanner
 })();
+const link = document.getElementById('evan-big-banner_goto');
+const target = document.querySelector('#indexPosition');
+
+link.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+
+    window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+    });
+});
