@@ -64,7 +64,7 @@
     <th:block th:each="result : ${commentFinder.list(null,1,theme.config.aside.show_newreply_num)}">
     <li class="item">
       <div class="user">
-        <img width="35" height="35" class="avatar lazyload" th:data-src="${result.owner.avatar ?: 'themes/theme-joe3/assets/img/peeps-avatar.png'} " th:src="${theme.config.blogger.lazyload_avatar}"  alt="头像">
+        <img width="35" height="35" class="avatar lazyload" th:data-src="${result.owner.avatar ?: '/themes/theme-Joe3/assets/img/peeps-avatar.png'} " th:src="${theme.config.blogger.lazyload_avatar}"  alt="头像">
         <div class="info">
           <div class="author">[[${result.owner.displayName}]]</div>
           <span class="date">[[${#temporals.format(result.spec.creationTime, 'yyyy-MM-dd HH:mm:ss')}]]</span>
