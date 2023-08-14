@@ -545,7 +545,7 @@ spec:
           name: enable_banner
           id: enable_banner
           label: 启用轮播图
-          value: ""
+          value: false
           options:
             - value: true
               label: 开启
@@ -575,7 +575,7 @@ spec:
           name: enable_banner_loop
           id: enable_banner_loop
           label: 循环播放
-          value: ""
+          value: true
           options:
             - value: true
               label: 开启
