@@ -32,9 +32,20 @@
   </th:block>
   <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/theme.min.css?v={version}(version=${theme.spec.version})}">
   <style th:inline="text">
-    #Joe .joe_container {
-      max-width: [[${theme.config.basic.content_max_width+'px'}]];
-    }
+      #Joe .joe_container {
+          max-width: [[${theme.config.basic.content_max_width + 'vw'}]] !important;
+      }
+
+      @media (max-width: 1360px) {
+          #Joe .joe_container{
+              max-width: initial;
+          }
+      }
+      @media (max-width: 768px) {
+          #Joe .joe_container{
+              max-width: initial;
+          }
+      }
   </style>
     <link rel="stylesheet" th:href="@{/assets/lib/qmsg/qmsg.css}">
     <link rel="preload stylesheet" as="style" th:href="@{/assets/lib/animate/animate.min.css}">
