@@ -23,10 +23,12 @@
 
     </th:block>
     <script th:src="@{/assets/lib/fancybox/jquery.fancybox.min.js}"></script>
-    <th:block th:if="${theme.config.aside.enable_aside} and ${theme.config.aside.enable_music_player && theme.config.aside.music_id != null && theme.config.aside.music_id != ''}">
+    <th:block th:each="aside : ${theme.config.aside.enable_outpost_aside}">
+    <th:block th:if="${aside.template_aside == 'enable_music_player'} and ${theme.config.aside.music_id != null && theme.config.aside.music_id != ''}">
         <link rel="stylesheet" th:href="@{/assets/lib/APlayer/APlayer.min.css}">
         <script th:src="@{/assets/lib/APlayer/APlayer.min.js}"></script>
         <script th:src="@{/assets/lib/meting/meting.min.js}"></script>
+    </th:block>
     </th:block>
     <script th:src="@{/assets/js/custom.js}"></script>
     <th:block th:if="${htmlType == 'post'} or ${htmlType == 'journals'} or ${htmlType == 'sheet'}">
@@ -120,10 +122,10 @@
         // new EvanBigBanner();
 
     </script>
-
     <th:block th:if="${htmlType == 'photos'}">
     <script type="text/javascript">
         document.querySelector('#sortable').sortablejs()
     </script>
+    </th:block>
 </th:block>
 </html>
