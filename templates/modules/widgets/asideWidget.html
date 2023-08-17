@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<th:block th:fragment="enable_blogger">
+    <th:block th:replace="~{modules/common/blogger :: blogger}" />
+</th:block>
+<th:block th:fragment="enable_notice">
+    <section class="joe_aside__item notice">
+        <div class="joe_aside__item-title">
+            <!--      <#&#45;&#45;  <i class="joe-font joe-icon-speaker"></i>  &ndash;&gt;-->
+            <th:block th:replace="~{modules/macro/speaker :: speaker}" />
+            <span class="text">公告信息</span>
+        </div>
+        <div class="joe_aside__item-contain">
+            <div class="notice_content">[[${theme.config.aside.site_notice}]]</div>
+        </div>
+    </section>
+</th:block>
+<th:block th:fragment="enable_qrcode">
+    <section class="joe_aside__item qrcode">
+        <div class="joe_aside__item-title">
+            <i class="joe-font joe-icon-qrcode"></i>
+            <span class="text">[[${theme.config.aside.qrcode_title}]]</span>
+        </div>
+        <div class="joe_aside__item-contain">
+            <img class="qrcode_img lazyload" th:src="${theme.config.aside.qrcode_url}" th:data-src="${theme.config.aside.qrcode_url}" alt="二维码"/>
+            <th:block th:if="${theme.config.aside.qrcode_description != ''}">
+                <p class="qrcode_description">[[${theme.config.aside.qrcode_description}]]</p>
+            </th:block>
+        </div>
+    </section>
+</th:block>
+<th:block th:fragment="enable_music_player">
+<th:block th:if="${theme.config.aside.music_id != ''}">
+    <section class="joe_aside__item timelife">
+        <div class="joe_aside__item-title">
+            <i class="joe-font joe-icon-yinfu"></i>
+            <span class="text">我的歌单</span>
+        </div>
+        <div id="aplayer" class="aplayer" th:data-id="${theme.config.aside.music_id}" list-max-height="20px" data-server="netease" data-type="playlist" data-fixed="false" data-listfolded="true" data-order="random"  data-mode="#f3f3f7"></div>
+    </section>
+</th:block>
+</th:block>
+<th:block th:fragment="enable_newest_post">
+    <th:block th:replace="~{modules/macro/latest :: latest}" />
+</th:block>
+<th:block th:fragment="enable_lifetime">
+    <section class="joe_aside__item timelife">
+        <div class="joe_aside__item-title">
+            <i class="joe-font joe-icon-shalou"></i>
+            <span class="text">人生倒计时</span>
+        </div>
+        <div class="joe_aside__item-contain"></div>
+    </section>
+</th:block>
+<th:block th:fragment="show_newreply">
+<th:block th:if="${theme.config.other.enable_clean_mode !=true}">
+    <section class="joe_aside__item newreply">
+        <div class="joe_aside__item-title">
+            <i class="joe-font joe-icon-message"></i>
+            <span class="text">最新回复</span>
+        </div>
+
+        <ul class="joe_aside__item-contain">
+            <th:block th:each="result : ${commentFinder.list(null,1,theme.config.aside.show_newreply_num)}">
+                <li class="item">
+                    <div class="user">
+                        <img width="35" height="35" class="avatar lazyload" th:data-src="${result.owner.avatar ?: '/themes/theme-Joe3/assets/img/peeps-avatar.png'} " th:src="${theme.config.blogger.lazyload_avatar}"  alt="头像">
+                        <div class="info">
+                            <div class="author">[[${result.owner.displayName}]]</div>
+                            <span class="date">[[${#temporals.format(result.spec.creationTime, 'yyyy-MM-dd HH:mm:ss')}]]</span>
+                        </div>
+                    </div>
+                    <div class="reply">
+                        <!--        <th:block th:with="post = ${postFinder.getByName(postMate.name)}">-->
+
+                        <a class="link aside-reply-content" href="#">[[${result.spec.content}]]</a>
+                        <!--        </th:block>-->
+                    </div>
+                </li>
+            </th:block>
+        </ul>
+    </section>
+</th:block>
+</th:block>
+<th:block th:fragment="enable_tag_cloud">
+    <section class="joe_aside__item tags-cloud">
+        <div class="joe_aside__item-title">
+            <i class="joe-font joe-icon-tag"></i>
+            <span class="text">标签云</span>
+
+            <a class="tags_more" th:href="@{/tags}">更多<i class="joe-font joe-icon-more-right"></i></a>
+
+        </div>
+        <div class="joe_aside__item-contain">
+
+            <div th:class="'tags-cloud-list'+${theme.config.aside.tag_cloud_width =='responsive' ? 'responsive':''}" th:style="${theme.config.aside.tag_cloud_type == '3d' ? 'display:none':''}">
+                <th:block th:with="tags = ${tagFinder.listAll()}">
+
+                    <a th:each="tag : ${tags}"
+                       th:data-url="@{${tag.status.permalink}}" th:data-label="${tag.spec.displayName}" th:href="@{${tag.status.permalink}}" title="${tag.name!}">[[${tag.spec.displayName}]]</a>
+                </th:block>
+
+            </div>
+            <th:block th:if="${theme.config.aside.tag_cloud_type == '3d'}">
+                <div id="tags-3d">
+                    <div class="empty">加载中…</div>
+                </div>
+            </th:block>
+        </div>
+        <!--    <#else>-->
+        <!--    <div class="empty">暂无标签</div>-->
+        <!--  </#if>-->
+        <!--</@tagTag>-->
+    </section>
+</th:block>
+</html>

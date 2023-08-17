@@ -82,12 +82,6 @@ spec:
           value: "https://imgapi.xl0408.top/index.php"
           label: 随机图api
           help: "输入适当的api地址"
-
-        - $formkit: textarea
-          name: site_notice
-          label: 网站公告
-          value: "这是你的公告"
-          help: "网站公告信息，将展示在页面右侧，尽量简洁明了，不填不展示该模块（需要先在 “侧边栏” 中开启公告模块）"
         - $formkit: text
           name: light_time_scope
           label: 浅色模式生效时间范围
@@ -757,7 +751,7 @@ spec:
         - $formkit: select
           name: enable_navbar_icon
           label: 开启菜单图标
-          value: true
+          value: false
           help: "导航条菜单默认展示后台配置的图标，若不需要可以在这里统一关闭"
           options:
             - value: true
@@ -1339,109 +1333,67 @@ spec:
               label: 是
             - value: false
               label: 否
-        - $formkit: select
-          name: enable_notice
-          label: 展示网站公告
-          value: false
-          help: "在侧边栏展示公告信息模块，必须配置公告内容才生效（请在 '基本设置' 栏中配置）"
-          options:
-            - value: true
-              label: 是
-            - value: false
-              label: 否
-        - $formkit: select
-          name: enable_qrcode
-          id: enable_qrcode
-          label: 展示二维码
-          value: false
-          help: "在侧边栏展示二维码模块，必须配置图片url"
-          options:
-            - value: true
-              label: 是
-            - value: false
-              label: 否
+        - $formkit: repeater
+          name: enable_outpost_aside
+          id: enable_outpost_aside
+          label: 非文章页侧边栏
+          value:
+            - template_aside: "enable_blogger"
+            - template_aside: "enable_newest_post"
+            - template_aside: "enable_tag_cloud"
+          children:
+            - $formkit: select
+              name: template_aside
+              id: template_aside
+              label: "侧边栏模块"
+              value: "enable_lifetime"
+              options:
+                - value: "enable_blogger"
+                  label: 博主信息
+                - value: "enable_notice"
+                  label: 网站公告
+                - value: "enable_qrcode"
+                  label: 二维码
+                - value: "enable_music_player"
+                  label: 音乐播放器
+                - value: "enable_newest_post"
+                  label: 最新文章
+                - value: "enable_lifetime"
+                  label: 人生倒计时
+                - value: "show_newreply"
+                  label: 最新评论
+                - value: "enable_tag_cloud"
+                  label: 标签云
+        - $formkit: textarea
+#          if: "$get(template_aside).value === 'enable_notice'"
+          name: site_notice
+          label: 网站公告
+          value: "这是你的公告"
+          help: "网站公告信息，将展示在页面右侧，尽量简洁明了，不填不展示该模块（需要先在 “侧边栏” 中开启公告模块）"
         - $formkit: attachment
-          if: "$get(enable_qrcode).value === true"
+#          if: "$get(template_aside).value === 'enable_qrcode'"
           name: qrcode_url
           label: 二维码图片
           value: ""
-        - $formkit: text
-          if: "$get(enable_qrcode).value === true"
-          name: qrcode_title
-          label: 二维码标题
-          value: "我的二维码"
         - $formkit: textarea
-          if: "$get(enable_qrcode).value === true"
+#          if: "$get(template_aside).value === 'enable_qrcode'"
           name: qrcode_description
           label: 二维码描述
           value: ""
-        - $formkit: select
-          name: enable_music_player
-          id: enable_music_player
-          label: 展示音乐播放器
-          value: false
-          help: "在侧边栏展示音乐播放器模块，必须配置歌单ID（目前仅支持网易云歌单）"
-          options:
-            - value: true
-              label: 是
-            - value: false
-              label: 否
         - $formkit: text
-          if: "$get(enable_music_player).value === true"
+#          if: "$get(template_aside).value === 'enable_music_player'"
           name: music_id
           label: 歌单ID
           help: "为音乐播放器配置歌单ID，大家在网页歌单页直接复制地址栏id参数后面那串数字即可，不填或填错将不会展示播放器（注意：仅支持网易云歌单ID，且不支持私密歌单）"
           value: ""
-        - $formkit: select
-          name: enable_newest_post
-          id: enable_newest_post
-          label: 展示最新文章
-          value: true
-          help: "在侧边栏展示最新文章"
-          options:
-            - value: true
-              label: 是
-            - value: false
-              label: 否
-        - $formkit: select
-          name: enable_lifetime
-          id: enable_lifetime
-          label: 展示人生倒计时
-          value: true
-          options:
-            - value: true
-              label: 是
-            - value: false
-              label: 否
-        - $formkit: select
-          name: show_newreply
-          id: show_newreply
-          label: 展示最新评论
-          value: false
-          help: "在侧边栏展示最新评论"
-          options:
-            - value: true
-              label: 是
-            - value: false
-              label: 否
         - $formkit: number
-          if: "$get(show_newreply).value"
+#          if: "$get(template_aside).value === 'show_newreply'"
           name: show_newreply_num
           label: 展示最新评论
           value: 3
           help: "在侧边栏展示最新评论的数量"
-        - $formkit: radio
-          name: enable_tag_cloud
-          id: enable_tag_cloud
-          label: 展示标签云
-          value: false
-          help: "在侧边栏展示标签云，默认关闭以节省性能"
-          options:
-            - value: true
-              label: 是
-            - value: false
-              label: 否
         - $formkit: select
+#          if: "$get(template_aside).value === 'enable_tag_cloud'"
           name: tag_cloud_type
           id: tag_cloud_type
           label: 标签云类型
@@ -1453,6 +1405,7 @@ spec:
             - value: list
               label: 标签列表
         - $formkit: select
+#          if: "$get(template_aside).value === 'enable_tag_cloud'"
           name: tag_cloud_width
           id: tag_cloud_width
           label: 标签宽度
@@ -1462,10 +1415,11 @@ spec:
               label: 固定宽度
             - value: responsive
               label: 自适应宽度
+#
     - group: post
       label: 文章页
       formSchema:
-        - $formkit: select
+        - $formkit: radio
           name: enable_title_shadow
           label: 标题阴影
           value: true
@@ -1475,7 +1429,9 @@ spec:
               label: 是
             - value: false
               label: 否
-        - $formkit: select
+
+
+        - $formkit: radio
           name: enable_page_meta
           label: 页面元数据
           value: true
@@ -1485,7 +1441,9 @@ spec:
               label: 是
             - value: false
               label: 否
-        - $formkit: select
+
+
+        - $formkit: radio
           name: enable_passage_tips
           id: enable_passage_tips
           label: 温馨提示
@@ -1496,12 +1454,16 @@ spec:
               label: 是
             - value: false
               label: 否
+
+
         - $formkit: textarea
-          if: "$get(enable_passage_tips).value"
+#          if: "$get(enable_passage_tips).value"
           name: passage_tips_content
           label: 温馨提示文案
           value: ""
           help: "自定义温馨提示的文案，为空则使用默认文案，一般不用设置"
+
+
         - $formkit: select
           name: post_img_align
           id: post_img_align
@@ -1515,12 +1477,16 @@ spec:
               label: 居中
             - value: right
               label: 右对齐
+
+
         - $formkit: text
           name: img_max_width
           label: 图片最大宽度
-          value: "100%"
+          value: 100%
           help: "设置文章内容区域图片的最大宽度，接受一切有效的宽度值，需带单位（默认为 100%，也可通过页面元数据 img_max_width 配置，但小屏幕下最大宽度会被强制设为 100%）"
-        - $formkit: select
+
+
+        - $formkit: radio
           name: enable_progress_bar
           id: enable_progress_bar
           label: 启用文章浏览进度条
@@ -1531,13 +1497,17 @@ spec:
               label: 是
             - value: false
               label: 否
+
+
         - $formkit: textarea
           if: "$get(enable_progress_bar).value === true"
           name: progress_bar_bgc
           label: 进度条背景色
           value: ""
           help: "浏览进度条的背景色，接受任何合法的颜色值（为空将使用默认背景色）"
-        - $formkit: select
+
+
+        - $formkit: radio
           name: enable_toc
           label: 文章TOC目录
           value: true
@@ -1547,6 +1517,8 @@ spec:
               label: 是
             - value: false
               label: 否
+
+
         - $formkit: select
           name: enable_mobile_toc
           label: 移动端文章TOC目录
@@ -1557,11 +1529,15 @@ spec:
               label: 是
             - value: false
               label: 否
+
+
         - $formkit: text
           name: toc_depth
           label: TOC目录默认展开层级
           value: "0"
           help: "TOC目录自动展开的标题层级（1~6级标题，仅对有多级目录的文章生效），默认为 0，不展开子目录"
+
+
         - $formkit: select
           name: enable_relate_post
           label: 展示相关文章
@@ -1572,11 +1548,15 @@ spec:
               label: 是
             - value: false
               label: 否
+
+
         - $formkit: text
           name: relate_post_max
           label: 相关文章最大条数
           value: "5"
           help: "相关文章模块展示的最大文章数，默认5条"
+
+
         - $formkit: select
           name: enable_comment
           label: 文章评论
@@ -1586,6 +1566,8 @@ spec:
               label: 是
             - value: false
               label: 否
+
+
         - $formkit: select
           name: enable_like
           label: 文章点赞
@@ -1595,6 +1577,8 @@ spec:
               label: 是
             - value: false
               label: 否
+
+
         - $formkit: select
           name: enable_share
           label: 文章分享
@@ -1604,6 +1588,8 @@ spec:
               label: 是
             - value: false
               label: 否
+
+
         - $formkit: select
           name: enable_copy
           label: 文章可复制
@@ -1613,6 +1599,8 @@ spec:
               label: 是
             - value: false
               label: 否
+
+
         - $formkit: select
           name: enable_indent
           label: 首行缩进
@@ -1623,6 +1611,8 @@ spec:
               label: 是
             - value: false
               label: 否
+
+
         - $formkit: select
           name: enable_copy_right_text
           id: enable_copy_right_text
@@ -1634,13 +1624,18 @@ spec:
               label: 是
             - value: false
               label: 否
+
+
         - $formkit: textarea
           name: copy_right_text
-          if: "$get(enable_copy_right_text).value === true"
+#          if: "$get(enable_copy_right_text).value === true"
           label: 自定义版权文案
           value: ""
           help: "文章页复制内容时追加的自定义版权文字（如无特殊需要不建议设置，使用默认的即可。若真的要设置，请不要填写表情等特殊内容，否则可能导致网站崩溃）"
-        - $formkit: select
+
+
+
+        - $formkit: radio
           name: enable_share_weixin
           label: 微信分享
           value: true
@@ -1649,7 +1644,9 @@ spec:
               label: 是
             - value: false
               label: 否
-        - $formkit: select
+
+
+        - $formkit: radio
           name: enable_share_qq
           label: QQ分享
           value: true
@@ -1658,7 +1655,9 @@ spec:
               label: 是
             - value: false
               label: 否
-        - $formkit: select
+
+
+        - $formkit: radio
           name: enable_share_qzone
           label: QQ空间分享
           value: true
@@ -1667,7 +1666,9 @@ spec:
               label: 是
             - value: false
               label: 否
-        - $formkit: select
+
+
+        - $formkit: radio
           name: enable_share_weibo
           label: 微博分享
           value: true
@@ -1676,7 +1677,9 @@ spec:
               label: 是
             - value: false
               label: 否
-        - $formkit: select
+
+
+        - $formkit: radio
           name: enable_share_link
           label: 链接分享
           value: true
@@ -1685,12 +1688,16 @@ spec:
               label: 是
             - value: false
               label: 否
+
+
         - $formkit: textarea
           name: passage_rights_content
           label: 许可协议文案
           value: ""
           help: "自定义文章页底部版权模块中的“作品采用”文案，为空则使用默认文案，一般不用设置"
-        - $formkit: select
+
+
+        - $formkit: radio
           name: enable_donate
           id: enable_donate
           label: 开启打赏
@@ -1700,14 +1707,18 @@ spec:
               label: 是
             - value: false
               label: 否
+
+
         - $formkit: attachment
-          if: "$get(enable_donate).value === true"
+#          if: "$get(enable_donate).value === true"
           name: qrcode_zfb
           label: 支付宝二维码
           value: ""
           help: "打赏用的支付宝收款二维码链接，不填不显示"
+
+
         - $formkit: attachment
-          if: "$get(enable_donate).value === true"
+#          if: "$get(enable_donate).value === true"
           name: qrcode_wx
           label: 微信二维码
           value: ""
