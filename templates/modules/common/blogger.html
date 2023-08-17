@@ -6,7 +6,7 @@
     <div class="user">
       <div class="avatar_wrapper"
       th:classappend="${theme.config.blogger.avatar_type == 'circle' ? 'circle':'round'}">
-        <img class="avatar lazyload" th:data-src="${theme.config.blogger.avatar?: 'themes/theme-joe3/assets/img/peeps-avatar.png'}" th:src="${theme.config.blogger.lazyload_avatar}"  alt="博主头像"/>
+        <img class="avatar lazyload" th:data-src="${theme.config.blogger.avatar?: 'themes/theme-Joe3/assets/img/peeps-avatar.png'}" th:src="${theme.config.blogger.lazyload_avatar}"  alt="博主头像"/>
         <th:block th:if="${theme.config.blogger.avatar_frame != '0'}">
         <img th:class="'avatar_frame '+${theme.config.blogger.avatar_frame}" th:src="@{/assets/frame/}+'/'+${theme.config.blogger.avatar_frame}+'.png'"  alt="挂架"/>
         </th:block>
