@@ -70,7 +70,7 @@ jobs:
       - name: Upload a release asset
         uses: actions/github-script@v2
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: ${{secrets.TOKEN}}
           script: |
             const fs = require('fs').promises;
             const { repo: { owner, repo }, sha } = context;
