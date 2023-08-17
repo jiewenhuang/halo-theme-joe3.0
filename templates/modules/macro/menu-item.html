@@ -6,7 +6,7 @@
      th:target="${menuItem.spec.target?.value}"
      th:title="${menuItem.status.displayName}">
     <th:block th:if="${theme.config.navbar.enable_navbar_icon}" >
-      <i th:class="'m-icon '+${#annotations.getOrDefault(menuItem, 'icon','joe-font joe-icon-shouye')}"></i>
+      <i th:class="'m-icon '+${#annotations.getOrDefault(menuItem, 'icon','jiewen joe-icon-zuzhijiagou')}"></i>
     </th:block>
     [[${menuItem.status.displayName}]]
   </a>
