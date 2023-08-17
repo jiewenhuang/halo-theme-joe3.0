@@ -314,7 +314,7 @@ const postContext = {
 			const $header = document.querySelector(".joe_header");
 			if (!$comment || !$header) return;
 			e.stopPropagation();
-			if (!document.getElementsByTagName("halo-comment").length) {
+			if (!Boolean(document.querySelector('[id*="comment-"]'))) {
 				Qmsg.warning("评论功能不可用！");
 				return;
 			}
