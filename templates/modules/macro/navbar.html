@@ -7,9 +7,11 @@
     <div class="joe_container joe_header_container"
     th:classappend="${theme.config.navbar.enable_full_header ? 'full':''}">
       <i class="joe-font joe-icon-caidan joe_header__above-slideicon"></i>
+      <th:block th:if="${theme.config.navbar.show_logo}">
       <a th:title="${site.title}" class="joe_header__above-logo" th:href="${site.url}">
         <img th:style="'border-radius:'+${theme.config.navbar.logo_radius} ?:'4px'" th:src="${site.logo}"  th:alt="${site.title}">
       </a>
+      </th:block>
       <nav class="joe_header__above-nav"
       th:classappend="|${theme.config.navbar.enable_active_shadow ? 'active-shadow':''} ${theme.config.navbar.enable_icon_animate ? 'active-animate':''}|">
         <th:block th:if="${#lists.isEmpty(theme.config.navbar.menu)}">
