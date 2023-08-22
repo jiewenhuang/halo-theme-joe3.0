@@ -73,7 +73,7 @@
                     <div class="reply">
                         <!--        <th:block th:with="post = ${postFinder.getByName(postMate.name)}">-->
 
-                        <a class="link aside-reply-content" href="#">[[${result.spec.content}]]</a>
+                        <p class="link aside-reply-content">[[${result.spec.content}]]</p>
                         <!--        </th:block>-->
                     </div>
                 </li>
@@ -83,7 +83,7 @@
 </th:block>
 </th:block>
 <th:block th:fragment="enable_tag_cloud">
-    <section class="joe_aside__item tags-cloud">
+    <section class="joe_aside__item tags-cloud" id="tags-cloud">
         <div class="joe_aside__item-title">
             <i class="joe-font joe-icon-tag"></i>
             <span class="text">标签云</span>

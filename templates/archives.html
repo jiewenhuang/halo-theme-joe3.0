@@ -40,7 +40,7 @@
       <th:block th:each="archive : ${archives.items}">
         <th:block th:each="month : ${archive.months}">
       <li class="item" th:each="post : ${month.posts}">
-        <a rel="noopener noreferrer" target="_blank" title="${post.title!}" th:href="@{${post.status.permalink}}">[[${post.spec.title}]]</a>
+        <a rel="noopener noreferrer" target="_blank" th:title="${post.spec.title}" th:href="@{${post.status.permalink}}">[[${post.spec.title}]]</a>
         <span>[[${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}]]</span>
       </li>
         </th:block>

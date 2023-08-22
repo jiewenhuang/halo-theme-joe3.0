@@ -21,7 +21,7 @@
             </div>
             <div class="joe_index__hot categories">
 
-              <ul th:class="'joe_index__hot-list'+${heme.config.categories.categories_type != 'card' ? '-tag':''}+' animated fadeIn'">
+              <ul th:class="'joe_index__hot-list'+${theme.config.categories.categories_type  == 'card'?' ':'-tag'}+ ' animated fadeIn'">
                 <th:block th:if="${theme.config.categories.categories_type=='card'}">
                 <li class="item" th:each="category : ${categories}">
                   <a class="link" th:href="${category.status.permalink}" th:title="${category.spec.displayName}">

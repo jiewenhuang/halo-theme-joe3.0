@@ -40,7 +40,7 @@
         <li class="joe_journal__item animated wow" th:data-wow-delay="'0.'+${iteration.index}+'s'" th:data-cid="${moment.metadata.name}" th:data-clikes="${moment.stats.upvote}">
           <p class="joe_journal_date">
             <i class="joe-font joe-icon-feather"></i>
-            <em class="joe_journal-posttime">[[${#dates.format(moment.metadata.creationTimestamp,'yyyy/MM/dd HH:mm:ss')}]]</em>
+            <em class="joe_journal-posttime">[[${#dates.format(moment.spec.releaseTime,'yyyy/MM/dd HH:mm:ss')}]]</em>
           </p>
           <div class="joe_journal_block">
             <div class="joe_journal_body" th:style="'max-height:'+${theme.config.journals.journal_block_height?: '300'}+'px'"

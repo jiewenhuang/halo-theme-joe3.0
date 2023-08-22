@@ -527,6 +527,8 @@ const commonContext = {
 	},
 	/* 初始化3D标签云 */
 	init3dTag() {
+		ThemeConfig.enable_tag_cloud=document.querySelector('.joe_aside__item.tags-cloud') !== null
+		// console.log(ThemeConfig.enable_tag_cloud)
 		if (
 			Joe.isMobile ||
       !ThemeConfig.enable_tag_cloud ||
@@ -767,22 +769,22 @@ const commonContext = {
 		document.addEventListener("scroll", Utils.throttle(handleHeader, 100));
 	},
 	/* 渲染最新评论中的 emoji */
-	renderReplyEmoji() {
-		const $replys = $(".aside-reply-content");
-		$replys.each((_index, item) => {
-			// 获取转换后的marked
-			const markedHtml = marked(item.innerHTML)
-				.replace(
-					/<img\ssrc[^>]*>/gm,
-					"<i class=\"joe-font joe-icon-tupian\"></i>"
-				)
-				.replace(/bili\//g, "bili/hd/ic_emoji_");
-			// 处理其中的表情包
-			const emoji = Utils.renderedEmojiHtml(markedHtml);
-			// 将回车转换为br
-			item.innerHTML = Utils.return2Br(emoji);
-		});
-	},
+	// renderReplyEmoji() {
+	// 	const $replys = $(".aside-reply-content");
+	// 	$replys.each((_index, item) => {
+	// 		// 获取转换后的marked
+	// 		const markedHtml = marked(item.innerHTML)
+	// 			.replace(
+	// 				/<img\ssrc[^>]*>/gm,
+	// 				"<i class=\"joe-font joe-icon-tupian\"></i>"
+	// 			)
+	// 			.replace(/bili\//g, "bili/hd/ic_emoji_");
+	// 		// 处理其中的表情包
+	// 		const emoji = Utils.renderedEmojiHtml(markedHtml);
+	// 		// 将回车转换为br
+	// 		item.innerHTML = Utils.return2Br(emoji);
+	// 	});
+	// },
 	/* 禁用浏览器空格滚动页面 */
 	cancelSpaceScroll() {
 		document.body.onkeydown = function (e) {
