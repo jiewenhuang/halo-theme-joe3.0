@@ -55,7 +55,7 @@
 </div>
 </div>
     </th:block>
-<th:block th:if="${theme.config.post.enable_donate} and ${#annotations.get(post, 'enable_donate')}">
+<th:block th:if="${theme.config.post.enable_donate} and ${#annotations.getOrDefault(post, 'enable_donate','true')}">
   <th:block th:replace="~{modules/donate :: donate}" />
 </th:block>
 </div>

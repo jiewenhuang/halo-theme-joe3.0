@@ -59,7 +59,7 @@
 </div>
 </li>
 </th:block>
-    <th:block th:if="${theme.config.post.enable_donate} and ${#annotations.getOrDefault(post, 'enable_donate','false')}">
+    <th:block th:if="${theme.config.post.enable_donate} and ${#annotations.getOrDefault(post, 'enable_donate','true')}">
 <li class="post-operate-donate">
   <i class="joe-font joe-icon-shang"></i>
   <th:block th:replace="~{modules/donate :: donate}" />
