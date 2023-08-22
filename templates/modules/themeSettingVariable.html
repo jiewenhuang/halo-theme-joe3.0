@@ -14,7 +14,7 @@
        enable_weather : /*[[${theme.config.blogger.enable_weather}]]*/ false,
        weather_key : /*[[${theme.config.blogger.weather_key}]]*/ '',
        link_behavior : /*[[${theme.config.theme.link_behavior}]]*/ 'default',
-       enable_tag_cloud : /*[[${theme.config.aside.enable_tag_cloud}]]*/ 'false',
+       enable_tag_cloud : true,
        tag_cloud_type : /*[[${theme.config.aside.tag_cloud_type}]]*/ '3d',
        enable_fixed_header : /*[[${theme.config.navbar.enable_fixed_header}]]*/ true,
        enable_clean_mode : /*[[${theme.config.other.enable_clean_mode}]]*/ false,
@@ -79,6 +79,7 @@
        
       
     }
+     console.log(ThemeConfig.enable_tag_cloud)
   </script>
 </th:block>
 
