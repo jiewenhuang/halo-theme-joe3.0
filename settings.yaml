@@ -1375,6 +1375,11 @@ spec:
           name: qrcode_url
           label: 二维码图片
           value: ""
+        - $formkit: text
+#          if: "$get(enable_qrcode).value === true"
+          name: qrcode_title
+          label: 二维码标题
+          value: "我的二维码"
         - $formkit: textarea
 #          if: "$get(template_aside).value === 'enable_qrcode'"
           name: qrcode_description
