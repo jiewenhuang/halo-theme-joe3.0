@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{modules/layout :: html(title = ${singlePage.spec.title}+'-'+${site.title},htmlType = links,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
+>
+<th:block th:fragment="content">
+
+    <body>
+    <div id="Joe">
+        <th:block th:replace="~{modules/macro/navbar :: navbar}" />
+        <!--          首页大图-->
+        <th:block th:if="${theme.config.beauty.enable_big_banner}">
+            <th:block th:replace="~{modules/macro/big_banner :: big_banner(${title})}" />
+        </th:block>
+        <div class="joe_container joe_main_container page-journals"
+             th:classappend="|${theme.config.theme.enable_show_in_up ? 'animated showInUp':''} ${theme.config.aside.aside_position == 'left' ? 'revert':''}|">
+            <div class="joe_main">
+                <div class="joe_detail">
+                    <h1 class="joe_detail__title txt-shadow">[[${singlePage.spec.title}]]</h1>
+                    <article class="joe_detail__article animated fadeIn" th:with="colorArray=${#strings.arraySplit('#F8D800 ,#0396FF ,#EA5455 ,#7367F0 ,#32CCBC ,#F6416C ,#32B76E ,#9F44D3 ,#F55555 ,#736EFE ,#E96D71 ,#DE4313 ,#D939CD ,#4C83FF ,#F072B6 ,#C346C2 ,#5961F9 ,#FD6585 ,#5569E8 ,#FFC600 ,#FA742B ,#5151E5 ,#BB4E75 ,#FF52E5 ,#4DA037 ,#15D1E2 ,#F067B4 ,#F067B4 ,#ff9a9e ,#00f2fe ,#4facfe ,#f093fb ,#6fa3ef ,#bc99c4 ,#46c47c ,#f9bb3c ,#e8583d ,#f68e5f',',')}">
+                        <h3>友链列表<span class="totals" >
+
+            </span></h3>
+                        <div class="links-group" th:each="group : ${linkFinder.groupBy()}">
+                            <h5>[[${group.spec.displayName}]]</h5>
+                            <ul class="joe_detail__friends evan-friends">
+                                <li class="joe_detail__friends-item" th:each="link : ${group.links}">
+                                    <a class="contain"
+                                       th:with="randomColor = ${colorArray[#numbers.formatDecimal(T(java.lang.Math).floor(T(java.lang.Math).random()* colorArray.length),1,0)]}"
+                                       th:href="${link.spec.url}" :key="i" target="_blank"
+                                       th:style="'--fcolor:'+${randomColor}" rel="noopener noreferrer">
+                                        <div class="evan-f-left">
+                                            <div class="f-avatar">
+                                                <img width="40" height="40" class="avatar lazyloaded" th:data-src="${theme.config.blogger.lazyload_avatar}" th:src="${link.spec.logo}" th:alt="${link.spec.displayName}">
+                                            </div>
+                                        </div>
+                                        <div class="evan-f-right">
+              <span class="title" th:style="'--fcolor:'+${randomColor}">
+                 <span class="sub-text" th:text="${link.spec.displayName}"></span>
+                 <svg t="1658027717181" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="25920" width="200" height="200">
+                      <path d="M0 0h1024v1024H0V0z" fill="#202425" opacity=".01" p-id="25921"></path>
+                       <path d="M989.866667 512c0 263.918933-213.947733 477.866667-477.866667 477.866667S34.133333 775.918933 34.133333 512 248.081067 34.133333 512 34.133333s477.866667 213.947733 477.866667 477.866667z" fill="#FF7744" p-id="25922"></path>
+                      <path d="M787.114667 339.285333a51.2 51.2 0 0 1 0 72.362667l-307.2 307.2a51.2 51.2 0 0 1-72.362667 0l-170.666667-170.666667a51.2 51.2 0 0 1 72.362667-72.362666L443.733333 610.235733l271.018667-271.018666a51.2 51.2 0 0 1 72.362667 0z" fill="#FFFFFF" p-id="25923"></path>
+                  </svg>
+              </span>
+                                            <div class="content">
+                                                <div class="desc" th:title="${link.spec.description}">[[${link.spec.description}]]</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </article>
+                    <article class="joe_detail__article animated fadeIn">
+                        <th:block th:utext="${singlePage.content.content}"></th:block>
+                    </article>
+
+                </div>
+                <div class="joe_comment">
+                    <div class="joe_comment_box">
+                        <div class="box_title">
+                        <h2 >评论区</h2>
+                        </div>
+                        <halo:comment
+                                group="content.halo.run"
+                                kind="SinglePage"
+                                name="${singlePage.metadata.name}"
+                                colorScheme="document.documentElement.getAttribute('data-mode')"
+                        />
+                    </div>
+                </div>
+            </div>
+            <th:block th:if="${theme.config.aside.enable_journals_aside}">
+                <th:block th:replace="~{modules/common/aside :: aside}" />
+            </th:block>
+        </div>
+        <th:block th:replace="~{modules/common/actions :: actions}" />
+        <th:block th:replace="~{modules/common/footer :: footer}" />
+    </div>
+    <th:block th:replace="~{modules/macro/tail :: tail}" />
+    </body>
+</th:block>
+</html>
