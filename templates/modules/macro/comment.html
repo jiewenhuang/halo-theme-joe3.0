@@ -2,7 +2,9 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <th:block th:fragment="comment(name, kind)">
 <div class="joe_comment_box">
+  <div class="box_title">
   <h2>评论区</h2>
+  </div>
   <halo:comment
           group="content.halo.run"
           th:attr="name=${name},kind=${kind}"
