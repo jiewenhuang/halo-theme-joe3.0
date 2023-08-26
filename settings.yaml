@@ -883,7 +883,19 @@ spec:
               label: 开启
             - value: false
               label: 关闭
+        - $formkit: radio
+          name: option_social_data
+          id: option_social_data
+          label: 社交信息来源
+          value: "default"
+          help: "是否在移动端展示社交账号，默认关闭"
+          options:
+            - value: default
+              label: 默认
+            - value: custom
+              label: 自定义
         - $formkit: repeater
+          if: "$get(option_social_data).value === 'default'"
           name: socials
           id: socials
           key: socials
@@ -912,14 +924,58 @@ spec:
                   value: qq
                 - label: 微博
                   value: weibo
+                - label: 豆瓣
+                  value: douban
+                - label: 抖音 / TikTok
+                  value: tiktok
+                - label: Facebook
+                  value: facebook
+                - label: Instagram
+                  value: instagram
+                - label: LinkedIn
+                  value: linkedin
+                - label: Twitter
+                  value: twitter
+                - label: Slack
+                  value: slack
+                - label: Discord
+                  value: discord
+                - label: YouTube
+                  value: youtube
+                - label: Steam
+                  value: steam
+                - label: GitLab
+                  value: gitlab
             - $formkit: text
               name: socialUrl
               label: 链接
               help: "邮箱填邮箱号，QQ填QQ号，其他填跳转链接"
+              validation: "required"
+        - $formkit: repeater
+          if: "$get(option_social_data).value === 'custom'"
+          name: custom_socials
+          id: custom_socials
+          key: custom_socials
+          label: 自定义社交信息
+          children:
+            - $formkit: text
+              name: socials_name
+              label: 名称
+              validation: "required"
+            - $formkit: url
+              name: socials_url
+              label: 跳转链接
+              validation: "required"
+            - $formkit: text
+              name: socials_icon
+              label: svg代码或者图片(如果使用图片请输入完整img标签)
+              validation: "required"
+
+
         - $formkit: radio
           name: enable_weather
           id: enable_weather
-          label: 展示博主信息
+          label: 展示天气信息
           value: false
           help: "是否展示简约版天气信息，必须配置正确的appKey后才可生效"
           options:
@@ -1434,6 +1490,11 @@ spec:
               label: 是
             - value: false
               label: 否
+        - $formkit: text
+          name: post_author_link
+          label: 文章页作者跳转链接
+          value: ""
+          help: "留空则不跳转"
 
 
         - $formkit: radio
@@ -2301,6 +2362,11 @@ spec:
               label: 开启
             - value: false
               label: 关闭
+        - $formkit: text
+          name: baidu_token
+          label: 百度推送Token
+          value: ""
+          help: "文章页未收录时会自动将当前链接推送给百度加快收录，Token在百度收录平台注册账号获取（必须启用“检查百度收录”并填入token才生效），https://ziyuan.baidu.com/linksubmit"
         - $formkit: select
           name: enable_console_theme
           label: 控制台输出主题信息

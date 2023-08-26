@@ -113,12 +113,19 @@
 <th:block th:if="${theme.config.blogger.enable_weather and theme.config.blogger.weather_key !=''}">
     <div id="he-plugin-simple"></div>
 </th:block>
-<th:block th:if="${theme.config.blogger.enable_social}">
+<th:block th:if="${not #lists.isEmpty(theme.config.blogger.enable_social)}">
+    <th:block th:if="${theme.config.blogger.option_social_data == 'default'}">
     <div class="social-account">
     <th:block th:each="socials : ${theme.config.blogger.socials}">
-        <th:block th:replace="~{modules/macro/social :: ${socials.socials_select}}" />
+        <th:block th:replace="~{modules/widgets/social :: ${socials.socials_select}}" />
     </th:block>
     </div>
+    </th:block>
+    <th:block th:if="${theme.config.blogger.option_social_data == 'custom'}">
+        <div class="social-account">
+            <th:block th:replace="~{modules/widgets/social :: custom_socials}" />
+        </div>
+    </th:block>
 </th:block>
 <th:block th:if="${theme.config.blogger.enable_strips}">
 <canvas id="canvas-strips" width="300" height="340"></canvas>
