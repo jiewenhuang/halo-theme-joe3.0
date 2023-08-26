@@ -93,7 +93,7 @@
         </div>
         <div class="joe_aside__item-contain">
 
-            <div th:class="'tags-cloud-list'+${theme.config.aside.tag_cloud_width =='responsive' ? 'responsive':''}" th:style="${theme.config.aside.tag_cloud_type == '3d' ? 'display:none':''}">
+            <div th:class="'tags-cloud-list '+${theme.config.aside.tag_cloud_width =='responsive' ? 'responsive':'static'}" th:style="${theme.config.aside.tag_cloud_type == '3d' ? 'display:none':''}">
                 <th:block th:with="tags = ${tagFinder.listAll()}">
 
                     <a th:each="tag : ${tags}"
