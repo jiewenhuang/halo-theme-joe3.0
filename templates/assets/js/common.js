@@ -310,7 +310,7 @@ const commonContext = {
 			} else {
 				htmlStr = `
       <div class="joe_pdf">
-        <iframe src="/themes/theme-Joe3/assets/lib/pdfjs/web/viewer.html?file=${options.src}" style="width:${options.width};height:${options.height}"></iframe>
+        <iframe src="${ThemeConfig.blog_url}/themes/theme-Joe3/assets/lib/pdfjs/web/viewer.html?file=${options.src}" style="width:${options.width};height:${options.height}"></iframe>
       </div>`;
 			}
 			$(item).replaceWith(htmlStr);
