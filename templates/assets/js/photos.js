@@ -98,14 +98,14 @@ class Sortable {
 
         this._setBlocWidth()
 
-        window.addEventListener('load', () => {
-            this._filterElements(()=>{
-                this.orderelements()
-            })
-            parent.style.opacity = 1
-        })
+        // window.addEventListener('load', () => {
+        //     this._filterElements(()=>{
+        //         this.orderelements()
+        //     })
+        //     parent.style.opacity = 1
+        // })
 
-        this.resize()
+
         //使用Intersection Observer API实现懒加载
         const ob = new IntersectionObserver(
             (entries)=>{
@@ -114,16 +114,23 @@ class Sortable {
                         const img = entry.target;
                         const src = img.getAttribute('data-src');
                         img.setAttribute('src',src);
-                        ob.unobserve(img);
+
+                        this._filterElements(()=>{
+                            this.orderelements()
+                        })
+                        parent.style.opacity = 1
+                        
+                        ob.unobserve(img)
                     }
                 })
-        },{
-            threshold:0.5
-        });
+            },{
+                threshold:0
+            });
         const imgs = document.querySelectorAll('img.card__picture');
         imgs.forEach((img)=>{
             ob.observe(img);
         })
+        this.resize()
 
     }
 
