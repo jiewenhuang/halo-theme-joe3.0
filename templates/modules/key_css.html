@@ -35,7 +35,7 @@
 
         }
         html[data-mode='dark'] body {
-            --theme: [[${theme.config.basic.mode_color_dark ?: '#9999ff'}]];
+            --theme: [[${theme.config.basic.mode_color_dark}?:'#9999ff']];
             --scroll-bar: [[${theme.config.theme.scrollbar_color ?: '#666'}]];
             --loading-bar: [[${theme.config.theme.loading_bar_color ?: 'var(--theme)'}]];
         }
@@ -45,7 +45,7 @@
         ::-webkit-scrollbar-thumb {
             background: var(--scroll-bar);
         }
-        [# th:if="${theme.config.basic.enable_background_light} and ${theme.config.basic.background_light_mode != ''} and ${theme.config.basic.background_light_mode != null}"]
+        [# th:if="${theme.config.basic.enable_background_light} and ${theme.config.basic.background_light_mode != ''}"]
         html[data-mode="light"] body {
             background-position: top center;
             background-attachment: fixed;
@@ -59,8 +59,8 @@
             background-image: none;
         }
         [/]
-        [# th:if="${theme.config.basic.enable_background_dark} and ${theme.config.basic.background_dark_mode != ''} and ${theme.config.basic.background_dark_mode != null}"]
-        html[data-mode="light"] body {
+        [# th:if="${theme.config.basic.enable_background_dark} and ${theme.config.basic.background_dark_mode != ''}"]
+        html[data-mode="dark"] body {
             background-position: top center;
             background-attachment: fixed;
             background-repeat: no-repeat;
@@ -69,7 +69,7 @@
         }
         [/]
         [# th:if="${theme.config.basic.enable_background_dark != true} or ${theme.config.basic.background_dark_mode == ''} or ${theme.config.basic.background_dark_mode == null}"]
-        html[data-mode="light"] body {
+        html[data-mode="dark"] body {
             background-image: none;
         }
         [/]
