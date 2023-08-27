@@ -20,7 +20,7 @@
 
 预览：[Jiewen's Blog](https://www.jiewen.run/?preview-theme=theme-Joe3)
 
-文档：WIP
+文档：部分配置请参考 [Joe3不完全使用指导指南](https://www.jiewen.run/archives/joe3use)
 > halo-theme-Joe3 是一款 [Halo2.0](https://halo.run/) 的博客主题  
 > 由[halo-theme-joe2.0](https://github.com/qinhua/halo-theme-joe2.0)适配而来，感谢原作者的无私奉献
 
@@ -33,7 +33,8 @@
 > 1、首次使用请先把主题所有配置保存一遍  
 > 2、部分功能使用插件进行实现  
 > 3、请配合Halo2.8.0及以上版本使用  
-> 4、菜单栏的图标请使用[iconfont](https://www.iconfont.cn/)的图标，需要填入Font Family 和图标代码例如：`jiewen joe-icon-tupian`
+> 4、菜单栏的图标请使用[iconfont](https://www.iconfont.cn/)的图标，需要填入Font Family 和图标代码例如：`jiewen joe-icon-tupian`  
+> 5、使用自定义标签样式请安装[Tool-Bench](https://github.com/DioxideCN/Tool-Bench)插件，标签请参考[Joe3部分样式](https://www.jiewen.run/archives/joe3style)或者直接使用插件标签
 
 - [x] 卡片化设计
 - [x] 响应式主题
