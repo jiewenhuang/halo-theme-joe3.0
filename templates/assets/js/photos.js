@@ -168,23 +168,27 @@ class Sortable {
     _lazyLoadImages(el) {
         const images = el.querySelectorAll('img[loading="lazy"]');
 
-        // 创建 IntersectionObserver 实例
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const img = entry.target;
-                    img.src = img.dataset.src; // 设置真实的图片地址
-                    img.removeAttribute('loading'); // 移除 loading 属性，以便浏览器开始加载图片
-                    observer.unobserve(img); // 停止观察这个元素，因为图片已经加载
+                    img.src = img.dataset.src;
+                    img.removeAttribute('loading');
+                    observer.unobserve(img);
+
+                    // 在图片加载完成后触发重新布局
+                    img.onload = () => {
+                        this.orderelements(); // 调用重新布局方法
+                    };
                 }
             });
         });
 
-        // 对每个图片元素启动观察
         images.forEach(img => {
             observer.observe(img);
         });
     }
+
 
     _sumArrHeight(arr, col){
         return arr.reduce((acc, val, id)=>{
