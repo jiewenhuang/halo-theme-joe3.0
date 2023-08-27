@@ -117,9 +117,9 @@ class Sortable {
                         ob.unobserve(img);
                     }
                 })
-        },{
-            threshold:0.5
-        });
+            },{
+                threshold:0.5
+            });
         const imgs = document.querySelectorAll('img.card__picture');
         imgs.forEach((img)=>{
             ob.observe(img);
@@ -146,6 +146,7 @@ class Sortable {
         this.activeElements = elements.filter(el => {
             if(dataLink === 'all') {
                 this._fadeIn(el, fadeDuration.in)
+                this._lazyLoadImages(el);
                 return true
             } else {
                 if(el.dataset.sjsel !== dataLink) {
@@ -153,6 +154,7 @@ class Sortable {
                     return false
                 } else {
                     this._fadeIn(el, fadeDuration.in)
+                    this._lazyLoadImages(el); // 添加这一行来启动懒加载
                     return true
                 }
             }
@@ -162,6 +164,32 @@ class Sortable {
             callback()
         }
     }
+    // 添加一个新的方法来执行图片的懒加载，使用 IntersectionObserver
+    _lazyLoadImages(el) {
+        const images = el.querySelectorAll('img[loading="lazy"]');
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.removeAttribute('loading');
+                    observer.unobserve(img);
+
+                    // 在图片加载完成后触发重新布局
+                    img.onload = () => {
+                        this.orderelements(); // 调用重新布局方法
+                    };
+                }
+            });
+        });
+
+        images.forEach(img => {
+            observer.observe(img);
+        });
+    }
+
+
     _sumArrHeight(arr, col){
         return arr.reduce((acc, val, id)=>{
             let cle = id%col

@@ -13,7 +13,7 @@ spec:
   repo: "https://github.com/jiewenhuang/halo-theme-joe3.0"
   settingName: "theme-Joe-setting"
   configMapName: "theme-Joe-configMap"
-  version: "1.0.6"
+  version: "1.0.7"
   require: ">=2.8.0"
   customTemplates:
     page:
@@ -21,3 +21,7 @@ spec:
         description: 留言板文章
         screenshot:
         file: page_leaving.html
+      - name: 友链
+        description: 友链模板
+        screenshot:
+        file: page_links.html

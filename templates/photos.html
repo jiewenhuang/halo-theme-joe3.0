@@ -35,13 +35,9 @@
                                         <div class="card" >
                                             <a class="item animated wow jg-entry" th:href="${photo.spec.url}" data-fancybox="gallery">
 
-                                            <img class="card__picture" th:data-src="${photo.spec.url}" th:src="@{/assets/img/lazyload.gif}" th:alt="${photo.spec.displayName}"></a>
-<!--                                            <div class="card-infos">-->
-<!--                                                <h2 class="card__title">Example 1</h2>-->
-<!--                                                <p class="card__text">-->
-<!--                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, eius, asperiores. Incidunt sapiente est quae iure...-->
-<!--                                                </p>-->
-<!--                                            </div>-->
+                                            <img class="card__picture" loading="lazy" th:data-src="${photo.spec.url}" th:src="@{/assets/img/lazyload.gif}" th:alt="${photo.spec.displayName}">
+                                            </a>
+<!--                                            <div class="placeholder" style="width: 200px;height: 120px;background: #eee;"></div>-->
                                         </div>
                                     </div>
                                 </div>

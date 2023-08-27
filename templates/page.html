@@ -45,7 +45,7 @@
             </th:block>
 
         <article th:class="'joe_detail__article animated fadeIn '+${#annotations.getOrDefault(singlePage, 'img_align', 'center')+'-img'}"
-                 th:classappend="|${#annotations.getOrDefault(singlePage, 'enable_read_limit', 'false') == 'true' ?'limited': ''} ${(#annotations.getOrDefault(singlePage, 'enable_copy', 'true') == 'false' or theme.config.post.enable_copy != true) ? 'uncopy' : ''} ${theme.config.post.enable_indent ? 'indent':''} ${(theme.config.post.enable_code_line_number == true and theme.config.post.enable_code_newline ==true) ? 'line-numbers':''} ${theme.config.post.enable_single_code_select == true ? 'single_code_select': ''}|">
+                 th:classappend="|${#annotations.getOrDefault(singlePage, 'enable_read_limit', 'false') == 'true' ?'limited': ''} ${(#annotations.getOrDefault(singlePage, 'enable_copy', 'true') == 'false' or theme.config.post.enable_copy != true) ? 'uncopy' : ''} ${theme.config.post.enable_indent ? 'indent':''} ${(theme.config.code_block.enable_code_line_number == true and theme.config.code_block.enable_code_newline ==true) ? 'line-numbers':''} ${theme.config.code_block.enable_single_code_select == true ? 'single_code_select': ''}|">
           <div id="singlePage-inner">
             <th:block th:if="${#annotations.getOrDefault(singlePage, 'use_raw_content', 'false') == 'false'}">
               <th:block th:utext="${singlePage.content.content}"></th:block>

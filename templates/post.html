@@ -33,7 +33,7 @@
           <img width="35" height="35" class="avatar lazyload" th:src="${theme.config.blogger.lazyload_avatar}" th:data-src="${contributor.avatar}"  th:alt="${contributor.displayName}">
           <div class="meta">
             <div class="author">
-              <a class="link" th:href="${contributor.permalink}" th:title="${contributor.displayName}">[[${contributor.displayName}]]</a>
+              <a class="link" th:href="${theme.config.post.post_author_link == ''?'javascript:;':theme.config.post.post_author_link}" th:title="${contributor.displayName}">[[${contributor.displayName}]]</a>
             </div>
             <div class="item">
               <span class="text">[[${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}]]</span>
@@ -84,7 +84,7 @@
 </th:block>
   </div>
   <article th:class="'joe_detail__article animated fadeIn '+${#annotations.getOrDefault(post, 'img_align', 'center')+'-img'}"
-           th:classappend="|${#annotations.getOrDefault(post, 'enable_read_limit', 'false') == 'true' ?'limited': ''} ${(#annotations.getOrDefault(post, 'enable_copy', 'true') == 'false' or theme.config.post.enable_copy != true) ? 'uncopy' : ''} ${theme.config.post.enable_indent ? 'indent':''} ${(theme.config.post.enable_code_line_number == true and theme.config.post.enable_code_newline ==true) ? 'line-numbers':''} ${theme.config.post.enable_single_code_select == true ? 'single_code_select': ''}|">
+           th:classappend="|${#annotations.getOrDefault(post, 'enable_read_limit', 'false') == 'true' ?'limited': ''} ${(#annotations.getOrDefault(post, 'enable_copy', 'true') == 'false' or theme.config.post.enable_copy != true) ? 'uncopy' : ''} ${theme.config.post.enable_indent ? 'indent':''} ${(theme.config.code_block.enable_code_line_number == true and theme.config.code_block.enable_code_newline ==true) ? 'line-numbers':''} ${theme.config.code_block.enable_single_code_select == true ? 'single_code_select': ''}|">
     <div id="post-inner">
       <th:block th:if="${#annotations.getOrDefault(post, 'use_raw_content', 'false') == 'false'}">
         <th:block th:utext="${post.content.content}"></th:block>
