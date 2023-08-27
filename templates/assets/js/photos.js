@@ -98,14 +98,14 @@ class Sortable {
 
         this._setBlocWidth()
 
-        // window.addEventListener('load', () => {
-        //     this._filterElements(()=>{
-        //         this.orderelements()
-        //     })
-        //     parent.style.opacity = 1
-        // })
+        window.addEventListener('load', () => {
+            this._filterElements(()=>{
+                this.orderelements()
+            })
+            parent.style.opacity = 1
+        })
 
-
+        this.resize()
         //使用Intersection Observer API实现懒加载
         const ob = new IntersectionObserver(
             (entries)=>{
@@ -114,23 +114,16 @@ class Sortable {
                         const img = entry.target;
                         const src = img.getAttribute('data-src');
                         img.setAttribute('src',src);
-
-                        this._filterElements(()=>{
-                            this.orderelements()
-                        })
-                        parent.style.opacity = 1
-                        
-                        ob.unobserve(img)
+                        ob.unobserve(img);
                     }
                 })
             },{
-                threshold:0
+                threshold:0.5
             });
         const imgs = document.querySelectorAll('img.card__picture');
         imgs.forEach((img)=>{
             ob.observe(img);
         })
-        this.resize()
 
     }
 
@@ -153,6 +146,7 @@ class Sortable {
         this.activeElements = elements.filter(el => {
             if(dataLink === 'all') {
                 this._fadeIn(el, fadeDuration.in)
+                this._lazyLoadImages(el);
                 return true
             } else {
                 if(el.dataset.sjsel !== dataLink) {
@@ -160,6 +154,7 @@ class Sortable {
                     return false
                 } else {
                     this._fadeIn(el, fadeDuration.in)
+                    this._lazyLoadImages(el); // 添加这一行来启动懒加载
                     return true
                 }
             }
@@ -169,6 +164,28 @@ class Sortable {
             callback()
         }
     }
+    // 添加一个新的方法来执行图片的懒加载，使用 IntersectionObserver
+    _lazyLoadImages(el) {
+        const images = el.querySelectorAll('img[loading="lazy"]');
+
+        // 创建 IntersectionObserver 实例
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src; // 设置真实的图片地址
+                    img.removeAttribute('loading'); // 移除 loading 属性，以便浏览器开始加载图片
+                    observer.unobserve(img); // 停止观察这个元素，因为图片已经加载
+                }
+            });
+        });
+
+        // 对每个图片元素启动观察
+        images.forEach(img => {
+            observer.observe(img);
+        });
+    }
+
     _sumArrHeight(arr, col){
         return arr.reduce((acc, val, id)=>{
             let cle = id%col
