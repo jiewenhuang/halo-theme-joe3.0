@@ -20,8 +20,8 @@
           <path d="M746.236 460.902l-81.233 81.233a179.353 179.353 0 0 0-13.102-70.46l52.7-52.409a69.878 69.878 0 0 0 0-98.702l-2.039-2.038a69.878 69.878 0 0 0-98.702 0L487.397 434.989a69.878 69.878 0 0 0 0 98.702l2.038 2.038a68.422 68.422 0 0 0 13.976 10.773l-42.51 42.51a136.553 136.553 0 0 1-13.101-11.356l-2.038-2.038a128.983 128.983 0 0 1 0-182.265l116.463-116.462a129.565 129.565 0 0 1 182.555 0l2.038 2.038a128.983 128.983 0 0 1 0 182.264z" fill="#FFF" />
         </svg>
         <span>本文链接：</span>
-        <span class="text">
-          <a class="link" th:href="${post.status.permalink}" target="_blank" rel="noopener noreferrer nofollow">[[${site.url}+${post.status.permalink}]]</a>
+        <span class="text" th:with="siteUrl = ${#strings.substring(site.url, #strings.length(site.url) - 1)== '/'}? ${#strings.substring(site.url,0,#strings.length(site.url) - 1)}:${site.url}">
+          <a class="link" th:href="${post.status.permalink}" target="_blank" rel="noopener noreferrer nofollow">[[${siteUrl}+${post.status.permalink}]]</a>
         </span>
       </div>
       <div class="item">
