@@ -281,7 +281,7 @@ const homeContext = {
 // 		getDate();
 // 	},
 	loadMoreArticles() {
-		if (ThemeConfig.enable_index_list_effect){
+		if (!ThemeConfig.enable_index_list_effect){
 			return
 		}
 		// 在页面加载完成后执行
