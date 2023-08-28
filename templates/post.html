@@ -84,7 +84,7 @@
 </th:block>
   </div>
   <article th:class="'joe_detail__article animated fadeIn '+${#annotations.getOrDefault(post, 'img_align', 'center')+'-img'}"
-           th:classappend="|${#annotations.getOrDefault(post, 'enable_read_limit', 'false') == 'true' ?'limited': ''} ${(#annotations.getOrDefault(post, 'enable_copy', 'true') == 'false' or theme.config.post.enable_copy != true) ? 'uncopy' : ''} ${theme.config.post.enable_indent ? 'indent':''} ${(theme.config.code_block.enable_code_line_number == true and theme.config.code_block.enable_code_newline ==true) ? 'line-numbers':''} ${theme.config.code_block.enable_single_code_select == true ? 'single_code_select': ''}|">
+           th:classappend="|${#annotations.getOrDefault(post, 'enable_read_limit', 'false') == 'true' ?'limited': ''} ${(#annotations.getOrDefault(post, 'enable_copy', 'true') == 'false' or theme.config.post.enable_copy != true) ? 'uncopy' : ''} ${theme.config.post.enable_indent ? 'indent':''} ${(theme.config.code_block.enable_code_line_number == true and theme.config.code_block.enable_code_newline !=true) ? 'line-numbers':''} ${theme.config.code_block.enable_single_code_select == true ? 'single_code_select': ''}|">
     <div id="post-inner">
       <th:block th:if="${#annotations.getOrDefault(post, 'use_raw_content', 'false') == 'false'}">
         <th:block th:utext="${post.content.content}"></th:block>
