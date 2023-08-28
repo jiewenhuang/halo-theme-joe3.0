@@ -127,5 +127,19 @@
         document.querySelector('#sortable').sortablejs()
     </script>
     </th:block>
+    <script type="text/javascript" th:if="${theme.config.home.enable_auto_ajax} and ${theme.config.home.enable_index_list_ajax}">
+        const ob =  new IntersectionObserver(entries => {
+            const domClick = document.querySelector('.joe_load')
+            if (entries[0].isIntersecting){
+                domClick.click()
+            }
+
+        }, {
+            threshold:1
+        })
+        const loading = document.querySelector('.joe_load_container')
+        ob.observe(loading)
+
+    </script>
 </th:block>
 </html>

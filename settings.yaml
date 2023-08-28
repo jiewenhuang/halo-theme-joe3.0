@@ -100,16 +100,27 @@ spec:
     - group: home
       label: 首页
       formSchema:
-        #        - $formkit: select
-        #          name: enable_index_list_ajax
-        #          label: 异步加载文章列表
-        #          value: true
-        #          help: ""
-        #          options:
-        #            - value: true
-        #              label: 是
-        #            - value: false
-        #              label: 否
+        - $formkit: radio
+          name: enable_index_list_ajax
+          label: 文章加载形式
+          value: false
+          help: ""
+          options:
+            - value: true
+              label: 加载
+            - value: false
+              label: 分页
+        - $formkit: radio
+          name: enable_auto_ajax
+          label: 是否开启自动加载
+          value: false
+          help: "开启后滑到底部自动加载文章(默认关闭)"
+          options:
+            - value: true
+              label: 是
+            - value: false
+              label: 否
+
         - $formkit: select
           name: enable_post_thumbnail
           label: 开启文章缩略图

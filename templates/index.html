@@ -50,7 +50,16 @@
                       </div>
                   </div>
 <!--                  pagination-->
+                  <th:block th:if="${!theme.config.home.enable_index_list_ajax}">
                   <th:block th:replace="~{modules/common/pagination :: pagination}" />
+                  </th:block>
+                  <th:block th:if="${theme.config.home.enable_index_list_ajax}">
+                      <div class="joe_load_container"
+                           th:with="nextPage = ${posts.totalPages == posts.page?'':posts.nextUrl}">
+                      <div class="joe_load" th:data-next="@{${nextPage}}">查看更多 </div>
+
+                      </div>
+                  </th:block>
               </div>
 <!--              aside-->
               <th:block th:if="${theme.config.aside.enable_aside}">
