@@ -28,6 +28,7 @@
         }
         html body {
             --theme: [[${theme.config.basic.mode_color_light}]];
+            --wave-color: [[${theme.config.beauty.light_color}?:'#fff']];
             --scroll-bar: [[${theme.config.theme.scrollbar_color ?: '#c0c4cc'}]];
             --loading-bar:  [[${theme.config.theme.loading_bar_color ?: 'var(--theme)'}]];
             --img-max-width: 100%;
@@ -36,6 +37,7 @@
         }
         html[data-mode='dark'] body {
             --theme: [[${theme.config.basic.mode_color_dark}?:'#9999ff']];
+            --wave-color: [[${theme.config.beauty.dark_color}?:'#fff']];
             --scroll-bar: [[${theme.config.theme.scrollbar_color ?: '#666'}]];
             --loading-bar: [[${theme.config.theme.loading_bar_color ?: 'var(--theme)'}]];
         }
