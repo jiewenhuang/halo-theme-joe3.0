@@ -34,7 +34,7 @@
     <th:block th:if="${htmlType == 'post'} or ${htmlType == 'journals'} or ${htmlType == 'sheet'}">
         <script th:src="@{/assets/lib/clipboard/clipboard.min.js}"></script>
     </th:block>
-    <th:block th:if="${theme.config.custom.favicon == true && theme.config.custom.favicon != null && theme.config.custom.favicon != ''}">
+    <th:block th:if="${theme.config.custom.favicon != null && theme.config.custom.favicon != ''}">
         <script th:src="@{/assets/lib/favico/favico.min.js}"></script>
     </th:block>
     <th:block th:if="${htmlType == 'post'}">
