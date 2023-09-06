@@ -21,6 +21,7 @@ spec:
               label: 浅色模式
             - value: dark
               label: 暗黑模式
+
         - $formkit: text
           name: mode_color_light
           label: 主题色（浅色）
@@ -570,7 +571,7 @@ spec:
           name: banner_direction
           id: banner_direction
           label: 轮播方向
-          value: "horizontal"
+          value: horizontal
           options:
             - value: horizontal
               label: 水平
@@ -592,14 +593,20 @@ spec:
           label: 切换效果
           value: "slide"
           options:
-            - value: slide
-              label: 滑动
-            - value: fade
+            - value: "slide"
+              label: 普通位移切换
+            - value: "fade"
               label: 淡入
-            - value: cube
-              label: 立方体
-            - value: coverflow
-              label: 封面
+            - value: "cube"
+              label: 方块
+            - value: "coverflow"
+              label: 3d流
+            - value: "flip"
+              label: 3d翻转
+            - value: "cards"
+              label: 卡片式
+            - value: "creative"
+              label: 创意性
         - $formkit: select
           name: enable_banner_handle
           id: enable_banner_handle
@@ -641,17 +648,17 @@ spec:
               label: 开启
             - value: false
               label: 关闭
-        - $formkit: text
+        - $formkit: number
           name: banner_delay
           id: banner_delay
           label: 切换间隔
           value: "3500"
           help: "设置轮播图切换的间隔时间，默认3500（仅在自动切换开启时生效，单位：毫秒）"
-        - $formkit: text
+        - $formkit: number
           name: banner_speed
           id: banner_speed
           label: 切换速度
-          value: "500"
+          value: 500
           help: "设置轮播图的切换速度，默认500（单位：毫秒）"
         - $formkit: attachment
           name: banner_lazyload_img
@@ -712,6 +719,16 @@ spec:
           name: big_banner_video
           label: 视频地址
           value:
+        - $formkit: text
+          if: "$get(enable_big_banner).value === true"
+          name: light_color
+          label: 底部波浪颜色
+          value: "#fff"
+        - $formkit: text
+          if: "$get(enable_big_banner).value === true"
+          name: dark_color
+          label: 暗色底部波浪颜色
+          value: "#fff"
     - group: navbar
       label: 导航
       formSchema:
@@ -724,6 +741,15 @@ spec:
           label: 导航条吸顶
           value: true
           help: "开启后，当页面滚动时，导航条会始终固定在可视区域顶部（默认只在向上滚动时显示，移动端强制吸顶展示）"
+          options:
+            - value: true
+              label: 开启
+            - value: false
+              label: 关闭
+        - $formkit: radio
+          name: nav_login
+          label: 导航栏登入按钮
+          value: false
           options:
             - value: true
               label: 开启

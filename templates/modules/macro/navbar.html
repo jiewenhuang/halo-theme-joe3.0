@@ -68,10 +68,35 @@
         </th:block>
 
       </nav>
+
       <div class="joe_header__above-search">
+<!--        <div class="nav_login">-->
+<!--          <th:block th:if="${#authentication.name == 'anonymousUser'}">-->
+<!--          <a href="/console" title="搜索"><i class="jiewen joe-icon-zhanghao"></i></a>-->
+<!--          </th:block>-->
+<!--          <th:block th:if="${#authentication.name != 'anonymousUser'}">-->
+<!--            <th:block th:with="contributor = ${contributorFinder.getContributor(#authentication.name)}">-->
+<!--            <img th:src="${contributor.avatar}" th:title="${contributor.displayName}" th:alt="${contributor.displayName}">-->
+<!--            </th:block>-->
+<!--          </th:block>-->
+<!--        </div>-->
 <!--        <input maxlength="16" autocomplete="off" placeholder="请输入关键字..." name="keyword" value="" class="input" type="text">-->
         <button type="submit" id="halo-search" class="submit" style="border-radius: 17px 17px 17px 17px" aria-label="搜索按钮"><i class="joe-font joe-icon-search"></i></button>
-        <span class="icon"></span>
+<!--        <span class="icon"></span>-->
+<th:block th:if="${theme.config.navbar.nav_login}">
+        <div class="nav_login">
+          <th:block th:if="${#authentication.name == 'anonymousUser'}">
+            <a class="login_before" href="/console" title="搜索"><i class="jiewen joe-icon-zhanghao" target="_blank"></i></a>
+          </th:block>
+          <th:block th:if="${#authentication.name != 'anonymousUser'}">
+            <th:block th:with="contributor = ${contributorFinder.getContributor(#authentication.name)}">
+              <a class="login_after" href="/console" th:title="${contributor.displayName}" target="_blank">
+              <img th:src="${contributor.avatar}" th:title="${contributor.displayName}" th:alt="${contributor.displayName}">
+              </a>
+            </th:block>
+          </th:block>
+        </div>
+</th:block>
 <!--        <nav class="result">-->
 <!--          <a href="archives/ce-shi-wen-zhang.html" title="测试文章" class="item">-->
 <!--            <span class="sort">1</span>-->
@@ -83,6 +108,7 @@
 <!--          </a>-->
 <!--        </nav>-->
       </div>
+
       <a href="javascript:SearchWidget.open()" title="搜索"><i class="joe-font joe-icon-search joe_header__above-searchicon"></i></a>
     </div>
   </div>
@@ -100,7 +126,7 @@
       </div>
       <ul class="joe_header__slideout-count" th:with="stats = ${siteStatsFinder.getStats()}">
         <li class="item">
-          <i class="joe-font joe-icon-riji"></i>
+          <i class="jiewen joe-icon-danganguanli"></i>
           <span>累计撰写 <strong>[[${stats.post}]]</strong> 篇文章</span>
         </li>
         <th:block th:with="tags = ${tagFinder.listAll()}">
