@@ -13,7 +13,7 @@
     <script th:src="@{/assets/js/min/utils.min.js}"></script>
 
     <th:block th:if="${htmlType == 'index' && theme.config.carousel.enable_banner}">
-        <script th:src="@{/assets/lib/swiper/swiper.min.js}"></script>
+        <script th:src="@{/assets/lib/swiper/swiper-bundle.min.js}"></script>
     </th:block>
     <th:block th:if="${htmlType == 'post'} and ${theme.config.post.enable_toc == true}">
         <script th:src="@{/assets/lib/tocbot/tocbot.min.js}"></script>
@@ -34,7 +34,7 @@
     <th:block th:if="${htmlType == 'post'} or ${htmlType == 'journals'} or ${htmlType == 'sheet'}">
         <script th:src="@{/assets/lib/clipboard/clipboard.min.js}"></script>
     </th:block>
-    <th:block th:if="${theme.config.custom.favicon != null && theme.config.custom.favicon != ''}">
+    <th:block th:if="${theme.config.custom.favicon == true && theme.config.custom.favicon != null && theme.config.custom.favicon != ''}">
         <script th:src="@{/assets/lib/favico/favico.min.js}"></script>
     </th:block>
     <th:block th:if="${htmlType == 'post'}">
@@ -70,9 +70,9 @@
         <script th:src="@{/assets/lib/draggabilly/draggabilly.min.js}"></script>
         <script th:src="@{/assets/js/min/leaving.min.js}"></script>
     </th:block>
+    <th:block th:if="${theme.config.beauty.enable_big_banner}">
     <script th:src="@{/assets/js/min/beauty.min.js}"></script>
-<!--    <script src="http://localhost:8090/upload/masonry.pkgd.min.js"></script>-->
-
+    </th:block>
     <!-- ===== 引入页面级js end ===== -->
 
 <!-- ===== 引入脚本 start ===== -->
@@ -92,6 +92,10 @@
 
     <!-- 自定义js -->
         <script type="text/javascript" th:inline="javascript">/*[[${theme.config.custom.custom_js_body}]]*/</script>
+    </th:block>
+    <th:block th:if="${theme.config.other.enable_debug}">
+    <!-- vconsole -->
+    <script th:src="@{/assets/lib/vconsole/vconsole.min.js}"></script>
     </th:block>
 <!--搜索点击-->
     <script>
@@ -141,5 +145,6 @@
         ob.observe(loading)
 
     </script>
+
 </th:block>
 </html>

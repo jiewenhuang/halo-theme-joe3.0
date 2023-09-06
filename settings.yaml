@@ -65,8 +65,8 @@ spec:
         - $formkit: number
           name: content_max_width
           label: 内容区最大宽度
-          value: 80
-          help: "限制内容区域的宽度，单位vw,1~100之间默认80"
+          value: 1320
+          help: "限制内容区域的宽度，单位px,默认1320px"
         - $formkit: select
           name: enable_random_img_api
           id: enable_random_img_api
@@ -2372,6 +2372,16 @@ spec:
     - group: other
       label: 其他
       formSchema:
+        - $formkit: select
+          name: enable_debug
+          label: 调试模式
+          help: "调试模式开启后，页面会展示 vconsole 的绿色调试按钮，便于排查移动端的线上问题"
+          value: false
+          options:
+            - value: true
+              label: 开启
+            - value: false
+              label: 关闭
         - $formkit: select
           name: rip_mode
           label: RIP模式
