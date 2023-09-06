@@ -45,7 +45,7 @@
        enable_index_list_effect : /*[[${theme.config.home.enable_index_list_effect}]]*/ true,
        index_list_effect_class : /*[[${theme.config.home.index_list_effect_class}]]*/ 'fadeInUp',
        show_loaded_time : /*[[${theme.config.custom.show_loaded_time}]]*/ false,
-       enable_debug : /*[[${theme.config.custom.show_loaded_time}]]*/ false,
+       enable_debug : /*[[${theme.config.other.enable_debug}]]*/ false,
        access_key : /*[[${theme.config.custom.show_loaded_time}]]*/ false,
        enable_copy : /*[[${theme.config.post.enable_copy}]]*/ true,
        enable_share : /*[[${theme.config.post.enable_share}]]*/ true,
@@ -74,7 +74,7 @@
        enable_like_journal : /*[[${theme.config.journals.enable_like_journal}]]*/ true,
        enable_comment_journal : /*[[${theme.config.journals.enable_comment_journal}]]*/ true,
        journal_block_height : /*[[${theme.config.journals.journal_block_height}]]*/ 300,
-       long_code_height : /*[[${theme.config.code_block.long_code_height}]]*/ '800',
+       long_code_height : /*[[${theme.config.code_block.long_code_height}]]*/ 800,
        photos_layout : 'waterfall',
        blog_url : /*[[${#strings.substring(site.url, #strings.length(site.url) - 1)== '/'}? ${#strings.substring(site.url,0,#strings.length(site.url) - 1)}:${site.url}]]*/ '',
        blog_title : /*[[${site.title}]]*/ '',
@@ -83,6 +83,15 @@
        
       
     }
+    //转数字
+    ThemeConfig.banner_speed = parseInt(ThemeConfig.banner_speed)
+    ThemeConfig.banner_delay = parseInt(ThemeConfig.banner_delay)
+    ThemeConfig.toc_depth = parseInt(ThemeConfig.toc_depth)
+    ThemeConfig.journal_block_height = parseInt(ThemeConfig.journal_block_height)
+    ThemeConfig.long_code_height = parseInt(ThemeConfig.long_code_height)
+    ThemeConfig.photos_gap = 10
+     ThemeConfig.enable_photos_effect= true
+
   </script>
 </th:block>
 
