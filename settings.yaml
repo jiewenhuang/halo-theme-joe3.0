@@ -501,6 +501,18 @@ spec:
           label: 离屏文案（回来）
           value: "(つェ⊂)咦，又回来了!"
           help: "在返回到当前标签时，通过title展示的文字（仅对首页生效）"
+        - $formkit: select
+          name: link_behavior
+          label: 链接跳转行为（全局-内容区域）
+          value: "default"
+          help: "配置网站 “内容区域（不包含导航条和页脚）” 的 a 标签跳转行为，暂时提供 3 种供选择【默认：遵循主题默认行为；当前页：在当前页打开链接；新标签：在新标签页中打开链接】"
+          options:
+            - value: default
+              label: 默认
+            - value: current
+              label: 当前页
+            - value: new
+              label: 新标签
 
         - $formkit: radio
           name: enable_show_in_up
@@ -666,18 +678,7 @@ spec:
           label: 图片预载图
           value: "/themes/theme-Joe3/assets/img/lazyload_h.gif"
           help: "轮播图默认为懒加载，这里可以为banner图设置加载完之前的加载图（体积尽可能的小）"
-        - $formkit: select
-          name: link_behavior
-          label: 链接跳转行为（全局-内容区域）
-          value: "default"
-          help: "配置网站 “内容区域（不包含导航条和页脚）” 的 a 标签跳转行为，暂时提供 3 种供选择【默认：遵循主题默认行为；当前页：在当前页打开链接；新标签：在新标签页中打开链接】"
-          options:
-            - value: default
-              label: 默认
-            - value: current
-              label: 当前页
-            - value: new
-              label: 新标签
+
     - group: beauty
       label: 美化
       formSchema:
