@@ -33,7 +33,7 @@
   <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/theme.min.css?v={version}(version=${theme.spec.version})}">
     <style th:inline="text">
         #Joe .joe_container {
-            max-width: [[${theme.config.basic.content_max_width+'vw'}]] !important;
+            max-width: [[${theme.config.basic.content_max_width+'px'}]] !important;
         }
 
         @media (max-width: 1360px) {
@@ -50,7 +50,7 @@
     <link rel="stylesheet" th:href="@{/assets/lib/qmsg/qmsg.css}">
     <link rel="preload stylesheet" as="style" th:href="@{/assets/lib/animate/animate.min.css}">
     <th:block th:if="${htmlType == 'index'} and ${theme.config.carousel.enable_banner}">
-        <link rel="stylesheet" th:href="@{/assets/lib/swiper/swiper.min.css}">
+        <link rel="stylesheet" th:href="@{/assets/lib/swiper/swiper-bundle.min.css}">
     </th:block>
     <th:block th:if="${htmlType == 'post' or tmlType == 'journals' or tmlType == 'sheet'}">
         <link rel="preload stylesheet" as="style" th:href="@{/assets/lib/prism/prism.min.css}">
@@ -232,6 +232,44 @@
                 border-color: var(--fcolor);
                 box-shadow: 0px 0px 20px -5px rgb(158 158 158 / 20%);
             }
+        }
+
+
+    </style>
+    <style>
+        .nav_login {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 34px;
+            /*background-color: var(--theme);*/
+            /*margin-right: 10px;*/
+            margin-left: 15px;
+        }
+
+        .nav_login a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #f2f2f2;
+            color: #333;
+            text-decoration: none;
+            font-size: 24px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav_login .login_before:hover {
+            background-color: var(--theme);
+            color: #f2f2f2;
+        }
+        .nav_login img{
+            width: 30px;
+            height: 30px;
+            overflow: hidden;
+
         }
 
 
