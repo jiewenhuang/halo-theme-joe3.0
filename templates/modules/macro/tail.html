@@ -81,6 +81,10 @@
 <!-- 卜算子 -->
         <script th:src="@{/assets/lib/busuanzi/busuanzi.min.js}"></script>
     </th:block>
+    <th:block th:if="${theme.config.custom.show_loaded_time || theme.config.other.enable_console_theme}">
+        <!-- vconsole -->
+        <script th:src="@{/assets/lib/vconsole/vconsole.min.js}"></script>
+    </th:block>
 
 <!-- ===== 引入脚本 end =====-->
 
