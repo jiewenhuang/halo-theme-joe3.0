@@ -5,7 +5,7 @@
     <ul class="joe_bread__bread">
       <li class="item">
         <i class="jiewen joe-icon-shouye"></i>
-        <a th:href="${site.url}" class="link" title="首页">首页</a>
+        <a href="/" class="link" title="首页">首页</a>
       </li>
       <th:block th:if="${not #lists.isEmpty(post.categories)}">
         <th:block th:with="category = ${post.categories[0]}">
