@@ -678,6 +678,8 @@ const commonContext = {
 			const $mask = $(".joe_header__mask");
 			const $header_above = $(".joe_header__above");
 			const $search_out = $(".joe_header__searchout");
+			console.log($search_out)
+			console.log($search_out.hasClass("active"));
 			if ($search_out.hasClass("active")) {
 				$html.removeClass("disable-scroll");
 				// $mask.removeClass("active slideout");

@@ -277,8 +277,8 @@ document.addEventListener("DOMContentLoaded", () => {
 				if (!$comment || !$header) return;
 				this.$button.addEventListener("click", (e) => {
 					e.stopPropagation();
-					if (!document.querySelector(".halo-comment-widget").length) {
-						console.log(document.querySelector(".halo-comment-widget"))
+					if (!Boolean(document.querySelector('[id*="comment-"]'))) {
+
 						Qmsg.warning("评论功能不可用！");
 						return;
 					}
