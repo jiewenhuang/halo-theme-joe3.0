@@ -3,39 +3,38 @@ const homeContext = {
 	/* 初始化轮播图 */
 	initSwiper() {
 		if (
-			/*${theme.config.carousel.enable_banner}*/ 'true' &&
-      $(".joe_index__banner .swiper-container").length !== 0
+			ThemeConfig.enable_banner &&
+			$(".joe_index__banner .swiper").length !== 0
 		) {
-			const config = {
-				direction: /*[[${theme.config.carousel.banner_direction}]]*/ 'horizontal',
-				loop: /*[[${theme.config.carousel.enable_banner_loop}]]*/ 'true',
-				effect: /*[[${theme.config.carousel.banner_effect}]]*/ 'slide',
+
+			new Swiper('.swiper', {
+				direction: ThemeConfig.banner_direction, // 垂直切换选项
+				loop: ThemeConfig.enable_banner_loop, // 循环模式选项
+				effect: ThemeConfig.banner_effect,//Slide的切换效果
 				keyboard: false,
-				speed: /*[[${theme.config.carousel.banner_speed}]]*/ '500',
+				speed: ThemeConfig.banner_speed,
 				mousewheel: false,
-				grabCursor: /*[[${theme.config.carousel.enable_banner_handle}]]*/ 'true',
-				allowTouchMove: /*[[${theme.config.carousel.enable_banner_handle}]]*/ 'true',
-				autoplay: /*[[${theme.config.carousel.enable_banner_autoplay}]]*/ 'true'
+				grabCursor: ThemeConfig.enable_banner_handle,
+				allowTouchMove: ThemeConfig.enable_banner_handle,
+				autoplay: ThemeConfig.enable_banner_autoplay
 					? {
-						delay: /*[[${theme.config.carousel.banner_delay}]]*/ '3500',
+						delay: ThemeConfig.banner_delay,
 						disableOnInteraction: false,
 					}
 					: false,
 				observer: true,
-			};
-			/*[[${theme.config.carousel.enable_banner_handle}]]*/ 'true' &&
-			/*[[${theme.config.carousel.enable_banner_switch_button}]]*/ 'true'
-				? (config.navigation = {
-					nextEl: ".swiper-button-next",
-					prevEl: ".swiper-button-prev",
-				})
-				: null;
-			/*[[${theme.config.carousel.enable_banner_pagination}]]*/ 'true'
-				? (config.pagination = {
-					el: ".swiper-pagination",
-				})
-				: null;
-			new Swiper(".swiper-container", config);
+				// 如果需要分页器
+				pagination: {
+					el: '.swiper-pagination',
+				},
+
+				// 如果需要前进后退按钮
+				navigation: {
+					nextEl: '.swiper-button-next',
+					prevEl: '.swiper-button-prev',
+				},
+
+			});
 		}
 	},
 	// /* 获取文章封面 */
