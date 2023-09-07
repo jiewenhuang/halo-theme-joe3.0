@@ -86,7 +86,7 @@
 <th:block th:if="${theme.config.navbar.nav_login}">
         <div class="nav_login">
           <th:block th:if="${#authentication.name == 'anonymousUser'}">
-            <a class="login_before" href="/console" title="搜索"><i class="jiewen joe-icon-zhanghao" target="_blank"></i></a>
+            <a class="login_before" href="/console" title="登入"><i class="jiewen joe-icon-zhanghao" target="_blank"></i></a>
           </th:block>
           <th:block th:if="${#authentication.name != 'anonymousUser'}">
             <th:block th:with="contributor = ${contributorFinder.getContributor(#authentication.name)}">
