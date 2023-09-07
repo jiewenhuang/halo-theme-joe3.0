@@ -1458,12 +1458,13 @@ spec:
                   label: 最新评论
                 - value: "enable_tag_cloud"
                   label: 标签云
-        - $formkit: textarea
+        - $formkit: code
 #          if: "$get(template_aside).value === 'enable_notice'"
           name: site_notice
           label: 网站公告
           value: "这是你的公告"
-          help: "网站公告信息，将展示在页面右侧，尽量简洁明了，不填不展示该模块（需要先在 “侧边栏” 中开启公告模块）"
+          help: "网站公告信息，将展示在页面右侧，尽量简洁明了，不填不展示该模块（需要先在 “侧边栏” 中开启公告模块）,支持html代码"
+          language: html
         - $formkit: attachment
 #          if: "$get(template_aside).value === 'enable_qrcode'"
           name: qrcode_url
