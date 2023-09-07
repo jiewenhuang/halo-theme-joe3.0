@@ -59,7 +59,7 @@ spec:
               label: 否
         - $formkit: attachment
           name: background_dark_mode
-          label: 背景图（浅色模式）
+          label: 背景图（暗黑模式）
           help: "设置暗黑模式下的背景图（建议webp格式），为空则只显示默认背景色"
           value: ""
         - $formkit: number
