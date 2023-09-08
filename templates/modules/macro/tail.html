@@ -127,9 +127,9 @@
 
     </script>
     <th:block th:if="${htmlType == 'photos'}">
-<!--    <script type="text/javascript">-->
-<!--        document.querySelector('#sortable').sortablejs()-->
-<!--    </script>-->
+    <script type="text/javascript">
+        document.querySelector('#sortable').sortablejs()
+    </script>
     </th:block>
     <script type="text/javascript" th:if="${theme.config.home.enable_auto_ajax} and ${theme.config.home.enable_index_list_ajax}">
         const ob =  new IntersectionObserver(entries => {
