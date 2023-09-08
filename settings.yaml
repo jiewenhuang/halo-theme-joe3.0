@@ -59,7 +59,7 @@ spec:
               label: 否
         - $formkit: attachment
           name: background_dark_mode
-          label: 背景图（浅色模式）
+          label: 背景图（暗黑模式）
           help: "设置暗黑模式下的背景图（建议webp格式），为空则只显示默认背景色"
           value: ""
         - $formkit: number
@@ -704,6 +704,18 @@ spec:
           label: 图片或者api地址
           value: "http://imgapi.xl0408.top/index.php"
           help: "填写图片地址或者随机图api地址"
+        - $formkit: select
+          if: "$get(enable_big_banner).value === true"
+          name: enable_big_banner_hitokoto
+          id: enable_big_banner_hitokoto
+          label: 是否启用一言
+          value: true
+          help: 更多设置自行修改（/templates/modules/macro/tail.html）s
+          options:
+            - value: true
+              label: 开启
+            - value: false
+              label: 关闭
         - $formkit: select
           if: "$get(enable_big_banner).value === true"
           name: enable_big_banner_video
@@ -1458,12 +1470,13 @@ spec:
                   label: 最新评论
                 - value: "enable_tag_cloud"
                   label: 标签云
-        - $formkit: textarea
+        - $formkit: code
 #          if: "$get(template_aside).value === 'enable_notice'"
           name: site_notice
           label: 网站公告
           value: "这是你的公告"
-          help: "网站公告信息，将展示在页面右侧，尽量简洁明了，不填不展示该模块（需要先在 “侧边栏” 中开启公告模块）"
+          help: "网站公告信息，将展示在页面右侧，尽量简洁明了，不填不展示该模块（需要先在 “侧边栏” 中开启公告模块）,支持html代码"
+          language: html
         - $formkit: attachment
 #          if: "$get(template_aside).value === 'enable_qrcode'"
           name: qrcode_url

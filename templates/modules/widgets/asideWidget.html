@@ -11,7 +11,7 @@
             <span class="text">公告信息</span>
         </div>
         <div class="joe_aside__item-contain">
-            <div class="notice_content">[[${theme.config.aside.site_notice}]]</div>
+            <div class="notice_content" th:utext="${theme.config.aside.site_notice}"></div>
         </div>
     </section>
 </th:block>
@@ -73,7 +73,34 @@
                     <div class="reply">
                         <!--        <th:block th:with="post = ${postFinder.getByName(postMate.name)}">-->
 
-                        <p class="link aside-reply-content">[[${result.spec.content}]]</p>
+                        <th:block th:if="${result.spec.subjectRef.kind == 'SinglePage'}  and ${result.spec.subjectRef.name != 'links'}">
+                            <th:block th:with="singlePage = ${singlePageFinder.getByName(result.spec.subjectRef.name)}">
+                        <a class="link aside-reply-content"
+                           th:href="@{${singlePage.status.permalink}}">
+                            <p>[[${result.spec.content}]]</p>
+                        </a>
+                            </th:block>
+                        </th:block>
+                        <th:block th:if="${result.spec.subjectRef.kind == 'SinglePage'}  and ${result.spec.subjectRef.name == 'links'}">
+                                <a class="link aside-reply-content"
+                                   th:href="@{/links}">
+                                    <p>[[${result.spec.content}]]</p>
+                                </a>
+                        </th:block>
+                        <th:block th:if="${result.spec.subjectRef.kind == 'Post'}">
+                            <th:block th:with="post = ${postFinder.getByName(result.spec.subjectRef.name)}">
+                                <a class="link aside-reply-content"
+                                   th:href="@{${post.status.permalink}}">
+                                    <p>[[${result.spec.content}]]</p>
+                                </a>
+                            </th:block>
+                        </th:block>
+                        <th:block th:if="${result.spec.subjectRef.kind == 'Moment'}">
+                            <a class="link aside-reply-content"
+                               th:href="@{/moments}">
+                                <p>[[${result.spec.content}]]</p>
+                            </a>
+                        </th:block>
                         <!--        </th:block>-->
                     </div>
                 </li>

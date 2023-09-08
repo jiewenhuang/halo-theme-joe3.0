@@ -20,7 +20,8 @@
                         <h3>友链列表<span class="totals" >
 
             </span></h3>
-                        <div class="links-group" th:each="group : ${linkFinder.groupBy()}">
+                        <div class="links-group" th:each="group : ${linkFinder.groupBy()}"
+                        th:if="${group.spec.displayName != ''}">
                             <h5>[[${group.spec.displayName}]]</h5>
                             <ul class="joe_detail__friends evan-friends">
                                 <li class="joe_detail__friends-item" th:each="link : ${group.links}">
