@@ -706,6 +706,18 @@ spec:
           help: "填写图片地址或者随机图api地址"
         - $formkit: select
           if: "$get(enable_big_banner).value === true"
+          name: enable_big_banner_hitokoto
+          id: enable_big_banner_hitokoto
+          label: 是否启用一言
+          value: true
+          help: 更多设置自行修改（/templates/modules/macro/tail.html）s
+          options:
+            - value: true
+              label: 开启
+            - value: false
+              label: 关闭
+        - $formkit: select
+          if: "$get(enable_big_banner).value === true"
           name: enable_big_banner_video
           id: enable_big_banner_video
           label: 是否启用视频背景
