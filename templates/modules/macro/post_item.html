@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <th:block th:fragment="post_item">
     <li th:class="'joe_list__item default ' + ${htmlType == 'index' ? 'animated wow' : ''} + ${htmlType == 'index' ? ' data-wow-delay=&quot;0.' + iteration.index + 's&quot;' : ''}" th:style="'animation-delay: '+${'0.'+iteration.index}+'s;'">    <th:block th:if="${theme.config.home.enable_post_thumbnail}">
-    <a th:href="${post.status.permalink}" class="thumbnail" title="${post.title!}" target="_blank" rel="noopener noreferrer">
+    <a th:href="${post.status.permalink}" class="thumbnail" th:title="${post.spec.title}" target="_blank" rel="noopener noreferrer">
         <th:block th:with="postCover = ${#lists.isEmpty(theme.config.home.post_thumbnail)? theme.config.basic.random_img_api_url+'?pageid='+post.metadata.name : theme.config.home.post_thumbnail}">
         <img width="100%" height="100%" class="lazyload" th:data-src="${post.spec.cover ?: postCover}" th:src="${theme.config.home.lazyload_thumbnail}"  th:alt="${post.spec.title}">
         </th:block>
