@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				this.options = {
 					id: this.getAttribute("id"),
 					color: this.getAttribute("color") || "#1989fa",
-					autoplay: this.getAttribute("autoplay") ? true : false,
+					autoplay: !!this.getAttribute("autoplay"),
 				};
 				this.render();
 			}
