@@ -75,6 +75,10 @@
     </th:block>
     <link rel="preload stylesheet" as="style" th:href="@{/assets/css/min/responsive.min.css?v={version}(version=${theme.spec.version})}">
     <link rel="stylesheet" th:href="@{/assets/lib/fancybox/jquery.fancybox.min.css}">
+    <link
+            rel="stylesheet"
+            href="https://unpkg.com/@waline/client@v2/dist/waline.css"
+    />
     <th:block th:if="${ttheme.config.other.enable_clean_mode != true} and ${theme.config.theme.cursor_skin != 'off'}">
         <link rel="stylesheet" th:href="@{/assets/cursor/style/min}+'/'+${theme.config.theme.cursor_skin}+'.min.css'">
     </th:block>
@@ -83,6 +87,7 @@
             th:utext="${theme.config.custom.custom_css}">
 
     </style>
+
     <style>
         .sjs-default{
             position: relative;
@@ -273,6 +278,7 @@
             overflow: hidden;
 
         }
+
 
 
     </style>

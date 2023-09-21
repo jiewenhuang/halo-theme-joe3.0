@@ -284,9 +284,14 @@ const homeContext = {
 			return
 		}
 		// 在页面加载完成后执行
+		const $headerHeight =
+			ThemeConfig.enable_fixed_header || Joe.isMobile
+				? $(".joe_header").height()
+				: 0;
 		$(document).ready(() => {
 			const $domLoadContainer = $(".joe_load_container");
 			$domLoadContainer.on('click','.joe_load', async function () {
+				const lastItemTop = document.querySelector(".joe_list__item:last-child").offsetTop;
 				const $domLoad = $(".joe_load");
 				this.domNext = $domLoad.attr('data-next');
 				// console.log(this.domNext)
@@ -316,8 +321,10 @@ const homeContext = {
 							$domLoadContainer.remove();
 						}
 						// 向下滚动一段距离
-						const lastItemTop = postListElement.querySelector(".joe_list__item:last-child").offsetTop;
-						const scrollTop = lastItemTop - window.innerHeight; // Adjust the value as needed
+						// const lastItemTop = postListElement.querySelector(".joe_list__item:last-child").offsetTop;
+						// console.log(postListElement.querySelector(".joe_list__item:last-child"))
+						// console.log($headerHeight)
+						const scrollTop = lastItemTop - $headerHeight; // Adjust the value as needed
 						window.scrollTo({
 							top: scrollTop,
 							behavior: 'smooth'

@@ -21,6 +21,23 @@ spec:
               label: 浅色模式
             - value: dark
               label: 暗黑模式
+        - $formkit: radio
+          name: comment_option
+          id: comment_option
+          value: default
+          label: 开启浅色模式背景图
+          help: "需要配置好浅色模式背景图后才有效"
+          options:
+            - value: default
+              label: 默认
+            - value: waline
+              label: Waline
+        - $formkit: text
+          if: "$get(comment_option).value === 'waline'"
+          name: waline_serverURL
+          label: Waline 服务端地址
+          value: ""
+          help: "Waline 服务端地址，如 https://waline-server.herokuapp.com 不要加结尾反斜杠"
 
         - $formkit: text
           name: mode_color_light
