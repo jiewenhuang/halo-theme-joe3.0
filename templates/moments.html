@@ -77,7 +77,7 @@
                   </th:block>
                   </th:block>
                   <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline_serverURL) !=''}">
-                    <span class="joe_journal_operate_item journal_comment_expander" id="waline-journal_comment_expander" style="display: none"><em class="journal_comment_expander_txt">查看评论</em><i class="joe-font joe-icon-arrow-downb"></i></span>
+                    <span class="joe_journal_operate_item journal_comment_expander" th:id="'waline-journal_comment_expander-'+${moment.metadata.name}" style="display: none"><em class="journal_comment_expander_txt">查看评论</em><i class="joe-font joe-icon-arrow-downb"></i></span>
                   </th:block>
 
                   </th:block>
@@ -109,11 +109,12 @@
                   requiredMeta:['nick', 'mail'],
 
                 });
-                const url = [[${theme.config.basic.waline_serverURL+'/api/comment?type=count'}]];
+                const url = [[${theme.config.basic.waline_serverURL+'/api/comment?type=count&url=/moments/'+moment.metadata.name}]];
                 fetch(url).then(async (response) => {
                   const data = await response.json();
+                  const comment_expander = 'waline-journal_comment_expander-'+/*[[${moment.metadata.name}]]*/'';
                   if (data.data>0){
-                    document.getElementById('waline-journal_comment_expander').style.display = 'block';
+                    document.getElementById(comment_expander).style.display = 'block';
                   }
                 });
               </script>
