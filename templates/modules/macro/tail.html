@@ -30,7 +30,7 @@
         <script th:src="@{/assets/lib/meting/meting.min.js}"></script>
     </th:block>
     </th:block>
-    <script th:src="@{/assets/js/custom.js}"></script>
+    <script th:src="@{/assets/js/min/custom.min.js?v={version}(version=${theme.spec.version})}"></script>
     <th:block th:if="${htmlType == 'post'} or ${htmlType == 'journals'} or ${htmlType == 'sheet'}">
         <script th:src="@{/assets/lib/clipboard/clipboard.min.js}"></script>
     </th:block>
@@ -73,6 +73,8 @@
     <th:block th:if="${theme.config.beauty.enable_big_banner}">
     <script th:src="@{/assets/js/min/beauty.min.js}"></script>
     </th:block>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+
     <!-- ===== 引入页面级js end ===== -->
 
 <!-- ===== 引入脚本 start ===== -->
@@ -105,7 +107,7 @@
         });
     </script>
 <!--    大图配置-->
-    <script th:inline="javascript">
+    <script th:inline="javascript" th:if="${theme.config.beauty.enable_big_banner}">
         // 以下配置参数均为默认值
         new EvanBigBanner({
             followMode: false,                       // 跟随模式
