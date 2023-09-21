@@ -5,7 +5,7 @@
   <a href="https://halo.run" target="_blank">
     <img src="https://img.shields.io/badge/dynamic/yaml?label=Halo&query=%24.spec.require&url=https://raw.githubusercontent.com/jiewenhuang/halo-theme-joe3.0/main/theme.yaml&color=113,195,71" alt="Halo"/>
   </a>
-  <a href="https://github.com/jiewenhuang/halo-theme-joe3.0" target="_blank">
+  <a href="https://github.com/jiewenhuang/halo-theme-joe3.0/releases" target="_blank">
     <img src="https://img.shields.io/github/v/release/jiewenhuang/halo-theme-joe3.0" alt="Release"/>
   </a>
   <a href="https://halo.run" target="_blank">
@@ -54,7 +54,7 @@
 ## 预览
 WIP
 ## TODO
-- [ ] 首页加载
+- [ ] 优化图库
 - [ ] ......
 
 
