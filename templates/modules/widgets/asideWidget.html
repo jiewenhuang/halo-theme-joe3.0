@@ -60,8 +60,10 @@
             <span class="text">最新回复</span>
         </div>
 
-        <ul class="joe_aside__item-contain">
-            <th:block th:each="result : ${commentFinder.list(null,1,theme.config.aside.show_newreply_num)}">
+        <ul class="joe_aside__item-contain"
+            th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline_serverURL) ==''}">
+            <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline_serverURL) ==''}"
+                    th:each="result : ${commentFinder.list(null,1,theme.config.aside.show_newreply_num)}">
                 <li class="item">
                     <div class="user">
                         <img width="35" height="35" class="avatar lazyload" th:data-src="${result.owner.avatar ?: '/themes/theme-Joe3/assets/img/peeps-avatar.png'} " th:src="${theme.config.blogger.lazyload_avatar}"  alt="头像">
@@ -104,8 +106,59 @@
                         <!--        </th:block>-->
                     </div>
                 </li>
+
             </th:block>
         </ul>
+        <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline_serverURL) !=''}">
+        <ul class="joe_aside__item-contain" id="waline-recent">
+        </ul>
+            <style>
+                .reply img{
+                    display: inline-block;
+                    height: 24px;
+                    max-width: 100%;}
+            </style>
+            <script type="module" th:inline="javascript">
+                import { RecentComments } from 'https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+
+                RecentComments({
+                    serverURL: 'https://waline-comment.jiewen.run',
+                    count: /*[[${theme.config.aside.show_newreply_num}]]*/5,
+                }).then(({ comments }) => {
+                    document.getElementById('waline-recent').innerHTML = comments.map(
+                        (comment) =>{
+                            const timestamp = new Date(comment.time);
+
+                            // 获取年、月、日、时、分、秒
+                            const year = timestamp.getFullYear();
+                            const month = timestamp.getMonth() + 1; // 月份是从0开始的，所以要加1
+                            const day = timestamp.getDate();
+                            const hours = timestamp.getHours();
+                            const minutes = timestamp.getMinutes();
+                            const seconds = timestamp.getSeconds();
+
+                            // 构建日期时间字符串
+                            const commentTime = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day} ${hours < 10 ? '0' : ''}${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+                            return `<li class="item">
+                    <div class="user">
+                        <img width="35" height="35" class="avatar lazyload" data-src="${comment.avatar}" src="${ThemeConfig.lazyload_avatar}"  alt="头像">
+                        <div class="info">
+                            <div class="author">${comment.nick}</div>
+                            <span class="date">${commentTime}</span>
+                        </div>
+                    </div>
+                    <div class="reply"><a class="link aside-reply-content"
+                           href="${comment.url}">
+                            <p>${comment.comment}</p>
+                        </a></div>`;
+
+                        }).join('');
+
+                });
+            </script>
+        </th:block>
+
     </section>
 </th:block>
 </th:block>

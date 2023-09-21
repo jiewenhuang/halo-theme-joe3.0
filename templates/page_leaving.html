@@ -47,6 +47,8 @@
       <article th:class="'joe_detail__article animated fadeIn '+${#annotations.getOrDefault(singlePage, 'img_align', 'center')+'-img'}"
                th:classappend="|${#annotations.getOrDefault(singlePage, 'enable_read_limit', 'false') == 'true' ?'limited': ''} ${(#annotations.getOrDefault(singlePage, 'enable_copy', 'true') == 'false' or theme.config.post.enable_copy != true) ? 'uncopy' : ''} ${theme.config.post.enable_indent ? 'indent':''} ${(theme.config.code_block.enable_code_line_number == true and theme.config.code_block.enable_code_newline !=true) ? 'line-numbers':''} ${theme.config.code_block.enable_single_code_select == true ? 'single_code_select': ''}|">
         <div class="joe_leaving tpl">
+          <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline_serverURL) ==''}">
+
           <ul class="joe_leaving-list">
             <li th:each="result : ${commentFinder.list(null,1,20)}" class="item">
               <div class="user">
@@ -61,6 +63,68 @@
             </li>
 
           </ul>
+          </th:block>
+          <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline_serverURL) !=''}">
+            <ul class="joe_leaving-list" id="waline-leaving">
+            </ul>
+            <style>
+              .joe_leaving-list img{
+                display: inline-block;
+                height: 24px;
+                max-width: 100%;}
+            </style>
+            <script type="module" th:inline="javascript">
+              import { RecentComments } from 'https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+              const url = [[${theme.config.basic.waline_serverURL+'/api/comment?type=count'}]];
+              let countNum = 0;
+              fetch(url).then(async (response) => {
+                const data = await response.json();
+                document.querySelector('.waline-comment .num').innerHTML = data.data;
+                document.querySelector('.waline-comment').title = '累计评论数:'+data.data;
+                countNum = data.data;
+              });
+
+              RecentComments({
+                serverURL: 'https://waline-comment.jiewen.run',
+                count: countNum,
+              }).then(({ comments }) => {
+                document.getElementById('waline-leaving').innerHTML = comments.map(
+                        (comment) =>{
+                          const timestamp = new Date(comment.time);
+
+                          // 获取年、月、日、时、分、秒
+                          const year = timestamp.getFullYear();
+                          const month = timestamp.getMonth() + 1; // 月份是从0开始的，所以要加1
+                          const day = timestamp.getDate();
+                          const hours = timestamp.getHours();
+                          const minutes = timestamp.getMinutes();
+                          const seconds = timestamp.getSeconds();
+
+                          // 构建日期时间字符串
+                          const commentTime = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day} ${hours < 10 ? '0' : ''}${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+                          return `<li class="item">
+              <div class="user">
+                <img class="avatar lazyload" src="${ThemeConfig.lazyload_avatar}" alt="用户头像"
+                     data-src="${comment.avatar}" />
+                <div class="nickname" >${comment.nick}</div>
+                <div class="date" th:text="${commentTime}"></div>
+              </div>
+              <div class="wrapper">
+                <div class="content leaving-content" >${comment.comment}</div>
+              </div>
+            </li>`;
+
+                        }).join('');
+                const leaving =document.createElement('script')
+                leaving.src = /*[[@{/assets/js/min/leaving.min.js}]]*/''
+                leaving.type= 'module'
+                document.body.appendChild(leaving)
+
+              });
+            </script>
+
+          </th:block>
 
           <div class="joe_leaving-none tpl">暂无留言，期待第一个脚印。</div>
         </div>

@@ -73,12 +73,33 @@
             <div class="box_title">
             <h2 >评论区</h2>
             </div>
+            <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline_serverURL) ==''}">
+
             <halo:comment
                     group="content.halo.run"
                     kind="SinglePage"
                     name="links"
                     colorScheme="document.documentElement.getAttribute('data-mode')"
             />
+            </th:block>
+            <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline_serverURL) !=''}">
+              <div id="waline"></div>
+              <style>
+                #waline .wl-count{color:var(--routine);}
+              </style>
+
+              <script type="module" th:inline="javascript">
+                import { init } from 'https://unpkg.com/@waline/client@v2/dist/waline.mjs';
+
+                init({
+                  el: '#waline',
+                  dark: 'html[data-mode="dark"]',
+                  serverURL: /*[[${theme.config.basic.waline_serverURL}]]*/'',
+                  requiredMeta:['nick', 'mail'],
+
+                });
+              </script>
+            </th:block>
           </div>
         </div>
       </div>

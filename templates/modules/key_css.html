@@ -5,6 +5,7 @@
     <style th:inline="text">
         [# th:if="${theme.config.other.rip_mode}"]
         html {
+
             -webkit-filter: grayscale(100%);
             -moz-filter: grayscale(100%);
             -ms-filter: grayscale(100%);
@@ -27,6 +28,11 @@
 
         }
         html body {
+            --waline-avatar-size: 2.25rem;
+            --waline-m-avatar-size: calc(var(--waline-avatar-size) * 9 / 13);
+            --waline-theme-color:[[${theme.config.basic.mode_color_light}]];
+            --waline-active-color: [[${theme.config.basic.mode_color_light}]];
+
             --theme: [[${theme.config.basic.mode_color_light}]];
             --wave-color: [[${theme.config.beauty.light_color}?:'#fff']];
             --scroll-bar: [[${theme.config.theme.scrollbar_color ?: '#c0c4cc'}]];
@@ -36,6 +42,9 @@
 
         }
         html[data-mode='dark'] body {
+
+            --waline-theme-color:[[${theme.config.basic.mode_color_dark}?:'#9999ff']];
+            --waline-active-color: [[${theme.config.basic.mode_color_dark}?:'#9999ff']];
             --theme: [[${theme.config.basic.mode_color_dark}?:'#9999ff']];
             --wave-color: [[${theme.config.beauty.dark_color}?:'#fff']];
             --scroll-bar: [[${theme.config.theme.scrollbar_color ?: '#666'}]];
@@ -78,5 +87,6 @@
 
 
     </style>
+
 </th:block>
 </html>

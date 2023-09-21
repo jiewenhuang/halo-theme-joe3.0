@@ -22,7 +22,24 @@
         <ul class="items">
             <li>[[${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}]]</li>
             <li><i class="joe-font joe-icon-eye"></i>[[${post.stats.visit}]]</li>
+            <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline_serverURL) ==''}">
             <li><i class="joe-font joe-icon-message"></i>[[${post.stats.comment}]]</li>
+            </th:block>
+            <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline_serverURL) !=''}">
+                <li><i class="joe-font joe-icon-message"></i><span class="waline-comment-count" th:data-path="${post.status.permalink}">0</span></li>
+                <script type="module" th:inline="javascript">
+                    import { commentCount } from 'https://unpkg.com/@waline/client@v2/dist/comment.mjs';
+
+                    commentCount({
+                        serverURL: /*[[${theme.config.basic.waline_serverURL}]]*/'',
+                        path:/*[[${post.status.permalink}]]*/'' ,
+
+                        // 可选的，用于自定选择器，默认为 `'.waline-pageview-count'`
+                        // selector: '.waline-pageview-count',
+                    });
+                </script>
+
+            </th:block>
             <li><i class="joe-font joe-icon-dianzan"></i>[[${post.stats.upvote}]]</li>
         </ul>
         <th:block th:if="${not #lists.isEmpty(post.categories)}">
