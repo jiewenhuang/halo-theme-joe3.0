@@ -85,7 +85,7 @@
               });
 
               RecentComments({
-                serverURL: 'https://waline-comment.jiewen.run',
+                serverURL: /*[[${theme.config.basic.waline_serverURL}]]*/'',
                 count: countNum,
               }).then(({ comments }) => {
                 document.getElementById('waline-leaving').innerHTML = comments.map(

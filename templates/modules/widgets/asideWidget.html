@@ -122,7 +122,7 @@
                 import { RecentComments } from 'https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
 
                 RecentComments({
-                    serverURL: 'https://waline-comment.jiewen.run',
+                    serverURL: /*[[${theme.config.basic.waline_serverURL}]]*/'',
                     count: /*[[${theme.config.aside.show_newreply_num}]]*/5,
                 }).then(({ comments }) => {
                     document.getElementById('waline-recent').innerHTML = comments.map(
