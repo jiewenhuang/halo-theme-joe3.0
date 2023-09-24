@@ -52,7 +52,7 @@
     <th:block th:if="${htmlType == 'index'} and ${theme.config.carousel.enable_banner}">
         <link rel="stylesheet" th:href="@{/assets/lib/swiper/swiper-bundle.min.css}">
     </th:block>
-    <th:block th:if="${htmlType == 'post' or tmlType == 'journals' or tmlType == 'sheet'}">
+    <th:block th:if="${htmlType == 'post' or htmlType == 'journals' or htmlType == 'sheet'}">
         <link rel="preload stylesheet" as="style" th:href="@{/assets/lib/prism/prism.min.css}">
         <link rel="preload stylesheet" as="style" th:href="@{/assets/lib/prism/themes}+'/prism-'+${theme.config.code_block.code_theme}+'.css'">
     </th:block>
