@@ -1,77 +1,77 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<th:block th:fragment="tail">
+<th:block th:fragment="tail" th:with="source_link=${(#strings.trim(theme.config.basic.source_link) !='' && theme.config.basic.enable_source_link)? theme.config.basic.source_link : '/themes/theme-Joe3'}">
 <!--    ===== 引入脚本 start ===== -->
 <!--    <th:block th:if="${htmlType == 'index' && theme.config.home.enable_index_list_effect == true} or ${htmlType == 'journals' && theme.config.journals.enable_journal_effect == true} or ${htmlType == 'photos' && theme.config.photos.enable_photos_effect == true}">-->
-        <script th:src="@{/assets/lib/wowjs/wow.min.js}"></script>
+        <script th:src="${source_link+'/assets/lib/wowjs/wow.min.js'}"></script>
 <!--    </th:block>-->
-    <script th:src="@{/assets/lib/lazysizes/lazysizes.min.js}"></script>
-    <script th:src="@{/assets/lib/qmsg/qmsg.js}"></script>
+    <script th:src="${source_link+'/assets/lib/lazysizes/lazysizes.min.js'}"></script>
+    <script th:src="${source_link+'/assets/lib/qmsg/qmsg.js'}"></script>
     <th:block th:if="${theme.config.aside.show_newreply == true} or ${htmlType == 'sheet'}">
-        <script th:src="@{/assets/lib/j-marked/marked.min.js}"></script>
+        <script th:src="${source_link+'/assets/lib/j-marked/marked.min.js'}"></script>
     </th:block>
-    <script th:src="@{/assets/js/min/utils.min.js}"></script>
+    <script th:src="${source_link+'/assets/js/min/utils.min.js'}"></script>
 
     <th:block th:if="${htmlType == 'index' && theme.config.carousel.enable_banner}">
-        <script th:src="@{/assets/lib/swiper/swiper-bundle.min.js}"></script>
+        <script th:src="${source_link+'/assets/lib/swiper/swiper-bundle.min.js'}"></script>
     </th:block>
     <th:block th:if="${htmlType == 'post'} and ${theme.config.post.enable_toc == true}">
-        <script th:src="@{/assets/lib/tocbot/tocbot.min.js}"></script>
+        <script th:src="${source_link+'/assets/lib/tocbot/tocbot.min.js'}"></script>
     </th:block>
     <th:block th:if="${theme.config.other.enable_clean_mode != false && (htmlType =='post' || htmlType =='journals' || htmlType =='sheet')}">
-        <script th:src="@{/assets/lib/vue@2.6.10/vue.min.js}"></script>
+        <script th:src="${source_link+'/assets/lib/vue@2.6.10/vue.min.js'}"></script>
 
     </th:block>
-    <script th:src="@{/assets/lib/fancybox/jquery.fancybox.min.js}"></script>
+    <script th:src="${source_link+'/assets/lib/fancybox/jquery.fancybox.min.js'}"></script>
     <th:block th:each="aside : ${theme.config.aside.enable_outpost_aside}">
     <th:block th:if="(${aside.template_aside == 'enable_music_player'} and ${theme.config.aside.music_id != null && theme.config.aside.music_id != ''}) or ${htmlType =='post'}">
-        <link rel="stylesheet" th:href="@{/assets/lib/APlayer/APlayer.min.css}">
-        <script th:src="@{/assets/lib/APlayer/APlayer.min.js}"></script>
-        <script th:src="@{/assets/lib/meting/meting.min.js}"></script>
+        <link rel="stylesheet" th:href="${source_link+'/assets/lib/APlayer/APlayer.min.css'}">
+        <script th:src="${source_link+'/assets/lib/APlayer/APlayer.min.js'}"></script>
+        <script th:src="${source_link+'/assets/lib/meting/meting.min.js'}"></script>
     </th:block>
     </th:block>
-    <script th:src="@{/assets/js/min/custom.min.js?v={version}(version=${theme.spec.version})}"></script>
+    <script th:src="${source_link+'/assets/js/min/custom.min.js?v='+theme.spec.version}"></script>
     <th:block th:if="${htmlType == 'post'} or ${htmlType == 'journals'} or ${htmlType == 'sheet'}">
-        <script th:src="@{/assets/lib/clipboard/clipboard.min.js}"></script>
+        <script th:src="${source_link+'/assets/lib/clipboard/clipboard.min.js'}"></script>
     </th:block>
     <th:block th:if="${theme.config.custom.favicon != null && theme.config.custom.favicon != ''}">
-        <script th:src="@{/assets/lib/favico/favico.min.js}"></script>
+        <script th:src="${source_link+'/assets/lib/favico/favico.min.js'}"></script>
     </th:block>
     <th:block th:if="${htmlType == 'post'}">
-        <script th:src="@{/assets/lib/jquery-qrcode/jquery.qrcode.min.js}"></script>
+        <script th:src="${source_link+'/assets/lib/jquery-qrcode/jquery.qrcode.min.js'}"></script>
     </th:block>
 <!--相册-->
     <th:block th:if="${htmlType == 'photos'}">
-        <script th:src="@{/assets/lib/justifiedGallery/justifiedGallery.min.js}"></script>
+        <script th:src="${source_link+'/assets/lib/justifiedGallery/justifiedGallery.min.js'}"></script>
 
     </th:block>
 
 <!--===== 引入页面级js start =====-->
-    <script th:src="@{/assets/js/min/common.min.js?v={version}(version=${theme.spec.version})}"></script>
+    <script th:src="${source_link+'/assets/js/min/common.min.js?v='+theme.spec.version}"></script>
     <th:block th:if="${htmlType == 'post'} or ${htmlType == 'journals'} or ${htmlType == 'sheet'}">
-        <script th:src="@{/assets/lib/prism/prism.min.js}"></script>
+        <script th:src="${source_link+'/assets/lib/prism/prism.min.js'}"></script>
     </th:block>
     <th:block th:if="${htmlType == 'index'}">
-        <script th:src="@{/assets/js/min/index.min.js?v={version}(version=${theme.spec.version})}"></script>
+        <script th:src="${source_link+'/assets/js/min/index.min.js?v='+theme.spec.version}"></script>
     </th:block>
     <th:block th:if="${htmlType == 'archives'}">
-        <script th:src="@{/assets/js/min/archives.min.js?v={version}(version=${theme.spec.version})}"></script>
+        <script th:src="${source_link+'/assets/js/min/archives.min.js?v='+theme.spec.version}"></script>
     </th:block>
     <th:block th:if="${htmlType == 'post'}">
-        <script th:src="@{/assets/js/min/post.min.js?v={version}(version=${theme.spec.version})}"></script>
+        <script th:src="${source_link+'/assets/js/min/post.min.js?v='+theme.spec.version}"></script>
     </th:block>
     <th:block th:if="${htmlType == 'journals'}">
-        <script th:src="@{/assets/js/min/journals.min.js?v={version}(version=${theme.spec.version})}"></script>
+        <script th:src="${source_link+'/assets/js/min/journals.min.js?v='+theme.spec.version}"></script>
     </th:block>
     <th:block th:if="${htmlType == 'photos'}">
-        <script th:src="@{/assets/js/min/photos.min.js?v={version}(version=${theme.spec.version})}"></script>
+        <script th:src="${source_link+'/assets/js/min/photos.min.js?v='+theme.spec.version}"></script>
     </th:block>
     <th:block th:if="${htmlType == 'sheet'}">
-        <script th:src="@{/assets/lib/draggabilly/draggabilly.min.js}"></script>
-        <script th:src="@{/assets/js/min/leaving.min.js}"></script>
+        <script th:src="${source_link+'/assets/lib/draggabilly/draggabilly.min.js'}"></script>
+        <script th:src="${source_link+'/assets/js/min/leaving.min.js'}"></script>
     </th:block>
     <th:block th:if="${theme.config.beauty.enable_big_banner}">
-    <script th:src="@{/assets/js/min/beauty.min.js}"></script>
+    <script th:src="${source_link+'/assets/js/min/beauty.min.js'}"></script>
     </th:block>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 
@@ -81,7 +81,7 @@
 
     <th:block th:if="${theme.config.footer.enable_busuanzi}">
 <!-- 卜算子 -->
-        <script th:src="@{/assets/lib/busuanzi/busuanzi.min.js}"></script>
+        <script th:src="${source_link+'/assets/lib/busuanzi/busuanzi.min.js'}"></script>
     </th:block>
 
 <!-- ===== 引入脚本 end =====-->
@@ -97,7 +97,7 @@
     </th:block>
     <th:block th:if="${theme.config.other.enable_debug}">
     <!-- vconsole -->
-    <script th:src="@{/assets/lib/vconsole/vconsole.min.js}"></script>
+    <script th:src="${source_link+'/assets/lib/vconsole/vconsole.min.js'}"></script>
     </th:block>
 <!--搜索点击-->
     <script>

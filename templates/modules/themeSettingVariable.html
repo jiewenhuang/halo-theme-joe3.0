@@ -79,9 +79,9 @@
        photos_layout : 'waterfall',
        blog_url : /*[[${#strings.substring(site.url, #strings.length(site.url) - 1)== '/'}? ${#strings.substring(site.url,0,#strings.length(site.url) - 1)}:${site.url}]]*/ '',
        blog_title : /*[[${site.title}]]*/ '',
-       BASE_RES_URL : '/themes/theme-Joe3',
+       BASE_RES_URL :  /*[[${(#strings.trim(theme.config.basic.source_link) !='' && theme.config.basic.enable_source_link)? theme.config.basic.source_link : '/themes/theme-Joe3'}]]*/'',
        BASE_URL : 'https://bbchin.com',
-       
+
       
     }
     //转数字
