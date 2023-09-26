@@ -277,7 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				if (!$comment || !$header) return;
 				this.$button.addEventListener("click", (e) => {
 					e.stopPropagation();
-					if (!Boolean(document.querySelector('[id*="comment-"]'))) {
+					if (!Boolean(document.querySelector('[id*="comment-"]')) &&!Boolean(document.querySelector("#waline"))) {
 
 						Qmsg.warning("评论功能不可用！");
 						return;
@@ -621,7 +621,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					src: this.getAttribute("src") || "",
 					player:
             this.getAttribute("player") ||
-            `/themes/theme-Joe3/assets/lib/dplayer/web/dplayer.html?url=`,
+            `${ThemeConfig.BASE_RES_URL}/assets/lib/dplayer/web/dplayer.html?url=`,
 					width: this.getAttribute("width") || "100%",
 					height: this.getAttribute("height") || "500px",
 				};

@@ -314,7 +314,7 @@ const postContext = {
 			const $header = document.querySelector(".joe_header");
 			if (!$comment || !$header) return;
 			e.stopPropagation();
-			if (!Boolean(document.querySelector('[id*="comment-"]'))) {
+			if (!Boolean(document.querySelector('[id*="comment-"]'))&& !Boolean(document.querySelector("#waline"))) {
 				Qmsg.warning("评论功能不可用！");
 				return;
 			}
