@@ -235,6 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					github: "Github仓库",
 					gitee: "Gitee仓库",
 					lz: "蓝奏云网盘",
+					ad: "阿里云盘",
 				};
 				this.innerHTML = `
 					<span class="joe_cloud">
@@ -277,7 +278,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				if (!$comment || !$header) return;
 				this.$button.addEventListener("click", (e) => {
 					e.stopPropagation();
-					if (!Boolean(document.querySelector('[id*="comment-"]'))) {
+					if (!Boolean(document.querySelector('[id*="comment-"]')) &&!Boolean(document.querySelector("#waline"))) {
 
 						Qmsg.warning("评论功能不可用！");
 						return;
@@ -612,6 +613,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	);
 
+
 	customElements.define(
 		"joe-dplayer",
 		class JoeDplayer extends HTMLElement {
@@ -621,7 +623,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					src: this.getAttribute("src") || "",
 					player:
             this.getAttribute("player") ||
-            `/themes/theme-Joe3/assets/lib/dplayer/web/dplayer.html?url=`,
+            `${ThemeConfig.BASE_RES_URL}/assets/lib/dplayer/web/${ThemeConfig.BASE_RES_URL==='/themes/theme-Joe3'?'dplayer':'dplayer-source'}.html?url=`,
 					width: this.getAttribute("width") || "100%",
 					height: this.getAttribute("height") || "500px",
 				};

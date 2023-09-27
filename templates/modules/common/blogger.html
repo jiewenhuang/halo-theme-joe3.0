@@ -80,14 +80,7 @@
                 <span class="num">0</span>
                 <span>评论数</span>
             </div>
-            <script th:inline="javascript">
-                const url = [[${theme.config.basic.waline_serverURL+'/api/comment?type=count'}]];
-                fetch(url).then(async (response) => {
-                    const data = await response.json();
-                    document.querySelector('.waline-comment .num').innerHTML = data.data;
-                    document.querySelector('.waline-comment').title = '累计评论数:'+data.data;
-                });
-            </script>
+
         </th:block>
     </th:block>
     <!--    搭配C-->
@@ -111,14 +104,7 @@
                 <span class="num">0</span>
                 <span>评论数</span>
             </div>
-            <script th:inline="javascript">
-                const url = [[${theme.config.basic.waline_serverURL+'/api/comment?type=count'}]];
-                fetch(url).then(async (response) => {
-                    const data = await response.json();
-                    document.querySelector('.waline-comment .num').innerHTML = data.data;
-                    document.querySelector('.waline-comment').title = '累计评论数:'+data.data;
-                });
-            </script>
+
         </th:block>
     </th:block>
     <!--    搭配D-->
@@ -147,14 +133,7 @@
                 <span class="num">0</span>
                 <span>评论数</span>
             </div>
-            <script th:inline="javascript">
-                const url = [[${theme.config.basic.waline_serverURL+'/api/comment?type=count'}]];
-                fetch(url).then(async (response) => {
-                    const data = await response.json();
-                    document.querySelector('.waline-comment .num').innerHTML = data.data;
-                    document.querySelector('.waline-comment').title = '累计评论数:'+data.data;
-                });
-            </script>
+
         </th:block>
         </th:block>
 </div>
@@ -178,6 +157,14 @@
 <th:block th:if="${theme.config.blogger.enable_strips}">
 <canvas id="canvas-strips" width="300" height="340"></canvas>
 <script th:src="@{/assets/effect/bg/strips.js}"></script>
+    <script th:inline="javascript">
+        const url = [[${theme.config.basic.waline_serverURL+'/api/comment?type=count'}]];
+        fetch(url).then(async (response) => {
+            const data = await response.json();
+            document.querySelector('.waline-comment .num').innerHTML = data.data;
+            document.querySelector('.waline-comment').title = '累计评论数:'+data.data;
+        });
+    </script>
 </th:block>
 </section>
 </th:block>

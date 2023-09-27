@@ -38,6 +38,23 @@ spec:
           label: Waline 服务端地址
           value: ""
           help: "Waline 服务端地址，如 https://waline-server.herokuapp.com 不要加结尾反斜杠"
+        - $formkit: radio
+          name: enable_source_link
+          id: enable_source_link
+          label: "是否使用外部资源地址"
+          help: "使用外部请将整个assets目录上传"
+          value: false
+          options:
+            - value: false
+              label: 默认
+            - value: true
+              label: 外部
+        - $formkit: text
+          name: source_link
+          label: 外部资源地址
+          value: ""
+          help: "如果你的资源地址是https://example.com/assets/js/min/index.min.js，那么这里填写https://example.com"
+
 
         - $formkit: text
           name: mode_color_light
