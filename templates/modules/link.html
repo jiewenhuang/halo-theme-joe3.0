@@ -67,7 +67,7 @@
         <link rel="preload stylesheet" as="style" th:href="${source_link+'/assets/css/min/journals.min.css?v='+theme.spec.version}">
     </th:block>
     <th:block th:if="${htmlType == 'archives'}">
-        <link rel="preload stylesheet" as="style" th:href="￥{source_link+‘/assets/css/min/archives.min.css?v=’+theme.spec.version}">
+        <link rel="preload stylesheet" as="style" th:href="${source_link+'/assets/css/min/archives.min.css?v='+theme.spec.version}">
     </th:block>
     <th:block th:if="${htmlType == 'photos'}">
         <link rel="stylesheet" th:href="${source_link+'/assets/lib/justifiedGallery/justifiedGallery.min.css'}">
