@@ -28,10 +28,15 @@
 
 
 <script id="theme-config-getter" type="text/javascript">
-    // if (ThemeConfig.mode === "development") {
-    //     console.log("Joe2.0主题配置：", ThemeConfig);
-    //     console.log("资源根路径：", ThemeConfig.BASE_RES_URL);
-    // }
+    if (window.location.hostname === 'localhost'||window.location.hostname === '127.0.0.1') {
+        ThemeConfig['mode'] = "development"
+    }
+    console.log(ThemeConfig.mode)
+
+    if (ThemeConfig.mode === "development") {
+        console.log("Joe3主题配置：", ThemeConfig);
+        console.log("资源根路径：", ThemeConfig.BASE_RES_URL);
+    }
     // 读取主题模式
     var initThemeMode = function() {
         try {

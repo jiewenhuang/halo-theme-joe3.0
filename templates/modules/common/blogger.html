@@ -157,7 +157,7 @@
 <th:block th:if="${theme.config.blogger.enable_strips}">
 <canvas id="canvas-strips" width="300" height="340"></canvas>
 <script th:src="@{/assets/effect/bg/strips.js}"></script>
-    <script th:inline="javascript">
+    <script th:inline="javascript" th:if="${theme.config.blogger.overview_type != 'A'}">
         const url = [[${theme.config.basic.waline_serverURL+'/api/comment?type=count'}]];
         fetch(url).then(async (response) => {
             const data = await response.json();

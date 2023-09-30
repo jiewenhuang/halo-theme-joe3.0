@@ -29,10 +29,10 @@
     <div class="joe_archives__wrapper animated fadeIn">
       <div class="joe_archives-title">
         <th:block th:if="${theme.config.archives.archives_list_type == 'timeline'}">
-        <i class="joe-font joe-icon-timeline"></i>时间轴<em>[[${'('+theme.config.archives.archives_timeline_metric == 'month' ? '月':'年'+'）'}]]</em>
+        <i class="joe-font joe-icon-timeline"></i>时间轴<em>（[[${theme.config.archives.archives_timeline_metric == 'month' ? '月':'年'}]]）</em>
         </th:block>
         <th:block th:if="${theme.config.archives.archives_list_type == 'list'}">
-        <i class="joe-font joe-icon-rili"></i>列表
+        <i class="jiewen joe-icon-riqi"></i>列表
         </th:block>
     </div>
       <th:block th:if="${theme.config.archives.archives_list_type =='list'}">

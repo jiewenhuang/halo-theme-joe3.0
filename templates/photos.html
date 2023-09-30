@@ -12,46 +12,45 @@
                 <div class="joe_photos__type">
                     <div class="joe_photos__type-title">
                         <i class="joe-font joe-icon-tupian"></i>&nbsp;[[${theme.config.photos.photos_title?:'我的图库'}]]
-                </div>
-                <nav class="joe_photos__filter">
-                    <ul>
-                        <li data-sjslink="all">
-                            <a >全部</a>
-                        </li>
-                        <th:block th:each="group : ${groups}">
-                        <li  th:data-sjslink="${group.metadata.name}">
-                            <a >[[${group.spec.displayName}]]</a>
-                        </li>
-                        </th:block>
+                    </div>
+                    <nav class="joe_photos__filter">
+                        <ul>
+                            <li data-sjslink="all">
+                                <a >全部</a>
+                            </li>
+                            <th:block th:each="group : ${groups}">
+                                <li  th:data-sjslink="${group.metadata.name}">
+                                    <a >[[${group.spec.displayName}]]</a>
+                                </li>
+                            </th:block>
 
-                </ul>
-                </nav>
+                        </ul>
+                    </nav>
+
+                </div>
+
+                <div class="wrapper">
+                    <div id="sortable" class="sjs-default">
+                        <div th:data-sjsel="${photo.spec.groupName}" th:each="photo : ${photoFinder.listAll()}">
+                            <div class="card" >
+                                <a class="item animated wow jg-entry" th:href="${photo.spec.url}" data-fancybox="gallery">
+
+                                    <img class="card__picture" loading="lazy" th:data-src="${photo.spec.url}" th:src="@{/assets/img/lazyload.gif}" th:alt="${photo.spec.displayName}">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
 
             </div>
-
-                            <div class="wrapper">
-                                <div id="sortable" class="sjs-default">
-                                    <div th:data-sjsel="${photo.spec.groupName}" th:each="photo : ${photoFinder.listAll()}">
-                                        <div class="card" >
-                                            <a class="item animated wow jg-entry" th:href="${photo.spec.url}" data-fancybox="gallery">
-
-                                            <img class="card__picture" loading="lazy" th:data-src="${photo.spec.url}" th:src="@{/assets/img/lazyload.gif}" th:alt="${photo.spec.displayName}">
-                                            </a>
-<!--                                            <div class="placeholder" style="width: 200px;height: 120px;background: #eee;"></div>-->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-        </div>
             <th:block th:if="${theme.config.aside.enable_photos_aside}">
                 <th:block th:replace="~{modules/common/aside :: aside}" />
             </th:block>
-    </div>
-    <th:block th:replace="~{modules/common/actions :: actions}" />
-    <th:block th:replace="~{modules/common/footer :: footer}" />
+        </div>
+        <th:block th:replace="~{modules/common/actions :: actions}" />
+        <th:block th:replace="~{modules/common/footer :: footer}" />
     </div>
     <th:block th:replace="~{modules/macro/tail :: tail}" />
     </body>
