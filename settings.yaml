@@ -1504,6 +1504,8 @@ spec:
                   label: 最新评论
                 - value: "enable_tag_cloud"
                   label: 标签云
+                - value: "enable_ads_aside"
+                  label: 侧边栏广告
         - $formkit: code
 #          if: "$get(template_aside).value === 'enable_notice'"
           name: site_notice
@@ -2221,6 +2223,86 @@ spec:
           label: 底部显示内容
           value: ""
           language: html
+    - group: ads
+      label: 广告
+      formSchema:
+        - $formkit: radio
+          name: enable_aside_ads
+          label: 是否启用侧边栏广告
+          value: false
+          help: "启用后需要再到侧边栏添加组件"
+          options:
+            - value: true
+              label: 是
+            - value: false
+              label: 否
+        - $formkit: attachment
+          name: aside_ads_img
+          label: 侧边栏广告图片
+          value: ""
+          help: "侧边栏广告图片链接"
+        - $formkit: text
+          name: aside_ads_url
+          label: 广告链接
+          value: ""
+          help: "广告跳转链接"
+        - $formkit: radio
+          name: enable_post_ads_top
+          label: 是否启用文章顶部广告
+          value: false
+          options:
+            - value: true
+              label: 是
+            - value: false
+              label: 否
+        - $formkit: attachment
+          name: post_ads_top_img
+          label: 文章顶部广告图片
+          value: ""
+          help: "文章顶部广告图片链接"
+        - $formkit: text
+          name: post_ads_top_url
+          label: 广告链接
+          value: ""
+          help: "广告跳转链接"
+        - $formkit: radio
+          name: enable_post_ads_bottom
+          label: 是否启用文章底部广告
+          value: false
+          options:
+            - value: true
+              label: 是
+            - value: false
+              label: 否
+        - $formkit: attachment
+          name: post_ads_bottom_img
+          label: 文章底部广告图片
+          value: ""
+          help: "文章底部广告图片链接"
+        - $formkit: text
+          name: post_ads_bottom_url
+          label: 广告链接
+          value: ""
+          help: "广告跳转链接"
+        - $formkit: radio
+          name: enable_post_ads_aside
+          label: 是否启用文章侧边栏广告
+          value: false
+          options:
+            - value: true
+              label: 是
+            - value: false
+              label: 否
+        - $formkit: attachment
+          name: post_ads_aside_img
+          label: 文章侧边栏广告图片
+          value: ""
+          help: "文章底部广告图片链接"
+        - $formkit: text
+          name: post_ads_aside_url
+          label: 广告链接
+          value: ""
+          help: "广告跳转链接"
 
     - group: footer
       label: 页脚

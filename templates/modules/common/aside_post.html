@@ -15,6 +15,9 @@
     <th:block th:if="${theme.config.post.enable_relate_post == true}">
       <th:block th:replace="~{modules/macro/relate :: relate}" />
     </th:block>
+    <th:block th:if="${theme.config.ads.enable_post_ads_aside} and ${#strings.trim(theme.config.ads.post_ads_aside_img) !=''}">
+        <th:block th:replace="~{modules/ads/ads_aside :: ads_aside(ads_url=${theme.config.ads.post_ads_aside_url}, ads_img=${theme.config.ads.post_ads_aside_img})}" />
+    </th:block>
 </div>
 </aside>
 </th:block>

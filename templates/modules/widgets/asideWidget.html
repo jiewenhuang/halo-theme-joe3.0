@@ -202,4 +202,9 @@
         <!--</@tagTag>-->
     </section>
 </th:block>
+<th:block th:fragment="enable_ads_aside">
+    <th:block th:if="${theme.config.ads.enable_aside_ads} and ${#strings.trim(theme.config.ads.aside_ads_img) !=''}">
+        <th:block th:replace="~{modules/ads/ads_aside :: ads_aside(ads_url=${theme.config.ads.aside_ads_url}, ads_img=${theme.config.ads.aside_ads_img})}" />
+    </th:block>
+</th:block>
 </html>
