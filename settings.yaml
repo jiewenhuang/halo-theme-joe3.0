@@ -25,8 +25,8 @@ spec:
           name: comment_option
           id: comment_option
           value: default
-          label: 开启浅色模式背景图
-          help: "需要配置好浅色模式背景图后才有效"
+          label: 评论系统
+          help: "选择使用的评论系统"
           options:
             - value: default
               label: 默认
