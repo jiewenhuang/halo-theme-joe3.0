@@ -127,6 +127,16 @@
                 }).then(({ comments }) => {
                     document.getElementById('waline-recent').innerHTML = comments.map(
                         (comment) =>{
+                            const commentContent = document.createElement('div');
+                            let commentText =''
+                            commentContent.innerHTML = comment.comment;
+                            const hasAnchor = commentContent.querySelector('a') !== null;
+                            if (hasAnchor) {
+                                 commentText = commentContent.textContent;
+                            }else {
+                                 commentText = commentContent.outerHTML || commentContent.textContent;
+                            }
+
                             const timestamp = new Date(comment.time);
 
                             // 获取年、月、日、时、分、秒
@@ -148,10 +158,9 @@
                             <span class="date">${commentTime}</span>
                         </div>
                     </div>
-                    <div class="reply"><a class="link aside-reply-content"
-                           href="${comment.url}">
-                            <p>${comment.comment}</p>
-                        </a></div>`;
+                    <div class="reply">
+                    <a href="${comment.url}" class="link aside-reply-content">${commentText}</a>
+                    </div>`;
 
                         }).join('');
 
