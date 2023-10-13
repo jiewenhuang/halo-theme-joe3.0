@@ -135,10 +135,25 @@
           <span>累计创建 <strong>[[${tagNum}]]</strong> 个标签</span>
         </li>
         </th:block>
+        <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline_serverURL) ==''}">
         <li class="item">
           <i class="joe-font joe-icon-message"></i>
           <span>累计收到 <strong>[[${stats.comment}]]</strong> 条评论</span>
         </li>
+        </th:block>
+        <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline_serverURL) !=''}">
+          <li class="item">
+            <i class="joe-font joe-icon-message"></i>
+            <span class="m-waline-comment-count">累计收到 <strong>0</strong> 条评论</span>
+          </li>
+          <script th:inline="javascript" th:if="${theme.config.basic.comment_option=='waline'} and ${#strings.trim(theme.config.basic.waline_serverURL) !=''}">
+            const url = [[${theme.config.basic.waline_serverURL+'/api/comment?type=count'}]];
+            fetch(url).then(async (response) => {
+              const data = await response.json();
+              document.querySelector('.m-waline-comment-count strong').innerHTML = data.data;
+            });
+          </script>
+        </th:block>
       </ul>
       <ul class="joe_header__slideout-menu panel-box">
         <li>
