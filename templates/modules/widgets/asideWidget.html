@@ -125,7 +125,7 @@
                     serverURL: /*[[${theme.config.basic.waline_serverURL}]]*/'',
                     count: /*[[${theme.config.aside.show_newreply_num}]]*/5,
                 }).then(({ comments }) => {
-                    document.getElementById('waline-recent').innerHTML = comments.map(
+                    document.getElementById('waline-recent').innerHTML = comments.data.map(
                         (comment) =>{
                             const commentContent = document.createElement('div');
                             let commentText =''
