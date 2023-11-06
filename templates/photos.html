@@ -15,7 +15,7 @@
                     </div>
                     <nav class="joe_photos__filter">
                         <ul>
-                            <li data-sjslink="all">
+                            <li data-sjslink="*" class="active">
                                 <a >全部</a>
                             </li>
                             <th:block th:each="group : ${groups}">
@@ -30,16 +30,10 @@
                 </div>
 
                 <div class="wrapper">
-                    <div id="sortable" class="sjs-default">
-                        <div th:data-sjsel="${photo.spec.groupName}" th:each="photo : ${photoFinder.listAll()}">
-                            <div class="card" >
-                                <a class="item animated wow jg-entry" th:href="${photo.spec.url}" data-fancybox="gallery">
-
-                                    <img class="card__picture" loading="lazy" th:data-src="${photo.spec.url}" th:src="@{/assets/img/lazyload.gif}" th:alt="${photo.spec.displayName}">
-                                </a>
-                            </div>
-                        </div>
+                    <div class="grid " id="image-grid">
+                        <!-- 预留空间 -->
                     </div>
+                    <th:block th:replace="~{modules/macro/loading :: loading}" />
                 </div>
 
 

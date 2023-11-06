@@ -1,258 +1,102 @@
-class Sortable {
-    constructor({
-                    parent,
-                    links         = document.querySelectorAll('[data-sjslink]'),
-                    active        = 'active',
-                    margin        = 20,
-                    responsive    = {
-                        980: {
-                            columns: 3
-                        },
-                        480: {
-                            columns: 2
-                        },
-                        0: {
-                            columns: 1
-                        }
-                    },
-                    fadeDuration  = {
-                        in: 300,
-                        out: 0
-                    }
-                } = {}) {
-        this.parent           = parent
-        this.links            = Array.from(links)
-        this.active           = active
-        this.margin           = margin
-        this.responsive       = responsive
-        this.fadeDuration     = fadeDuration
-        this.elements         = Array.from(this.parent.children)
-        this.activeElements   = this.elements
-        this.columns          = 1
-        this.dataLink         = 'all'
-        this.winWidth         = window.innerWidth
 
-        this.init()
-    }
-
-    orderelements(){
-        let {parent, activeElements, columns, blocWidth, responsive, margin} = this
-
-        let arrayRectHeight   = activeElements.reduce((acc, el, id) => {
-            let columnsHeight   = this._sumArrHeight(acc, columns)
-            let positionX       = (id%columns) * (blocWidth + margin)
-            let rectHeight      = (id - columns >= 0) ? (columnsHeight[id%columns] + (margin * Math.floor(id / columns))) : 0
-
-            el.style.transform  = `translate3d(${positionX}px, ${rectHeight}px, 0)`
-
-            acc.push(el.offsetHeight)
-            return acc
-        }, [])
-
-        let columnsMaxHeight    = this._sumArrHeight(arrayRectHeight, columns)
-        let parentHeight        = Math.max(...columnsMaxHeight) + (margin * (Math.floor(activeElements.length / columns) - 1))
-        parent.style.height     = `${parentHeight}px`
-    }
-
-    handleFilterClick(ev, element){
-        ev.preventDefault()
-        let {links, active} = this
-
-        if(element.dataset.sjslink === this.dataLink){
-            return
-        } else {
-            this.dataLink = element.dataset.sjslink
-            links.forEach(el => {
-                el.isEqualNode(element) ? el.classList.add(active) : el.classList.remove(active)
-            })
-            this._filterElements(()=>{
-                this.orderelements()
-            })
+$(document).ready(function(){
+    const $grid = $('#image-grid').isotope({
+        itemSelector: '.grid-item',
+        percentPosition: true,
+        masonry: {
+            columnWidth: '.grid-item'
         }
-    }
+    });
 
-    resize(){
-        window.addEventListener('resize', () => {
-            clearTimeout(window.sortableResize)
-            window.sortableResize = setTimeout(() => {
-                this.winWidth = window.innerWidth
-                this._setBlocWidth(()=>{
-                    this.orderelements()
-                })
-            }, 500)
-        })
-    }
 
-    init(){
-        let {parent, links, active} = this
+    let allImages = [];
+    let currentIndex = 0;
+    const batchSize = 6;
+    const baseUrl = ThemeConfig.blog_url; // 替换成您的API URL
 
-        links.forEach((el, id) => {
-            if(id === 0){
-                el.classList.add(active)
-                this.dataLink = el.dataset.sjslink
-            }
-            el.addEventListener('click', ev => {
-                this.handleFilterClick(ev, el)
-            })
-        })
-
-        this._setBlocWidth()
-
-        window.addEventListener('load', () => {
-            this._filterElements(()=>{
-                this.orderelements()
-            })
-            parent.style.opacity = 1
-        })
-
-        this.resize()
-        //使用Intersection Observer API实现懒加载
-        const ob = new IntersectionObserver(
-            (entries)=>{
-                entries.forEach((entry)=>{
-                    if(entry.isIntersecting){
-                        const img = entry.target;
-                        const src = img.getAttribute('data-src');
-                        img.setAttribute('src',src);
-                        ob.unobserve(img);
-                    }
-                })
-            },{
-                threshold:0.5
-            });
-        const imgs = document.querySelectorAll('img.card__picture');
-        imgs.forEach((img)=>{
-            ob.observe(img);
-        })
-
-    }
-
-    _setBlocWidth(callback){
-        let {parent, elements, margin, responsive} = this
-
-        let columns         = this.columns = this._columnsCount(responsive)['columns']
-        let blocWidth       = this.blocWidth = (parent.clientWidth - (margin * (columns - 1))) / columns
-
-        elements.forEach(el=>{
-            el.style.width = `${blocWidth}px`
-        })
-        if(callback){
-            callback()
+    function loadImages(callback) {
+        // ...逻辑保持不变
+        if (allImages.length) {
+            callback();
+            return;
         }
-    }
-    _filterElements(callback){
-        let {elements, dataLink, fadeDuration} = this
 
-        this.activeElements = elements.filter(el => {
-            if(dataLink === 'all') {
-                this._fadeIn(el, fadeDuration.in)
-                this._lazyLoadImages(el);
-                return true
-            } else {
-                if(el.dataset.sjsel !== dataLink) {
-                    this._fadeOut(el, fadeDuration.out)
-                    return false
-                } else {
-                    this._fadeIn(el, fadeDuration.in)
-                    this._lazyLoadImages(el); // 添加这一行来启动懒加载
-                    return true
-                }
-            }
-        })
-
-        if(callback){
-            callback()
-        }
-    }
-    // 添加一个新的方法来执行图片的懒加载，使用 IntersectionObserver
-    _lazyLoadImages(el) {
-        const images = el.querySelectorAll('img[loading="lazy"]');
-
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.removeAttribute('loading');
-                    observer.unobserve(img);
-
-                    // 在图片加载完成后触发重新布局
-                    img.onload = () => {
-                        this.orderelements(); // 调用重新布局方法
-                    };
-                }
-            });
-        });
-
-        images.forEach(img => {
-            observer.observe(img);
+        // 获取所有图片
+        const apiUrl = baseUrl + '/apis/api.plugin.halo.run/v1alpha1/plugins/PluginPhotos/photos';
+        $.getJSON(apiUrl, function(data) {
+            allImages = data.items; // 假设这是图片数组
+            callback();
         });
     }
 
 
-    _sumArrHeight(arr, col){
-        return arr.reduce((acc, val, id)=>{
-            let cle = id%col
-            if(!acc[cle]){
-                acc[cle] = 0
+
+    function loadBatchImages() {
+
+        const $domLoad = $('.joe_loading')
+        loadImages(function() {
+            // ...创建和插入元素的逻辑保持不变
+            const batchEndIndex = currentIndex + batchSize;
+            // 一批加载的图片项
+            const items = [];
+
+            // 获取当前批次的图片
+            for (; currentIndex < batchEndIndex && currentIndex < allImages.length; currentIndex++) {
+                const currentImage = allImages[currentIndex];
+                const item = $('<div class="grid-item wow fadeIn" data-sjsel="'+ currentImage.spec.groupName+'">' +
+                    '<div class="card__picture">'+
+                    '<a class="item animated wow jg-entry" href="'+ currentImage.spec.url+'" data-fancybox="gallery">'+
+                    '<img src="' + baseUrl + currentImage.spec.url + '" alt="' + currentImage.spec.displayName + '"/>' +
+                    '</a>'+
+                        '</div>'+
+                '</div>');
+
+                items.push(item[0]);
             }
-            acc[cle] = acc[cle]+val
-            return acc
-        }, [])
-    }
-    _columnsCount(obj){
-        let {winWidth} = this
-        return Object.entries(obj).reduce((acc, val)=>{
-            return winWidth > val[0] && val[0] >= Math.max(acc['width'])
-                ? { width: val[0], columns: val[1]['columns'] }
-                : acc
-        }, {width: 0, columns: 4})
-    }
-    _fadeIn(el, duration = 300, callback){
-        let opacity   = parseFloat(window.getComputedStyle(el, null).getPropertyValue("opacity")),
-            interval  = 16,
-            gap       = interval / duration
 
-        el.style.display = 'block'
-
-        function animation(){
-            opacity += gap
-
-            if(opacity <= 1){
-                el.style.opacity = opacity
-                requestAnimationFrame(animation)
-            } else {
-                el.style.opacity = 1
-                if(callback){
-                    callback()
-                }
+            // 将图片元素添加到网格中并重新布局
+            $grid.append(items)
+                .isotope('appended', items)
+                .imagesLoaded().progress(function() {
+                $grid.isotope('layout');
+            });
+            // ...其余逻辑保持不变
+            // 如果所有图片都已加载，可以选择隐藏加载更多按钮
+            if (currentIndex >= allImages.length) {
+                $domLoad.remove()
+                ob.unobserve(loading)
             }
+        });
+    }
+
+    // 初始加载
+    loadBatchImages();
+    const ob =  new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting){
+            loadBatchImages();
         }
-        requestAnimationFrame(animation)
-    }
-    _fadeOut(el, duration = 300, callback){
-        let opacity   = parseFloat(window.getComputedStyle(el, null).getPropertyValue("opacity")),
-            interval  = 16,
-            gap       = duration ? (interval / duration) : 1
 
-        function animation(){
-            opacity -= gap
+    }, {
+        threshold:1
+    })
+    const loading = document.querySelector('.joe_loading')
+    ob.observe(loading)
 
-            if(opacity >= 0){
-                el.style.opacity = opacity
-                requestAnimationFrame(animation)
-            } else {
-                el.style.opacity = 0
-                el.style.display = 'none'
-                if(callback){
-                    callback()
-                }
+
+    $('.joe_photos__filter li').on('click', function(){
+        let filterValue = $(this).attr('data-sjslink');
+        console.log(filterValue)
+        // 添加active
+        $(this).addClass('active').siblings().removeClass('active');
+        $grid.isotope({
+            filter: function() {
+                // 这里 "this" 指的是每一个被 Isotope 处理的元素
+                // 检查 data-sjsel 属性值是否匹配我们筛选的值
+                const sjselValue = $(this).attr('data-sjsel'); // 这里获取的是.grid-item的data-sjsel
+                console.log('Filtering:', sjselValue, filterValue);
+                // 如果 filterValue 是 '*'（显示所有），或者 sjselValue 匹配筛选值，则保留元素
+                return filterValue === '*' || sjselValue === filterValue;
             }
-        }
-        requestAnimationFrame(animation)
-    }
-}
-
-HTMLElement.prototype.sortablejs = HTMLElement.prototype.sortablejs || function(params){
-    return new Sortable({parent: this, ...params})
-}
+        });
+    });
+});

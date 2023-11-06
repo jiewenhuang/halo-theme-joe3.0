@@ -609,6 +609,7 @@ hr {
 
 .wrapper {
   padding: 40px 0;
+
 }
 
 .card {
@@ -709,6 +710,39 @@ hr {
         width: 2rem;
       }
     }
+  }
+}
+.grid {
+  position: relative;
+  margin: 0 auto;
+  max-width: 1200px;
+
+  .grid-item {
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    padding: 5px;
+    height: auto; /* 预设高度可以改善布局的稳定性 */
+
+    img {
+      width: 100%;
+      height: auto; /* 保持图片宽高比 */
+      display: block;
+      object-fit: cover; /* 防止图片变形 */
+      border-radius: var(--radius-wrap);
+    }
+  }
+
+  /* 电脑大屏幕，一行4张 */
+  @media (min-width: 1200px) {
+    .grid-item { width: calc(25%); }
+  }
+
+  @media (min-width: 768px) and (max-width: 1199px) {
+    .grid-item { width: calc(33.333%); }
+  }
+
+  @media (max-width: 767px) {
+    .grid-item { width: calc(50%); }
   }
 }
 
