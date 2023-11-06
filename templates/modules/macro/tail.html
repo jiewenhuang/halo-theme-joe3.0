@@ -43,6 +43,9 @@
 <!--相册-->
     <th:block th:if="${htmlType == 'photos'}">
         <script th:src="${source_link+'/assets/lib/justifiedGallery/justifiedGallery.min.js'}"></script>
+        <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+        <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+        <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
 
     </th:block>
 
@@ -73,7 +76,6 @@
     <th:block th:if="${theme.config.beauty.enable_big_banner}">
     <script th:src="${source_link+'/assets/js/min/beauty.min.js'}"></script>
     </th:block>
-    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 
     <!-- ===== 引入页面级js end ===== -->
 
@@ -99,6 +101,7 @@
     <!-- vconsole -->
     <script th:src="${source_link+'/assets/lib/vconsole/vconsole.min.js'}"></script>
     </th:block>
+
 <!--搜索点击-->
     <script>
         const searchButton = document.getElementById("halo-search");
@@ -129,9 +132,6 @@
 
     </script>
     <th:block th:if="${htmlType == 'photos'}">
-    <script type="text/javascript">
-        document.querySelector('#sortable').sortablejs()
-    </script>
     </th:block>
     <script type="text/javascript" th:if="${theme.config.home.enable_auto_ajax} and ${theme.config.home.enable_index_list_ajax}">
         const ob =  new IntersectionObserver(entries => {
