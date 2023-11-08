@@ -71,10 +71,23 @@ $(document).ready(function(){
 
     // 初始加载
     loadBatchImages();
+
     const ob =  new IntersectionObserver(entries => {
         if (entries[0].isIntersecting){
             loadBatchImages();
-        }
+            let filteredDivs = $('.grid-item').filter(function() {
+                return $(this).data('sjsel') === $('.joe_photos__filter li.active').data('sjslink');
+            });
+            if (filteredDivs.length===0 && currentIndex <= allImages.length && $('.joe_photos__filter li.active').data('sjslink')!=='*') {
+                while (filteredDivs.length===0&&currentIndex <= allImages.length){
+                    loadBatchImages();
+                    filteredDivs = $('.grid-item').filter(function() {
+                        return $(this).data('sjsel') === $('.joe_photos__filter li.active').data('sjslink');
+                    });
+                }
+            }else {
+            }
+                }
 
     }, {
         threshold:1
@@ -85,15 +98,13 @@ $(document).ready(function(){
 
     $('.joe_photos__filter li').on('click', function(){
         let filterValue = $(this).attr('data-sjslink');
-        console.log(filterValue)
         // 添加active
         $(this).addClass('active').siblings().removeClass('active');
+        // 重置 Isotope 过滤器为默认值
         $grid.isotope({
             filter: function() {
-                // 这里 "this" 指的是每一个被 Isotope 处理的元素
                 // 检查 data-sjsel 属性值是否匹配我们筛选的值
                 const sjselValue = $(this).attr('data-sjsel'); // 这里获取的是.grid-item的data-sjsel
-                console.log('Filtering:', sjselValue, filterValue);
                 // 如果 filterValue 是 '*'（显示所有），或者 sjselValue 匹配筛选值，则保留元素
                 return filterValue === '*' || sjselValue === filterValue;
             }
