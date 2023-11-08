@@ -6580,6 +6580,44 @@ body {
     z-index: 90;
   }
 }
+//登入按钮样式
+.nav_login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  //background-color: var(--theme); // 你可以用LESS变量替换这里
+  //margin-right: 10px;
+  margin-left: 15px;
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #f2f2f2;
+    color: #333;
+    text-decoration: none;
+    font-size: 24px;
+    transition: background-color 0.3s, color 0.3s;
+
+    &:hover {
+      background-color: var(--theme); // 这里的变量可以是LESS的全局变量
+      color: #f2f2f2;
+    }
+  }
+
+  img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    overflow: hidden;
+  }
+}
+
 
 .blur-up {
   filter: blur(5px) !important;

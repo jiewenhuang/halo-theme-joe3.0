@@ -88,6 +88,9 @@
   </div>
 </th:block>
   </div>
+      <th:block th:if="${theme.config.ads.enable_post_ads_top} and ${#strings.trim(theme.config.ads.post_ads_top_img) !=''}">
+        <th:block th:replace="~{modules/ads/ads_post :: ads_post(ads_url=${theme.config.ads.post_ads_top_url}, ads_img=${theme.config.ads.post_ads_top_img})}" />
+      </th:block>
   <article th:class="'joe_detail__article animated fadeIn '+${#annotations.getOrDefault(post, 'img_align', 'center')+'-img'}"
            th:classappend="|${#annotations.getOrDefault(post, 'enable_read_limit', 'false') == 'true' ?'limited': ''} ${(#annotations.getOrDefault(post, 'enable_copy', 'true') == 'false' or theme.config.post.enable_copy != true) ? 'uncopy' : ''} ${theme.config.post.enable_indent ? 'indent':''} ${(theme.config.code_block.enable_code_line_number == true and theme.config.code_block.enable_code_newline !=true) ? 'line-numbers':''} ${theme.config.code_block.enable_single_code_select == true ? 'single_code_select': ''}|">
     <div id="post-inner">
@@ -110,6 +113,10 @@
 </div>
           <th:block th:replace="~{modules/post_operate :: post_operate}" />
           <th:block th:replace="~{modules//macro/post_copyright :: post_copyright}" />
+          <th:block th:if="${theme.config.ads.enable_post_ads_bottom} and ${#strings.trim(theme.config.ads.post_ads_bottom_img) !=''}">
+            <th:block th:replace="~{modules/ads/ads_post :: ads_post(ads_url=${theme.config.ads.post_ads_bottom_url}, ads_img=${theme.config.ads.post_ads_bottom_img})}" />
+          </th:block>
+
 </div>
         <th:block th:replace="~{modules/post_operate_aside :: post_operate_aside}" />
 <ul class="joe_post__pagination"

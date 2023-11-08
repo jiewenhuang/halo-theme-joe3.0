@@ -125,8 +125,18 @@
                     serverURL: /*[[${theme.config.basic.waline_serverURL}]]*/'',
                     count: /*[[${theme.config.aside.show_newreply_num}]]*/5,
                 }).then(({ comments }) => {
-                    document.getElementById('waline-recent').innerHTML = comments.map(
+                    document.getElementById('waline-recent').innerHTML = comments.data.map(
                         (comment) =>{
+                            const commentContent = document.createElement('div');
+                            let commentText =''
+                            commentContent.innerHTML = comment.comment;
+                            const hasAnchor = commentContent.querySelector('a') !== null;
+                            if (hasAnchor) {
+                                 commentText = commentContent.textContent;
+                            }else {
+                                 commentText = commentContent.outerHTML || commentContent.textContent;
+                            }
+
                             const timestamp = new Date(comment.time);
 
                             // 获取年、月、日、时、分、秒
@@ -148,10 +158,9 @@
                             <span class="date">${commentTime}</span>
                         </div>
                     </div>
-                    <div class="reply"><a class="link aside-reply-content"
-                           href="${comment.url}">
-                            <p>${comment.comment}</p>
-                        </a></div>`;
+                    <div class="reply">
+                    <a href="${comment.url}" class="link aside-reply-content">${commentText}</a>
+                    </div>`;
 
                         }).join('');
 
@@ -192,5 +201,10 @@
         <!--  </#if>-->
         <!--</@tagTag>-->
     </section>
+</th:block>
+<th:block th:fragment="enable_ads_aside">
+    <th:block th:if="${theme.config.ads.enable_aside_ads} and ${#strings.trim(theme.config.ads.aside_ads_img) !=''}">
+        <th:block th:replace="~{modules/ads/ads_aside :: ads_aside(ads_url=${theme.config.ads.aside_ads_url}, ads_img=${theme.config.ads.aside_ads_img})}" />
+    </th:block>
 </th:block>
 </html>

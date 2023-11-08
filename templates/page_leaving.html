@@ -80,7 +80,7 @@
             </style>
             <script type="module" th:inline="javascript">
               import { RecentComments } from 'https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
-              const url = [[${theme.config.basic.waline_serverURL+'/api/comment?type=count'}]];
+              const url = /*[[${theme.config.basic.waline_serverURL+'/api/comment?type=count'}]]*/'';
               let countNum = 0;
               fetch(url).then(async (response) => {
                 const data = await response.json();
@@ -91,7 +91,8 @@
                 serverURL: /*[[${theme.config.basic.waline_serverURL}]]*/'',
                 count: countNum,
               }).then(({ comments }) => {
-                document.getElementById('waline-leaving').innerHTML = comments.map(
+
+                document.getElementById('waline-leaving').innerHTML = comments.data.map(
                         (comment) =>{
                           const timestamp = new Date(comment.time);
 

@@ -158,7 +158,7 @@
 <canvas id="canvas-strips" width="300" height="340"></canvas>
 <script th:src="@{/assets/effect/bg/strips.js}"></script>
     <script th:inline="javascript" th:if="${theme.config.blogger.overview_type != 'A'} and ${theme.config.basic.comment_option=='waline'} and ${#strings.trim(theme.config.basic.waline_serverURL) !=''}">
-        const url = [[${theme.config.basic.waline_serverURL+'/api/comment?type=count'}]];
+        // const url = [[${theme.config.basic.waline_serverURL+'/api/comment?type=count'}]];
         fetch(url).then(async (response) => {
             const data = await response.json();
             document.querySelector('.waline-comment .num').innerHTML = data.data;
