@@ -46,7 +46,7 @@ $(document).ready(function(){
                 const item = $('<div class="grid-item wow fadeIn" data-sjsel="'+ currentImage.spec.groupName+'">' +
                     '<div class="card__picture">'+
                     '<a class="item animated wow jg-entry" href="'+ currentImage.spec.url+'" data-fancybox="gallery">'+
-                    '<img src="' + baseUrl + currentImage.spec.url + '" alt="' + currentImage.spec.displayName + '"/>' +
+                    '<img src="'+ currentImage.spec.url + '" alt="' + currentImage.spec.displayName + '"/>' +
                     '</a>'+
                         '</div>'+
                 '</div>');
