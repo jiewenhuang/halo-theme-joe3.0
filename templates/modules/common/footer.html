@@ -72,6 +72,13 @@
           </a>提供云服务
         </p>
       </th:block>
+      <th:block th:if="${theme.config.footer.driven_by == 'custom'} and ${theme.config.footer.driven_by_custom_img != ''}">
+        <p class="site_driven">本站点由
+          <a th:href="${theme.config.footer.driven_by_custom_url}" target="_blank" rel="noopener noreferrer nofollow">
+            <img th:class="${theme.config.footer.driven_by}" th:src="${theme.config.footer.driven_by_custom_img}"  alt="云服务商"/>
+          </a>提供云服务
+        </p>
+      </th:block>
 
 
     </th:block>
