@@ -2415,13 +2415,15 @@ spec:
               label: 金山云
             - value: custom
               label: 自定义
-        - $formkit: code
+
+        - $formkit: text
+          name: driven_by_custom_url
           if: "$get(driven_by).value === 'custom'"
-          name: driven_custom
-          label: 自定义提供商
-          help: "配置自定义服务提供商，此处可填写html代码"
-          value: ""
-          language: html
+          label: 跳转链接
+        - $formkit: attachment
+          name: driven_by_custom_img
+          if: "$get(driven_by).value === 'custom'"
+          label: 图片地址
         - $formkit: radio
           name: enable_rss
           label: 展示 RSS
