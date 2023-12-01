@@ -72,6 +72,9 @@
           </a>提供云服务
         </p>
       </th:block>
+      <th:block th:if="${theme.config.footer.driven_by == 'custom'}">
+        <p class="site_driven" th:utext="${theme.config.footer.driven_custom}"></p>
+      </th:block>
 
 
     </th:block>

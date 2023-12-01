@@ -2392,6 +2392,7 @@ spec:
               label: 否
         - $formkit: select
           name: driven_by
+          id: driven_by
           label: 云服务提供商
           value: "none"
           help: "配置本站点由xxx云提供云服务"
@@ -2414,6 +2415,13 @@ spec:
               label: 金山云
             - value: custom
               label: 自定义
+        - $formkit: code
+          if: "$get(driven_by).value === 'custom'"
+          name: driven_custom
+          label: 自定义提供商
+          help: "配置自定义服务提供商，此处可填写html代码"
+          value: ""
+          language: html
         - $formkit: radio
           name: enable_rss
           label: 展示 RSS
