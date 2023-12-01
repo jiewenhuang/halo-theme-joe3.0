@@ -2415,6 +2415,7 @@ spec:
               label: 金山云
             - value: custom
               label: 自定义
+
         - $formkit: text
           name: driven_by_custom_url
           if: "$get(driven_by).value === 'custom'"
