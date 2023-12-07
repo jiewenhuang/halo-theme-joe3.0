@@ -30,8 +30,8 @@
 <script id="theme-config-getter" type="text/javascript">
     if (window.location.hostname === 'localhost'||window.location.hostname === '127.0.0.1') {
         ThemeConfig['mode'] = "development"
+        console.log(ThemeConfig.mode)
     }
-    console.log(ThemeConfig.mode)
 
     if (ThemeConfig.mode === "development") {
         console.log("Joe3主题配置：", ThemeConfig);
