@@ -20,8 +20,8 @@
             <img width="35" height="35" class="avatar lazyload" th:data-src="${theme.config.blogger.avatar}" th:src="${theme.config.blogger.lazyload_avatar}"  th:alt="${moment.owner.displayName}">
             <div class="meta">
               <div class="author">
-                <a class="link" th:href="${site.url}" th:text="${theme.config.blogger.nickname ?: site.title}"></a>
-                <!-- 修改链接指向博客地址 显示为博主名/博客名 -->
+                <a class="link" th:href="${site.url}" th:title="${theme.config.blogger.nickname ?: site.title}">[[${theme.config.blogger.nickname ?: site.title}]]</a>
+                <!-- 修改链接指向博客地址 title 和 显示为博主名/博客名 -->
               </div>
               <div class="item">
                 <span class="text">[[${theme.config.blogger.motto?:'一句话介绍自己吧！'}]]</span>
