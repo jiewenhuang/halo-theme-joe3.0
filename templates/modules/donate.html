@@ -7,10 +7,19 @@
   <ol class="joe_donate_list"
       th:classappend="${theme.config.post.qrcode_zfb != '' && theme.config.post.qrcode_wx != '' ?'two':''}">
     <th:block th:if="${theme.config.post.qrcode_zfb}">
-    <li><img th:src="${theme.config.post.qrcode_zfb}"  alt="qrcode alipay"/></li>
+    <li>
+      <p>支付宝打赏</p>
+      <img th:src="${theme.config.post.qrcode_zfb}"  alt="qrcode alipay"/></li>
     </th:block>
     <th:block th:if="${theme.config.post.qrcode_wx}">
-    <li><img th:src="${theme.config.post.qrcode_wx}"  alt="qrcode weixin"/></li>
+    <li>
+      <p>微信打赏</p>
+      <img th:src="${theme.config.post.qrcode_wx}"  alt="qrcode weixin"/></li>
+    </th:block>
+    <th:block th:if="${theme.config.post.qrcode_qq}">
+    <li>
+      <p>QQ打赏</p>
+      <img th:src="${theme.config.post.qrcode_qq}"  alt="qrcode qq"/></li>
     </th:block>
 </ol>
 </th:block>
