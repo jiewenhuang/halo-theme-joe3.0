@@ -2,7 +2,6 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <th:block th:fragment="donate">
   <div class="joe_donate">
-    <i class="joe-font joe-icon-shang"></i>
     <th:block th:if="${theme.config.post.qrcode_zfb != ''} or ${theme.config.post.qrcode_wx != ''}">
   <ol class="joe_donate_list"
       th:classappend="${theme.config.post.qrcode_zfb != '' && theme.config.post.qrcode_wx != '' ?'two':''}">
