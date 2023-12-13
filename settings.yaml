@@ -1876,6 +1876,15 @@ spec:
           label: 微信二维码
           value: ""
           help: "打赏用的微信收款二维码链接，不填不显示"
+
+
+        - $formkit: attachment
+#          if: "$get(enable_donate).value === true"
+          name: qrcode_qq
+          label: QQ二维码
+          value: ""
+          help: "打赏用的QQ收款二维码链接，不填不显示"
+
     - group: tags
       label: 标签页
       formSchema:
