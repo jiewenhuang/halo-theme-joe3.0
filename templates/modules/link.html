@@ -76,9 +76,9 @@
     </th:block>
     <link rel="preload stylesheet" as="style" th:href="${source_link+'/assets/css/min/responsive.min.css?v='+theme.spec.version}">
     <link rel="stylesheet" th:href="${source_link+'/assets/lib/fancybox/jquery.fancybox.min.css'}">
-    <link
+    <link th:if="${theme.config.basic.comment_option == 'waline'}"
             rel="stylesheet"
-            href="https://unpkg.com/@waline/client@v2/dist/waline.css"
+          href="https://unpkg.com/@waline/client@v2/dist/waline.css"
     />
     <th:block th:if="${ttheme.config.other.enable_clean_mode != true} and ${theme.config.theme.cursor_skin != 'off'}">
         <link rel="stylesheet" th:href="${source_link+'/assets/cursor/style/min/'+theme.config.theme.cursor_skin+'.min.css'}">
