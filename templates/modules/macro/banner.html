@@ -4,26 +4,16 @@
   <div class="joe_index__banner">
     <div class="swiper">
       <div class="swiper-wrapper">
-        <th:block th:each="bannerData : ${theme.config.carousel.banner_source}">
-          <th:block th:with="post = ${postFinder.getByName(bannerData.posts)}">
-            <div class="swiper-slide">
-              <a class="item"
-                 th:classappend="${post.status.permalink !='' ? 'clickable': ''}"
-                 th:href="${post.status.permalink !='' ? post.status.permalink : 'javascript:;'}" target="_blank" rel="noopener noreferrer nofollow">
-                <img width="100%" height="100%" class="thumbnail lazyload" th:data-src="${post.spec.cover ?: '/themes/theme-Joe3/assets/img/Joe3.png'}" th:src="${theme.config.carousel.banner_lazyload_img}" th:alt="${post.spec.title}">
-
-              <div class="title-row">
-                <h3 class="title">[[${post.spec.title}]]</h3>
-
-                <th:block th:if="${post.status.excerpt != ''}">
-                  <p class="subtitle">[[${post.status.excerpt}]]</p>
+        <th:block th:each="banner_data : ${theme.config.carousel.banner_data_group}">
+            <th:block th:switch="${banner_data.banner_section_type}">
+                <th:block th:case="'post'">
+                <th:block th:include="~{modules/macro/banner_item_data :: data_by_post(post_metadata = ${banner_data.data_by_post})}" />
                 </th:block>
-            </div>
+                <th:block th:case="'custom'">
+                <th:block th:include="~{modules/macro/banner_item_data :: data_by_custom(banner_url = ${banner_data.data_by_custom.banner_url}, banner_cover = ${banner_data.data_by_custom.banner_img}, banner_title = ${banner_data.data_by_custom.banner_title}, banner_excerpt = ${banner_data.data_by_custom.banner_subtitle})}" />
+                </th:block>
+            </th:block>
 
-          <i class="joe-font joe-icon-zhifeiji"></i>
-          </a>
-      </div>
-          </th:block>
         </th:block>
 </div>
 <th:block th:if="${theme.config.carousel.enable_banner_pagination}">

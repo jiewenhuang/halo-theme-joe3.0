@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="data_by_post(post_metadata)">
+  <div class="swiper-slide" th:with="post = ${postFinder.getByName(post_metadata)}">
+    <a class="item"
+       th:classappend="${post.status.permalink !='' ? 'clickable': ''}"
+       th:href="${post.status.permalink !='' ? post.status.permalink : 'javascript:;'}" target="_blank" rel="noopener noreferrer nofollow">
+      <img width="100%" height="100%" class="thumbnail lazyload" th:data-src="${post.spec.cover ?: '/themes/theme-Joe3/assets/img/Joe3.png'}" th:src="${theme.config.carousel.banner_lazyload_img}" th:alt="${post.spec.title}">
+
+      <div class="title-row">
+        <h3 class="title">[[${post.spec.title}]]</h3>
+
+        <th:block th:if="${post.status.excerpt != ''}">
+          <p class="subtitle">[[${post.status.excerpt}]]</p>
+        </th:block>
+      </div>
+
+      <i class="joe-font joe-icon-zhifeiji"></i>
+    </a>
+  </div>
+
+</th:block>
+<th:block th:fragment="data_by_custom(banner_url, banner_cover, banner_title, banner_excerpt)">
+  <div class="swiper-slide">
+    <a class="item"
+       th:classappend="${banner_url !='' ? 'clickable': ''}"
+       th:href="${banner_url !='' ? banner_url : 'javascript:;'}" target="_blank" rel="noopener noreferrer nofollow">
+      <img width="100%" height="100%" class="thumbnail lazyload" th:data-src="${banner_cover ?: '/themes/theme-Joe3/assets/img/Joe3.png'}" th:src="${theme.config.carousel.banner_lazyload_img}" th:alt="${banner_title}">
+
+      <div class="title-row">
+        <h3 class="title">[[${banner_title}]]</h3>
+
+        <th:block th:if="${banner_excerpt != ''}">
+          <p class="subtitle">[[${banner_excerpt}]]</p>
+        </th:block>
+      </div>
+
+      <i class="joe-font joe-icon-zhifeiji"></i>
+    </a>
+  </div>
+</th:block>
+</html>

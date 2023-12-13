@@ -604,15 +604,60 @@ spec:
             - value: false
               label: 关闭
         - $formkit: repeater
-          if: "$get(enable_banner).value"
-          name: banner_source
-          label: 轮播图文章
-          value: [ ]
+          if: "$get(enable_banner).value === true"
+          name: banner_data_group
+          label: 轮播图数据设置
+          id: banner_data_group
+          value: []
           children:
+            - $formkit: radio
+              name: banner_section_type
+              id: banner_section_type
+              label: 模块类型
+              value:
+              options:
+                - label: 已有文章
+                  value: post
+                - label: 自定义数据
+                  value: custom
             - $formkit: postSelect
-              name: posts
-              label: 选择要推荐的文章(至少两个)
+              if: $value.banner_section_type === 'post'
+              name: data_by_post
+              label: 选择已有文章
+              id: data_by_post
               value: ""
+            - $formkit: group
+              if: $value.banner_section_type === 'custom'
+              name: data_by_custom
+              label: 自定义数据
+              id: data_by_custom
+              value: [ ]
+              children:
+                - $formkit: text
+                  name: banner_title
+                  label: 标题
+                  value: ""
+                  validation: "required"
+                - $formkit: textarea
+                  name: banner_subtitle
+                  label: 描述(可留空)
+                  value: ""
+                - $formkit: url
+                  name: banner_url
+                  label: 跳转链接
+                  value: ""
+                  validation: "required"
+                - $formkit: attachment
+                  name: banner_img
+                  label: 图片地址
+                  value: ""
+                  validation: "required"
+
+
+
+
+
+
         - $formkit: radio
           name: banner_direction
           id: banner_direction
