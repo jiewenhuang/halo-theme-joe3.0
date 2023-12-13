@@ -652,12 +652,6 @@ spec:
                   label: 图片地址
                   value: ""
                   validation: "required"
-
-
-
-
-
-
         - $formkit: radio
           name: banner_direction
           id: banner_direction
@@ -1531,14 +1525,16 @@ spec:
               name: template_aside
               id: template_aside
               label: "侧边栏模块"
-              value: "enable_lifetime"
+              value: "none"
               options:
+                - value: "none"
+                  label: 无
                 - value: "enable_blogger"
                   label: 博主信息
                 - value: "enable_notice"
                   label: 网站公告
-                - value: "enable_qrcode"
-                  label: 二维码
+                - value: "enable_picture"
+                  label: 图片
                 - value: "enable_music_player"
                   label: 音乐播放器
                 - value: "enable_newest_post"
@@ -1551,63 +1547,128 @@ spec:
                   label: 标签云
                 - value: "enable_ads_aside"
                   label: 侧边栏广告
-        - $formkit: code
-#          if: "$get(template_aside).value === 'enable_notice'"
-          name: site_notice
-          label: 网站公告
-          value: "这是你的公告"
-          help: "网站公告信息，将展示在页面右侧，尽量简洁明了，不填不展示该模块（需要先在 “侧边栏” 中开启公告模块）,支持html代码"
-          language: html
-        - $formkit: attachment
-#          if: "$get(template_aside).value === 'enable_qrcode'"
-          name: qrcode_url
-          label: 二维码图片
-          value: ""
-        - $formkit: text
-#          if: "$get(enable_qrcode).value === true"
-          name: qrcode_title
-          label: 二维码标题
-          value: "我的二维码"
-        - $formkit: textarea
-#          if: "$get(template_aside).value === 'enable_qrcode'"
-          name: qrcode_description
-          label: 二维码描述
-          value: ""
-        - $formkit: text
-#          if: "$get(template_aside).value === 'enable_music_player'"
-          name: music_id
-          label: 歌单ID
-          help: "为音乐播放器配置歌单ID，大家在网页歌单页直接复制地址栏id参数后面那串数字即可，不填或填错将不会展示播放器（注意：仅支持网易云歌单ID，且不支持私密歌单）"
-          value: ""
-        - $formkit: number
-#          if: "$get(template_aside).value === 'show_newreply'"
-          name: show_newreply_num
-          label: 展示最新评论
-          value: 3
-          help: "在侧边栏展示最新评论的数量"
-        - $formkit: select
-#          if: "$get(template_aside).value === 'enable_tag_cloud'"
-          name: tag_cloud_type
-          id: tag_cloud_type
-          label: 标签云类型
-          value: "3d"
-          help: "设置标签云的展示形式，默认为 “3D标签云”，标签太多或卡顿时建议限制展示的标签数量使用列表形式"
-          options:
-            - value: 3d
-              label: 3D标签云
-            - value: list
-              label: 标签列表
-        - $formkit: select
-#          if: "$get(template_aside).value === 'enable_tag_cloud'"
-          name: tag_cloud_width
-          id: tag_cloud_width
-          label: 标签宽度
-          value: "static"
-          options:
-            - value: static
-              label: 固定宽度
-            - value: responsive
-              label: 自适应宽度
+            - $formkit: group
+              if: $value.template_aside === 'enable_notice'
+              name: aside_notice
+              label: 网站公告
+              value: [ ]
+              children:
+                - $formkit: text
+                  name: notice_title
+                  label: 公告标题
+                  value: "网站公告"
+                  help: "公告标题，留空则不显示"
+                - $formkit: code
+                  name: site_notice
+                  label: 网站公告内容
+                  value: "这是你的公告"
+                  help: "支持html代码"
+                  language: html
+            - $formkit: group
+              if: $value.template_aside === 'enable_picture'
+              name: aside_picture
+              label: 图片
+              value: [ ]
+              children:
+                - $formkit: attachment
+                  name: qrcode_url
+                  label: 图片链接
+                  value: ""
+                - $formkit: text
+                  name: qrcode_title
+                  label: 图片标题
+                  value: "我的二维码"
+                - $formkit: textarea
+                  name: qrcode_description
+                  label: 图片描述
+                  value: ""
+            - $formkit: group
+              if: $value.template_aside === 'enable_music_player'
+              name: aside_music_player
+              label: 音乐播放器
+              value: [ ]
+              children:
+                - $formkit: text
+                  name: music_id
+                  label: 歌单ID
+                  help: "为音乐播放器配置歌单ID，大家在网页歌单页直接复制地址栏id参数后面那串数字即可，不填或填错将不会展示播放器（注意：仅支持网易云歌单ID，且不支持私密歌单）"
+                  value: ""
+            - $formkit: group
+              if: $value.template_aside === 'show_newreply'
+              name: aside_newreply
+              label: 最新评论
+              value: [ ]
+              children:
+                - $formkit: number
+                  name: show_newreply_num
+                  label: 展示最新评论
+                  value: 3
+                  help: "在侧边栏展示最新评论的数量"
+            - $formkit: group
+              if: $value.template_aside === 'enable_tag_cloud'
+              name: aside_tag_cloud
+              label: 标签云
+              value: [ ]
+              children:
+                - $formkit: select
+                  name: tag_cloud_type
+                  id: tag_cloud_type
+                  label: 标签云类型
+                  value: "3d"
+                  help: "设置标签云的展示形式，默认为 “3D标签云”，标签太多或卡顿时建议限制展示的标签数量使用列表形式"
+                  options:
+                    - value: 3d
+                      label: 3D标签云
+                    - value: list
+                      label: 标签列表
+                - $formkit: select
+                  name: tag_cloud_width
+                  id: tag_cloud_width
+                  label: 标签宽度
+                  value: "static"
+                  options:
+                    - value: static
+                      label: 固定宽度
+                    - value: responsive
+                      label: 自适应宽度
+            - $formkit: group
+              if: $value.template_aside === 'enable_ads_aside'
+              name: aside_ads
+              label: 侧边栏广告
+              value: [ ]
+              children:
+                - $formkit: radio
+                  name: aside_ads_type
+                  id: aside_ads_type
+                  label: 广告数据
+                  value: ""
+                  help: "广告类型，支持图片和自定义代码"
+                  options:
+                    - value: img
+                      label: 图片
+                    - value: code
+                      label: 自定义代码
+                - $formkit: attachment
+                  if: $value.aside_ads_type === 'img'
+                  name: aside_ads_img
+                  label: 侧边栏广告图片
+                  value: ""
+                  help: "侧边栏广告图片链接"
+                - $formkit: text
+                  if: $value.aside_ads_type === 'img'
+                  name: aside_ads_url
+                  label: 广告链接
+                  value: ""
+                  help: "广告跳转链接"
+                - $formkit: code
+                  if: $value.aside_ads_type === 'code'
+                  name: aside_ads_code
+                  label: 自定义代码
+                  value: ""
+                  help: "支持html代码"
+                  language: html
+
+
 #
     - group: post
       label: 文章页
@@ -2280,26 +2341,7 @@ spec:
     - group: ads
       label: 广告
       formSchema:
-        - $formkit: radio
-          name: enable_aside_ads
-          label: 是否启用侧边栏广告
-          value: false
-          help: "启用后需要再到侧边栏添加组件"
-          options:
-            - value: true
-              label: 是
-            - value: false
-              label: 否
-        - $formkit: attachment
-          name: aside_ads_img
-          label: 侧边栏广告图片
-          value: ""
-          help: "侧边栏广告图片链接"
-        - $formkit: text
-          name: aside_ads_url
-          label: 广告链接
-          value: ""
-          help: "广告跳转链接"
+
         - $formkit: radio
           name: enable_post_ads_top
           label: 是否启用文章顶部广告

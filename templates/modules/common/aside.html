@@ -4,7 +4,45 @@
   <aside class="joe_aside"
   th:classappend="${theme.config.aside.aside_position == 'left' ? 'pos_left':''}">
   <th:block th:each="aside : ${theme.config.aside.enable_outpost_aside}">
-    <th:block th:replace="~{modules/widgets/asideWidget :: ${aside.template_aside}}" />
+    <th:block th:switch="${aside.template_aside}">
+      <th:block th:case="'enable_blogger'">
+<!--        博主信息-->
+        <th:block th:include="~{modules/widgets/asideWidget :: enable_blogger}" />
+      </th:block>
+      <th:block th:case="'enable_notice'">
+<!--        公告-->
+        <th:block th:include="~{modules/widgets/asideWidget :: enable_notice(notice_data = ${aside.aside_notice})}" />
+      </th:block>
+      <th:block th:case="'enable_picture'">
+<!--        图片-->
+        <th:block th:include="~{modules/widgets/asideWidget :: enable_picture(pic_data = ${aside.aside_picture})}" />
+      </th:block>
+      <th:block th:case="'enable_music_player'">
+<!--        音乐播放器-->
+        <th:block th:include="~{modules/widgets/asideWidget :: enable_music_player(music_data = ${aside.aside_music_player})}" />
+      </th:block>
+      <th:block th:case="'enable_newest_post'">
+<!--        最新文章-->
+        <th:block th:include="~{modules/widgets/asideWidget :: enable_newest_post}" />
+      </th:block>
+      <th:block th:case="'enable_lifetime'">
+<!--        人生倒计时-->
+          <th:block th:include="~{modules/widgets/asideWidget :: enable_lifetime}" />
+      </th:block>
+      <th:block th:case="'show_newreply'">
+<!--        最新评论-->
+        <th:block th:include="~{modules/widgets/asideWidget :: show_newreply(new_reply_data = ${aside.aside_newreply})}" />
+      </th:block>
+      <th:block th:case="'enable_tag_cloud'">
+<!--        标签云-->
+          <th:block th:include="~{modules/widgets/asideWidget :: enable_tag_cloud(tag_cloud_data = ${aside.aside_tag_cloud})}" />
+      </th:block>
+      <th:block th:case="'enable_ads_aside'">
+        <!--        侧边栏广告-->
+          <th:block th:include="~{modules/widgets/asideWidget :: enable_ads_aside(ads_data = ${aside.aside_ads})}" />
+      </th:block>
+
+    </th:block>
 
   </th:block>
 

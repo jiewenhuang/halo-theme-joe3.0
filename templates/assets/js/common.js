@@ -172,7 +172,8 @@ const commonContext = {
 				}
 				// 代码复制
 				if (ThemeConfig.enable_code_copy) {
-					const text = $item.find("code[class*='language-']").text();
+					const text = $item.find("code[class='language-none'], code[class*='language-']").text();
+					console.log('text:'+text);
 					const span = $(
 						"<span class=\"copy-button\"><i class=\"joe-font joe-icon-copy\" title=\"复制代码\"></i></span>"
 					);
@@ -527,6 +528,7 @@ const commonContext = {
 	},
 	/* 初始化3D标签云 */
 	init3dTag() {
+		ThemeConfig.tag_cloud_type = document.getElementById('tags-3d') ? '3d' : 'list'
 		ThemeConfig.enable_tag_cloud=document.querySelector('.joe_aside__item.tags-cloud') !== null
 		// console.log(ThemeConfig.enable_tag_cloud)
 		if (
