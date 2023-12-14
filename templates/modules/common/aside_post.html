@@ -15,9 +15,10 @@
     <th:block th:if="${theme.config.post.enable_relate_post == true}">
       <th:block th:replace="~{modules/macro/relate :: relate}" />
     </th:block>
-    <th:block th:if="${theme.config.ads.enable_post_ads_aside} and ${#strings.trim(theme.config.ads.post_ads_aside_img) !=''}">
-        <th:block th:replace="~{modules/ads/ads_aside :: ads_aside(ads_url=${theme.config.ads.post_ads_aside_url}, ads_img=${theme.config.ads.post_ads_aside_img})}" />
-    </th:block>
+      <th:block th:if="${theme.config.ads.enable_ads_aside != 'none'} and ${not #lists.isEmpty(theme.config.ads.ads_aside)}"
+                th:each="ads_data : ${theme.config.ads.ads_aside}">
+          <th:block th:replace="~{modules/ads/ads_post :: ads_post(kind = ${theme.config.ads.enable_ads_aside}, data = ${ads_data})}" />
+      </th:block>
 </div>
 </aside>
 </th:block>

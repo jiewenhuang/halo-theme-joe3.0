@@ -3,40 +3,40 @@
 <th:block th:fragment="enable_blogger">
     <th:block th:replace="~{modules/common/blogger :: blogger}" />
 </th:block>
-<th:block th:fragment="enable_notice">
+<th:block th:fragment="enable_notice(notice_data)">
     <section class="joe_aside__item notice">
         <div class="joe_aside__item-title">
             <!--      <#&#45;&#45;  <i class="joe-font joe-icon-speaker"></i>  &ndash;&gt;-->
             <th:block th:replace="~{modules/macro/speaker :: speaker}" />
-            <span class="text">公告信息</span>
+            <span class="text">[[${notice_data.notice_title}]]</span>
         </div>
         <div class="joe_aside__item-contain">
-            <div class="notice_content" th:utext="${theme.config.aside.site_notice}"></div>
+            <div class="notice_content" th:utext="${notice_data.site_notice}"></div>
         </div>
     </section>
 </th:block>
-<th:block th:fragment="enable_qrcode">
+<th:block th:fragment="enable_picture(pic_data)">
     <section class="joe_aside__item qrcode">
         <div class="joe_aside__item-title">
             <i class="joe-font joe-icon-qrcode"></i>
-            <span class="text">[[${theme.config.aside.qrcode_title}]]</span>
+            <span class="text">[[${pic_data.qrcode_title}]]</span>
         </div>
         <div class="joe_aside__item-contain">
-            <img class="qrcode_img lazyload" th:src="${theme.config.aside.qrcode_url}" th:data-src="${theme.config.aside.qrcode_url}" alt="二维码"/>
-            <th:block th:if="${theme.config.aside.qrcode_description != ''}">
-                <p class="qrcode_description">[[${theme.config.aside.qrcode_description}]]</p>
+            <img class="qrcode_img lazyload" th:src="${pic_data.qrcode_url}" th:data-src="${pic_data.qrcode_url}" th:alt="${pic_data.qrcode_title}"/>
+            <th:block th:if="${pic_data.qrcode_description != ''}">
+                <p class="qrcode_description">[[${pic_data.qrcode_description}]]</p>
             </th:block>
         </div>
     </section>
 </th:block>
-<th:block th:fragment="enable_music_player">
-<th:block th:if="${theme.config.aside.music_id != ''}">
+<th:block th:fragment="enable_music_player(music_data)">
+<th:block th:if="${music_data.music_id != ''}">
     <section class="joe_aside__item timelife">
         <div class="joe_aside__item-title">
             <i class="joe-font joe-icon-yinfu"></i>
             <span class="text">我的歌单</span>
         </div>
-        <div id="aplayer" class="aplayer" th:data-id="${theme.config.aside.music_id}" list-max-height="20px" data-server="netease" data-type="playlist" data-fixed="false" data-listfolded="true" data-order="random"  data-mode="#f3f3f7"></div>
+        <div id="aplayer" class="aplayer" th:data-id="${music_data.music_id}" list-max-height="20px" data-server="netease" data-type="playlist" data-fixed="false" data-listfolded="true" data-order="random"  data-mode="#f3f3f7"></div>
     </section>
 </th:block>
 </th:block>
@@ -52,7 +52,7 @@
         <div class="joe_aside__item-contain"></div>
     </section>
 </th:block>
-<th:block th:fragment="show_newreply">
+<th:block th:fragment="show_newreply(new_reply_data)">
 <th:block th:if="${theme.config.other.enable_clean_mode !=true}">
     <section class="joe_aside__item newreply">
         <div class="joe_aside__item-title">
@@ -61,9 +61,9 @@
         </div>
 
         <ul class="joe_aside__item-contain"
-            th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline_serverURL) ==''}">
-            <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline_serverURL) ==''}"
-                    th:each="result : ${commentFinder.list(null,1,theme.config.aside.show_newreply_num)}">
+            th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}">
+            <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}"
+                    th:each="result : ${commentFinder.list(null,1,new_reply_data.show_newreply_num)}">
                 <li class="item">
                     <div class="user">
                         <img width="35" height="35" class="avatar lazyload" th:data-src="${result.owner.avatar ?: '/themes/theme-Joe3/assets/img/peeps-avatar.png'} " th:src="${theme.config.blogger.lazyload_avatar}"  alt="头像">
@@ -109,7 +109,7 @@
 
             </th:block>
         </ul>
-        <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline_serverURL) !=''}">
+        <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}">
         <ul class="joe_aside__item-contain" id="waline-recent">
         </ul>
             <style>
@@ -119,13 +119,13 @@
                     max-width: 100%;}
             </style>
             <script type="module" th:inline="javascript">
-                import { RecentComments } from 'https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+                import { RecentComments } from /*[[${theme.config.basic.waline.waline_js_leaving}]]*/'';
 
                 RecentComments({
-                    serverURL: /*[[${theme.config.basic.waline_serverURL}]]*/'',
-                    count: /*[[${theme.config.aside.show_newreply_num}]]*/5,
+                    serverURL: /*[[${theme.config.basic.waline.waline_serverURL}]]*/'',
+                    count: /*[[${new_reply_data.show_newreply_num}]]*/5,
                 }).then(({ comments }) => {
-                    document.getElementById('waline-recent').innerHTML = comments.data.map(
+                    document.getElementById('waline-recent').innerHTML = comments.map(
                         (comment) =>{
                             const commentContent = document.createElement('div');
                             let commentText =''
@@ -171,7 +171,7 @@
     </section>
 </th:block>
 </th:block>
-<th:block th:fragment="enable_tag_cloud">
+<th:block th:fragment="enable_tag_cloud(tag_cloud_data)">
     <section class="joe_aside__item tags-cloud" id="tags-cloud">
         <div class="joe_aside__item-title">
             <i class="joe-font joe-icon-tag"></i>
@@ -182,7 +182,7 @@
         </div>
         <div class="joe_aside__item-contain">
 
-            <div th:class="'tags-cloud-list '+${theme.config.aside.tag_cloud_width =='responsive' ? 'responsive':'static'}" th:style="${theme.config.aside.tag_cloud_type == '3d' ? 'display:none':''}">
+            <div th:class="'tags-cloud-list '+${tag_cloud_data.tag_cloud_width =='responsive' ? 'responsive':'static'}" th:style="${tag_cloud_data.tag_cloud_type == '3d' ? 'display:none':''}">
                 <th:block th:with="tags = ${tagFinder.listAll()}">
 
                     <a th:each="tag : ${tags}"
@@ -190,7 +190,7 @@
                 </th:block>
 
             </div>
-            <th:block th:if="${theme.config.aside.tag_cloud_type == '3d'}">
+            <th:block th:if="${tag_cloud_data.tag_cloud_type == '3d'}">
                 <div id="tags-3d">
                     <div class="empty">加载中…</div>
                 </div>
@@ -202,9 +202,18 @@
         <!--</@tagTag>-->
     </section>
 </th:block>
-<th:block th:fragment="enable_ads_aside">
-    <th:block th:if="${theme.config.ads.enable_aside_ads} and ${#strings.trim(theme.config.ads.aside_ads_img) !=''}">
-        <th:block th:replace="~{modules/ads/ads_aside :: ads_aside(ads_url=${theme.config.ads.aside_ads_url}, ads_img=${theme.config.ads.aside_ads_img})}" />
+<th:block th:fragment="enable_ads_aside(ads_data)">
+    <th:block th:switch="${ads_data.aside_ads_type}">
+        <th:block th:case="'img'">
+            <th:block th:if="${#strings.trim(ads_data.aside_ads_img) !=''}">
+                <th:block th:replace="~{modules/ads/ads_aside :: ads_aside_img(ads_url=${ads_data.aside_ads_url}, ads_img=${ads_data.aside_ads_img})}" />
+            </th:block>
+        </th:block>
+        <th:block th:case="'code'">
+                <th:block th:replace="~{modules/ads/ads_aside :: ads_aside_code(ads_code = ${ads_data.aside_ads_code})}" />
+        </th:block>
+
     </th:block>
+
 </th:block>
 </html>

@@ -17,7 +17,7 @@
               <div class="joe_main">
                   <div class="joe_index">
 <!--                      轮播图-->
-                      <th:block th:if="${theme.config.carousel.enable_banner} and ${not #lists.isEmpty(theme.config.carousel.banner_source)}">
+                      <th:block th:if="${theme.config.carousel.enable_banner} and ${not #lists.isEmpty(theme.config.carousel.banner_data_group)}">
                           <th:block th:replace="~{modules/macro/banner :: banner}" />
                       </th:block>
 
@@ -53,7 +53,7 @@
                   <th:block th:if="${!theme.config.home.enable_index_list_ajax}">
                   <th:block th:replace="~{modules/common/pagination :: pagination}" />
                   </th:block>
-                  <th:block th:if="${theme.config.home.enable_index_list_ajax}">
+                  <th:block th:if="${posts.hasNext()} and ${theme.config.home.enable_index_list_ajax}">
                       <div class="joe_load_container"
                            th:with="nextPage = ${posts.totalPages == posts.page?'':posts.nextUrl}">
                       <div class="joe_load" th:data-next="@{${nextPage}}">查看更多 </div>
