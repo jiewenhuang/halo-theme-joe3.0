@@ -32,12 +32,38 @@ spec:
               label: 默认
             - value: waline
               label: Waline
-        - $formkit: text
+        - $formkit: group
+          name: waline
           if: "$get(comment_option).value === 'waline'"
-          name: waline_serverURL
-          label: Waline 服务端地址
-          value: ""
-          help: "Waline 服务端地址，如 https://waline-server.herokuapp.com 不要加结尾反斜杠"
+          label: Waline 设置
+          id: waline
+          children:
+            - $formkit: text
+              name: waline_serverURL
+              label: Waline 服务端地址
+              value: ""
+              help: "Waline 服务端地址，如 https://waline-server.herokuapp.com 不要加结尾反斜杠"
+            - $formkit: text
+              name: waline_css
+              label: Waline CSS地址
+              value: "https://unpkg.com/@waline/client@v2/dist/waline.css"
+              help: Waline 的主样式地址
+            - $formkit: text
+              name: waline_js_comment
+              label: 用于评论的 JS 地址
+              value: "https://unpkg.com/@waline/client@v2/dist/waline.mjs"
+              help: Waline 的评论 JS 地址
+            - $formkit: text
+              name: waline_js_leaving
+              label: 功能 JS
+              value: "https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs"
+              help: 用于加载留言板和最新评论的 JS 地址
+            - $formkit: text
+              name: waline_js_list
+              label: 列表 JS
+              value: "https://unpkg.com/@waline/client@v2/dist/comment.mjs"
+              help: 首页加载显示评论数的 JS 地址
+
         - $formkit: radio
           name: enable_source_link
           id: enable_source_link

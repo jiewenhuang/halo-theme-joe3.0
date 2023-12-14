@@ -61,8 +61,8 @@
         </div>
 
         <ul class="joe_aside__item-contain"
-            th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline_serverURL) ==''}">
-            <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline_serverURL) ==''}"
+            th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}">
+            <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}"
                     th:each="result : ${commentFinder.list(null,1,new_reply_data.show_newreply_num)}">
                 <li class="item">
                     <div class="user">
@@ -109,7 +109,7 @@
 
             </th:block>
         </ul>
-        <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline_serverURL) !=''}">
+        <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}">
         <ul class="joe_aside__item-contain" id="waline-recent">
         </ul>
             <style>
@@ -119,10 +119,10 @@
                     max-width: 100%;}
             </style>
             <script type="module" th:inline="javascript">
-                import { RecentComments } from 'https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+                import { RecentComments } from /*[[${theme.config.basic.waline.waline_js_leaving}]]*/'';
 
                 RecentComments({
-                    serverURL: /*[[${theme.config.basic.waline_serverURL}]]*/'',
+                    serverURL: /*[[${theme.config.basic.waline.waline_serverURL}]]*/'',
                     count: /*[[${new_reply_data.show_newreply_num}]]*/5,
                 }).then(({ comments }) => {
                     document.getElementById('waline-recent').innerHTML = comments.map(
