@@ -173,7 +173,6 @@ const commonContext = {
 				// 代码复制
 				if (ThemeConfig.enable_code_copy) {
 					const text = $item.find("code[class='language-none'], code[class*='language-']").text();
-					console.log('text:'+text);
 					const span = $(
 						"<span class=\"copy-button\"><i class=\"joe-font joe-icon-copy\" title=\"复制代码\"></i></span>"
 					);
