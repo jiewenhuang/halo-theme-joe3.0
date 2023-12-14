@@ -2367,64 +2367,116 @@ spec:
     - group: ads
       label: 广告
       formSchema:
-
-        - $formkit: radio
-          name: enable_post_ads_top
-          label: 是否启用文章顶部广告
-          value: false
+        - $formkit: select
+          name: enable_ads_top
+          id: enable_ads_top
+          label: 启用文章顶部广告
+          value: none
           options:
-            - value: true
-              label: 是
-            - value: false
-              label: 否
-        - $formkit: attachment
-          name: post_ads_top_img
+            - value: none
+              label: 不启用
+            - value: img
+              label: 图片
+            - value: code
+              label: 自定义代码
+        - $formkit: repeater
+          name: ads_top
           label: 文章顶部广告图片
-          value: ""
-          help: "文章顶部广告图片链接"
-        - $formkit: text
-          name: post_ads_top_url
-          label: 广告链接
-          value: ""
-          help: "广告跳转链接"
-        - $formkit: radio
-          name: enable_post_ads_bottom
-          label: 是否启用文章底部广告
-          value: false
+          max: 1
+          min: 1
+          value: [ ]
+          children:
+            - $formkit: attachment
+              name: ads_img
+              id: ads_img
+              label: 广告图片
+              value:
+            - $formkit: text
+              name: ads_url
+              id: ads_url
+              label: 广告链接
+              value:
+            - $formkit: code
+              name: ads_code
+              id: ads_code
+              label: 自定义代码
+              value:
+              language: html
+        - $formkit: select
+          name: enable_ads_bottom
+          id: enable_ads_bottom
+          label: 启用文章底部广告
+          value: none
           options:
-            - value: true
-              label: 是
-            - value: false
-              label: 否
-        - $formkit: attachment
-          name: post_ads_bottom_img
-          label: 文章底部广告图片
-          value: ""
-          help: "文章底部广告图片链接"
-        - $formkit: text
-          name: post_ads_bottom_url
-          label: 广告链接
-          value: ""
-          help: "广告跳转链接"
-        - $formkit: radio
-          name: enable_post_ads_aside
-          label: 是否启用文章侧边栏广告
-          value: false
+            - value: none
+              label: 不启用
+            - value: img
+              label: 图片
+            - value: code
+              label: 自定义代码
+        - $formkit: repeater
+          name: ads_bottom
+          label: 文章顶部广告图片
+          max: 1
+          min: 1
+          value: [ ]
+          children:
+            - $formkit: attachment
+              name: ads_img
+              id: ads_img
+              label: 广告图片
+              value:
+            - $formkit: text
+              name: ads_url
+              id: ads_url
+              label: 广告链接
+              value:
+            - $formkit: code
+              name: ads_code
+              id: ads_code
+              label: 自定义代码
+              value:
+              language: html
+        - $formkit: select
+          name: enable_ads_aside
+          id: enable_ads_aside
+          label: 启用文章底部广告
+          value: none
           options:
-            - value: true
-              label: 是
-            - value: false
-              label: 否
-        - $formkit: attachment
-          name: post_ads_aside_img
-          label: 文章侧边栏广告图片
-          value: ""
-          help: "文章底部广告图片链接"
-        - $formkit: text
-          name: post_ads_aside_url
-          label: 广告链接
-          value: ""
-          help: "广告跳转链接"
+            - value: none
+              label: 不启用
+            - value: img
+              label: 图片
+            - value: code
+              label: 自定义代码
+        - $formkit: repeater
+          name: ads_aside
+          label: 文章顶部广告图片
+          max: 1
+          min: 1
+          value: [ ]
+          children:
+            - $formkit: attachment
+              name: ads_img
+              id: ads_img
+              label: 广告图片
+              value:
+            - $formkit: text
+              name: ads_url
+              id: ads_url
+              label: 广告链接
+              value:
+            - $formkit: code
+              name: ads_code
+              id: ads_code
+              label: 自定义代码
+              value:
+              language: html
+
+
+
+
+
 
     - group: footer
       label: 页脚

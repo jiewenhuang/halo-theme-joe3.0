@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<th:block th:fragment="ads_post(ads_url, ads_img)">
+<th:block th:fragment="ads_post(kind, data)">
     <section class="joe_advert-large">
-        <a target="_blank" rel="noopener noreferrer nofollow" th:href="${ads_url}" title="广告">
-            <img class="omit" width="100%" th:src="${ads_img}" alt="广告"/>
+        <th:block th:if="${kind == 'img'}">
+        <a target="_blank" rel="noopener noreferrer nofollow" th:href="${data.ads_url}" title="广告">
+            <img class="omit" width="100%" th:src="${data.ads_img}" alt="广告"/>
             <span class="icon">广告</span>
         </a>
+        </th:block>
+        <th:block th:if="${kind == 'code'}" th:utext="${data.ads_code}">
+
+        </th:block>
     </section>
 </th:block>
 </html>
