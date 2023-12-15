@@ -2416,7 +2416,7 @@ spec:
               label: 自定义代码
         - $formkit: repeater
           name: ads_bottom
-          label: 文章顶部广告图片
+          label: 文章底部广告图片
           max: 1
           min: 1
           value: [ ]
@@ -2440,7 +2440,7 @@ spec:
         - $formkit: select
           name: enable_ads_aside
           id: enable_ads_aside
-          label: 启用文章底部广告
+          label: 启用文章侧边栏广告
           value: none
           options:
             - value: none
@@ -2451,7 +2451,7 @@ spec:
               label: 自定义代码
         - $formkit: repeater
           name: ads_aside
-          label: 文章顶部广告图片
+          label: 文章侧边栏广告图片
           max: 1
           min: 1
           value: [ ]
