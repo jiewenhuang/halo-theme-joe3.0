@@ -89,7 +89,7 @@
               </style>
 
               <script type="module" th:inline="javascript">
-                import { init } from 'https://unpkg.com/@waline/client@v2/dist/waline.mjs';
+                import { init } from /*[[${theme.config.basic.waline.waline_js_comment}]]*/'';
 
                 init({
                   el: '#waline',

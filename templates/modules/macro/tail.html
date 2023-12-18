@@ -43,9 +43,9 @@
 <!--相册-->
     <th:block th:if="${htmlType == 'photos'}">
         <script th:src="${source_link+'/assets/lib/justifiedGallery/justifiedGallery.min.js'}"></script>
-        <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-        <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
-        <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+        <script th:src="${source_link+'/assets/lib/masonry/masonry.pkgd.min.js'}"></script>
+        <script th:src="${source_link+'/assets/lib/masonry/isotope.pkgd.min.js'}"></script>
+        <script th:src="${source_link+'/assets/lib/masonry/imagesloaded.pkgd.min.js'}"></script>
 
     </th:block>
 
