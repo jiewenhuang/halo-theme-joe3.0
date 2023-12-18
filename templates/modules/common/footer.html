@@ -91,7 +91,7 @@
 <th:block th:if="${theme.config.footer.enable_police} and ${theme.config.basic.police != ''} and ${theme.config.basic.police != null}">
 <p class="site_police">
 
-  <a th:href="'http://www.beian.gov.cn/portal/registerSystemInfo?recordcode='" target="_blank" rel="noopener noreferrer nofollow">[[${theme.config.basic.police}]]</a>
+  <a th:href="'https://beian.mps.gov.cn/#/query/webSearch?code='+${theme.config.basic.police}" target="_blank" rel="noopener noreferrer nofollow">[[${theme.config.basic.police}]]</a>
 
 </p>
 </th:block>
