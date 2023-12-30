@@ -29,6 +29,7 @@
         <script th:src="${source_link+'/assets/lib/APlayer/APlayer.min.js'}"></script>
         <script th:src="${source_link+'/assets/lib/meting/meting.min.js'}"></script>
     </th:block>
+        <link rel="stylesheet" th:href="${source_link+'/assets/lib/katex@0.13.18/katex.min.css'}">
     </th:block>
     <script th:src="${source_link+'/assets/js/min/custom.min.js?v='+theme.spec.version}"></script>
     <th:block th:if="${htmlType == 'post'} or ${htmlType == 'journals'} or ${htmlType == 'sheet'}">
