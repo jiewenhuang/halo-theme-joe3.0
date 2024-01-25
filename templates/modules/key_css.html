@@ -40,6 +40,8 @@
             --img-max-width: 100%;
             font-family: "Joe Font", "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, "sans-serif";
 
+
+
         }
         html[data-mode='dark'] body {
 
@@ -49,6 +51,21 @@
             --wave-color: [[${theme.config.beauty.dark_color}?:'#fff']];
             --scroll-bar: [[${theme.config.theme.scrollbar_color ?: '#666'}]];
             --loading-bar: [[${theme.config.theme.loading_bar_color ?: 'var(--theme)'}]];
+            //    搜索框
+            --halo-search-widget-color-modal-layer: rgba(10, 11, 12, 0.8);
+            --halo-search-widget-color-modal-content-bg: rgb(27, 27, 30);
+            --halo-search-widget-color-form-input: rgb(255, 255, 255);
+            --halo-search-widget-color-form-input-placeholder: #868686;
+            --halo-search-widget-color-form-input-bg: rgb(27, 27, 30);
+            --halo-search-widget-color-form-divider: #292929;
+            --halo-search-widget-color-result-item-bg: #232323;
+            --halo-search-widget-color-result-item-hover-bg: #2b3033;
+            --halo-search-widget-color-result-item-title: rgb(255 255 255);
+            --halo-search-widget-color-result-item-content: #868686;
+            --halo-search-widget-color-command-kbd-item: #868686;
+            --halo-search-widget-color-command-kbd-border: #868686;
+            --halo-search-widget-color-result-empty: #868686;
+
         }
         ::-webkit-scrollbar {
             width: [[${theme.config.theme.scrollbar_width ?: '8px'}]];
