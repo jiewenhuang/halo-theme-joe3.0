@@ -66,25 +66,25 @@
                               </span>
                 </th:block>
                 <th:block th:if="${theme.config.journals.enable_comment_journal} and ${theme.config.other.enable_clean_mode != true}">
-                  <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline_serverURL) ==''}">
+                  <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}">
                   <span class="joe_journal_operate_item comment"><i class="joe-font joe-icon-message journal-comment"></i><em >[[${moment.stats.totalComment}]]</em></span>
                   </th:block>
-                  <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline_serverURL) !=''}">
+                  <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}">
                     <span class="joe_journal_operate_item comment"><i class="joe-font joe-icon-message journal-comment"></i><em class="waline-comment-count" th:data-path="'/moments/'+${moment.metadata.name}">0</em></span>
                   </th:block>
-                  <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline_serverURL) ==''}">
+                  <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}">
                   <th:block th:if="${moment.stats.totalComment gt 0}">
               <span class="joe_journal_operate_item journal_comment_expander"><em class="journal_comment_expander_txt">查看评论</em><i class="joe-font joe-icon-arrow-downb"></i></span>
                   </th:block>
                   </th:block>
-                  <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline_serverURL) !=''}">
+                  <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}">
                     <span class="joe_journal_operate_item journal_comment_expander" th:id="'waline-journal_comment_expander-'+${moment.metadata.name}" style="display: none"><em class="journal_comment_expander_txt">查看评论</em><i class="joe-font joe-icon-arrow-downb"></i></span>
                   </th:block>
 
                   </th:block>
                 <th:block th:if="${theme.config.journals.enable_comment_journal} and ${theme.config.other.enable_clean_mode != true}">
           <div class="joe_journal_comment">
-            <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline_serverURL) ==''}">
+            <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}">
             <halo:comment
                     group="moment.halo.run"
                     kind="Moment"
@@ -92,7 +92,7 @@
                     colorScheme="document.documentElement.getAttribute('data-mode')"
             />
             </th:block>
-            <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline_serverURL) !=''}">
+            <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}">
               <div th:id="${moment.metadata.name}"></div>
               <style>
                 #waline .wl-count{color:var(--routine);}
@@ -104,13 +104,13 @@
                 init({
                   el: /*[[${'#'+moment.metadata.name}]]*/'',
                   dark: 'html[data-mode="dark"]',
-                  serverURL: /*[[${theme.config.basic.waline_serverURL}]]*/'',
+                  serverURL: /*[[${theme.config.basic.waline.waline_serverURL}]]*/'',
                   path: '/moments/'+/*[[${moment.metadata.name}]]*/'',
                   comment: true,
                   requiredMeta:['nick', 'mail'],
 
                 });
-                const url = [[${theme.config.basic.waline_serverURL+'/api/comment?type=count&url=/moments/'+moment.metadata.name}]];
+                const url = [[${theme.config.basic.waline.waline_serverURL+'/api/comment?type=count&url=/moments/'+moment.metadata.name}]];
                 fetch(url).then(async (response) => {
                   const data = await response.json();
                   const comment_expander = 'waline-journal_comment_expander-'+/*[[${moment.metadata.name}]]*/'';

@@ -23,8 +23,9 @@
 
     </th:block>
     <script th:src="${source_link+'/assets/lib/fancybox/jquery.fancybox.min.js'}"></script>
-    <th:block th:each="aside : ${theme.config.aside.enable_outpost_aside}">
-    <th:block th:if="(${aside.template_aside == 'enable_music_player'} and ${theme.config.aside.music_id != null && theme.config.aside.music_id != ''}) or ${htmlType =='post'}">
+    <th:block th:each="aside : ${theme.config.aside.enable_outpost_aside}"
+              th:if="${aside.template_aside == 'enable_music_player'} or ${htmlType =='post'}">
+    <th:block th:if="${#strings.trim(aside.aside_music_player.music_id) !=''}" >
         <link rel="stylesheet" th:href="${source_link+'/assets/lib/APlayer/APlayer.min.css'}">
         <script th:src="${source_link+'/assets/lib/APlayer/APlayer.min.js'}"></script>
         <script th:src="${source_link+'/assets/lib/meting/meting.min.js'}"></script>

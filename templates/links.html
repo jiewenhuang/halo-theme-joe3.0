@@ -73,7 +73,7 @@
             <div class="box_title">
             <h2 >评论区</h2>
             </div>
-            <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline_serverURL) ==''}">
+            <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}">
 
             <halo:comment
                     group="content.halo.run"
@@ -82,7 +82,7 @@
                     colorScheme="document.documentElement.getAttribute('data-mode')"
             />
             </th:block>
-            <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline_serverURL) !=''}">
+            <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}">
               <div id="waline"></div>
               <style>
                 #waline .wl-count{color:var(--routine);}
@@ -94,7 +94,7 @@
                 init({
                   el: '#waline',
                   dark: 'html[data-mode="dark"]',
-                  serverURL: /*[[${theme.config.basic.waline_serverURL}]]*/'',
+                  serverURL: /*[[${theme.config.basic.waline.waline_serverURL}]]*/'',
                   requiredMeta:['nick', 'mail'],
 
                 });

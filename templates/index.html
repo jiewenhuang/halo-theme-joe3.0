@@ -20,9 +20,10 @@
                       <th:block th:if="${theme.config.carousel.enable_banner} and ${not #lists.isEmpty(theme.config.carousel.banner_data_group)}">
                           <th:block th:replace="~{modules/macro/banner :: banner}" />
                       </th:block>
+<!--                      热门模块-->
 
-                      <th:block th:if="${theme.config.home.enable_hot_category} and (${not #lists.isEmpty(theme.config.home.category_data) and theme.config.home.hot_category_source == 'category'} or ${not #lists.isEmpty(theme.config.home.custom_data) and theme.config.home.hot_category_source == 'custom'})">
-                          <th:block th:replace="~{modules/macro/hot_category :: hot_category}" />
+                      <th:block th:if="${theme.config.home.enable_hot_category} and ${not #lists.isEmpty(theme.config.home.data_hot_category)}">
+                          <th:block th:replace="~{modules/macro/hot_category :: hot_category(data=${theme.config.home.data_hot_category})}" />
                       </th:block>
 
                       <div class="joe_index__article">

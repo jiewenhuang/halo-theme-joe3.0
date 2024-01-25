@@ -41,6 +41,10 @@
         <!--        侧边栏广告-->
           <th:block th:include="~{modules/widgets/asideWidget :: enable_ads_aside(ads_data = ${aside.aside_ads})}" />
       </th:block>
+        <th:block th:case="'enable_custom'">
+            <!--        侧边栏广告-->
+            <th:block th:include="~{modules/widgets/asideWidget :: enable_custom(custom_data = ${aside.aside_custom})}" />
+        </th:block>
 
     </th:block>
 

@@ -41,7 +41,7 @@
                 <th:block th:if="${theme.config.tags.tags_type=='tag'}">
                 <li class="item" th:each="tag : ${tags}">
                   <a class="link" th:href="${tag.status.permalink}" th:title="${tag.spec.displayName}">
-                    <span title="${tag.name!}">[[${tag.spec.displayName}]]</span>
+                    <span >[[${tag.spec.displayName}]]</span>
                     <th:block th:if="${theme.config.tags.enable_tags_post_num}">
                       <th:block th:replace="~{modules/macro/post_num :: post_num}" />
                     </th:block>

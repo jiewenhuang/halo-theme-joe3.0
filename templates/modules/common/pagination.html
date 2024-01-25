@@ -198,7 +198,7 @@
                 </li>
                 <li th:classappend="${index eq pageIndex} ? 'active'"
                     th:each="index : ${#numbers.sequence(1, totalPages)}">
-                    <a th:href="@{/categories}+'/'+${category.spec.slug}+'/page/' + ${index}"
+                    <a th:href="@{/categories}+'/'+${category.status.permalink}+'/page/' + ${index}"
                        th:text="${index}"></a>
                 </li>
                 <li class="next"
@@ -224,7 +224,7 @@
                 <li th:classappend="${index eq pageIndex} ? 'active':''"
                     th:each="index : ${#numbers.sequence(2,5)}"
                     th:if="${pageIndex le 4}">
-                    <a th:href="@{/categories}+'/'+${category.spec.slug}+'/page/' + ${index}"
+                    <a th:href="@{/categories}+'/'+${category.status.permalink}+'/page/' + ${index}"
                        th:text="${index}"></a>
                 </li>
                 <li th:if="${pageIndex le 4}">
@@ -237,7 +237,7 @@
                 <li th:classappend="${index eq pageIndex} ? 'active':''"
                     th:each="index : ${#numbers.sequence(totalPages - 4, totalPages - 1)}"
                     th:if="${totalPages - pageIndex le 3}">
-                    <a th:href="@{/categories}+'/'+${category.spec.slug}+'/page/' + ${index}"
+                    <a th:href="@{/categories}+'/'+${category.status.permalink}+'/page/' + ${index}"
                        th:text="${index}">
                     </a>
                 </li>
@@ -248,7 +248,7 @@
                 <li th:each="index : ${#numbers.sequence(pageIndex - 1,pageIndex + 1)}"
                     th:classappend="${index eq pageIndex} ? 'active':''"
                     th:if="${(pageIndex gt 4) && (totalPages - pageIndex gt 3)}">
-                    <a th:href="@{/categories}+'/'+${category.spec.slug}+'/page/' + ${index}"
+                    <a th:href="@{/categories}+'/'+${category.status.permalink}+'/page/' + ${index}"
                        th:text="${index}">
                     </a>
                 </li>
@@ -288,7 +288,7 @@
                 </li>
                 <li th:classappend="${index eq pageIndex} ? 'active'"
                     th:each="index : ${#numbers.sequence(1, totalPages)}">
-                    <a th:href="@{/tags}+'/'+${tag.spec.slug}+'/page/' + ${index}"
+                    <a th:href="@{/tags}+'/'+${tag.status.permalink}+'/page/' + ${index}"
                        th:text="${index}"></a>
                 </li>
                 <li class="next"
@@ -314,7 +314,7 @@
                 <li th:classappend="${index eq pageIndex} ? 'active':''"
                     th:each="index : ${#numbers.sequence(2,5)}"
                     th:if="${pageIndex le 4}">
-                    <a th:href="@{/tags}+'/'+${tag.spec.slug}+'/page/' + ${index}"
+                    <a th:href="@{/tags}+'/'+${tag.status.permalink}+'/page/' + ${index}"
                        th:text="${index}"></a>
                 </li>
                 <li th:if="${pageIndex le 4}">
@@ -327,7 +327,7 @@
                 <li th:classappend="${index eq pageIndex} ? 'active':''"
                     th:each="index : ${#numbers.sequence(totalPages - 4, totalPages - 1)}"
                     th:if="${totalPages - pageIndex le 3}">
-                    <a th:href="@{/tags}+'/'+${tag.spec.slug}+'/page/' + ${index}"
+                    <a th:href="@{/tags}+'/'+${tag.status.permalink}+'/page/' + ${index}"
                        th:text="${index}">
                     </a>
                 </li>
@@ -338,7 +338,7 @@
                 <li th:each="index : ${#numbers.sequence(pageIndex - 1,pageIndex + 1)}"
                     th:classappend="${index eq pageIndex} ? 'active':''"
                     th:if="${(pageIndex gt 4) && (totalPages - pageIndex gt 3)}">
-                    <a th:href="@{/tags}+'/'+${tag.spec.slug}+'/page/' + ${index}"
+                    <a th:href="@{/tags}+'/'+${tag.status.permalink}+'/page/' + ${index}"
                        th:text="${index}">
                     </a>
                 </li>
@@ -348,7 +348,7 @@
                 <!-- 尾页 -->
                 <li th:classappend="${totalPages eq pageIndex} ? 'active':''"
                 >
-                    <a th:href="@{/tags}+'/'+${tag.spec.slug}+'/page/' + ${totalPages}"
+                    <a th:href="@{/tags}+'/'+${tag.status.permalink}+'/page/' + ${totalPages}"
                        th:text="${totalPages}">
                     </a>
                 </li>

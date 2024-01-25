@@ -68,13 +68,13 @@
                 <span>标签数</span>
             </div>
         </th:block>
-        <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline_serverURL) ==''}">
+        <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}">
             <div class="item" th:title="'累计评论数 '+${stats.comment}">
                 <span class="num">[[${stats.comment}]]</span>
                 <span>评论数</span>
             </div>
         </th:block>
-        <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline_serverURL) !=''}">
+        <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}">
             <div class="item waline-comment" title="">
                 <span class="num">0</span>
                 <span>评论数</span>
@@ -92,13 +92,13 @@
             <span class="num">[[${stats.post}]]</span>
             <span>文章数</span>
         </div>
-        <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline_serverURL) ==''}">
+        <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}">
             <div class="item" th:title="'累计评论数 '+${stats.comment}">
                 <span class="num">[[${stats.comment}]]</span>
                 <span>评论数</span>
             </div>
         </th:block>
-        <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline_serverURL) !=''}">
+        <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}">
             <div class="item waline-comment" title="">
                 <span class="num">0</span>
                 <span>评论数</span>
@@ -121,13 +121,13 @@
             <span class="num">[[${stats.post}]]</span>
             <span>文章数</span>
         </div>
-        <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline_serverURL) ==''}">
+        <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}">
             <div class="item" th:title="'累计评论数 '+${stats.comment}">
                 <span class="num">[[${stats.comment}]]</span>
                 <span>评论数</span>
             </div>
         </th:block>
-        <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline_serverURL) !=''}">
+        <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}">
             <div class="item waline-comment" title="">
                 <span class="num">0</span>
                 <span>评论数</span>
@@ -156,8 +156,7 @@
 <th:block th:if="${theme.config.blogger.enable_strips}">
 <canvas id="canvas-strips" width="300" height="340"></canvas>
 <script th:src="@{/assets/effect/bg/strips.js}"></script>
-    <script th:inline="javascript" th:if="${theme.config.blogger.overview_type != 'A'} and ${theme.config.basic.comment_option=='waline'} and ${#strings.trim(theme.config.basic.waline_serverURL) !=''}">
-        // const url = [[${theme.config.basic.waline_serverURL+'/api/comment?type=count'}]];
+    <script th:inline="javascript" th:if="${theme.config.blogger.overview_type != 'A'} and ${theme.config.basic.comment_option=='waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}">
         fetch(url).then(async (response) => {
             const data = await response.json();
             document.querySelector('.waline-comment .num').innerHTML = data.data;

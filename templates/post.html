@@ -11,7 +11,7 @@
     <div class="joe_container joe_main_container page-post"
          th:classappend="${theme.config.theme.enable_show_in_up ? 'animated fadeIn':''}">
       <div class="joe_main joe_post">
-        <th:block th:with="contributor = ${contributorFinder.getContributor(post.status.contributors[0])}">
+        <th:block th:with="contributor = ${contributorFinder.getContributor(post.status.contributors[post.status.contributors.size()-1])}">
         <div class="joe_detail" data-status="PUBLISHED" th:data-cid="${post.metadata.name}" th:data-clikes="${post.stats.upvote}" th:data-author="${contributor.displayName}">
           <th:block th:if="${post.categories}">
           <div class="joe_detail__category">
@@ -38,10 +38,10 @@
             <div class="item">
               <span class="text">[[${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}]]</span>
               <span class="line">/</span>
-              <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline_serverURL) ==''}">
+              <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}">
               <span class="text">[[${post.stats.comment}]] 评论</span>
               </th:block>
-              <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline_serverURL) !=''}">
+              <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}">
                 <span class="text waline-comment-count" th:data-path="@{${post.status.permalink}}">0</span>&nbsp;评论
               </th:block>
               <span class="line">/</span>
