@@ -221,56 +221,71 @@ spec:
           name: enable_hot_category
           id: enable_hot_category
           label: 展示精品分类
-          value: true
+          value: false
           help: "是否展示首页的精品分类，可自定义封面图片"
           options:
             - value: true
               label: 是
             - value: false
               label: 否
-        - $formkit: select
-          name: hot_category_source
+        - $formkit: repeater
+          name: data_hot_category
           if: "$get(enable_hot_category).value"
-          id: hot_category_source
-          label: 精品分类数据源
-          value: "category"
-          help: "选择首页精品分类的数据来源"
-          options:
-            - value: category
-              label: 分类
-            - value: custom
-              label: 自定义
-        - $formkit: repeater
-          name: category_data
-          if: "$get(hot_category_source).value === 'category'"
-          id: category_data
-          label: 选择展示分类
-          value: [ ]
-          help: "选择要展示的分类"
+          id: data_hot_category
+          max: 4
+          min: 1
+          label: 分类数据
+          value: []
           children:
-            - $formkit: categorySelect
-              name: categoryMetaData
-              label: 选择分类
-        - $formkit: repeater
-          name: custom_data
-          if: "$get(hot_category_source).value === 'custom'"
-          id: custom_data
-          label: 自定义信息
-          value: [ ]
-          help: "选择要展示的分类"
-          children:
-            - $formkit: text
-              name: title
+            - $formkit: radio
+              name: hot_category_section_type
+              id: hot_category_section_type
+              label: 数据来源
               value: ""
-              help: "名称"
-            - $formkit: text
-              name: url
+              options:
+                - label: 分类
+                  value: category
+                - label: 自定义数据
+                  value: custom
+            - $formkit: group
+              if: $value.hot_category_section_type === 'category'
+              name: data_by_category
+              label: 分类数据
+              id: data_by_category
               value: ""
-              help: "跳转链接"
-            - $formkit: attachment
-              name: cover
-              value: ""
-              help: "封面图"
+              children:
+                - $formkit: categorySelect
+                  name: category
+                  label: 选择分类
+                  value: ""
+                  validation: "required"
+            - $formkit: group
+              if: $value.hot_category_section_type === 'custom'
+              name: data_by_custom
+              label: 自定义数据
+              id: data_by_custom
+              value: [ ]
+              children:
+                - $formkit: text
+                  name: hot_custom_title
+                  label: 标题
+                  value: ""
+                  validation: "required"
+                - $formkit: url
+                  name: hot_custom_url
+                  label: 跳转链接
+                  value: ""
+                  validation: "required"
+                - $formkit: attachment
+                  name: hot_custom_img
+                  label: 图片地址
+                  value: ""
+                  validation: "required"
+
+
+
+
+
         - $formkit: select
           name: index_list_effect_class
           label: 动画效果类名
