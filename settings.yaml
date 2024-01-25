@@ -148,16 +148,30 @@ spec:
           label: 浅色模式生效时间范围
           value: "5:00~19:00"
           help: "设置浅色模式自动生效的时间范围，范围之外为暗黑模式（仅在主题模式为 “自动模式” 下生效），请严格按照规定格式设置，否则会导致报错"
-        - $formkit: text
-          name: icp
-          label: ICP 备案号
-          value: ""
-          help: "ICP 备案信息将展示在页脚中，不填不展示（示例：鄂ICP备20001234号-1）"
-        - $formkit: text
-          name: police
-          label: 公网安备号
-          value: ""
-          help: "公网安备信息将展示在页脚中，不填不展示，也可在 “页脚” 一栏中单独关闭（示例：鄂公网安备42011102001234号）"
+        - $formkit: group
+          name: icp_police
+          label: 备案信息
+          children:
+            - $formkit: text
+              name: icp
+              label: ICP 备案号
+              value: ""
+              help: "ICP 备案信息将展示在页脚中，不填不展示（示例：鄂ICP备20001234号-1）"
+            - $formkit: text
+              name: icp_link
+              label: ICP备案跳转链接
+              value: https://beian.miit.gov.cn/
+            - $formkit: text
+              name: police
+              label: 公网安备号
+              value: ""
+              help: "公网安备信息将展示在页脚中，不填不展示，也可在 “页脚” 一栏中单独关闭（示例：鄂公网安备42011102001234号）"
+            - $formkit: text
+              name: gongan_link
+              label: 公安联网备案跳转链接
+              value: https://beian.mps.gov.cn/#/query/webSearch
+
+
     - group: home
       label: 首页
       formSchema:

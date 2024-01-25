@@ -9,9 +9,9 @@
       <div class="item">
         <p>
           [[${#dates.format(new java.util.Date().getTime(), 'yyyy')}]] ©<a th:href="${site.url}" target="_blank" rel="noopener noreferrer">[[${site.title}]]</a>
-          <th:block th:if="${theme.config.footer.enable_icp} and ${theme.config.basic.icp != ''} and ${theme.config.basic.icp != null}">
+          <th:block th:if="${theme.config.footer.enable_icp} and ${#strings.trim(theme.config.basic.icp_police.icp) != ''} and ${theme.config.basic.icp_police.icp != null}">
            -
-          <a class="icp" href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer nofollow">[[${theme.config.basic.icp}]]</a>
+          <a class="icp" href="https://beian.miit.gov.cn" th:href="${theme.config.basic.icp_police.icp_link}" target="_blank" rel="noopener noreferrer nofollow">[[${theme.config.basic.icp_police.icp}]]</a>
           </th:block>
         </p>
         <th:block th:if="${theme.config.footer.enable_powerby}">
@@ -88,10 +88,10 @@
     <i class="joe-font joe-icon-jiasu"></i>已运行&nbsp;<strong class="joe_run__day">00</strong> 天 <strong class="joe_run__hour">00</strong> 时 <strong class="joe_run__minute">00</strong> 分 <strong class="joe_run__second">00</strong> 秒
   </div>
   </th:block>
-<th:block th:if="${theme.config.footer.enable_police} and ${theme.config.basic.police != ''} and ${theme.config.basic.police != null}">
+<th:block th:if="${theme.config.footer.enable_police} and ${#strings.trim(theme.config.basic.icp_police.police) != ''} and ${theme.config.basic.icp_police.police != null}">
 <p class="site_police">
 
-  <a th:href="'http://www.beian.gov.cn/portal/registerSystemInfo?recordcode='" target="_blank" rel="noopener noreferrer nofollow">[[${theme.config.basic.police}]]</a>
+  <a href="https://beian.mps.gov.cn/#/query/webSearch" th:href="${theme.config.basic.icp_police.gongan_link}" target="_blank" rel="noopener noreferrer nofollow">[[${theme.config.basic.icp_police.police}]]</a>
 
 </p>
 </th:block>
