@@ -11,7 +11,7 @@
     <div class="joe_container joe_main_container page-post"
          th:classappend="${theme.config.theme.enable_show_in_up ? 'animated fadeIn':''}">
       <div class="joe_main joe_post">
-        <th:block th:with="contributor = ${contributorFinder.getContributor(post.status.contributors[0])}">
+        <th:block th:with="contributor = ${contributorFinder.getContributor(post.status.contributors[post.status.contributors.size()-1])}">
         <div class="joe_detail" data-status="PUBLISHED" th:data-cid="${post.metadata.name}" th:data-clikes="${post.stats.upvote}" th:data-author="${contributor.displayName}">
           <th:block th:if="${post.categories}">
           <div class="joe_detail__category">
