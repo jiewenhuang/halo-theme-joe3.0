@@ -1602,6 +1602,8 @@ spec:
                   label: 标签云
                 - value: "enable_ads_aside"
                   label: 侧边栏广告
+                - value: "enable_custom"
+                  label: 自定义内容
             - $formkit: group
               if: $value.template_aside === 'enable_notice'
               name: aside_notice
@@ -1722,6 +1724,17 @@ spec:
                   value: ""
                   help: "支持html代码"
                   language: html
+            - $formkit: group
+              if: $value.template_aside === 'enable_custom'
+              name: aside_custom
+              label: 自定义html
+              value: [ ]
+              children:
+                - $formkit: code
+                  name: aside_custom_code
+                  label: 自定义代码
+                  language: html
+                  help: "支持html代码"
 
 
 #

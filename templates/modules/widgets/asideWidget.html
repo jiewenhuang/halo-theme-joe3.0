@@ -216,4 +216,10 @@
     </th:block>
 
 </th:block>
+<th:block th:fragment="enable_custom(custom_data)">
+    <section class="joe_aside__item aside_custom">
+        <th:block th:utext="${custom_data.aside_custom_code}"></th:block>
+
+    </section>
+</th:block>
 </html>
