@@ -28,6 +28,10 @@
     <th:block th:replace="~{modules/config :: config}" />
     <th:block th:replace="~{modules/link :: links}" />
     <script th:src="@{/assets/lib/jquery@3.5.1/jquery.min.js}"></script>
+    <th:block th:if="${theme.config.custom.custom_js_head != null} and ${#strings.trim(theme.config.custom.custom_js_head) != ''}">
+        <!-- 自定义js(HEAD) -->
+        <script type="text/javascript" th:inline="javascript" th:utext="${theme.config.custom.custom_js_head}"></script>
+    </th:block>
 
 
 </head>
