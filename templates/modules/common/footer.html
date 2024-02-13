@@ -5,7 +5,7 @@
           th:classappend="|${theme.config.footer.footer_position == 'fixed'? 'fixed' :''} ${theme.config.footer.enable_full_footer ? 'full' :''} |">
 
     <div class="joe_container"
-         th:classappend="${theme.config.footer.enable_rss == false} and ${theme.config.footer.enable_rss ==false} ?'central':''">
+         th:classappend="${theme.config.footer.enable_rss == false} and ${theme.config.footer.enable_sitemap ==false} ?'central':''">
       <div class="item">
         <p>
           [[${#dates.format(new java.util.Date().getTime(), 'yyyy')}]] ©<a th:href="${site.url}" target="_blank" rel="noopener noreferrer">[[${site.title}]]</a>
@@ -97,12 +97,12 @@
 </th:block>
 </div>
 <div class="side-col">
-<th:block th:if="${theme.config.footer.enable_rss || theme.config.footer.enable_rss}">
+<th:block th:if="${theme.config.footer.enable_rss || theme.config.footer.enable_sitemap}">
   <div class="item">
     <th:block th:if="${theme.config.footer.enable_rss}">
     <a class="rss" th:href="@{/rss.xml}" target="_blank" rel="noopener noreferrer"><i class="joe-font joe-icon-rss-fill"></i>&nbsp;RSS</a>
     </th:block>
-    <th:block th:if="${theme.config.footer.enable_rss}">
+    <th:block th:if="${theme.config.footer.enable_sitemap}">
       <a th:href="@{/sitemap.xml}" target="_blank" rel="noopener noreferrer">站点地图</a>
     </th:block>
 </div>
