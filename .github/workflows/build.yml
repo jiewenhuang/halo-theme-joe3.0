@@ -52,7 +52,7 @@ jobs:
           node-version: 16
       - name: Compress zip
         run: |
-          PACKAGE_VERSION=$(sed -nE 's/^\s*"version": "(.*?)",$/\1/p' package.json)
+          PACKAGE_VERSION=$(sed -nE 's/^ *version: "([^"]+)"$/\1/p' theme.yaml)
           PRE_ZIP_FOLDER=halo-theme-Joe3-${PACKAGE_VERSION}
           ARTIFACT_NAME=${PRE_ZIP_FOLDER}.zip
           ARTIFACT_PATHNAME=dist/${ARTIFACT_NAME}
