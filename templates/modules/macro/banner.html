@@ -7,10 +7,10 @@
         <th:block th:each="banner_data : ${theme.config.carousel.banner_data_group}">
             <th:block th:switch="${banner_data.banner_section_type}">
                 <th:block th:case="'post'">
-                <th:block th:include="~{modules/macro/banner_item_data :: data_by_post(post_metadata = ${banner_data.data_by_post})}" />
+                <th:block th:insert="~{modules/macro/banner_item_data :: data_by_post(post_metadata = ${banner_data.data_by_post})}" />
                 </th:block>
                 <th:block th:case="'custom'">
-                <th:block th:include="~{modules/macro/banner_item_data :: data_by_custom(banner_url = ${banner_data.data_by_custom.banner_url}, banner_cover = ${banner_data.data_by_custom.banner_img}, banner_title = ${banner_data.data_by_custom.banner_title}, banner_excerpt = ${banner_data.data_by_custom.banner_subtitle})}" />
+                <th:block th:insert="~{modules/macro/banner_item_data :: data_by_custom(banner_url = ${banner_data.data_by_custom.banner_url}, banner_cover = ${banner_data.data_by_custom.banner_img}, banner_title = ${banner_data.data_by_custom.banner_title}, banner_excerpt = ${banner_data.data_by_custom.banner_subtitle})}" />
                 </th:block>
             </th:block>
 
