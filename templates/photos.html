@@ -32,15 +32,13 @@
                 <div class="wrapper">
                     <div class="grid" id="image-grid" th:data-total="${photos.totalPages}" th:data-index="${photos.page}">
                         <!-- 预留空间 -->
-                        <th:block th:each="group : ${groups}">
-                        <div class="grid-item wow fadeIn" th:each="photo : ${group.photos}" th:data-sjsel="${group.metadata.name}">
+                        <div class="grid-item wow fadeIn" th:each="photo : ${photos.items}" th:data-sjsel="${photo.spec.groupName}">
                             <div class="card__picture">
                                 <a class="item animated wow jg-entry" th:href="${photo.spec.url}" data-fancybox="gallery">
                                     <img class="lazy-load" th:data-src="${photo.spec.url}" th:alt="${photo.spec.displayName}" th:src="@{/assets/img/photo_loading.gif}">
                                 </a>
                             </div>
                         </div>
-                        </th:block>
                     </div>
                     <th:block th:replace="~{modules/macro/loading :: loading}"/>
                 </div>
