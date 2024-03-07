@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
     const $grid = $('#image-grid').isotope({
         itemSelector: '.grid-item',
@@ -7,105 +6,91 @@ $(document).ready(function(){
             columnWidth: '.grid-item'
         }
     });
+    let page = Number(document.querySelector('#image-grid').getAttribute('data-index'))+1
+    const totalPage = document.querySelector('#image-grid').getAttribute('data-total')
 
+    const baseUrl = ThemeConfig.blog_url;
+    const loadingIndicator = document.querySelector('.joe_loading');
 
-    let allImages = [];
-    let currentIndex = 0;
-    const batchSize = 6;
-    const baseUrl = ThemeConfig.blog_url; // 替换成您的API URL
+function loadRealImages(){
+    // 创建 Intersection Observer 实例
+    const gridItems = document.querySelectorAll('.grid-item');
 
-    function loadImages(callback) {
-        // ...逻辑保持不变
-        if (allImages.length) {
-            callback();
-            return;
-        }
-
-        // 获取所有图片
-        const apiUrl = baseUrl + '/apis/api.plugin.halo.run/v1alpha1/plugins/PluginPhotos/photos';
-        $.getJSON(apiUrl, function(data) {
-            allImages = data.items; // 假设这是图片数组
-            callback();
-        });
-    }
-
-
-
-    function loadBatchImages() {
-
-        const $domLoad = $('.joe_loading')
-        loadImages(function() {
-            // ...创建和插入元素的逻辑保持不变
-            const batchEndIndex = currentIndex + batchSize;
-            // 一批加载的图片项
-            const items = [];
-
-            // 获取当前批次的图片
-            for (; currentIndex < batchEndIndex && currentIndex < allImages.length; currentIndex++) {
-                const currentImage = allImages[currentIndex];
-                const item = $('<div class="grid-item wow fadeIn" data-sjsel="'+ currentImage.spec.groupName+'">' +
-                    '<div class="card__picture">'+
-                    '<a class="item animated wow jg-entry" href="'+ currentImage.spec.url+'" data-fancybox="gallery">'+
-                    '<img src="'+ currentImage.spec.url + '" alt="' + currentImage.spec.displayName + '"/>' +
-                    '</a>'+
-                        '</div>'+
-                '</div>');
-
-                items.push(item[0]);
-            }
-
-            // 将图片元素添加到网格中并重新布局
-            $grid.append(items)
-                .isotope('appended', items)
-                .imagesLoaded().progress(function() {
-                $grid.isotope('layout');
-            });
-            // ...其余逻辑保持不变
-            // 如果所有图片都已加载，可以选择隐藏加载更多按钮
-            if (currentIndex >= allImages.length) {
-                $domLoad.remove()
-                ob.unobserve(loading)
+    const observer = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                // 加载图片
+                const image = entry.target.querySelector('.lazy-load');
+                if (image) {
+                    image.src = image.dataset.src; // 将 data-src 的值赋给 src
+                    image.classList.remove('lazy-load'); // 移除 lazy-load 类
+                    observer.unobserve(entry.target); // 停止观察该元素
+                    image.onload = function() {
+                        $grid.isotope('layout');
+                    };
+                }
             }
         });
-    }
-
-    // 初始加载
-    loadBatchImages();
-
-    const ob =  new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting){
-            loadBatchImages();
-            let filteredDivs = $('.grid-item').filter(function() {
-                return $(this).data('sjsel') === $('.joe_photos__filter li.active').data('sjslink');
-            });
-            if (filteredDivs.length===0 && currentIndex <= allImages.length && $('.joe_photos__filter li.active').data('sjslink')!=='*') {
-                while (filteredDivs.length===0&&currentIndex <= allImages.length){
-                    loadBatchImages();
-                    filteredDivs = $('.grid-item').filter(function() {
-                        return $(this).data('sjsel') === $('.joe_photos__filter li.active').data('sjslink');
-                    });
-                }
-            }else {
-            }
-                }
-
     }, {
-        threshold:1
-    })
-    const loading = document.querySelector('.joe_loading')
-    ob.observe(loading)
+        threshold: 0.5
+    });
 
+    // 开始观察每个 grid item
+    gridItems.forEach(function(item) {
+        observer.observe(item);
+    });
+}
+loadRealImages()
 
-    $('.joe_photos__filter li').on('click', function(){
-        let filterValue = $(this).attr('data-sjslink');
-        // 添加active
+    const loadPageData = async function() {
+        const url = baseUrl + '/photos/page/' + page;
+        if(page>totalPage){
+            document.querySelector('.joe_loading').remove()
+            return
+
+        }
+        fetch(url)
+            .then(response => response.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const nextPageImages = doc.querySelectorAll('.grid-item');
+
+                if (nextPageImages.length > 0) {
+                    nextPageImages.forEach(image => {
+                        $grid.append(image).isotope('appended', image);
+                    });
+                    $grid.isotope('layout');
+                    loadRealImages()
+                    page++
+                    if(page>totalPage){
+                        document.querySelector('.joe_loading').remove()
+
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching next page data:', error);
+            });
+
+    };
+
+    const observerForLoading = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+            loadPageData();
+        }
+    }, {
+        threshold: 1
+    });
+
+    observerForLoading.observe(loadingIndicator);
+
+    $('.joe_photos__filter li').on('click', function() {
+        const filterValue = $(this).attr('data-sjslink');
         $(this).addClass('active').siblings().removeClass('active');
-        // 重置 Isotope 过滤器为默认值
         $grid.isotope({
             filter: function() {
-                // 检查 data-sjsel 属性值是否匹配我们筛选的值
-                const sjselValue = $(this).attr('data-sjsel'); // 这里获取的是.grid-item的data-sjsel
-                // 如果 filterValue 是 '*'（显示所有），或者 sjselValue 匹配筛选值，则保留元素
+                const sjselValue = $(this).attr('data-sjsel');
                 return filterValue === '*' || sjselValue === filterValue;
             }
         });
