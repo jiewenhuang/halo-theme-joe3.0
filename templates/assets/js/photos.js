@@ -6,8 +6,9 @@ $(document).ready(function(){
             columnWidth: '.grid-item'
         }
     });
+    let page = Number(document.querySelector('#image-grid').getAttribute('data-index'))+1
+    const totalPage = document.querySelector('#image-grid').getAttribute('data-total')
 
-    let page = 2;
     const baseUrl = ThemeConfig.blog_url;
     const loadingIndicator = document.querySelector('.joe_loading');
 
@@ -24,7 +25,9 @@ function loadRealImages(){
                     image.src = image.dataset.src; // 将 data-src 的值赋给 src
                     image.classList.remove('lazy-load'); // 移除 lazy-load 类
                     observer.unobserve(entry.target); // 停止观察该元素
-                    $grid.isotope('layout');
+                    image.onload = function() {
+                        $grid.isotope('layout');
+                    };
                 }
             }
         });
@@ -41,20 +44,17 @@ loadRealImages()
 
     const loadPageData = async function() {
         const url = baseUrl + '/photos/page/' + page;
+        if(page>totalPage){
+            document.querySelector('.joe_loading').remove()
+            return
+
+        }
         fetch(url)
             .then(response => response.text())
             .then(html => {
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(html, 'text/html');
                 const nextPageImages = doc.querySelectorAll('.grid-item');
-                const _ = $(doc).find("#image-grid");
-                const hasNext= _.attr('data-next')
-
-                if(hasNext<page){
-                    document.querySelector('.joe_loading').remove()
-                    return;
-
-                }
 
                 if (nextPageImages.length > 0) {
                     nextPageImages.forEach(image => {
@@ -62,7 +62,11 @@ loadRealImages()
                     });
                     $grid.isotope('layout');
                     loadRealImages()
-                    page++;
+                    page++
+                    if(page>totalPage){
+                        document.querySelector('.joe_loading').remove()
+
+                    }
                 }
             })
             .catch(error => {

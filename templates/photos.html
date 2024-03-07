@@ -13,6 +13,7 @@
                     <div class="joe_photos__type-title">
                         <i class="joe-font joe-icon-tupian"></i>&nbsp;[[${theme.config.photos.photos_title?:'我的图库'}]]
                     </div>
+                    [[${photos.page}]]
                     <nav class="joe_photos__filter">
                         <ul>
                             <li data-sjslink="*" class="active">
@@ -30,13 +31,13 @@
                 </div>
 
                 <div class="wrapper">
-                    <div class="grid" id="image-grid" th:data-next="${photos.totalPages}">
+                    <div class="grid" id="image-grid" th:data-total="${photos.totalPages}" th:data-index="${photos.page}">
                         <!-- 预留空间 -->
                         <th:block th:each="group : ${groups}">
                         <div class="grid-item wow fadeIn" th:each="photo : ${group.photos}" th:data-sjsel="${group.metadata.name}">
                             <div class="card__picture">
                                 <a class="item animated wow jg-entry" th:href="${photo.spec.url}" data-fancybox="gallery">
-                                    <img class="lazy-load" th:data-src="${photo.spec.url}" th:alt="${photo.spec.displayName}" src="https://img.soogif.com/j1E9MY8LfW5Bla4iKdHb5TUmK8HbjLA3.gif_s400x0">
+                                    <img class="lazy-load" th:data-src="${photo.spec.url}" th:alt="${photo.spec.displayName}" th:src="@{/assets/img/photo_loading.gif}">
                                 </a>
                             </div>
                         </div>
