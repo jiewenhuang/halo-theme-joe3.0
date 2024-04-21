@@ -56,7 +56,7 @@ spec:
             - $formkit: text
               name: waline_js_leaving
               label: 功能 JS
-              value: "https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs"
+              value: "https://githubcdn.qiushaocloud.top/npm/@waline/client/dist/waline.mjs"
               help: 用于加载留言板和最新评论的 JS 地址
             - $formkit: text
               name: waline_js_list
