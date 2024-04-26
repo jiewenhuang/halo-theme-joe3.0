@@ -56,8 +56,15 @@
                   <i class="joe-font joe-icon-arrow-down joe_dropdown__link-icon" style="color:var(--main)"></i>
                 </div>
                 <nav class="joe_dropdown__menu" style="top: 60px;">
-                    <li th:each="childMenu : ${menuItem.children}">
+                    <li th:each="childMenu : ${menuItem.children}" th:class="${not #lists.isEmpty(childMenu.children)} ? 'joe_nav_sub-li' : ''" >
                       <th:block th:replace="~{modules/macro/menu-item :: menu-item(${childMenu})}" />
+                      <th:block th:if="${not #lists.isEmpty(childMenu.children)}">
+                        <ol class="joe_nav_sub">
+                          <li th:each="subChildMenu : ${childMenu.children}">
+                            <th:block th:replace="~{modules/macro/menu-item :: menu-item(${subChildMenu})}" />
+                          </li>
+                        </ol>
+                      </th:block>
                     </li>
                 </nav>
               </div>
