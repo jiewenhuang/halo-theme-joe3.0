@@ -31,8 +31,15 @@
           </div>
           <nav class="joe_dropdown__menu" style="top: 60px;">
             <th:block th:each="childMenu : ${menuItem.children}">
-            <li>
+            <li th:class="${not #lists.isEmpty(childMenu.children)} ? 'joe_nav_sub-li' : ''" >
               <th:block th:replace="~{modules/macro/menu-item :: menu-item(${childMenu})}" />
+              <th:block th:if="${not #lists.isEmpty(childMenu.children)}">
+                <ol class="joe_nav_sub">
+                  <li th:each="subChildMenu : ${childMenu.children}">
+                    <th:block th:replace="~{modules/macro/menu-item :: menu-item(${subChildMenu})}" />
+                  </li>
+                </ol>
+              </th:block>
             </li>
             </th:block>
           </nav>
@@ -56,8 +63,15 @@
                   <i class="joe-font joe-icon-arrow-down joe_dropdown__link-icon" style="color:var(--main)"></i>
                 </div>
                 <nav class="joe_dropdown__menu" style="top: 60px;">
-                    <li th:each="childMenu : ${menuItem.children}">
+                    <li th:each="childMenu : ${menuItem.children}" th:class="${not #lists.isEmpty(childMenu.children)} ? 'joe_nav_sub-li' : ''" >
                       <th:block th:replace="~{modules/macro/menu-item :: menu-item(${childMenu})}" />
+                      <th:block th:if="${not #lists.isEmpty(childMenu.children)}">
+                        <ol class="joe_nav_sub">
+                          <li th:each="subChildMenu : ${childMenu.children}">
+                            <th:block th:replace="~{modules/macro/menu-item :: menu-item(${subChildMenu})}" />
+                          </li>
+                        </ol>
+                      </th:block>
                     </li>
                 </nav>
               </div>
@@ -184,11 +198,34 @@
               </div>
               <ul class="slides panel-body">
                 <th:block th:each="childMenu : ${menuItem.children}">
-                <li>
-                  <a class="link" th:href="@{${childMenu.status.href}}"
-                     th:target="${childMenu.spec.target?.value}"
-                     th:title="${childMenu.status.displayName}">[[${childMenu.status.displayName}]]</a>
-                </li>
+                  <th:block th:if="${#lists.isEmpty(childMenu.children)}">
+                    <li>
+                      <a class="link" th:href="@{${childMenu.status.href}}"
+                          th:target="${childMenu.spec.target?.value}"
+                          th:title="${childMenu.status.displayName}">[[${childMenu.status.displayName}]]
+                      </a>
+                    </li>
+                  </th:block>
+                  <th:block th:if="${not #lists.isEmpty(childMenu.children)}">
+                    <li>
+                      <div class="link panel">
+                        <a th:href="@{${childMenu.status.href}}"
+                            th:target="${childMenu.spec.target?.value}"
+                            th:title="${childMenu.status.displayName}">[[${childMenu.status.displayName}]]</a>
+                        <i class="joe-font joe-icon-arrow-right"></i>
+                      </div>
+
+                      <ul class="slides panel-body">
+                        <th:block th:each="subChildMenu : ${childMenu.children}">
+                          <li>
+                            <a class="link" th:href="@{${subChildMenu.status.href}}"
+                              th:target="${subChildMenu.spec.target?.value}"
+                              th:title="${subChildMenu.status.displayName}">[[${subChildMenu.status.displayName}]]</a>
+                          </li>
+                        </th:block>
+                      </ul>
+                    </li>
+                  </th:block>
                 </th:block>
               </ul>
             </li>
@@ -218,11 +255,34 @@
                     </div>
                     <ul class="slides panel-body">
                       <th:block th:each="childMenu : ${menuItem.children}">
-                        <li>
-                          <a class="link" th:href="@{${childMenu.status.href}}"
-                             th:target="${childMenu.spec.target?.value}"
-                             th:title="${childMenu.status.displayName}">[[${childMenu.status.displayName}]]</a>
-                        </li>
+                        <th:block th:if="${#lists.isEmpty(childMenu.children)}">
+                          <li>
+                            <a class="link" th:href="@{${childMenu.status.href}}"
+                               th:target="${childMenu.spec.target?.value}"
+                               th:title="${childMenu.status.displayName}">[[${childMenu.status.displayName}]]
+                            </a>
+                          </li>
+                        </th:block>
+                        <th:block th:if="${not #lists.isEmpty(childMenu.children)}">
+                          <li>
+                            <div class="link panel">
+                              <a th:href="@{${childMenu.status.href}}"
+                                 th:target="${childMenu.spec.target?.value}"
+                                 th:title="${childMenu.status.displayName}">[[${childMenu.status.displayName}]]</a>
+                              <i class="joe-font joe-icon-arrow-right"></i>
+                            </div>
+
+                            <ul class="slides panel-body">
+                              <th:block th:each="subChildMenu : ${childMenu.children}">
+                                <li>
+                                  <a class="link" th:href="@{${subChildMenu.status.href}}"
+                                    th:target="${subChildMenu.spec.target?.value}"
+                                    th:title="${subChildMenu.status.displayName}">[[${subChildMenu.status.displayName}]]</a>
+                                </li>
+                              </th:block>
+                            </ul>
+                          </li>
+                        </th:block>
                       </th:block>
                     </ul>
                   </li>
