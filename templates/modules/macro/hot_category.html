@@ -18,7 +18,7 @@
                       th:with="category = ${categoryFinder.getByName(hot_data.data_by_category.category)}">
                       <a class="link" target="_blank" th:href="@{${category.status.permalink}}" th:title="${category.spec.displayName}">
                           <figure class="inner">
-                              <img width="100%" height="120" class="image ls-is-cached lazyloaded" th:data-src="@{/assets/img/hot_cover1.jpg}" th:src="${category.spec.cover}" onerror="Joe.errorImg(this)" th:alt="${category.spec.displayName}">
+                              <img width="100%" height="120" class="image ls-is-cached lazyloaded" th:data-src="@{/assets/img/hot_cover1.jpg}" th:src="${category.spec.cover}" onerror="Joe.errorImg(this, 'HomeErrImg')" th:alt="${category.spec.displayName}">
                               <figcaption class="title">[[${category.spec.displayName}]]</figcaption>
                           </figure>
                       </a>
@@ -29,7 +29,7 @@
                       th:with="custom_data = ${hot_data.data_by_custom}">
                       <a class="link" target="_blank" th:href="${custom_data.hot_custom_url}" th:title="${custom_data.hot_custom_title}">
                           <figure class="inner">
-                              <img width="100%" height="120" class="image ls-is-cached lazyloaded" th:data-src="@{/assets/img/hot_cover1.jpg}" th:src="${custom_data.hot_custom_img}" onerror="Joe.errorImg(this)" th:alt="${category.spec.displayName}">
+                              <img width="100%" height="120" class="image ls-is-cached lazyloaded" th:data-src="@{/assets/img/hot_cover1.jpg}" th:src="${custom_data.hot_custom_img}" onerror="Joe.errorImg(this, 'HomeErrImg')" th:alt="${category.spec.displayName}">
                               <figcaption class="title">[[${custom_data.hot_custom_title}]]</figcaption>
                           </figure>
                       </a>
