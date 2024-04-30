@@ -22,7 +22,6 @@ git pull origin develop
 
 echo "合并 source-code-main 分支代码"
 git merge source-code-main
-
 # 提交合并的代码
 echo "提交合并的代码"
 git add .

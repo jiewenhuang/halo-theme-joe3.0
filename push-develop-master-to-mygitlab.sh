@@ -26,6 +26,10 @@ if [ "$isMasterMerge2Develop" == "true" ]; then
     git pull origin master
     git checkout -b develop origin/develop || git checkout develop
     git merge master
+    # 提交 master to develop 合并的代码
+    echo "提交 master to develop 合并的代码"
+    git add .
+    git commit -m "merge master to develop"
 fi
 git push origin develop
 
@@ -34,7 +38,11 @@ echo "推送到 master 分支"
 git checkout -b master origin/master || git checkout master
 git pull origin master
 if [ "$isDevelopMerge2Master" == "true" ]; then
-  echo "合并 develop 分支到 master 分支"
-  git merge develop
+    echo "合并 develop 分支到 master 分支"
+    git merge develop
+    # 提交 develop to master 合并的代码
+    echo "提交 develop to master 合并的代码"
+    git add .
+    git commit -m "merge develop to master"
 fi
 git push origin master
