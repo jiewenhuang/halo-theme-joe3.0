@@ -798,7 +798,7 @@ const commonContext = {
 			const key = e.keyCode || e.charCode;
 			if (key === 32) {
 				if (
-					["text", "input", "textarea", "halo-comment"].includes(
+					["text", "input", "textarea", "halo-comment", "halo-comment", "comment-widget"].includes(
 						elm.tagName.toLowerCase()
 					)
 				) {

@@ -31,7 +31,7 @@
                         <th:block th:replace="~{modules/macro/post_num :: post_num}" />
                       </th:block>
                       <th:block th:with="postCover = ${#lists.isEmpty(theme.config.home.post_thumbnail)? theme.config.basic.random_img_api_url+'?pageid='+tag.metadata.name : theme.config.home.post_thumbnail}">
-                        <img width="100%" height="120" class="image lazyload" th:data-src="${tag.spec.cover ?: postCover}" th:src="${theme.config.theme.lazyload_thumbnail}"  th:alt="${tag.spec.displayName}">
+                        <img width="100%" height="120" class="image lazyload" th:data-src="${tag.spec.cover ?: postCover}" th:src="${theme.config.theme.lazyload_thumbnail}"  th:alt="${tag.spec.displayName}" onerror="Joe.errorImg(this, 'HomeErrImg')" >
                       </th:block>
                     <figcaption class="title">[[${tag.spec.displayName}]]</figcaption>
                     </figure>
