@@ -20,7 +20,7 @@ git remote set-url origin ssh://git@gitlab.qiushaocloud.top:61023/qiushaocloud/$
 echo "推送到 develop 分支"
 git checkout -b develop origin/develop || git checkout develop
 git pull origin develop
-if [ "$isMasterMerge2Develop" == "true" ]; then
+if [ "$isMasterMerge2Develop" == "yes" ]; then
   echo "合并 master 分支到 develop 分支"
     git checkout -b develop origin/master || git checkout master
     git pull origin master
@@ -37,7 +37,7 @@ git push origin develop
 echo "推送到 master 分支"
 git checkout -b master origin/master || git checkout master
 git pull origin master
-if [ "$isDevelopMerge2Master" == "true" ]; then
+if [ "$isDevelopMerge2Master" == "yes" ]; then
     echo "合并 develop 分支到 master 分支"
     git merge develop
     # 提交 develop to master 合并的代码
