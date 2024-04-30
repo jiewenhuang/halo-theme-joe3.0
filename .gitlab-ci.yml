@@ -4,7 +4,7 @@ stages:
 sync-code:
   stage: sync-code
   only:
-    - develop
+    - master
   script:
     - export GIT_NAME_DIR=`grep -E "url = .*.git" $PWD/.git/config|awk -F 'qiushaocloud/' '{print $2}' | sed s/\.git//g`
     - git config --global user.email "qiushaocloud@126.com"
@@ -14,7 +14,6 @@ sync-code:
     #- chmod 600 /root/.ssh/id_rsa
     - git clone ssh://git@gitlab.qiushaocloud.top:61023/qiushaocloud/$GIT_NAME_DIR.git
     - cd $GIT_NAME_DIR && echo `pwd`
-    - git checkout -b develop origin/develop || git checkout develop
     - sh push-remote-git-repos.sh
   tags:
     - qiushaocloud-runner
