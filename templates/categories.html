@@ -30,7 +30,7 @@
                         <th:block th:replace="~{modules/macro/post_num :: post_num}" />
                       </th:block>
 
-                  <img width="100%" height="120" class="image lazyload" th:data-src="${category.spec.cover ?: theme.config.basic.random_img_api_url+'?pageid='+category.metadata.name}" th:src="${theme.config.theme.lazyload_thumbnail}"  th:alt="${category.spec.displayName}" onerror="Joe.errorImg(this, 'HomeErrImg')" >
+                  <img width="100%" height="120" class="image lazyload" th:data-src="${category.spec.cover ?: theme.config.basic.random_img_api_url+'?pageid='+category.metadata.name}" th:src="${theme.config.home.lazyload_thumbnail}"  th:alt="${category.spec.displayName}" onerror="Joe.errorImg(this, 'HomeErrImg')" >
                   <figcaption class="title">[[${category.spec.displayName}]]</figcaption>
                   </figure>
                   </a>
