@@ -24,13 +24,16 @@
               <h5>[[${group.spec.displayName}]]</h5>
               <ul class="joe_detail__friends evan-friends">
                 <li class="joe_detail__friends-item" th:each="link : ${group.links}">
+                <th:block
+                  th:with="randomBgColor = ${bgColorArray[#numbers.formatDecimal(T(java.lang.Math).floor(T(java.lang.Math).random()* bgColorArray.length),1,0)]}"
+                >
                   <a class="contain"
                      th:with="randomColor = ${colorArray[#numbers.formatDecimal(T(java.lang.Math).floor(T(java.lang.Math).random()* colorArray.length),1,0)]}"
                      th:href="${link.spec.url}" :key="i" target="_blank"
-                     th:style="'--fcolor:'+${randomColor}" rel="noopener noreferrer">
+                     th:style="'--fcolor:'+${randomColor} + '; background:' + ${randomBgColor}" rel="noopener noreferrer">
                     <div class="evan-f-left">
                       <div class="f-avatar">
-                        <img width="40" height="40" class="avatar lazyloaded" th:data-src="${theme.config.blogger.lazyload_avatar}" th:src="${link.spec.logo}" th:alt="${link.spec.displayName}">
+                        <img width="40" height="40" class="avatar lazyload" th:src="${theme.config.blogger.lazyload_avatar}" th:data-src="${link.spec.logo ?: theme.config.links.links_default_logo}" th:alt="${link.spec.displayName}" onerror="Joe.errorImg(this, 'LinksErrImg')" >
                       </div>
                     </div>
                     <div class="evan-f-right">
@@ -47,6 +50,7 @@
                       </div>
                     </div>
                   </a>
+                </th:block>
                 </li>
               </ul>
             </div>

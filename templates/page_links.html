@@ -31,7 +31,7 @@
                                        th:style="'--fcolor:'+${randomColor}" rel="noopener noreferrer">
                                         <div class="evan-f-left">
                                             <div class="f-avatar">
-                                                <img width="40" height="40" class="avatar lazyloaded" th:data-src="${theme.config.blogger.lazyload_avatar}" th:src="${link.spec.logo}" th:alt="${link.spec.displayName}">
+                                                <img width="40" height="40" class="avatar lazyload" th:src="${theme.config.blogger.lazyload_avatar}" th:src="${link.spec.logo ?: theme.config.links.links_default_logo}" th:alt="${link.spec.displayName}" onerror="Joe.errorImg(this, 'LinksErrImg')" >
                                             </div>
                                         </div>
                                         <div class="evan-f-right">

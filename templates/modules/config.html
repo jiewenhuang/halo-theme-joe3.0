@@ -66,10 +66,16 @@
         BASE_API: "",
         isMobile: /windows phone|iphone|android/gi.test(window.navigator.userAgent),
         errorImg: function(target, src) {
-            target.setAttribute('src', src || '${EMPTY_IMG}');
-            setTimeout(function () {
-                target.setAttribute('onerror', null);
-            }, 1000)
+            if (src && src === 'HomeErrImg') { // 如果 src 是 HomeErrImg 则使用首页配置里配置的文章错误缺省图
+                src = '[[${theme.config.home.fallback_thumbnail}]]';
+            } else if (src && src === 'LinksErrImg') { // 如果 src 是 LinksErrImg 则使用友链配置里配置的友链默认 logo
+                src = target.dataset.errSrc || '[[${theme.config.links.links_default_logo}]]'
+                if (!src || target.getAttribute('src') === src) {
+                    src = '/themes/theme-Joe3/assets/img/default_links_logo.png';
+                }
+            }
+            target.setAttribute('onerror', null);
+            target.setAttribute('src', src || target.dataset.errSrc || '/themes/theme-Joe3/assets/img/Joe3.png');
         }
     }
     ThemeConfig.enable_console_theme && console.log("%cTheme By  Jiewen" + " | 版本 V" + ThemeConfig.version, "padding: 8px 15px;color:#fff;background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3);border-radius: 0 15px 0 15px;");
