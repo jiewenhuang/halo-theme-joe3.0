@@ -25,7 +25,7 @@ git merge source-code-main
 # 提交合并的代码
 echo "提交合并的代码"
 git add .
-git commit -m "merge source-code-main to develop"
+git commit -m "merge source-code-main to develop" --no-verify
 
 # 提交代码到 develop 分支
 echo "推送到 github: git@github.com:qiushaocloud/$gitName"

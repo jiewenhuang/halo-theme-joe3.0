@@ -29,7 +29,7 @@ if [ "$isMasterMerge2Develop" == "yes" ]; then
     # 提交 master to develop 合并的代码
     echo "提交 master to develop 合并的代码"
     git add .
-    git commit -m "merge master to develop"
+    git commit -m "merge master to develop" --no-verify
 fi
 git push origin develop
 
@@ -43,6 +43,6 @@ if [ "$isDevelopMerge2Master" == "yes" ]; then
     # 提交 develop to master 合并的代码
     echo "提交 develop to master 合并的代码"
     git add .
-    git commit -m "merge develop to master"
+    git commit -m "merge develop to master" --no-verify
 fi
 git push origin master
