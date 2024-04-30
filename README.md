@@ -20,7 +20,7 @@
 <img width="100%" src="https://wmimg.com/i/70/2023/08/64d3c41d5bde2.webp">
 </p>
 
-预览：[Jiewen's Blog](https://www.qiushaocloud.top)
+预览：[邱少羽梦 Blog](https://www.qiushaocloud.top)
 
 #### 👀 [有疑问或者功能需求，请点击此处前往](https://www.qiushaocloud.top/2022/01/10/joe20halozhu-ti-qiu-shao-xiu-gai-ban.html)
 
@@ -34,6 +34,10 @@
 文档：部分配置请参考 [Joe3不完全使用指导指南](https://www.jiewen.run/archives/joe3use)
 > halo-theme-Joe3 是一款 [Halo2.0](https://halo.run/) 的博客主题  
 > 由[halo-theme-joe2.0](https://github.com/qinhua/halo-theme-joe2.0)适配而来，感谢原作者的无私奉献
+
+**类似主题效果图** 👇
+![类似主题效果图](https://githubcdn.qiushaocloud.top/gh/qiushaocloud/halo-theme-joe2.0-qiu@master/source/img/dp/mockup.jpg)
+
 
 ## 安裝
 
