@@ -3,7 +3,7 @@
 
 <p class="badge-row" align="center">
   <a href="https://halo.run" target="_blank">
-    <img src="https://img.shields.io/badge/dynamic/yaml?label=Halo&query=%24.spec.require&url=https://raw.githubusercontent.com/qiushaocloud/halo-theme-joe3.0-qiu/main/theme.yaml&color=113,195,71" alt="Halo"/>
+    <img src="https://img.shields.io/badge/dynamic/yaml?label=Halo&query=%24.spec.require&url=https://raw.githubusercontent.com/qiushaocloud/halo-theme-joe3.0-qiu/master/theme.yaml&color=113,195,71" alt="Halo"/>
   </a>
   <a href="https://github.com/qiushaocloud/halo-theme-joe3.0-qiu/releases" target="_blank">
     <img src="https://img.shields.io/github/v/release/qiushaocloud/halo-theme-joe3.0-qiu" alt="Release"/>
@@ -85,7 +85,7 @@ WIP
 <br>  
 
 ### 奉献提示
-此仓库分为main和dev分支，如何您想奉献代码，请fork dev分支，开发完成后提交pr到dev分支，dev分支会定期合并到main分支，main分支为稳定版本且dev分支才是最新代码，不接受pr。
+此仓库分为master和develop分支，如何您想奉献代码，请fork develop分支，开发完成后提交pr到develop分支，develop分支会定期合并到master分支，master分支为稳定版本且develop分支才是最新代码，不接受pr。
 
 
 ### 🙆‍♂️ 感谢
