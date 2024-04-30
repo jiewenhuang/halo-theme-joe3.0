@@ -14,7 +14,9 @@
     <div class="joe_container joe_main_container page-journals"
          th:classappend="|${theme.config.theme.enable_show_in_up ? 'animated showInUp':''} ${theme.config.aside.aside_position == 'left' ? 'revert':''}|">
       <div class="joe_main">
-        <div class="joe_detail">
+        <div class="joe_detail"
+          th:with="bgColorArray=${#strings.arraySplit('linear-gradient(-90deg, #29bdd9 0%, #276ace 100%)@ linear-gradient(to right, #ff9569 0%, #e92758 100%)@ linear-gradient(to right, #a1c4fd 0%, #c2e9fb 100%)@ linear-gradient(to right, #f6d365 0%, #fda085 100%)@ linear-gradient(to right, #30cfd0 0%, #330867 100%)@ linear-gradient(to right, #fa709a 0%, #fee140 100%)@ linear-gradient(to right, #a8edea 0%, #fed6e3 100%)@ linear-gradient(to right, #fddb92 0%, #d1fdff 100%)@ linear-gradient(to right, #ebc0fd 0%, #d9ded8 100%),  linear-gradient(to right, #e4afcb 0%, #b8cbb8 0%, #b8cbb8 0%, #e2c58b 30%, #c2ce9c 64%, #7edbdc 100%)@ linear-gradient(to right, #ebbba7 0%, #cfc7f8 100%)@ linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%)@ linear-gradient(to top, #09203f 0%, #537895 100%)@ linear-gradient(to right, #a8caba 0%, #5d4157 100%)@ linear-gradient(-60deg, #16a085 0%, #f4d03f 100%)@ linear-gradient(to right, #3b41c5 0%, #a981bb 49%, #ffc8a9 100%)@ linear-gradient(to right, #0fd850 0%, #f9f047 100%)','@')}"
+        >
           <h1 class="joe_detail__title txt-shadow">[[${theme.config.links.links_title}]]</h1>
           <article class="joe_detail__article animated fadeIn" th:with="colorArray=${#strings.arraySplit('#F8D800 ,#0396FF ,#EA5455 ,#7367F0 ,#32CCBC ,#F6416C ,#32B76E ,#9F44D3 ,#F55555 ,#736EFE ,#E96D71 ,#DE4313 ,#D939CD ,#4C83FF ,#F072B6 ,#C346C2 ,#5961F9 ,#FD6585 ,#5569E8 ,#FFC600 ,#FA742B ,#5151E5 ,#BB4E75 ,#FF52E5 ,#4DA037 ,#15D1E2 ,#F067B4 ,#F067B4 ,#ff9a9e ,#00f2fe ,#4facfe ,#f093fb ,#6fa3ef ,#bc99c4 ,#46c47c ,#f9bb3c ,#e8583d ,#f68e5f',',')}">
             <h3>友链列表<span class="totals" >
@@ -24,13 +26,16 @@
               <h5>[[${group.spec.displayName}]]</h5>
               <ul class="joe_detail__friends evan-friends">
                 <li class="joe_detail__friends-item" th:each="link : ${group.links}">
+                <th:block
+                  th:with="randomBgColor = ${bgColorArray[#numbers.formatDecimal(T(java.lang.Math).floor(T(java.lang.Math).random()* bgColorArray.length),1,0)]}"
+                >
                   <a class="contain"
                      th:with="randomColor = ${colorArray[#numbers.formatDecimal(T(java.lang.Math).floor(T(java.lang.Math).random()* colorArray.length),1,0)]}"
                      th:href="${link.spec.url}" :key="i" target="_blank"
-                     th:style="'--fcolor:'+${randomColor}" rel="noopener noreferrer">
+                     th:style="'--fcolor:'+${randomColor} + '; background:' + ${randomBgColor}" rel="noopener noreferrer">
                     <div class="evan-f-left">
                       <div class="f-avatar">
-                        <img width="40" height="40" class="avatar lazyloaded" th:data-src="${theme.config.blogger.lazyload_avatar}" th:src="${link.spec.logo}" th:alt="${link.spec.displayName}">
+                        <img width="40" height="40" class="avatar lazyload" th:src="${theme.config.blogger.lazyload_avatar}" th:data-src="${link.spec.logo ?: theme.config.links.links_default_logo}" th:alt="${link.spec.displayName}" onerror="Joe.errorImg(this, 'LinksErrImg')" >
                       </div>
                     </div>
                     <div class="evan-f-right">
@@ -47,6 +52,7 @@
                       </div>
                     </div>
                   </a>
+                </th:block>
                 </li>
               </ul>
             </div>
