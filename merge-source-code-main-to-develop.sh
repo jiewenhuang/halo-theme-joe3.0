@@ -23,6 +23,11 @@ git pull origin develop
 echo "合并 source-code-main 分支代码"
 git merge source-code-main
 
+# 提交合并的代码
+echo "提交合并的代码"
+git add .
+git commit -m "merge source-code-main to develop"
+
 # 提交代码到 develop 分支
 echo "推送到 github: git@github.com:qiushaocloud/$gitName"
 echo "提交代码到 develop 分支"
