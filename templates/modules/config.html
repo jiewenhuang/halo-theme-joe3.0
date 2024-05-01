@@ -71,11 +71,78 @@
             } else if (src && src === 'LinksErrImg') { // 如果 src 是 LinksErrImg 则使用友链配置里配置的友链默认 logo
                 src = target.dataset.errSrc || '[[${theme.config.links.links_default_logo}]]'
                 if (!src || target.getAttribute('src') === src) {
+                    if (target.dataset.textAvatar || target.getAttribute('alt'))
+                        src = Joe.generateTextAvatarImage(target.dataset.textAvatar || target.getAttribute('alt'));
+                    else
                     src = '/themes/theme-Joe3/assets/img/default_links_logo.png';
                 }
+            } else if (src && src === 'ErrAvatarImg') {
+                src = target.dataset.errSrc || Joe.generateTextAvatarImage(target.dataset.textAvatar || target.getAttribute('alt') || 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.charAt(Math.floor(Math.random() * 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.length)));
+            } else if (src && src === 'LoadFailedImg') {
+                src = target.dataset.errSrc || '/themes/theme-Joe3/assets/img/img_load_failed.jpg';
             }
             target.setAttribute('onerror', null);
             target.setAttribute('src', src || target.dataset.errSrc || '/themes/theme-Joe3/assets/img/Joe3.png');
+        },
+         // 生成随机颜色函数
+        getRandomColor: function (alpha) {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            if (alpha !== undefined) {
+                return color + (alpha >= 0 && alpha <= 1 ? Math.round(alpha * 255).toString(16) : 'FF');
+            }
+            return color;
+        },
+        // 生成随机颜色的文字性头像
+        generateTextAvatarImage: function(text, opts) {
+            opts = opts || {};
+            opts.fontSize = opts.fontSize || 50;
+            opts.font = opts.font || 'Great Vibes';
+            opts.canvasRadius = opts.canvasWidth || 1.5 * opts.fontSize;
+
+            // 创建一个新的 Canvas 元素
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            // 设置 Canvas 的尺寸
+            canvas.width = opts.canvasRadius;
+            canvas.height = opts.canvasRadius;
+
+            if (!opts.textColor) {
+                // 生成文字的线性渐变
+                const textGradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+                textGradient.addColorStop(0, Joe.getRandomColor(0.9)); // 文字的渐变色
+                textGradient.addColorStop(1, Joe.getRandomColor(0.9)); // 文字的渐变色
+            }
+
+            // 生成随机颜色的渐变背景
+            const gradient = ctx.createRadialGradient(
+                canvas.width / 2, canvas.height / 2, 0,
+                canvas.width / 2, canvas.height / 2, canvas.width / 2
+            );
+            gradient.addColorStop(0, Joe.getRandomColor(0.7));
+            gradient.addColorStop(1, Joe.getRandomColor(0.7));
+
+            // 绘制渐变背景
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 2, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 设置文本样式
+            ctx.font = `${opts.fontSize}px ${opts.font}`;
+            ctx.fillStyle = opts.textColor;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            // 在 Canvas 上绘制文本
+            ctx.fillText(text.charAt(0), canvas.width / 2, canvas.height / 2);
+
+            // 返回生成的图片对象 base64 编码
+            return canvas.toDataURL();
         }
     }
     ThemeConfig.enable_console_theme && console.log("%cTheme By  Jiewen" + " | 版本 V" + ThemeConfig.version, "padding: 8px 15px;color:#fff;background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3);border-radius: 0 15px 0 15px;");

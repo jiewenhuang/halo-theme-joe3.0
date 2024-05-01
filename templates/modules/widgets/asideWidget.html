@@ -22,7 +22,7 @@
             <span class="text">[[${pic_data.qrcode_title}]]</span>
         </div>
         <div class="joe_aside__item-contain">
-            <img class="qrcode_img lazyload" th:src="${pic_data.qrcode_url}" th:data-src="${pic_data.qrcode_url}" th:alt="${pic_data.qrcode_title}"/>
+            <img class="qrcode_img lazyload" th:src="${pic_data.qrcode_url}" th:data-src="${pic_data.qrcode_url}" th:alt="${pic_data.qrcode_title}" onerror="Joe.errorImg(this, 'LoadFailedImg')" />
             <th:block th:if="${pic_data.qrcode_description != ''}">
                 <p class="qrcode_description">[[${pic_data.qrcode_description}]]</p>
             </th:block>
@@ -66,7 +66,7 @@
                     th:each="result : ${commentFinder.list(null,1,new_reply_data.show_newreply_num)}">
                 <li class="item">
                     <div class="user">
-                        <img width="35" height="35" class="avatar lazyload" th:data-src="${result.owner.avatar ?: '/themes/theme-Joe3/assets/img/peeps-avatar.png'} " th:src="${theme.config.blogger.lazyload_avatar}"  alt="头像">
+                        <img width="35" height="35" class="avatar lazyload" th:data-src="${result.owner.avatar ?: '/themes/theme-Joe3/assets/img/peeps-avatar.png'} " th:src="${theme.config.blogger.lazyload_avatar}"  alt="头像" th:data-text-avatar="${result.owner.displayName}" onerror="Joe.errorImg(this, 'ErrAvatarImg')" >
                         <div class="info">
                             <div class="author">[[${result.owner.displayName}]]</div>
                             <span class="date">[[${#temporals.format(result.spec.creationTime, 'yyyy-MM-dd HH:mm:ss')}]]</span>
@@ -152,7 +152,7 @@
 
                             return `<li class="item">
                     <div class="user">
-                        <img width="35" height="35" class="avatar lazyload" data-src="${comment.avatar}" src="${ThemeConfig.lazyload_avatar}"  alt="头像">
+                        <img width="35" height="35" class="avatar lazyload" data-src="${comment.avatar}" src="${ThemeConfig.lazyload_avatar}"  alt="头像" th:data-text-avatar="${comment.nick}" onerror="Joe.errorImg(this, 'ErrAvatarImg')" >
                         <div class="info">
                             <div class="author">${comment.nick}</div>
                             <span class="date">${commentTime}</span>
