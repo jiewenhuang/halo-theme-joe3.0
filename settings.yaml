@@ -2404,8 +2404,8 @@ spec:
           name: links_default_logo
           id: links_default_logo
           label: 友链默认 logo
-          value: "/themes/theme-Joe3/assets/img/default_links_logo.png"
-          help: "用于友链 logo 未设置或加载出错时显示的图片"
+          value: ""
+          help: "用于友链 logo 未设置或加载出错时显示的图片，设置为空，会随机根据当前博主名字随机生成一张首字符的渐变色图片"
         - $formkit: code
           name: links_article
           height: 200

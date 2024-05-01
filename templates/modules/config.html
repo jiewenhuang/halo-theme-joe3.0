@@ -74,7 +74,7 @@
                     if (target.dataset.textAvatar || target.getAttribute('alt'))
                         src = Joe.generateTextAvatarImage(target.dataset.textAvatar || target.getAttribute('alt'));
                     else
-                    src = '/themes/theme-Joe3/assets/img/default_links_logo.png';
+                        src = '/themes/theme-Joe3/assets/img/default_links_logo.png';
                 }
             } else if (src && src === 'ErrAvatarImg') {
                 src = target.dataset.errSrc || Joe.generateTextAvatarImage(target.dataset.textAvatar || target.getAttribute('alt') || 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.charAt(Math.floor(Math.random() * 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.length)));
