@@ -1018,7 +1018,7 @@ spec:
           name: generate_avatar_opts
           label: 头像生成配置项
           value: "{bgColor:"",textColor:"",useTextGradient:false}"
-          help: "头像随机生成配置项，格式：{bgColor: '', textColor: '', useTextGradient: false}"，默认情况使用随机渐变色背景和文字，如需自定义请修改此处【useTextGradient:当textColor为空时是否使用文字渐变色，默认为false】
+          help: "头像随机生成配置项，格式：{bgColor: '', textColor: '', useTextGradient: false}，默认情况使用随机渐变色背景和文字，如需自定义请修改此处【useTextGradient:当textColor为空时是否使用文字渐变色，默认为false】"
         - $formkit: attachment
           name: author_bg
           label: 博主栏背景图
