@@ -57,7 +57,7 @@
           <ul class="joe_leaving-list">
             <li th:each="result : ${commentFinder.list(null,1,20)}" class="item">
               <div class="user">
-                <img class="avatar lazyload" th:src="${result.owner.avatar}" alt="用户头像"
+                <img class="avatar lazyload" th:src="${theme.config.blogger.lazyload_avatar}" alt="用户头像"
                      th:data-src="${result.owner.avatar}" th:data-text-avatar="${result.spec.owner.displayName}" onerror="Joe.errorImg(this, 'ErrAvatarImg')" />
                 <div class="nickname" th:text="${result.spec.owner.displayName}"></div>
                 <div class="date" th:text="${#dates.format(result.metadata.creationTimestamp, 'yyyy-MM-dd')}"></div>

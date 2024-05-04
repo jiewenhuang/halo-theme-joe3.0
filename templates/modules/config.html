@@ -170,7 +170,20 @@
         },
         // 生成随机颜色的文字性头像
         generateTextAvatarImage: function(text, opts) {
-            opts = opts || {};
+            let optsTmp = {};
+            let generate_avatar_opts_str = '[[${theme.config.blogger.generate_avatar_opts}]]';
+            if (generate_avatar_opts_str) {
+                // generate_avatar_opts_str 示例：{bgColor:"",textColor:"",useTextGradient:false}, 解析 generate_avatar_opts 配置
+                try {
+                    // key 自动加上 "" 防止报错
+                    generate_avatar_opts_str = generate_avatar_opts_str.replace(/([\w]+):/g, '"$1":');
+                    optsTmp = JSON.parse(generate_avatar_opts_str);
+                } catch (e) {
+                    console.error('Joe3主题配置：生成文字性头像的配置解析失败，使用默认配置。generate_avatar_opts_str:', generate_avatar_opts_str, ' ,error:', e);
+                }
+            }
+
+            opts = Object.assign(optsTmp, opts || {});
             opts.fontSize = opts.fontSize || 50;
             opts.font = opts.font || 'Great Vibes';
             opts.canvasRadius = opts.canvasWidth || 1.5 * opts.fontSize;
@@ -183,30 +196,41 @@
             canvas.width = opts.canvasRadius;
             canvas.height = opts.canvasRadius;
 
-            if (!opts.textColor) {
-                // 生成文字的线性渐变
-                const textGradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-                textGradient.addColorStop(0, Joe.getRandomColor(0.9)); // 文字的渐变色
-                textGradient.addColorStop(1, Joe.getRandomColor(0.9)); // 文字的渐变色
+            if (opts.bgColor) {
+                ctx.fillStyle = opts.bgColor;
+            } else {
+                // 生成随机颜色的渐变背景
+                const gradient = ctx.createRadialGradient(
+                    canvas.width / 2, canvas.height / 2, 0,
+                    canvas.width / 2, canvas.height / 2, canvas.width / 2
+                );
+                gradient.addColorStop(0, Joe.getRandomColor(0.7));
+                gradient.addColorStop(1, Joe.getRandomColor(0.7));
+
+                // 绘制渐变背景
+                ctx.fillStyle = gradient;
             }
 
-            // 生成随机颜色的渐变背景
-            const gradient = ctx.createRadialGradient(
-                canvas.width / 2, canvas.height / 2, 0,
-                canvas.width / 2, canvas.height / 2, canvas.width / 2
-            );
-            gradient.addColorStop(0, Joe.getRandomColor(0.7));
-            gradient.addColorStop(1, Joe.getRandomColor(0.7));
-
-            // 绘制渐变背景
-            ctx.fillStyle = gradient;
             ctx.beginPath();
             ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 2, 0, Math.PI * 2);
             ctx.fill();
 
             // 设置文本样式
             ctx.font = `${opts.fontSize}px ${opts.font}`;
-            ctx.fillStyle = opts.textColor;
+
+            if (opts.textColor) {
+                ctx.fillStyle = opts.textColor;
+            } else if (opts.useTextGradient) {
+                // 生成文字的线性渐变
+                const textGradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+                textGradient.addColorStop(0, Joe.getRandomColor(0.9)); // 文字的渐变色
+                textGradient.addColorStop(1, Joe.getRandomColor(0.9)); // 文字的渐变色
+                ctx.fillStyle = textGradient;
+            } else if (opts.bgColor) { // 设置了背景色，但是没有设置文字颜色，则需要设置默认文字颜色为黑色，防止文字颜色和背景色一致【注；背景色为渐变色，文字能显示出来，因此不需要设置文字颜色】
+                // 如果 bgColor 为黑色，则文字颜色设置为白色，否则设置为黑色
+                ctx.fillStyle = /(#000000|#000|black)/.test(opts.bgColor) ? '#fff' : '#000';
+            }
+
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
 

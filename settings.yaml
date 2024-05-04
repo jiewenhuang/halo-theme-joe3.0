@@ -1014,6 +1014,11 @@ spec:
           label: 默认头像
           value: "/themes/theme-Joe3/templates/assets/img/peeps-avatar.png"
           help: "用于头像未设置或加载出错时显示的图片，设置为空，会随机根据当前博主名字随机生成一张首字符的渐变色图片（注意：主题优先使用后台配置的头像，当后台未配置头像或头像加载出错才会用这里设置的图片。此处是有默认值的）"
+        - $formkit: text
+          name: generate_avatar_opts
+          label: 头像生成配置项
+          value: "{bgColor:"",textColor:"",useTextGradient:false}"
+          help: "头像随机生成配置项，格式：{bgColor: '', textColor: '', useTextGradient: false}"，默认情况使用随机渐变色背景和文字，如需自定义请修改此处【useTextGradient:当textColor为空时是否使用文字渐变色，默认为false】
         - $formkit: attachment
           name: author_bg
           label: 博主栏背景图
