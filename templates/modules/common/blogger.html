@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <th:block th:fragment="blogger">
   <section class="joe_aside__item author">
-    <img width="100%" height="120" class="image lazyload" th:data-src="${theme.config.blogger.author_bg}" th:src="@{/assets/img/author_bg.jpg}"  alt="博主栏壁纸">
+    <img width="100%" height="120" class="image lazyload" th:data-src="${theme.config.blogger.author_bg}" th:src="@{/assets/img/author_bg.jpg}"  alt="博主栏壁纸" onerror="Joe.errorImg(this)" >
     <div class="user">
       <div class="avatar_wrapper"
       th:classappend="${theme.config.blogger.avatar_type == 'circle' ? 'circle':'round'}">
-        <img class="avatar lazyload" th:data-src="${theme.config.blogger.avatar?: '/themes/theme-Joe3/assets/img/peeps-avatar.png'}" th:src="${theme.config.blogger.lazyload_avatar}"  alt="博主头像"/>
+        <img class="avatar lazyload" th:data-src="${theme.config.blogger.avatar ?: (theme.config.blogger.default_avatar ?: '/themes/theme-Joe3/assets/img/transparent-placeholder.png')}" th:src="${theme.config.blogger.lazyload_avatar}"  alt="博主头像" th:data-text-avatar="${theme.config.blogger.nickname ?: site.title}" onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')" onerror="Joe.errorImg(this, 'ErrAvatarImg')" />
         <th:block th:if="${theme.config.blogger.avatar_frame != '0'}">
-        <img th:class="'avatar_frame '+${theme.config.blogger.avatar_frame}" th:src="@{/assets/frame/}+'/'+${theme.config.blogger.avatar_frame}+'.png'"  alt="挂架"/>
+        <img th:class="'avatar_frame '+${theme.config.blogger.avatar_frame}" th:src="@{/assets/frame/}+'/'+${theme.config.blogger.avatar_frame}+'.png'"  alt="挂架" />
         </th:block>
         <th:block th:if="${theme.config.blogger.avatar_widget != '0'}">
       <img th:class="'avatar_widget '+${theme.config.blogger.avatar_widget}" th:src="@{/assets/widget/}+'/'+${theme.config.blogger.avatar_widget}+'.gif'"  alt="相框"/>
