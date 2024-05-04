@@ -5,7 +5,9 @@
     <a class="item"
        th:classappend="${post.status.permalink !='' ? 'clickable': ''}"
        th:href="${post.status.permalink !='' ? post.status.permalink : 'javascript:;'}" target="_blank" rel="noopener noreferrer nofollow">
-      <img width="100%" height="100%" class="thumbnail lazyload" th:data-src="${post.spec.cover ?: '/themes/theme-Joe3/assets/img/Joe3.png'}" th:src="${theme.config.carousel.banner_lazyload_img}" th:alt="${post.spec.title}" onerror="Joe.errorImg(this, 'HomeErrImg')">
+      <th:block th:with="postCover = ${#lists.isEmpty(theme.config.home.post_thumbnail)? theme.config.basic.random_img_api_url+'?pageid='+post.metadata.name : theme.config.home.post_thumbnail}">
+        <img width="100%" height="100%" class="thumbnail lazyload" th:data-src="${post.spec.cover ?: postCover}" th:src="${theme.config.carousel.banner_lazyload_img}" th:alt="${post.spec.title}" onerror="Joe.errorImg(this, 'HomeErrImg')">
+      </th:block>
 
       <div class="title-row">
         <h3 class="title">[[${post.spec.title}]]</h3>
@@ -25,7 +27,9 @@
     <a class="item"
        th:classappend="${banner_url !='' ? 'clickable': ''}"
        th:href="${banner_url !='' ? banner_url : 'javascript:;'}" target="_blank" rel="noopener noreferrer nofollow">
-      <img width="100%" height="100%" class="thumbnail lazyload" th:data-src="${banner_cover ?: '/themes/theme-Joe3/assets/img/Joe3.png'}" th:src="${theme.config.carousel.banner_lazyload_img}" th:alt="${banner_title}" onerror="Joe.errorImg(this, 'HomeErrImg')" >
+      <th:block th:with="postCover = ${#lists.isEmpty(theme.config.home.post_thumbnail)? theme.config.basic.random_img_api_url+'?pageid='+banner_title : theme.config.home.post_thumbnail}">
+        <img width="100%" height="100%" class="thumbnail lazyload" th:data-src="${banner_cover ?: postCover}" th:src="${theme.config.carousel.banner_lazyload_img}" th:alt="${banner_title}" onerror="Joe.errorImg(this, 'HomeErrImg')" >
+      </th:block>
 
       <div class="title-row">
         <h3 class="title">[[${banner_title}]]</h3>
