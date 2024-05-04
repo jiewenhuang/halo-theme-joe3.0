@@ -22,7 +22,7 @@
 
 预览：[邱少羽梦 Blog](https://www.qiushaocloud.top)
 
-#### 👀 [有疑问或者功能需求，请点击此处前往](https://www.qiushaocloud.top/2022/01/10/joe20halozhu-ti-qiu-shao-xiu-gai-ban.html)
+#### 👀 [有疑问或者功能需求，请点击此处前往](https://www.qiushaocloud.top/2024/05/05/halo2x-joe30-zhu-ti-qiu-shao-xiu-gai-ban)
 
 
 ### 邱少羽梦修改内容
