@@ -13,7 +13,7 @@ spec:
   repo: "https://github.com/qiushaocloud/halo-theme-joe3.0-qiu"
   settingName: "theme-Joe-setting"
   configMapName: "theme-Joe-configMap"
-  version: "master"
+  version: "2.2.2"
   require: ">=2.11.0"
   customTemplates:
     page:
