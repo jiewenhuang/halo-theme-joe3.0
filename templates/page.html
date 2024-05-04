@@ -16,7 +16,7 @@
               <div class="joe_detail__count">
                 <div class="joe_detail__count-information">
 
-                  <img width="35" height="35" class="avatar lazyload" th:src="${theme.config.blogger.lazyload_avatar}" th:data-src="${contributor.avatar}"  th:alt="${contributor.displayName}">
+                  <img width="35" height="35" class="avatar lazyload" th:src="${theme.config.blogger.lazyload_avatar}" th:data-src="${contributor.avatar}"  th:alt="${contributor.displayName}" onerror="Joe.errorImg(this, 'ErrAvatarImg')" >
                   <div class="meta">
                     <div class="author">
                       <a class="link" th:href="${contributor.permalink}" th:title="${contributor.displayName}">[[${contributor.displayName}]]</a>

@@ -26,49 +26,49 @@
       <th:block th:if="${theme.config.footer.driven_by == 'aliyun'}">
     <p class="site_driven">本站点由
       <a href="https://www.aliyun.com" target="_blank" rel="noopener noreferrer nofollow">
-      <img th:class="${theme.config.footer.driven_by}" th:src="@{/assets/img/cloud}+'/'+${theme.config.footer.driven_by}+'.svg'"  alt="云服务商"/>
+      <img th:class="${theme.config.footer.driven_by}" th:src="@{/assets/img/cloud}+'/'+${theme.config.footer.driven_by}+'.svg'"  alt="云服务商" onerror="Joe.errorImg(this, 'LoadFailedImg')" />
       </a>提供云服务
     </p>
       </th:block>
       <th:block th:if="${theme.config.footer.driven_by == 'tencent'}">
         <p class="site_driven">本站点由
           <a href="https://cloud.tencent.com" target="_blank" rel="noopener noreferrer nofollow">
-            <img th:class="${theme.config.footer.driven_by}" th:src="@{/assets/img/cloud}+'/'+${theme.config.footer.driven_by}+'.svg'"  alt="云服务商"/>
+            <img th:class="${theme.config.footer.driven_by}" th:src="@{/assets/img/cloud}+'/'+${theme.config.footer.driven_by}+'.svg'"  alt="云服务商" onerror="Joe.errorImg(this, 'LoadFailedImg')" />
           </a>提供云服务
         </p>
       </th:block>
       <th:block th:if="${theme.config.footer.driven_by == 'baidu'}">
         <p class="site_driven">本站点由
           <a href="https://cloud.baidu.com" target="_blank" rel="noopener noreferrer nofollow">
-            <img th:class="${theme.config.footer.driven_by}" th:src="@{/assets/img/cloud}+'/'+${theme.config.footer.driven_by}+'.svg'"  alt="云服务商"/>
+            <img th:class="${theme.config.footer.driven_by}" th:src="@{/assets/img/cloud}+'/'+${theme.config.footer.driven_by}+'.svg'"  alt="云服务商" onerror="Joe.errorImg(this, 'LoadFailedImg')" />
           </a>提供云服务
         </p>
       </th:block>
       <th:block th:if="${theme.config.footer.driven_by == 'upyun'}">
         <p class="site_driven">本站点由
           <a href="https://www.upyun.com" target="_blank" rel="noopener noreferrer nofollow">
-            <img th:class="${theme.config.footer.driven_by}" th:src="@{/assets/img/cloud}+'/'+${theme.config.footer.driven_by}+'.svg'"  alt="云服务商"/>
+            <img th:class="${theme.config.footer.driven_by}" th:src="@{/assets/img/cloud}+'/'+${theme.config.footer.driven_by}+'.svg'"  alt="云服务商" onerror="Joe.errorImg(this, 'LoadFailedImg')" />
           </a>提供云服务
         </p>
       </th:block>
       <th:block th:if="${theme.config.footer.driven_by == 'qiniu'}">
         <p class="site_driven">本站点由
           <a href="https://www.qiniu.com" target="_blank" rel="noopener noreferrer nofollow">
-            <img th:class="${theme.config.footer.driven_by}" th:src="@{/assets/img/cloud}+'/'+${theme.config.footer.driven_by}+'.svg'"  alt="云服务商"/>
+            <img th:class="${theme.config.footer.driven_by}" th:src="@{/assets/img/cloud}+'/'+${theme.config.footer.driven_by}+'.svg'"  alt="云服务商" onerror="Joe.errorImg(this, 'LoadFailedImg')" />
           </a>提供云服务
         </p>
       </th:block>
       <th:block th:if="${theme.config.footer.driven_by == 'huawei'}">
         <p class="site_driven">本站点由
           <a href="https://www.huaweicloud.com" target="_blank" rel="noopener noreferrer nofollow">
-            <img th:class="${theme.config.footer.driven_by}" th:src="@{/assets/img/cloud}+'/'+${theme.config.footer.driven_by}+'.svg'"  alt="云服务商"/>
+            <img th:class="${theme.config.footer.driven_by}" th:src="@{/assets/img/cloud}+'/'+${theme.config.footer.driven_by}+'.svg'"  alt="云服务商" onerror="Joe.errorImg(this, 'LoadFailedImg')" />
           </a>提供云服务
         </p>
       </th:block>
       <th:block th:if="${theme.config.footer.driven_by == 'jinshan'}">
         <p class="site_driven">本站点由
           <a href="https://www.ksyun.com" target="_blank" rel="noopener noreferrer nofollow">
-            <img th:class="${theme.config.footer.driven_by}" th:src="@{/assets/img/cloud}+'/'+${theme.config.footer.driven_by}+'.svg'"  alt="云服务商"/>
+            <img th:class="${theme.config.footer.driven_by}" th:src="@{/assets/img/cloud}+'/'+${theme.config.footer.driven_by}+'.svg'"  alt="云服务商" onerror="Joe.errorImg(this, 'LoadFailedImg')" />
           </a>提供云服务
         </p>
       </th:block>
@@ -76,7 +76,7 @@
       <th:block th:if="${theme.config.footer.driven_by == 'custom'} and ${theme.config.footer.driven_by_custom_img != ''}">
         <p class="site_driven">本站点由
           <a th:href="${theme.config.footer.driven_by_custom_url}" target="_blank" rel="noopener noreferrer nofollow">
-            <img th:class="${theme.config.footer.driven_by}" th:src="${theme.config.footer.driven_by_custom_img}"  alt="云服务商"/>
+            <img th:class="${theme.config.footer.driven_by}" th:src="${theme.config.footer.driven_by_custom_img}"  alt="云服务商" onerror="Joe.errorImg(this, 'LoadFailedImg')" />
           </a>提供云服务
         </p>
       </th:block>

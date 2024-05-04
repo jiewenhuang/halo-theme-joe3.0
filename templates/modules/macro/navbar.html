@@ -10,7 +10,7 @@
       <th:block th:if="${theme.config.navbar.show_logo}"
                 th:with="logoLink = ${theme.config.navbar.logo_link == '#'}?'javascript:;':${theme.config.navbar.logo_link}">
       <a th:title="${site.title}" class="joe_header__above-logo" th:href="${logoLink == ''?site.url:logoLink}">
-        <img th:style="'border-radius:'+${theme.config.navbar.logo_radius} ?:'4px'" th:src="${site.logo}"  th:alt="${site.title}">
+        <img th:style="'border-radius:'+${theme.config.navbar.logo_radius} ?:'4px'" th:src="${site.logo}"  th:alt="${site.title}" onerror="Joe.errorImg(this, 'ErrAvatarImg')" >
       </a>
       </th:block>
       <nav class="joe_header__above-nav"
@@ -90,7 +90,7 @@
 <!--          </th:block>-->
 <!--          <th:block th:if="${#authentication.name != 'anonymousUser'}">-->
 <!--            <th:block th:with="contributor = ${contributorFinder.getContributor(#authentication.name)}">-->
-<!--            <img th:src="${contributor.avatar}" th:title="${contributor.displayName}" th:alt="${contributor.displayName}">-->
+<!--            <img th:src="${contributor.avatar}" th:title="${contributor.displayName}" th:alt="${contributor.displayName}" onerror="Joe.errorImg(this, 'ErrAvatarImg')" >-->
 <!--            </th:block>-->
 <!--          </th:block>-->
 <!--        </div>-->
@@ -105,7 +105,7 @@
           <th:block th:if="${#authentication.name != 'anonymousUser'}">
             <th:block th:with="contributor = ${contributorFinder.getContributor(#authentication.name)}">
               <a class="login_after" href="/console" th:title="${contributor.displayName}" target="_blank">
-              <img th:src="${contributor.avatar}" th:title="${contributor.displayName}" th:alt="${contributor.displayName}">
+              <img th:src="${contributor.avatar}" th:title="${contributor.displayName}" th:alt="${contributor.displayName}" onerror="Joe.errorImg(this, 'ErrAvatarImg')" >
               </a>
             </th:block>
           </th:block>
@@ -129,9 +129,9 @@
 
   <div class="joe_header__slideout">
     <div class="joe_header__slideout-wrap">
-      <img width="100%" height="150" class="joe_header__slideout-image" th:src="${theme.config.blogger.author_bg ?: #theme.assets('/img/author_bg.jpg')}"  alt="侧边栏壁纸">
+      <img width="100%" height="150" class="joe_header__slideout-image" th:src="${theme.config.blogger.author_bg ?: #theme.assets('/img/author_bg.jpg')}"  alt="侧边栏壁纸" onerror="Joe.errorImg(this)" >
       <div class="joe_header__slideout-author">
-        <img width="50" height="50" class="avatar ls-is-cached lazyloaded" th:data-src="${theme.config.blogger.lazyload_avatar}" th:src="${theme.config.blogger.avatar ?: theme.config.blogger.default_avatar}"  alt="博主头像">
+        <img width="50" height="50" class="avatar ls-is-cached lazyloaded" th:data-src="${theme.config.blogger.lazyload_avatar}" th:src="${theme.config.blogger.avatar ?: (theme.config.blogger.default_avatar ?: '/themes/theme-Joe3/assets/img/transparent-placeholder.png')}"  alt="博主头像" th:data-text-avatar="${theme.config.blogger.name ?: site.title}" onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')" onerror="Joe.errorImg(this, 'ErrAvatarImg')" >
         <div class="info">
           <a class="link" th:href="${site.url}" target="_blank" rel="noopener noreferrer nofollow">[[${theme.config.blogger.name ?: site.title}]]<img class="level" th:src="@{/assets/svg/level_1.svg}"  alt="博主等级"></a>
 
@@ -314,7 +314,7 @@
     <div class="joe_header__toc-wrap">
       <div class="toc_top">
         <h3>目 录<span>CONTENT</span></h3>
-        <img width="100%" height="150" th:src="${theme.config.blogger.author_bg?:'/themes/theme-Joe3/assets/img/context_bg.png'}"  alt="文章目录">
+        <img width="100%" height="150" th:src="${theme.config.blogger.author_bg?:'/themes/theme-Joe3/assets/img/context_bg.png'}"  alt="文章目录" onerror="Joe.errorImg(this)" >
       </div>
       <div id="js-toc-mobile" class="toc"></div>
     </div>
