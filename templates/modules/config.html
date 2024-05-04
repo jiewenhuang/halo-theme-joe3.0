@@ -91,8 +91,14 @@
                     }
                     break;
                 }
-                case 'ErrAvatarImg': { // 如果 src 是 ErrAvatarImg 则使用随机颜色的文字性头像
-                    src = target.dataset.errSrc || Joe.generateTextAvatarImage(target.dataset.textAvatar || target.getAttribute('alt') || 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.charAt(Math.floor(Math.random() * 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.length)));
+                case 'ErrAvatarImg': { // 如果 src 是 ErrAvatarImg 则使用博主配置里配置的默认头像
+                    src = target.dataset.errSrc || '[[${theme.config.blogger.default_avatar}]]';
+                    if (!src || src === targetSrc || (targetSrc && targetSrc.indexOf('/assets/img/transparent-placeholder.png') !== -1)) {
+                        if (target.dataset.textAvatar || target.getAttribute('alt'))
+                            src = Joe.generateTextAvatarImage(target.dataset.textAvatar || target.getAttribute('alt'));
+                        else
+                            src = '/themes/theme-Joe3/assets/img/peeps-avatar.png';
+                    }
                     break;
                 }
                 case 'LoadFailedImg': { // 如果 src 是 LoadFailedImg 则使用加载失败的图片
@@ -130,6 +136,16 @@
                             src = Joe.generateTextAvatarImage(target.dataset.textAvatar || target.getAttribute('alt'));
                         else
                             src = '/themes/theme-Joe3/assets/img/default_links_logo.png';
+                    }
+                    break;
+                }
+                case 'AvatarImg': { // 如果 src 是 AvatarImg 则使用博主配置里配置的默认头像
+                    src = target.dataset.replaceSrc || '[[${theme.config.blogger.default_avatar}]]';
+                    if (!src || src === targetSrc) {
+                        if (target.dataset.textAvatar || target.getAttribute('alt'))
+                            src = Joe.generateTextAvatarImage(target.dataset.textAvatar || target.getAttribute('alt'));
+                        else
+                            src = '/themes/theme-Joe3/assets/img/peeps-avatar.png';
                     }
                     break;
                 }
