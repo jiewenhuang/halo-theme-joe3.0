@@ -175,8 +175,11 @@
             if (generate_avatar_opts_str) {
                 // generate_avatar_opts_str 示例：{bgColor:'',textColor:'',useTextGradient:false}, 解析 generate_avatar_opts 配置
                 try {
+                    // 防止 &#39; 等特殊字符导致 JSON 解析失败
+                    const eleTmp =document.createElement('div');
+                    eleTmp.innerHTML = generate_avatar_opts_str;
                     // key 自动加上 "" 防止报错，’ 自动转成 “
-                    generate_avatar_opts_str = generate_avatar_opts_str.replace(/'/g, '"').replace(/([\w]+):/g, '"$1":');
+                    generate_avatar_opts_str = eleTmp.innerHTML.replace(/'/g, '"').replace(/([\w]+):/g, '"$1":');
                     optsTmp = JSON.parse(generate_avatar_opts_str);
                 } catch (e) {
                     console.error('Joe3主题配置：生成文字性头像的配置解析失败，使用默认配置。generate_avatar_opts_str:', generate_avatar_opts_str, ' ,error:', e);
