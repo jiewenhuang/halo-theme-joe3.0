@@ -209,7 +209,7 @@ spec:
         - $formkit: attachment
           name: lazyload_thumbnail
           label: 文章预载图
-          value: "/themes/theme-Joe3/assets/img/lazyload.gif"
+          value: "/themes/theme-Joe3-qiu/assets/img/lazyload.gif"
           help: "文章配图加载出来之前展示的图片，体积尽可能的小"
         - $formkit: attachment
           name: post_thumbnail
@@ -219,7 +219,7 @@ spec:
         - $formkit: attachment
           name: fallback_thumbnail
           label: 文章错误缺省图
-          value: "/themes/theme-Joe3/templates/assets/img/default_thumbnail.png"
+          value: "/themes/theme-Joe3-qiu/templates/assets/img/default_thumbnail.png"
           help: "文章图片加载出错时生效，可使用占位图服务（350*200）"
         - $formkit: select
           name: enable_index_list_effect
@@ -804,7 +804,7 @@ spec:
           name: banner_lazyload_img
           id: banner_lazyload_img
           label: 图片预载图
-          value: "/themes/theme-Joe3/assets/img/lazyload_h.gif"
+          value: "/themes/theme-Joe3-qiu/assets/img/lazyload_h.gif"
           help: "轮播图默认为懒加载，这里可以为banner图设置加载完之前的加载图（体积尽可能的小）"
 
     - group: beauty
@@ -1002,7 +1002,7 @@ spec:
         - $formkit: attachment
           name: lazyload_avatar
           label: 头像预载图
-          value: "/themes/theme-Joe3/assets/svg/spinner-preloader.svg"
+          value: "/themes/theme-Joe3-qiu/assets/svg/spinner-preloader.svg"
           help: "头像加载出来之前展示的图片"
         - $formkit: attachment
           name: avatar
@@ -1012,7 +1012,7 @@ spec:
         - $formkit: attachment
           name: default_avatar
           label: 默认头像
-          value: "/themes/theme-Joe3/templates/assets/img/peeps-avatar.png"
+          value: "/themes/theme-Joe3-qiu/templates/assets/img/peeps-avatar.png"
           help: "用于头像未设置或加载出错时显示的图片，设置为空，会随机根据当前博主名字随机生成一张首字符的渐变色图片（注意：主题优先使用后台配置的头像，当后台未配置头像或头像加载出错才会用这里设置的图片。此处是有默认值的）"
         - $formkit: text
           name: generate_avatar_opts
@@ -2409,7 +2409,7 @@ spec:
           name: links_default_logo
           id: links_default_logo
           label: 友链默认 logo
-          value: "/themes/theme-Joe3/assets/img/default_links_logo.png"
+          value: "/themes/theme-Joe3-qiu/assets/img/default_links_logo.png"
           help: "用于友链 logo 未设置或加载出错时显示的图片，设置为空，会随机根据当前博主名字随机生成一张首字符的渐变色图片（注意：主题优先使用后台配置的 logo，当后台未配置 logo 或 logo 加载出错才会用这里设置的图片。此处是有默认值的）"
         - $formkit: code
           name: links_article

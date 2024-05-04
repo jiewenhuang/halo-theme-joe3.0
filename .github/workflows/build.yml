@@ -17,10 +17,10 @@ jobs:
       - name: Compress zip
         run: |
           PACKAGE_VERSION=$(sed -nE 's/^ *version: "([^"]+)"$/\1/p' theme.yaml)
-          PRE_ZIP_FOLDER=halo-theme-Joe3-${PACKAGE_VERSION}
+          PRE_ZIP_FOLDER=halo-theme-Joe3-qiu-${PACKAGE_VERSION}
           ARTIFACT_NAME=${PRE_ZIP_FOLDER}.zip
           ARTIFACT_PATHNAME=dist/${ARTIFACT_NAME}
-          echo "halo-theme-Joe3 version $PACKAGE_VERSION"
+          echo "halo-theme-Joe3-qiu version $PACKAGE_VERSION"
           echo "Artifact name: ${ARTIFACT_NAME}"
           echo "Artifact pathname: ${ARTIFACT_PATHNAME}"
           echo "PACKAGE_VERSION=${PACKAGE_VERSION}" >> $GITHUB_ENV
@@ -34,7 +34,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: halo-theme-Joe3
+          name: halo-theme-Joe3-qiu
           path: |
             dist/*.zip
           retention-days: 7
@@ -53,10 +53,10 @@ jobs:
       - name: Compress zip
         run: |
           PACKAGE_VERSION=$(sed -nE 's/^ *version: "([^"]+)"$/\1/p' theme.yaml)
-          PRE_ZIP_FOLDER=halo-theme-Joe3-${PACKAGE_VERSION}
+          PRE_ZIP_FOLDER=halo-theme-Joe3-qiu-${PACKAGE_VERSION}
           ARTIFACT_NAME=${PRE_ZIP_FOLDER}.zip
           ARTIFACT_PATHNAME=dist/${ARTIFACT_NAME}
-          echo "halo-theme-Joe3 version $PACKAGE_VERSION"
+          echo "halo-theme-Joe3-qiu version $PACKAGE_VERSION"
           echo "Artifact name: ${ARTIFACT_NAME}"
           echo "Artifact pathname: ${ARTIFACT_PATHNAME}"
           echo "PACKAGE_VERSION=${PACKAGE_VERSION}" >> $GITHUB_ENV

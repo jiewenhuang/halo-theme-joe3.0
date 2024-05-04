@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<th:block th:fragment="tail" th:with="source_link=${(#strings.trim(theme.config.basic.source_link) !='' && theme.config.basic.enable_source_link)? theme.config.basic.source_link : '/themes/theme-Joe3'}">
+<th:block th:fragment="tail" th:with="source_link=${(#strings.trim(theme.config.basic.source_link) !='' && theme.config.basic.enable_source_link)? theme.config.basic.source_link : '/themes/theme-Joe3-qiu'}">
 <!--    ===== 引入脚本 start ===== -->
 <!--    <th:block th:if="${htmlType == 'index' && theme.config.home.enable_index_list_effect == true} or ${htmlType == 'journals' && theme.config.journals.enable_journal_effect == true} or ${htmlType == 'photos' && theme.config.photos.enable_photos_effect == true}">-->
         <script th:src="${source_link+'/assets/lib/wowjs/wow.min.js'}"></script>

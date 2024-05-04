@@ -32,7 +32,7 @@
 <hr />
 
 文档：部分配置请参考 [Joe3不完全使用指导指南](https://www.jiewen.run/archives/joe3use)
-> halo-theme-Joe3 是一款 [Halo2.0](https://halo.run/) 的博客主题  
+> halo-theme-Joe3-qiu 是一款 [Halo2.0](https://halo.run/) 的博客主题  
 > 由[halo-theme-joe2.0](https://github.com/qinhua/halo-theme-joe2.0)适配而来，感谢原作者的无私奉献
 
 **类似主题效果图** 👇

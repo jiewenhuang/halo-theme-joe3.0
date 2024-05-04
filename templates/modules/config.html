@@ -87,7 +87,7 @@
                         if (target.dataset.textAvatar || target.getAttribute('alt'))
                             src = Joe.generateTextAvatarImage(target.dataset.textAvatar || target.getAttribute('alt'));
                         else
-                            src = '/themes/theme-Joe3/assets/img/default_links_logo.png';
+                            src = '/themes/theme-Joe3-qiu/assets/img/default_links_logo.png';
                     }
                     break;
                 }
@@ -97,18 +97,18 @@
                         if (target.dataset.textAvatar || target.getAttribute('alt'))
                             src = Joe.generateTextAvatarImage(target.dataset.textAvatar || target.getAttribute('alt'));
                         else
-                            src = '/themes/theme-Joe3/assets/img/peeps-avatar.png';
+                            src = '/themes/theme-Joe3-qiu/assets/img/peeps-avatar.png';
                     }
                     break;
                 }
                 case 'LoadFailedImg': { // 如果 src 是 LoadFailedImg 则使用加载失败的图片
-                    src = target.dataset.errSrc || '/themes/theme-Joe3/assets/img/img_load_failed.jpg';
+                    src = target.dataset.errSrc || '/themes/theme-Joe3-qiu/assets/img/img_load_failed.jpg';
                     break;
                 }
             }
         
 
-            const nowSrc = src || target.dataset.errSrc || '/themes/theme-Joe3/assets/img/Joe3.png';
+            const nowSrc = src || target.dataset.errSrc || '/themes/theme-Joe3-qiu/assets/img/Joe3.png';
             console.log('加载图片失败，使用默认图片:', nowSrc, ' ,oldSrc:', targetSrc, ' ,target.alt:', target.getAttribute('alt'));
             target.setAttribute('onerror', null);
             target.setAttribute('src', nowSrc);
@@ -135,7 +135,7 @@
                         if (target.dataset.textAvatar || target.getAttribute('alt'))
                             src = Joe.generateTextAvatarImage(target.dataset.textAvatar || target.getAttribute('alt'));
                         else
-                            src = '/themes/theme-Joe3/assets/img/default_links_logo.png';
+                            src = '/themes/theme-Joe3-qiu/assets/img/default_links_logo.png';
                     }
                     break;
                 }
@@ -145,13 +145,13 @@
                         if (target.dataset.textAvatar || target.getAttribute('alt'))
                             src = Joe.generateTextAvatarImage(target.dataset.textAvatar || target.getAttribute('alt'));
                         else
-                            src = '/themes/theme-Joe3/assets/img/peeps-avatar.png';
+                            src = '/themes/theme-Joe3-qiu/assets/img/peeps-avatar.png';
                     }
                     break;
                 }
             }
 
-            const nowSrc = src || target.dataset.replaceSrc || '/themes/theme-Joe3/assets/img/Joe3.png';
+            const nowSrc = src || target.dataset.replaceSrc || '/themes/theme-Joe3-qiu/assets/img/Joe3.png';
             console.log('加载替换后的图片:', nowSrc, ' ,target.alt:', target.getAttribute('alt'));
             target.setAttribute('onload', null);
             target.setAttribute('src', nowSrc);
