@@ -17,7 +17,7 @@
             <div class="joe_detail__count">
               <div class="joe_detail__count-information">
 
-                <img width="35" height="35" class="avatar lazyload" th:src="${theme.config.blogger.lazyload_avatar}" th:data-src="${contributor.avatar}"  th:alt="${contributor.displayName}" onerror="Joe.errorImg(this, 'ErrAvatarImg')" >
+                <img width="35" height="35" class="avatar lazyload" th:src="${theme.config.blogger.lazyload_avatar}" th:data-src="${contributor.avatar ?: (theme.config.blogger.default_avatar ?: '/themes/theme-Joe3/assets/img/transparent-placeholder.png')}"  th:alt="${contributor.displayName}" onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')" onerror="Joe.errorImg(this, 'ErrAvatarImg')" >
                 <div class="meta">
                   <div class="author">
                     <a class="link" th:href="${contributor.permalink}" th:title="${contributor.displayName}">[[${contributor.displayName}]]</a>
@@ -58,7 +58,7 @@
             <li th:each="result : ${commentFinder.list(null,1,20)}" class="item">
               <div class="user">
                 <img class="avatar lazyload" th:src="${theme.config.blogger.lazyload_avatar}" alt="用户头像"
-                     th:data-src="${result.owner.avatar}" th:data-text-avatar="${result.spec.owner.displayName}" onerror="Joe.errorImg(this, 'ErrAvatarImg')" />
+                     th:data-src="${result.owner.avatar ?: (theme.config.blogger.default_avatar ?: '/themes/theme-Joe3/assets/img/transparent-placeholder.png')}" th:data-text-avatar="${result.spec.owner.displayName}" onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')" onerror="Joe.errorImg(this, 'ErrAvatarImg')" />
                 <div class="nickname" th:text="${result.spec.owner.displayName}"></div>
                 <div class="date" th:text="${#dates.format(result.metadata.creationTimestamp, 'yyyy-MM-dd')}"></div>
               </div>
@@ -108,7 +108,7 @@
                                   return `<li class="item">
               <div class="user">
                 <img class="avatar lazyload" src="${ThemeConfig.lazyload_avatar}" alt="用户头像"
-                     data-src="${comment.avatar}" data-text-avatar="${comment.nick}" onerror="Joe.errorImg(this, 'ErrAvatarImg')" />
+                     data-src="${comment.avatar || '/themes/theme-Joe3/assets/img/transparent-placeholder.png'}" data-text-avatar="${comment.nick}" onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')" onerror="Joe.errorImg(this, 'ErrAvatarImg')" />
                 <div class="nickname" >${comment.nick}</div>
                 <div class="date" th:text="${commentTime}"></div>
               </div>
