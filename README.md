@@ -33,7 +33,8 @@
 5. 修复若干 bug
 6. 导航条站点图标后支持显示博客名称【暂未实现】
 7. 留言板支持背景墙、留言板 Markdown 内容展示【暂未实现】
-8. 部分样式修改及优化 
+8. 部分样式修改及优化
+9. 首页文章支持排除指定的分类【暂未实现】
 
 
 <hr />
@@ -43,7 +44,8 @@
 > 由[halo-theme-joe2.0](https://github.com/qinhua/halo-theme-joe2.0)适配而来，感谢原作者的无私奉献
 
 **类似主题效果图** 👇
-![类似主题效果图](https://githubcdn.qiushaocloud.top/gh/qiushaocloud/halo-theme-joe2.0-qiu@master/source/img/dp/mockup.jpg)
+![类似主题效果图](https://githubcdn.qiushaocloud.top/gh/qiushaocloud/halo-theme-joe3.0-qiu@master/templates/assets/img/dp/mockup.jpg)
+![类似主题效果图](https://githubcdn.qiushaocloud.top/gh/qiushaocloud/halo-theme-joe3.0-qiu@master/templates/assets/img/dp/screenshot.png)
 
 
 ## 安裝
