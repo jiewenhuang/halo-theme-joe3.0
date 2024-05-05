@@ -11,8 +11,8 @@ spec:
   logo: "https://wmimg.com/i/70/2023/08/64d3c41d5bde2.webp"
   website: "https://www.qiushaocloud.top"
   repo: "https://github.com/qiushaocloud/halo-theme-joe3.0-qiu"
-  settingName: "theme-Joe-setting"
-  configMapName: "theme-Joe-configMap"
+  settingName: "theme-Joe3-qiu-setting"
+  configMapName: "theme-Joe3-qiu-configMap"
   version: "2.2.2"
   require: ">=2.11.0"
   customTemplates:
