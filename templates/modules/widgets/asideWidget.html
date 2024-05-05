@@ -66,7 +66,11 @@
                     th:each="result : ${commentFinder.list(null,1,new_reply_data.show_newreply_num)}">
                 <li class="item">
                     <div class="user">
+<<<<<<< HEAD
                         <img width="35" height="35" class="avatar lazyload" th:data-src="${result.owner.avatar ?: (theme.config.blogger.default_avatar ?: '/themes/theme-Joe3-qiu/assets/img/transparent-placeholder.png')} " th:src="${theme.config.blogger.lazyload_avatar}"  alt="头像" th:data-text-avatar="${result.owner.displayName}" onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')" onerror="Joe.errorImg(this, 'ErrAvatarImg')" >
+=======
+                        <img width="35" height="35" class="avatar lazyload" th:data-src="${result.owner.avatar ?: (theme.config.blogger.default_avatar ?: '/themes/theme-Joe3/assets/img/transparent-placeholder.png')}" th:src="${theme.config.blogger.lazyload_avatar}"  alt="头像" th:data-text-avatar="${result.owner.displayName}" onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')" onerror="Joe.errorImg(this, 'ErrAvatarImg')" >
+>>>>>>> source-code-main
                         <div class="info">
                             <div class="author">[[${result.owner.displayName}]]</div>
                             <span class="date">[[${#temporals.format(result.spec.creationTime, 'yyyy-MM-dd HH:mm:ss')}]]</span>
@@ -152,7 +156,7 @@
 
                             return `<li class="item">
                     <div class="user">
-                        <img width="35" height="35" class="avatar lazyload" data-src="${comment.avatar}" src="${ThemeConfig.lazyload_avatar}"  alt="头像" th:data-text-avatar="${comment.nick}" onerror="Joe.errorImg(this, 'ErrAvatarImg')" >
+                        <img width="35" height="35" class="avatar lazyload" data-src="${comment.avatar || '/themes/theme-Joe3/assets/img/transparent-placeholder.png'}" src="${ThemeConfig.lazyload_avatar}"  alt="头像" data-text-avatar="${comment.nick}" onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')" onerror="Joe.errorImg(this, 'ErrAvatarImg')" >
                         <div class="info">
                             <div class="author">${comment.nick}</div>
                             <span class="date">${commentTime}</span>
