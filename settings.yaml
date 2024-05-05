@@ -1,7 +1,7 @@
 apiVersion: v1alpha1
 kind: Setting
 metadata:
-  name: theme-Joe-setting
+  name: theme-Joe3-qiu-setting
 spec:
   forms:
     - group: basic
