@@ -51,7 +51,8 @@
 ## 安裝
 
 ### 下载安装
-下载[releases](https://github.com/qiushaocloud/halo-theme-joe3.0-qiu/releases)或者直接[下载代码](https://github.com/qiushaocloud/halo-theme-joe3.0-qiu)，通过 Halo Console 后台主题安装处上传即可。
+* 下载[releases](https://github.com/qiushaocloud/halo-theme-joe3.0-qiu/releases)或者直接[下载代码](https://github.com/qiushaocloud/halo-theme-joe3.0-qiu)，通过 Halo Console 后台主题安装处上传即可。
+* 到 `themes` 目录下克隆主题：`git clone https://github.com/qiushaocloud/halo-theme-joe3.0-qiu.git theme-Joe3-qiu`，然后通过 Halo Console 后台主题本地未安装处安装即可。【注意：如果克隆不了，换成 gitee 地址克隆即可，如：`git clone https://gitee.com/qiushaocloud/halo-theme-joe3.0-qiu.git theme-Joe3-qiu`】
 
 ## 使用说明
 > 1、首次使用请先把主题所有配置保存一遍  
