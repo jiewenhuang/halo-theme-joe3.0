@@ -26,6 +26,13 @@ if [ "$isMasterMerge2Develop" == "yes" ]; then
     git pull origin master
     git checkout -b develop origin/develop || git checkout develop
     git merge master
+
+    # 检查是否有冲突
+    if [ $? -ne 0 ]; then
+        echo "出现冲突，请手动解决后再提交。"
+        exit 1
+    fi
+
     # 提交 master to develop 合并的代码
     echo "提交 master to develop 合并的代码"
     git add .
@@ -40,6 +47,13 @@ git pull origin master
 if [ "$isDevelopMerge2Master" == "yes" ]; then
     echo "合并 develop 分支到 master 分支"
     git merge develop
+
+    # 检查是否有冲突
+    if [ $? -ne 0 ]; then
+        echo "出现冲突，请手动解决后再提交。"
+        exit 1
+    fi
+    
     # 提交 develop to master 合并的代码
     echo "提交 develop to master 合并的代码"
     git add .

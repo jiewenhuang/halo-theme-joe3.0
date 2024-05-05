@@ -22,6 +22,13 @@ git pull origin develop
 
 echo "合并 source-code-main 分支代码"
 git merge source-code-main
+
+# 检查是否有冲突
+if [ $? -ne 0 ]; then
+    echo "出现冲突，请手动解决后再提交。"
+    exit 1
+fi
+
 # 提交合并的代码
 echo "提交合并的代码"
 git add .
