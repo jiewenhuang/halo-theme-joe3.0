@@ -183,7 +183,7 @@
         <div class="joe_aside__item-contain">
 
             <div th:class="'tags-cloud-list '+${tag_cloud_data.tag_cloud_width =='responsive' ? 'responsive':'static'}" th:style="${tag_cloud_data.tag_cloud_type == '3d' ? 'display:none':''}">
-                <th:block th:with="tags = ${tag_cloud_data.tag_cloud_num ? tagFinder.list(1, tag_cloud_data.tag_cloud_num) : tagFinder.listAll()}">
+                <th:block th:with="tags = ${#strings.isEmpty(tag_cloud_data.tag_cloud_num) ? tagFinder.listAll() : tagFinder.list(1, tag_cloud_data.tag_cloud_num)}">
 
                     <a th:each="tag : ${tags}"
                        th:data-url="@{${tag.status.permalink}}" th:data-label="${tag.spec.displayName}" th:href="@{${tag.status.permalink}}" th:title="${tag.spec.displayName}">[[${tag.spec.displayName}]]</a>
