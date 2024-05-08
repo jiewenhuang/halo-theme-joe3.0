@@ -1693,6 +1693,11 @@ spec:
                       label: 固定宽度
                     - value: responsive
                       label: 自适应宽度
+                - $formkit: number
+                  name: tag_cloud_num
+                  label: 标签个数
+                  value: ""
+                  help: "设置标签云个数，留空则展示全部标签"
             - $formkit: group
               if: $value.template_aside === 'enable_ads_aside'
               name: aside_ads
