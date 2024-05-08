@@ -916,6 +916,16 @@ spec:
               label: 开启
             - value: false
               label: 关闭
+        - $formkit: radio
+          name: show_logo_blog_name
+          label: 是否显示博客名称
+          value: true
+          help: "导航栏是否在LOGO右侧显示博客名称"
+          options:
+            - value: true
+              label: 开启
+            - value: false
+              label: 关闭
         - $formkit: text
           name: logo_link
           label: LOGO跳转链接
