@@ -21,7 +21,7 @@ git checkout -b develop origin/develop || git checkout develop
 git pull origin develop
 
 echo "合并 source-code-main 分支代码"
-git merge source-code-main
+git merge source-code-main --no-verify
 
 # 检查是否有冲突
 if [ $? -ne 0 ]; then

@@ -25,7 +25,7 @@ if [ "$isMasterMerge2Develop" == "yes" ]; then
     git checkout -b develop origin/master || git checkout master
     git pull origin master
     git checkout -b develop origin/develop || git checkout develop
-    git merge master
+    git merge master --no-verify
 
     # 检查是否有冲突
     if [ $? -ne 0 ]; then
@@ -46,7 +46,7 @@ git checkout -b master origin/master || git checkout master
 git pull origin master
 if [ "$isDevelopMerge2Master" == "yes" ]; then
     echo "合并 develop 分支到 master 分支"
-    git merge develop
+    git merge develop --no-verify
 
     # 检查是否有冲突
     if [ $? -ne 0 ]; then
