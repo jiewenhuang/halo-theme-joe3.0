@@ -419,10 +419,20 @@ document.addEventListener("DOMContentLoaded", () => {
 						let userComment = null;
 						for(let i = 0; i < items.length; i++) {
 							const item = items[i];
-							if (item.owner && item.owner.displayName === displayName) {
-								userComment = item;
-								break
-							} 
+							const owner = (item.spec &&item.spec.owner) || item.owner;
+							if (!owner) continue;
+
+							if (owner.name) { // 使用用户名判断，但是现在评论组件 name 并没有给出，所以暂时使用 displayName 判断，此处先实现，如果后续有 name 字段，则就用 name 判断
+								if (owner.name === username) {
+									userComment = item;
+									break
+								}
+							} else { // 使用 displayName 判断，这种判断方式会有问题，比如昵称相同但用户名不同，这种情况会误判，但是现在没办法，因为评论组件没有提供 name 字段
+								if (owner.displayName === displayName) {
+									userComment = item;
+									break
+								}
+							}
 						}
 
 						if (userComment) {
