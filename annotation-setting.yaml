@@ -45,7 +45,7 @@ spec:
           label: 否
     - $formkit: "select"
       name: "enable_read_limit"
-      label: "是否开启评论后可见"
+      label: "是否开启登陆后评论可见"
       value: "false"
       options:
         - value: "true"
@@ -208,7 +208,7 @@ spec:
           label: 否
     - $formkit: "select"
       name: "enable_read_limit"
-      label: "是否开启评论后可见"
+      label: "是否开启登陆后评论可见"
       value: "false"
       options:
         - value: "true"
