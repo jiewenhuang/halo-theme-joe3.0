@@ -265,11 +265,208 @@ document.addEventListener("DOMContentLoaded", () => {
 		class JoeReadLimited extends HTMLElement {
 			constructor() {
 				super();
+				this.options = {
+					username: this.getAttribute("username"),
+					displayName: this.getAttribute("display-name"),
+					commentName: this.getAttribute("comment-name"),
+					commentKind: this.getAttribute("comment-kind"),
+					commentPlugin: this.getAttribute("comment-plugin"), // 'CommentWidgetPlugin' | 'WalinePlugin'
+				}
+				console.log('JoeReadLimited options:', this.options)
+
+				this.isUserCommented = false; // 是否已经评论过
 				this.render();
+				this.checking = false; // 是否正在检查评论
+		
+				if (this.options.username !== 'anonymousUser') { // 非匿名用户才检查评论
+					if (this.options.commentPlugin === 'CommentWidgetPlugin') { // halo-comment-widget 插件，即 halo 默认评论插件
+						this.commentWidgetPluginCheckComment();
+					} else if (this.options.commentPlugin === 'WalinePlugin') { // waline 插件
+						this.walineCheckComment();
+					} else {
+						console.warn('JoeReadLimited 评论插件未实现或不可用，不检查评论！');
+					}
+				}
 			}
+
+			commentWidgetPluginCheckComment() {
+				console.log('call commentWidgetPluginCheckComment');
+				this.runIntervalTask();
+
+				const isUseResetFetch = true; // 是否使用重置 fetch 请求 ajax 方法，在其中进行捕获提交的评论
+				if (!isUseResetFetch || !window.fetch) {
+					// 方式一：定时检查评论方式
+					this.checkTimer = setInterval(() => {
+						this.runIntervalTask();
+					}, 3000);
+				} else {
+					// 方式二：覆盖 commentWidgetPlugin fetch 请求 ajax 方法，在其中进行捕获提交的评论
+					if (!window._commentWidgetPluginFetch)
+						window._commentWidgetPluginFetch = window.fetch;
+
+					console.log('JoeReadLimited 覆盖 commentWidgetPlugin fetch 请求 ajax 方法！')
+					window.fetch = (url, options, ...args) => {
+						const pro = window._commentWidgetPluginFetch(url, options, ...args);
+						if (pro && typeof pro === 'object' && typeof pro.then === 'function') {
+							return pro.then((res) => {
+								if (
+									url === '/apis/api.halo.run/v1alpha1/comments' && options.method === 'POST'
+									&& res.ok && this.options.username !== 'anonymousUser' && !this.isUserCommented
+								) { // 提交评论，则说明用户已经评论了，注意：这里不能使用 res.json，否则会报错
+									console.log('JoeReadLimited commentWidgetPlugin 拦截到用户评论，不再检查评论！');
+									this.removeReadLimited();
+								}
+
+								return res;
+							})
+						}
+
+						return pro
+					}
+				}
+			}
+
+			walineCheckComment() {
+				console.log('call walineCheckComment');
+
+				// TODO qiushaocloud: 我目前没有 waline 服务器，无法测试 waline 插件的评论检查功能，希望有能力的伙伴可以帮忙实现一下。我这里提供的是一种定时的思路，也可以参考下 commentWidgetPluginCheckComment 的两种实现方式。
+				
+				// 方式一：定时检查评论方式
+				this.runIntervalTask();
+				this.checkTimer = setInterval(() => {
+					this.runIntervalTask();
+				}, 3000);
+
+			}
+
+			runIntervalTask() {
+				if (this.options.username === 'anonymousUser') {
+					console.log('JoeReadLimited 匿名用户，不检查评论！');
+					this.checkTimer && clearInterval(this.checkTimer);
+					this.checkTimer = null;
+					return;
+				}
+
+				if (this.isUserCommented) {
+					console.log('JoeReadLimited 已经评论过，不再检查评论！')
+					this.removeReadLimited();
+					return;
+				}
+
+				if (this.checking)
+					return;
+
+				this.checking = true;
+				this.findFirstMyComment(1, (isFinduserComment) => {
+					this.checking = false;
+
+					if (isFinduserComment === null) {
+						console.log('JoeReadLimited 评论查找功能未实现或不可用，不再检查评论！');
+						this.checkTimer && clearInterval(this.checkTimer);
+						this.checkTimer = null;
+						return;
+					}
+
+					if (isFinduserComment) {
+						console.log('JoeReadLimited 找到评论，不再检查评论！')
+						this.isUserCommented = true;
+						this.removeReadLimited();
+						return;
+					}
+				});
+			}
+
+			removeReadLimited () {
+				console.log('call removeReadLimited')
+				this.checking = false;
+				this.isUserCommented = true;
+				this.checkTimer && clearInterval(this.checkTimer);
+				this.checkTimer = null;
+				$('.joe_read_limited').hide();
+				$('.joe_detail__article.limited').removeClass('limited');
+
+				// 恢复 commentWidgetPlugin fetch 请求 ajax 方法
+				if (window._commentWidgetPluginFetch) {
+					console.log('JoeReadLimited 恢复 commentWidgetPlugin fetch 请求 ajax 方法！')
+					window.fetch = window._commentWidgetPluginFetch;
+					delete window._commentWidgetPluginFetch;
+				}
+			}
+			
+			findFirstMyComment (page, onCallback) {
+				const username = this.options.username;
+				const displayName = this.options.displayName;
+
+				if (displayName === 'anonymousUser') {
+					console.log('findFirstMyComment 匿名用户，不查找评论！, page:', page, ' ,displayName:', displayName, ' ,username:', username)
+					return onCallback(null);
+				}
+
+				if (this.options.commentPlugin === 'CommentWidgetPlugin') { // halo-comment-widget 插件，即 halo 默认评论插件
+					const reqUrl = `/apis/api.halo.run/v1alpha1/comments?group=content.halo.run&kind=${this.options.commentKind}&name=${this.options.commentName}&page=${page}&size=20&version=v1alpha1`;
+					// console.log('findFirstMyComment CommentWidgetPlugin ajax get reqUrl:', reqUrl, ' ,page:', page, ' ,displayName:', displayName, ' ,username:', username)
+					$.ajax({
+						url: reqUrl,
+						type: "GET",
+						timeout: 10000, // 10秒超时
+					}).then((res) => {
+						const items = res.items;
+						if (!items.length) {
+							// console.log('findFirstMyComment CommentWidgetPlugin 没有找到评论！, reqUrl:', reqUrl, ' ,page:', page, ' ,displayName:', displayName, ' ,username:', username)
+							return onCallback(false);
+						}
+
+						let userComment = null;
+						for(let i = 0; i < items.length; i++) {
+							const item = items[i];
+							if (item.owner && item.owner.displayName === displayName) {
+								userComment = item;
+								break
+							} 
+						}
+
+						if (userComment) {
+							console.log('findFirstMyComment CommentWidgetPlugin 找到评论！, reqUrl:', reqUrl, ' ,page:', page, ' ,displayName:', displayName, ' ,username:', username, ' ,userComment:', userComment)
+							return onCallback(!!userComment);
+						}
+
+						if (res.hasNext) { // 还有下一页，则继续查找
+							// console.log('findFirstMyComment CommentWidgetPlugin 还有下一页，继续查找！, reqUrl:', reqUrl, ' ,page:', page, ' ,displayName:', displayName, ' ,username:', username)
+							return this.findFirstMyComment(page + 1, onCallback);
+						}
+
+						// console.log('findFirstMyComment CommentWidgetPlugin 没有找到评论！, reqUrl:', reqUrl, ' ,page:', page, ' ,displayName:', displayName, ' ,username:', username)
+						return onCallback(false);
+					}).catch((xhr, status, error) => {
+						console.error('findFirstMyComment CommentWidgetPlugin catch err:', !!xhr, status, error, ' ,reqUrl:', reqUrl, ' ,page:', page, ' ,displayName:', displayName, ' ,username:', username);
+						return onCallback(false);
+					});
+
+					return;
+				}
+
+				// waline 插件
+				if (this.options.commentPlugin === 'WalinePlugin') { // TODO qiushaocloud: waline 插件评论查找功能未实现，因为没有 waline 服务器，希望有这个能力的伙伴可以帮忙实现
+					console.warn('findFirstMyComment WalinePlugin 暂不支持查找评论！, page:', page, ' ,displayName:', displayName, ' ,username:', username);
+					onCallback(null);
+					return;
+				}
+
+				console.warn('findFirstMyComment 未知评论插件，暂不支持查找评论！, page:', page, ' ,displayName:', displayName, ' ,username:', username, ' ,commentPlugin:', this.options.commentPlugin);
+				return onCallback(null);
+			}
+
 			render() {
 				this.innerHTML =
-          "<div class=\"joe_read_limited\"><p><i class=\"joe-font joe-icon-locker\" style=\"color:#f5840d;\"></i>&nbsp;此处内容仅 <span class=\"joe_read_limited__button\">评论</span> 后可见</p></div>";
+          			`<div class="joe_read_limited" data-username="${this.options.username}" data-display-name="${this.options.displayName}" data-comment-name="${this.options.commentName}" data-comment-kind="${this.options.commentKind}">
+						<p><i class="joe-font joe-icon-locker" style="color:#f5840d;"></i>
+						${
+							this.options.username === 'anonymousUser' ? 
+							'&nbsp;此处内容仅 <span class="joe_read_limited__button need-login">登陆后评论</span> 后可见' :
+							'&nbsp;'+(this.options.displayName)+'您已登陆，此处内容仅 <span class="joe_read_limited__button logined">评论</span> 后可见'
+						}
+						</p>
+					</div>`;
 				this.$button = this.querySelector(".joe_read_limited__button");
 				const $comment = document.querySelector(".joe_comment");
 				const $header = document.querySelector(".joe_header");
@@ -279,10 +476,17 @@ document.addEventListener("DOMContentLoaded", () => {
 				this.$button.addEventListener("click", (e) => {
 					e.stopPropagation();
 					if (!Boolean(document.querySelector('[id*="comment-"]')) &&!Boolean(document.querySelector("#waline"))) {
-
 						Qmsg.warning("评论功能不可用！");
 						return;
 					}
+
+					if (this.options.username === 'anonymousUser') {
+						console.log('JoeReadLimited 匿名用户，跳转到登录页面！')
+						window.location.href='/console/login?redirect_uri='+window.location.href;
+						return
+					}
+
+					// 下滑到评论区
 					const scrollTop = $comment.offsetTop - $header.offsetHeight - 15;
 					$("html,body").animate(
 						{

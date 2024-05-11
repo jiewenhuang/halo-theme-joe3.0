@@ -93,7 +93,7 @@
         <th:block th:replace="~{modules/ads/ads_post :: ads_post(kind = ${theme.config.ads.enable_ads_top}, data = ${ads_data})}" />
       </th:block>
   <article th:class="'joe_detail__article animated fadeIn '+${#annotations.getOrDefault(post, 'img_align', 'center')+'-img'}"
-           th:classappend="|${#annotations.getOrDefault(post, 'enable_read_limit', 'false') == 'true' ?'limited': ''} ${(#annotations.getOrDefault(post, 'enable_copy', 'true') == 'false' or theme.config.post.enable_copy != true) ? 'uncopy' : ''} ${theme.config.post.enable_indent ? 'indent':''} ${(theme.config.code_block.enable_code_line_number == true and theme.config.code_block.enable_code_newline !=true) ? 'line-numbers':''} ${theme.config.code_block.enable_single_code_select == true ? 'single_code_select': ''}|">
+           th:classappend="|${(#authentication.name == 'anonymousUser' || (contributor.name != #authentication.name && #annotations.getOrDefault(post, 'enable_read_limit', 'false') == 'true')) ? 'limited': ''} ${(#annotations.getOrDefault(post, 'enable_copy', 'true') == 'false' or theme.config.post.enable_copy != true) ? 'uncopy' : ''} ${theme.config.post.enable_indent ? 'indent':''} ${(theme.config.code_block.enable_code_line_number == true and theme.config.code_block.enable_code_newline !=true) ? 'line-numbers':''} ${theme.config.code_block.enable_single_code_select == true ? 'single_code_select': ''}|">
     <div id="post-inner">
       <th:block th:if="${#annotations.getOrDefault(post, 'use_raw_content', 'false') == 'false'}">
         <th:block th:utext="${post.content.content}"></th:block>
@@ -104,8 +104,17 @@
       </joe-raw-content>
       </th:block>
     </div>
-    <th:block th:if="${#annotations.getOrDefault(post, 'enable_read_limit', 'false') == 'true'}">
-    <joe-read-limited></joe-read-limited>
+    <th:block
+      th:if="${#authentication.name == 'anonymousUser' || (contributor.name != #authentication.name && #annotations.getOrDefault(post, 'enable_read_limit', 'false') == 'true')}"
+      th:with="authenticationDisplayName=${#authentication.name == 'anonymousUser' ? '游客' : contributorFinder.getContributor(#authentication.name).displayName}"
+    >
+      <joe-read-limited
+        th:username="${#authentication.name}"
+        th:display-name="${authenticationDisplayName}"
+        th:comment-name="${post.metadata.name}"
+        th:comment-kind="Post"
+        th:comment-plugin="${(theme.config.basic.comment_option == 'default' || #strings.trim(theme.config.basic.waline.waline_serverURL) =='') ? 'CommentWidgetPlugin' : 'WalinePlugin'}"
+      ></joe-read-limited>
     </th:block>
   </article>
   <th:block th:if="${#annotations.getOrDefault(post, 'enable_like' ,'true') == 'true'} and ${theme.config.post.enable_like}">
