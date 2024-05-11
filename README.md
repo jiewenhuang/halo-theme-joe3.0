@@ -1,4 +1,3 @@
-
 <h1 align="center"> Halo Theme Joe3 Qiu </h1>
 
 <p class="badge-row" align="center">
@@ -35,6 +34,11 @@
 7. 留言板支持背景墙、留言板 Markdown 内容展示【暂未实现】
 8. 部分样式修改及优化
 9. 首页文章支持排除指定的分类【暂未实现】
+10. 支持 iframe 模板展示其它网页【暂未实现】
+11. 支持 pdf 模板展示 pdf 文件【暂未实现】
+12. 支持 Markdown 模板展示 Md 文件【暂未实现】
+13. 支持朋友圈模板【暂未实现】
+
 
 
 <hr />
