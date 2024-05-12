@@ -473,7 +473,7 @@ document.addEventListener("DOMContentLoaded", () => {
 						${
 							this.options.username === 'anonymousUser' ? 
 							'&nbsp;此处内容仅 <span class="joe_read_limited__button need-login">登陆后评论</span> 后可见' :
-							'&nbsp;'+(this.options.displayName)+'您已登陆，此处内容仅 <span class="joe_read_limited__button logined">评论</span> 后可见'
+							'&nbsp;'+(this.options.displayName)+' 您已登陆，此处内容仅 <span class="joe_read_limited__button logined">评论</span> 后可见'
 						}
 						</p>
 					</div>`;
