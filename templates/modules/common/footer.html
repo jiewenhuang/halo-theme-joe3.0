@@ -107,13 +107,47 @@
     </th:block>
 </div>
 </th:block>
-<th:block th:if="${theme.config.footer.enable_busuanzi}">
+
+<th:block th:if="${theme.config.footer.site_counter == 'busuanzi'}">
 <div class="item busuanzi-statistic">
   <span class="site-pv"><i class="joe-font joe-icon-zhexiantu"></i>访问量<em id="busuanzi_value_site_pv">0</em></span>
   <span class="site-uv"><i class="joe-font joe-icon-monitor"></i>访客量<em id="busuanzi_value_site_uv">0</em></span>
   <span class="site-page-pv"><i class="joe-font joe-icon-dianji"></i>本页访客<em id="busuanzi_value_page_pv">0</em></span>
 </div>
 </th:block>
+
+<th:block th:if="${theme.config.footer.site_counter == 'qiushaocloud_site_counter'}">
+  <div class="qiushaocloud_sitecounter-box">
+    <span class="site-total">
+    <span id="qiushaocloud_sitecounter_container_site_pv" style="display: inline;">
+        &nbsp;<i class="fa fa-eye"></i>&nbsp;访问量:&nbsp;<span id="qiushaocloud_sitecounter_value_site_pv" class="white-color">n</span>&nbsp;
+    </span>
+    <span id="qiushaocloud_sitecounter_container_site_uv" style="display: inline;">
+        <span class="vline">|</span>
+        &nbsp;<i class="fa fa-users"></i>&nbsp;访客量:&nbsp;<span id="qiushaocloud_sitecounter_value_site_uv" class="white-color">n</span>&nbsp;
+    </span>
+    </span>
+
+    <span class="site-today">
+      <span id="qiushaocloud_sitecounter_container_today_site_pv" style="display: inline;">
+          <span class="vline">|</span>
+          &nbsp;<i class="fa fa-eye"></i>&nbsp;今日访问量:&nbsp;<span id="qiushaocloud_sitecounter_value_today_site_pv" class="white-color">n</span>&nbsp;
+      </span>
+      <span id="qiushaocloud_sitecounter_container_today_site_uv" style="display: inline;">
+          <span class="vline">|</span>
+          &nbsp;<i class="fa fa-users"></i>&nbsp;今日访客量:&nbsp;<span id="qiushaocloud_sitecounter_value_today_site_uv" class="white-color">n</span>&nbsp;
+      </span>
+    </span>
+
+    <!--
+      <p>本页面总访问量: <span id="qiushaocloud_sitecounter_value_site_page_pv">n</span></p>
+      <p>本页面总访客量: <span id="qiushaocloud_sitecounter_value_site_page_uv">n</span></p>
+      <p>本页面今日访问量: <span id="qiushaocloud_sitecounter_value_today_site_page_pv">n</span></p>
+      <p> 本页面今日访客量: <span id="qiushaocloud_sitecounter_value_today_site_page_uv">n</span></p>
+    -->
+  </div>
+</th:block>
+
 </div>
 </div>
 </footer>

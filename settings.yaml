@@ -2684,15 +2684,29 @@ spec:
               label: 是
             - value: false
               label: 否
-        - $formkit: radio
-          name: enable_busuanzi
-          label: 展示访问量数据
-          value: true
+        - $formkit: select
+          name: site_counter
+          id: site_counter
+          label: 站点统计工具(展示访问量数据)
+          value: "none"
+          help: "配置本站点使用的站点统计工具"
           options:
-            - value: true
-              label: 是
-            - value: false
-              label: 否
+            - value: none
+              label: 不统计也不展示(默认)
+            - value: busuanzi
+              label: 卜算子站点统计工具
+            - value: qiushaocloud_site_counter
+              label: 邱少羽梦提供的站点统计工具
+        - $formkit: text
+          name: qiushaocloud_sitecounter_api_host
+          if: "$get(site_counter).value === 'qiushaocloud_site_counter'"
+          label: 邱少羽梦统计工具—接口请求的服务器地址[参考:https://www.qiushaocloud.top/2022/01/10/site-counter]
+          value: "https://www.qiushaocloud.top"
+         - $formkit: text
+          name: qiushaocloud_sitecounter_api_sign_secret_key
+          if: "$get(site_counter).value === 'qiushaocloud_site_counter'"
+          label: 邱少羽梦统计工具—接口请求的签名key，www.qiushaocloud.top 则配置为''即可[参考:https://www.qiushaocloud.top/2022/01/10/site-counter]
+          value: ""
 
     - group: custom
       label: 自定义
