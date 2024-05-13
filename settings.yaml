@@ -2702,7 +2702,7 @@ spec:
           if: "$get(site_counter).value === 'qiushaocloud_site_counter'"
           label: 邱少羽梦统计工具—接口请求的服务器地址，不填默认使用 https://www.qiushaocloud.top [参考:https://www.qiushaocloud.top/2022/01/10/site-counter]
           value: ""
-         - $formkit: text
+        - $formkit: text
           name: qiushaocloud_sitecounter_api_sign_secret_key
           if: "$get(site_counter).value === 'qiushaocloud_site_counter'"
           label: 邱少羽梦统计工具—接口请求的签名key，www.qiushaocloud.top 则配置为'' [参考:https://www.qiushaocloud.top/2022/01/10/site-counter]
