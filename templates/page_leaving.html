@@ -132,6 +132,18 @@
 
           <div class="joe_leaving-none tpl">暂无留言，期待第一个脚印。</div>
         </div>
+
+        <div id="singlePage-inner">
+          <th:block th:if="${#annotations.getOrDefault(singlePage, 'use_raw_content', 'false') == 'false'}">
+            <th:block th:utext="${singlePage.content.content}"></th:block>
+          </th:block>
+          <th:block th:if="${#annotations.getOrDefault(singlePage, 'use_raw_content', 'false') =='true'}">
+          <joe-raw-content>
+            <div id="_raw">[[${singlePage.content.content}]]</div>
+          </joe-raw-content>
+          </th:block>
+        </div>
+        
       </article>
     </div>
     <th:block th:if="${theme.config.other.enable_clean_mode != true} and ${theme.config.post.enable_comment}">
