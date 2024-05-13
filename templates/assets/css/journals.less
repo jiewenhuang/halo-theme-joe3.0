@@ -353,6 +353,10 @@
           list-style: disc;
         }
 
+        span[data-fancybox='Joe'] {
+          display: inline-block !important;
+        }
+
         img {
           display: inline-block;
           max-width: var(--img-max-width) !important;
@@ -360,6 +364,11 @@
           margin: 5px 0;
           border-radius: var(--radius-img);
           transition: transform 0.35s, box-shadow 0.35s;
+          height: 120px;
+
+          @media screen and (max-width: 768px) {
+            height: 80px;
+          }
 
           &:hover {
             transform: translateY(-3px);
