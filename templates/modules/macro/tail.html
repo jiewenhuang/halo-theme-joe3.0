@@ -89,9 +89,9 @@
 
     <th:block th:if="${theme.config.footer.site_counter == 'qiushaocloud_site_counter'}">
         <!-- 邱少羽梦站点统计工具 -->
-        <script th:src="${source_link+'/assets/lib/qiushaocloud/qiushaocloud_site_counter.min.js'}"></script>
+        <script async th:src="${source_link+'/assets/lib/qiushaocloud/qiushaocloud_site_counter.min.js'}"></script>
     </th:block>
-    
+
 <!-- ===== 引入脚本 end =====-->
 
     <th:block th:if="${theme.config.custom.custom_external_js_body != null} and ${theme.config.custom.custom_external_js_body != ''}">

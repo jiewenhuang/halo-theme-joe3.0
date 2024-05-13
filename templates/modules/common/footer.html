@@ -117,6 +117,20 @@
 </th:block>
 
 <th:block th:if="${theme.config.footer.site_counter == 'qiushaocloud_site_counter'}">
+  <th:block th:if="${theme.config.footer.qiushaocloud_sitecounter_api_host != ''}">
+    <script>
+      // 设置格式为：www.qiushaocloud.top 或者 https://www.qiushaocloud.top:443
+      window.localStorage.setItem('qiushaocloud_sitecounter_api_host', '[[${theme.config.footer.qiushaocloud_sitecounter_api_host}]]');
+      //window.localStorage.setItem('qiushaocloud_sitecounter_api_host', 'https://www.qiushaocloud.top:443');
+    </script>
+  </th:block>
+
+  <th:block th:if="${theme.config.footer.qiushaocloud_sitecounter_api_sign_secret_key != ''}">
+    <script>
+      window.QIUSHAOCLOUD_SITE_COUNTER_API_SIGN_SECRET_KEY = '[[${theme.config.footer.qiushaocloud_sitecounter_api_sign_secret_key}]]';
+    </script>
+  </th:block>
+
   <div class="qiushaocloud_sitecounter-box">
     <span class="site-total">
     <span id="qiushaocloud_sitecounter_container_site_pv" style="display: inline;">
