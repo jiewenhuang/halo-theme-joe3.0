@@ -117,6 +117,11 @@
 </th:block>
 
 <th:block th:if="${theme.config.footer.site_counter == 'qiushaocloud_site_counter'}">
+  <script>
+    // 先删除 qiushaocloud_sitecounter_api_host 这个 localStorage 值，避免冲突
+    window.localStorage.removeItem('qiushaocloud_sitecounter_api_host');
+  </script>
+
   <th:block th:if="${theme.config.footer.qiushaocloud_sitecounter_api_host != ''}">
     <script>
       // 设置格式为：www.qiushaocloud.top 或者 https://www.qiushaocloud.top:443
