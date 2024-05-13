@@ -17,7 +17,7 @@
             <div class="joe_detail__count">
               <div class="joe_detail__count-information">
 
-                <img width="35" height="35" class="avatar lazyload" th:src="${theme.config.blogger.lazyload_avatar}" th:data-src="${contributor.avatar ?: (theme.config.blogger.default_avatar ?: '/themes/theme-Joe3/assets/img/transparent-placeholder.png')}"  th:alt="${contributor.displayName}" onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')" onerror="Joe.errorImg(this, 'ErrAvatarImg')" >
+                <img width="35" height="35" class="avatar lazyload" th:src="${theme.config.blogger.lazyload_avatar}" th:data-src="${contributor.avatar ?: (theme.config.blogger.default_avatar ?: '/themes/theme-Joe3-qiu/assets/img/transparent-placeholder.png')}"  th:alt="${contributor.displayName}" onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')" onerror="Joe.errorImg(this, 'ErrAvatarImg')" >
                 <div class="meta">
                   <div class="author">
                     <a class="link" th:href="${contributor.permalink}" th:title="${contributor.displayName}">[[${contributor.displayName}]]</a>
@@ -58,7 +58,7 @@
             <li th:each="result : ${commentFinder.list(null,1,20)}" class="item">
               <div class="user">
                 <img class="avatar lazyload" th:src="${theme.config.blogger.lazyload_avatar}" alt="用户头像"
-                     th:data-src="${result.owner.avatar ?: (theme.config.blogger.default_avatar ?: '/themes/theme-Joe3/assets/img/transparent-placeholder.png')}" th:data-text-avatar="${result.spec.owner.displayName}" onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')" onerror="Joe.errorImg(this, 'ErrAvatarImg')" />
+                     th:data-src="${result.owner.avatar ?: (theme.config.blogger.default_avatar ?: '/themes/theme-Joe3-qiu/assets/img/transparent-placeholder.png')}" th:data-text-avatar="${result.spec.owner.displayName}" onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')" onerror="Joe.errorImg(this, 'ErrAvatarImg')" />
                 <div class="nickname" th:text="${result.spec.owner.displayName}"></div>
                 <div class="date" th:text="${#dates.format(result.metadata.creationTimestamp, 'yyyy-MM-dd')}"></div>
               </div>
@@ -108,7 +108,7 @@
                                   return `<li class="item">
               <div class="user">
                 <img class="avatar lazyload" src="${ThemeConfig.lazyload_avatar}" alt="用户头像"
-                     data-src="${comment.avatar || '/themes/theme-Joe3/assets/img/transparent-placeholder.png'}" data-text-avatar="${comment.nick}" onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')" onerror="Joe.errorImg(this, 'ErrAvatarImg')" />
+                     data-src="${comment.avatar || '/themes/theme-Joe3-qiu/assets/img/transparent-placeholder.png'}" data-text-avatar="${comment.nick}" onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')" onerror="Joe.errorImg(this, 'ErrAvatarImg')" />
                 <div class="nickname" >${comment.nick}</div>
                 <div class="date" th:text="${commentTime}"></div>
               </div>
@@ -132,6 +132,18 @@
 
           <div class="joe_leaving-none tpl">暂无留言，期待第一个脚印。</div>
         </div>
+
+        <div id="singlePage-inner">
+          <th:block th:if="${#annotations.getOrDefault(singlePage, 'use_raw_content', 'false') == 'false'}">
+            <th:block th:utext="${singlePage.content.content}"></th:block>
+          </th:block>
+          <th:block th:if="${#annotations.getOrDefault(singlePage, 'use_raw_content', 'false') =='true'}">
+          <joe-raw-content>
+            <div id="_raw">[[${singlePage.content.content}]]</div>
+          </joe-raw-content>
+          </th:block>
+        </div>
+        
       </article>
     </div>
     <th:block th:if="${theme.config.other.enable_clean_mode != true} and ${theme.config.post.enable_comment}">

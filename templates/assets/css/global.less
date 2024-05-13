@@ -1,3 +1,18 @@
+
+html {
+  &[data-mode="dark"] {
+    .joe_header__above-logo .user-name {
+      text-shadow: -1px -1px 1px #414242, 2px 2px 1px #423e3e;
+      color: #232323;
+    }
+
+    .joe_detail__title.txt-shadow {
+      text-shadow: -1px -1px 1px #5d5f60, 2px 2px 1px #6a6464;
+      color: #232323;
+    }
+  }
+}
+
 body {
   overflow: overlay;
   overflow: auto;
@@ -546,6 +561,15 @@ body {
       margin-right: 10px;
       padding-right: 18px;
 
+      .user-name {
+        color: white;
+        text-shadow: -1px -1px 1px #d1cccb, 2px 2px 1px #575960;
+        font-size: 25px;
+        padding-left: 10px;
+        font-weight: 600;
+        letter-spacing: 5px;
+      }
+
       img {
         min-width: 40px;
         max-width: 150px;
@@ -675,7 +699,8 @@ body {
         &__menu {
           min-width: 90px;
           max-width: 200px;
-          text-align: center;
+          // text-align: center;
+          text-align: left;
 
           a {
             display: block;
@@ -4418,7 +4443,14 @@ body {
     word-break: break-word;
 
     &.txt-shadow {
-      text-shadow: var(--text-shadow);
+      // text-shadow: var(--text-shadow);
+      text-shadow: -1px -1px 1px #5d5f60, 2px 2px 1px #6a6464;
+      font-weight: bolder;
+      letter-spacing: 20px;
+      font-size: 60px;
+      padding-top: 0px;
+      color: white;
+      text-shadow: -1px -1px 1px #120b09, 2px 2px 1px #575960;
     }
   }
 
@@ -5755,6 +5787,39 @@ body {
       }
     }
 
+    .qiushaocloud_sitecounter-box {
+      display: inline-block;
+      font-size: 13px;
+
+      .white-color {
+        font-weight: 500;
+        color: var(--theme);
+      }
+
+      // .qiushaocloud_sitecounter-box 媒体查询
+      @media (max-width: 750px)
+      {
+        &{
+          display: block;
+          margin-bottom: 0px;
+        }
+
+        .site-total {
+          display: block;
+          // margin-bottom: 10px;
+        }
+
+        .site-today {
+          display: block;
+
+          #qiushaocloud_sitecounter_container_today_site_pv .vline {
+            display: none;
+          }
+        }
+      }
+    }
+    
+
     .site_police {
       padding-top: 5px;
 
@@ -5839,6 +5904,24 @@ body {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
+
+      .qiushaocloud_sitecounter-box {
+        display: block;
+        margin-bottom: 0px;
+
+        .site-total {
+          display: block;
+          // margin-bottom: 10px;
+        }
+
+        .site-today {
+          display: block;
+
+          #qiushaocloud_sitecounter_container_today_site_pv .vline {
+            display: none;
+          }
+        }
+      }
     }
   }
 

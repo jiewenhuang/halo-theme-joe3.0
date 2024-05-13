@@ -837,7 +837,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					src: this.getAttribute("src") || "",
 					player:
             this.getAttribute("player") ||
-            `${ThemeConfig.BASE_RES_URL}/assets/lib/dplayer/web/${ThemeConfig.BASE_RES_URL==='/themes/theme-Joe3'?'dplayer':'dplayer-source'}.html?url=`,
+            `${ThemeConfig.BASE_RES_URL}/assets/lib/dplayer/web/${ThemeConfig.BASE_RES_URL==='/themes/theme-Joe3-qiu'?'dplayer':'dplayer-source'}.html?url=`,
 					width: this.getAttribute("width") || "100%",
 					height: this.getAttribute("height") || "500px",
 				};

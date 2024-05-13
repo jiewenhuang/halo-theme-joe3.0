@@ -17,7 +17,7 @@
         <th:block th:if="${theme.config.footer.enable_powerby}">
           <th:block th:with="theme = ${themeFinder.activation()}">
         <p class="site_powered">Powered by<a class="a-powered" href="https://halo.run/" target="_blank" rel="noopener noreferrer">
-          Halo</a>&nbsp;|&nbsp;🌈 Theme by<a class="a-theme" th:title="${theme.spec.displayName}+'v'+${theme.spec.version}" th:href="${theme.spec.repo}" target="_blank" rel="noopener noreferrer">M酷&Jiewen</a></p>
+          Halo</a>&nbsp;|&nbsp;🌈 Theme by<a class="a-theme" th:title="${theme.spec.displayName}+'v'+${theme.spec.version}" th:href="${theme.spec.repo}" target="_blank" rel="noopener noreferrer">M酷&Jiewen&邱少羽梦</a></p>
           </th:block>
         </th:block>
 
@@ -88,6 +88,58 @@
     <i class="joe-font joe-icon-jiasu"></i>已运行&nbsp;<strong class="joe_run__day">00</strong> 天 <strong class="joe_run__hour">00</strong> 时 <strong class="joe_run__minute">00</strong> 分 <strong class="joe_run__second">00</strong> 秒
   </div>
   </th:block>
+
+  <th:block th:if="${theme.config.footer.site_counter == 'qiushaocloud_site_counter' && theme.config.footer.qiushaocloud_sitecounter_position_is_right == false }">
+    <script>
+      // 先删除 qiushaocloud_sitecounter_api_host 这个 localStorage 值，避免冲突
+      window.localStorage.removeItem('qiushaocloud_sitecounter_api_host');
+    </script>
+  
+    <th:block th:if="${theme.config.footer.qiushaocloud_sitecounter_api_host != ''}">
+      <script>
+        // 设置格式为：www.qiushaocloud.top 或者 https://www.qiushaocloud.top:443
+        window.localStorage.setItem('qiushaocloud_sitecounter_api_host', '[[${theme.config.footer.qiushaocloud_sitecounter_api_host}]]');
+        //window.localStorage.setItem('qiushaocloud_sitecounter_api_host', 'https://www.qiushaocloud.top:443');
+      </script>
+    </th:block>
+  
+    <th:block th:if="${theme.config.footer.qiushaocloud_sitecounter_api_sign_secret_key != ''}">
+      <script>
+        window.QIUSHAOCLOUD_SITE_COUNTER_API_SIGN_SECRET_KEY = '[[${theme.config.footer.qiushaocloud_sitecounter_api_sign_secret_key}]]';
+      </script>
+    </th:block>
+  
+    <div class="qiushaocloud_sitecounter-box">
+      <span class="site-total">
+      <span id="qiushaocloud_sitecounter_container_site_pv" style="display: inline;">
+          &nbsp;<i class="fa fa-eye"></i>&nbsp;访问量:&nbsp;<span id="qiushaocloud_sitecounter_value_site_pv" class="white-color">n</span>&nbsp;
+      </span>
+      <span id="qiushaocloud_sitecounter_container_site_uv" style="display: inline;">
+          <span class="vline">|</span>
+          &nbsp;<i class="fa fa-users"></i>&nbsp;访客量:&nbsp;<span id="qiushaocloud_sitecounter_value_site_uv" class="white-color">n</span>&nbsp;
+      </span>
+      </span>
+  
+      <span class="site-today">
+        <span id="qiushaocloud_sitecounter_container_today_site_pv" style="display: inline;">
+            <span class="vline">|</span>
+            &nbsp;<i class="fa fa-eye"></i>&nbsp;今日访问量:&nbsp;<span id="qiushaocloud_sitecounter_value_today_site_pv" class="white-color">n</span>&nbsp;
+        </span>
+        <span id="qiushaocloud_sitecounter_container_today_site_uv" style="display: inline;">
+            <span class="vline">|</span>
+            &nbsp;<i class="fa fa-users"></i>&nbsp;今日访客量:&nbsp;<span id="qiushaocloud_sitecounter_value_today_site_uv" class="white-color">n</span>&nbsp;
+        </span>
+      </span>
+  
+      <!--
+        <p>本页面总访问量: <span id="qiushaocloud_sitecounter_value_site_page_pv">n</span></p>
+        <p>本页面总访客量: <span id="qiushaocloud_sitecounter_value_site_page_uv">n</span></p>
+        <p>本页面今日访问量: <span id="qiushaocloud_sitecounter_value_today_site_page_pv">n</span></p>
+        <p> 本页面今日访客量: <span id="qiushaocloud_sitecounter_value_today_site_page_uv">n</span></p>
+      -->
+    </div>
+  </th:block>
+
 <th:block th:if="${theme.config.footer.enable_police} and ${#strings.trim(theme.config.basic.icp_police.police) != ''} and ${theme.config.basic.icp_police.police != null}">
 <p class="site_police">
 
@@ -107,13 +159,66 @@
     </th:block>
 </div>
 </th:block>
-<th:block th:if="${theme.config.footer.enable_busuanzi}">
+
+<th:block th:if="${theme.config.footer.site_counter == 'busuanzi'}">
 <div class="item busuanzi-statistic">
   <span class="site-pv"><i class="joe-font joe-icon-zhexiantu"></i>访问量<em id="busuanzi_value_site_pv">0</em></span>
   <span class="site-uv"><i class="joe-font joe-icon-monitor"></i>访客量<em id="busuanzi_value_site_uv">0</em></span>
   <span class="site-page-pv"><i class="joe-font joe-icon-dianji"></i>本页访客<em id="busuanzi_value_page_pv">0</em></span>
 </div>
 </th:block>
+
+<th:block th:if="${theme.config.footer.site_counter == 'qiushaocloud_site_counter' && theme.config.footer.qiushaocloud_sitecounter_position_is_right == true }">
+  <script>
+    // 先删除 qiushaocloud_sitecounter_api_host 这个 localStorage 值，避免冲突
+    window.localStorage.removeItem('qiushaocloud_sitecounter_api_host');
+  </script>
+
+  <th:block th:if="${theme.config.footer.qiushaocloud_sitecounter_api_host != ''}">
+    <script>
+      // 设置格式为：www.qiushaocloud.top 或者 https://www.qiushaocloud.top:443
+      window.localStorage.setItem('qiushaocloud_sitecounter_api_host', '[[${theme.config.footer.qiushaocloud_sitecounter_api_host}]]');
+      //window.localStorage.setItem('qiushaocloud_sitecounter_api_host', 'https://www.qiushaocloud.top:443');
+    </script>
+  </th:block>
+
+  <th:block th:if="${theme.config.footer.qiushaocloud_sitecounter_api_sign_secret_key != ''}">
+    <script>
+      window.QIUSHAOCLOUD_SITE_COUNTER_API_SIGN_SECRET_KEY = '[[${theme.config.footer.qiushaocloud_sitecounter_api_sign_secret_key}]]';
+    </script>
+  </th:block>
+
+  <div class="qiushaocloud_sitecounter-box">
+    <span class="site-total">
+    <span id="qiushaocloud_sitecounter_container_site_pv" style="display: inline;">
+        &nbsp;<i class="fa fa-eye"></i>&nbsp;访问量:&nbsp;<span id="qiushaocloud_sitecounter_value_site_pv" class="white-color">n</span>&nbsp;
+    </span>
+    <span id="qiushaocloud_sitecounter_container_site_uv" style="display: inline;">
+        <span class="vline">|</span>
+        &nbsp;<i class="fa fa-users"></i>&nbsp;访客量:&nbsp;<span id="qiushaocloud_sitecounter_value_site_uv" class="white-color">n</span>&nbsp;
+    </span>
+    </span>
+
+    <span class="site-today">
+      <span id="qiushaocloud_sitecounter_container_today_site_pv" style="display: inline;">
+          <span class="vline">|</span>
+          &nbsp;<i class="fa fa-eye"></i>&nbsp;今日访问量:&nbsp;<span id="qiushaocloud_sitecounter_value_today_site_pv" class="white-color">n</span>&nbsp;
+      </span>
+      <span id="qiushaocloud_sitecounter_container_today_site_uv" style="display: inline;">
+          <span class="vline">|</span>
+          &nbsp;<i class="fa fa-users"></i>&nbsp;今日访客量:&nbsp;<span id="qiushaocloud_sitecounter_value_today_site_uv" class="white-color">n</span>&nbsp;
+      </span>
+    </span>
+
+    <!--
+      <p>本页面总访问量: <span id="qiushaocloud_sitecounter_value_site_page_pv">n</span></p>
+      <p>本页面总访客量: <span id="qiushaocloud_sitecounter_value_site_page_uv">n</span></p>
+      <p>本页面今日访问量: <span id="qiushaocloud_sitecounter_value_today_site_page_pv">n</span></p>
+      <p> 本页面今日访客量: <span id="qiushaocloud_sitecounter_value_today_site_page_uv">n</span></p>
+    -->
+  </div>
+</th:block>
+
 </div>
 </div>
 </footer>

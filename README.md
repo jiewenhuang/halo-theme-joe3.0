@@ -1,33 +1,63 @@
-
-<h1 align="center"> Halo Theme Joe3  </h1>
+<h1 align="center"> Halo Theme Joe3 Qiu </h1>
 
 <p class="badge-row" align="center">
   <a href="https://halo.run" target="_blank">
-    <img src="https://img.shields.io/badge/dynamic/yaml?label=Halo&query=%24.spec.require&url=https://raw.githubusercontent.com/jiewenhuang/halo-theme-joe3.0/main/theme.yaml&color=113,195,71" alt="Halo"/>
+    <img src="https://img.shields.io/badge/dynamic/yaml?label=Halo&query=%24.spec.require&url=https://raw.githubusercontent.com/qiushaocloud/halo-theme-joe3.0-qiu/master/theme.yaml&color=113,195,71" alt="Halo"/>
   </a>
-  <a href="https://github.com/jiewenhuang/halo-theme-joe3.0/releases" target="_blank">
-    <img src="https://img.shields.io/github/v/release/jiewenhuang/halo-theme-joe3.0" alt="Release"/>
+  <a href="https://github.com/qiushaocloud/halo-theme-joe3.0-qiu/releases" target="_blank">
+    <img src="https://img.shields.io/github/v/release/qiushaocloud/halo-theme-joe3.0-qiu" alt="Release"/>
   </a>
   <a href="https://halo.run" target="_blank">
     <img src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-orange" alt="License"/>
   </a>
 </p>
 
+<p align="center">Joe3.0 Halo 主题 邱少修改版</p>
+
 ---
 <p align="center">
 <img width="100%" src="https://wmimg.com/i/70/2023/08/64d3c41d5bde2.webp">
 </p>
 
-预览：[Jiewen's Blog](https://www.jiewen.run/?preview-theme=theme-Joe3)
+预览：[邱少羽梦 Blog](https://www.qiushaocloud.top)
+
+#### 👀 [有疑问或者功能需求，请点击此处前往](https://www.qiushaocloud.top/2024/05/05/halo2x-joe30-zhu-ti-qiu-shao-xiu-gai-ban)
+
+
+### 邱少羽梦修改内容
+1. 支持不蒜子统计、邱少羽梦实现的[极简网页计数器](https://www.qiushaocloud.top/2022/01/10/site-counter)
+2. 支持导航条三级菜单
+3. 友链支持默认头像，优化友链样式，支持渐变色背景
+4. 头像支持根据所属博主名称生成图片
+5. 修复若干 bug
+6. 导航条站点图标后支持显示博客名称【暂未实现】
+7. 留言板 Markdown 内容展示【暂未实现】
+8. 部分样式修改及优化
+9. 首页文章支持排除指定的分类【暂未实现】
+10. 支持 iframe 模板展示其它网页【暂未实现】
+11. 支持 pdf 模板展示 pdf 文件【暂未实现】
+12. 支持 Markdown 模板展示 Md 文件【暂未实现】
+13. 支持朋友圈模板【暂未实现】
+14. 实现登陆评论后文章可见的功能
+
+
+
+<hr />
 
 文档：部分配置请参考 [Joe3不完全使用指导指南](https://www.jiewen.run/archives/joe3use)
-> halo-theme-Joe3 是一款 [Halo2.0](https://halo.run/) 的博客主题  
+> halo-theme-Joe3-qiu 是一款 [Halo2.0](https://halo.run/) 的博客主题  
 > 由[halo-theme-joe2.0](https://github.com/qinhua/halo-theme-joe2.0)适配而来，感谢原作者的无私奉献
+
+**类似主题效果图** 👇
+![类似主题效果图](https://githubcdn.qiushaocloud.top/gh/qiushaocloud/halo-theme-joe3.0-qiu@master/templates/assets/img/dp/mockup.jpg)
+![类似主题效果图](https://githubcdn.qiushaocloud.top/gh/qiushaocloud/halo-theme-joe3.0-qiu@master/templates/assets/img/dp/screenshot.png)
+
 
 ## 安裝
 
 ### 下载安装
-下载[releases](https://github.com/jiewenhuang/halo-theme-joe3.0/releases)或者直接[下载代码](https://github.com/jiewenhuang/halo-theme-joe3.0)，通过 Halo Console 后台主题安装处上传即可。
+* 下载[releases](https://github.com/qiushaocloud/halo-theme-joe3.0-qiu/releases)或者直接[下载代码](https://github.com/qiushaocloud/halo-theme-joe3.0-qiu)，通过 Halo Console 后台主题安装处上传即可。
+* 【推荐这种方式】到 `themes` 目录下克隆主题：`git clone https://github.com/qiushaocloud/halo-theme-joe3.0-qiu.git theme-Joe3-qiu`，然后通过 Halo Console 后台主题本地未安装处安装即可。【注意：如果克隆不了，换成 gitee 地址克隆即可，如：`git clone https://gitee.com/qiushaocloud/halo-theme-joe3.0-qiu.git theme-Joe3-qiu`】
 
 ## 使用说明
 > 1、首次使用请先把主题所有配置保存一遍  
@@ -60,7 +90,7 @@ WIP
 
 ### 🏭 贡献
 
-> 如果你想帮助完善 `Joe3.0` 主题，请：
+> 如果你想帮助完善 `Joe3.0-qiu` 主题，请：
 
 - 点 `star`
 - 提 `issue`
@@ -70,7 +100,7 @@ WIP
 <br>  
 
 ### 奉献提示
-此仓库分为main和dev分支，如何您想奉献代码，请fork dev分支，开发完成后提交pr到dev分支，dev分支会定期合并到main分支，main分支为稳定版本且dev分支才是最新代码，不接受pr。
+此仓库分为master和develop分支，如何您想奉献代码，请fork develop分支，开发完成后提交pr到develop分支，develop分支会定期合并到master分支，master分支为稳定版本且develop分支才是最新代码，不接受pr。
 
 
 ### 🙆‍♂️ 感谢
@@ -92,3 +122,18 @@ WIP
 
 <br>
 
+
+#### 开源不易，如果对您有帮助，请您动一动您的小手，给作者点 Star，也请您多多关注分享者「[邱少羽梦](https://www.qiushaocloud.top)」
+
+* 分享者邮箱: [qiushaocloud@126.com](mailto:qiushaocloud@126.com)
+* [分享者博客](https://www.qiushaocloud.top)
+* [分享者自己搭建的 gitlab](https://gitlab.qiushaocloud.top/qiushaocloud) 
+* [分享者 gitee](https://gitee.com/qiushaocloud/dashboard/projects) 
+* [分享者 github](https://github.com/qiushaocloud?tab=repositories) 
+
+
+### 版权信息公告:
+* 此主题是基于 [jiewenhuang/halo-theme-joe3.0](https://github.com/jiewenhuang/halo-theme-joe3.0) 修改
+* 以上内容大部分为原作者原创内容
+* 如果大家喜欢，请支持 [邱少羽梦(修改者)](https://www.qiushaocloud.top)，也请支持下原作者哦
+* 版权归原作者所有，修改者只是进行部分修改，以满足修改者需求

@@ -1,19 +1,19 @@
 apiVersion: theme.halo.run/v1alpha1
 kind: Theme
 metadata:
-  name: theme-Joe3
+  name: theme-Joe3-qiu
 spec:
-  displayName: Theme Joe3
+  displayName: Theme Joe3 Qiu
   author:
-    name: Jiewenhuang
-    website: "https://halo.run"
-  description: Halo2.0主题 Joe3
+    name: 邱少羽梦 改(主题原作者 Jiewenhuang)
+    website: "https://www.qiushaocloud.top"
+  description: Halo2.0主题 Joe3(邱少修改版)
   logo: "https://wmimg.com/i/70/2023/08/64d3c41d5bde2.webp"
-  website: "https://www.jiewen.run"
-  repo: "https://github.com/jiewenhuang/halo-theme-joe3.0"
-  settingName: "theme-Joe-setting"
-  configMapName: "theme-Joe-configMap"
-  version: "1.2.2"
+  website: "https://www.qiushaocloud.top"
+  repo: "https://github.com/qiushaocloud/halo-theme-joe3.0-qiu"
+  settingName: "theme-Joe3-qiu-setting"
+  configMapName: "theme-Joe3-qiu-configMap"
+  version: "2.2.2"
   require: ">=2.11.0"
   customTemplates:
     page:

@@ -1,7 +1,7 @@
 apiVersion: v1alpha1
 kind: Setting
 metadata:
-  name: theme-Joe-setting
+  name: theme-Joe3-qiu-setting
 spec:
   forms:
     - group: basic
@@ -209,7 +209,7 @@ spec:
         - $formkit: attachment
           name: lazyload_thumbnail
           label: 文章预载图
-          value: "/themes/theme-Joe3/assets/img/lazyload.gif"
+          value: "/themes/theme-Joe3-qiu/assets/img/lazyload.gif"
           help: "文章配图加载出来之前展示的图片，体积尽可能的小"
         - $formkit: attachment
           name: post_thumbnail
@@ -219,7 +219,7 @@ spec:
         - $formkit: attachment
           name: fallback_thumbnail
           label: 文章错误缺省图
-          value: "/themes/theme-Joe3/templates/assets/img/default_thumbnail.png"
+          value: "/themes/theme-Joe3-qiu/templates/assets/img/default_thumbnail.png"
           help: "文章图片加载出错时生效，可使用占位图服务（350*200）"
         - $formkit: select
           name: enable_index_list_effect
@@ -804,7 +804,7 @@ spec:
           name: banner_lazyload_img
           id: banner_lazyload_img
           label: 图片预载图
-          value: "/themes/theme-Joe3/assets/img/lazyload_h.gif"
+          value: "/themes/theme-Joe3-qiu/assets/img/lazyload_h.gif"
           help: "轮播图默认为懒加载，这里可以为banner图设置加载完之前的加载图（体积尽可能的小）"
 
     - group: beauty
@@ -916,6 +916,16 @@ spec:
               label: 开启
             - value: false
               label: 关闭
+        - $formkit: radio
+          name: show_logo_blog_name
+          label: 是否显示博客名称
+          value: true
+          help: "导航栏是否在LOGO右侧显示博客名称"
+          options:
+            - value: true
+              label: 开启
+            - value: false
+              label: 关闭
         - $formkit: text
           name: logo_link
           label: LOGO跳转链接
@@ -1002,7 +1012,7 @@ spec:
         - $formkit: attachment
           name: lazyload_avatar
           label: 头像预载图
-          value: "/themes/theme-Joe3/assets/svg/spinner-preloader.svg"
+          value: "/themes/theme-Joe3-qiu/assets/svg/spinner-preloader.svg"
           help: "头像加载出来之前展示的图片"
         - $formkit: attachment
           name: avatar
@@ -1012,7 +1022,7 @@ spec:
         - $formkit: attachment
           name: default_avatar
           label: 默认头像
-          value: "/themes/theme-Joe3/templates/assets/img/peeps-avatar.png"
+          value: "/themes/theme-Joe3-qiu/templates/assets/img/peeps-avatar.png"
           help: "用于头像未设置或加载出错时显示的图片，设置为空，会随机根据当前博主名字随机生成一张首字符的渐变色图片（注意：主题优先使用后台配置的头像，当后台未配置头像或头像加载出错才会用这里设置的图片。此处是有默认值的）"
         - $formkit: text
           name: generate_avatar_opts
@@ -2414,7 +2424,7 @@ spec:
           name: links_default_logo
           id: links_default_logo
           label: 友链默认 logo
-          value: "/themes/theme-Joe3/assets/img/default_links_logo.png"
+          value: "/themes/theme-Joe3-qiu/assets/img/default_links_logo.png"
           help: "用于友链 logo 未设置或加载出错时显示的图片，设置为空，会随机根据当前博主名字随机生成一张首字符的渐变色图片（注意：主题优先使用后台配置的 logo，当后台未配置 logo 或 logo 加载出错才会用这里设置的图片。此处是有默认值的）"
         - $formkit: code
           name: links_article
@@ -2674,9 +2684,33 @@ spec:
               label: 是
             - value: false
               label: 否
+        - $formkit: select
+          name: site_counter
+          id: site_counter
+          label: 站点统计工具(展示访问量数据)
+          value: "none"
+          help: "配置本站点使用的站点统计工具"
+          options:
+            - value: none
+              label: 不统计也不展示(默认)
+            - value: busuanzi
+              label: 卜算子站点统计工具
+            - value: qiushaocloud_site_counter
+              label: 邱少羽梦提供的站点统计工具
+        - $formkit: text
+          name: qiushaocloud_sitecounter_api_host
+          if: "$get(site_counter).value === 'qiushaocloud_site_counter'"
+          label: 邱少羽梦统计工具—接口请求的服务器地址，不填默认使用 https://www.qiushaocloud.top [参考:https://www.qiushaocloud.top/2022/01/10/site-counter]
+          value: ""
+        - $formkit: text
+          name: qiushaocloud_sitecounter_api_sign_secret_key
+          if: "$get(site_counter).value === 'qiushaocloud_site_counter'"
+          label: 邱少羽梦统计工具—接口请求的签名key，www.qiushaocloud.top 则配置为'' [参考:https://www.qiushaocloud.top/2022/01/10/site-counter]
+          value: ""
         - $formkit: radio
-          name: enable_busuanzi
-          label: 展示访问量数据
+          name: qiushaocloud_sitecounter_position_is_right
+          if: "$get(site_counter).value === 'qiushaocloud_site_counter'"
+          label: 邱少羽梦统计工具—是否在页面底部右侧显示
           value: true
           options:
             - value: true
