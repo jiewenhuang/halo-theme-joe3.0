@@ -74,6 +74,8 @@
           </article>
 
         </div>
+
+        <th:block th:if="${theme.config.links.enable_links_comment}">
         <div class="joe_comment">
           <div class="joe_comment_box">
             <div class="box_title">
@@ -108,6 +110,7 @@
             </th:block>
           </div>
         </div>
+        </th:block>
       </div>
       <th:block th:if="${theme.config.aside.enable_journals_aside}">
         <th:block th:replace="~{modules/common/aside :: aside}" />
