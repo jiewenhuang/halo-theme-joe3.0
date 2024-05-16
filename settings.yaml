@@ -1018,7 +1018,7 @@ spec:
           name: generate_avatar_opts
           label: 头像生成配置项
           value: "{bgColor:'',textColor:'',useTextGradient:false}"
-          help: "头像随机生成配置项，格式：{bgColor: '', textColor: '', useTextGradient: false}，默认情况使用随机渐变色背景和文字，如需自定义请修改此处【useTextGradient:当textColor为空时是否使用文字渐变色，默认为false】"
+          help: "头像随机生成配置项，格式：{bgColor: '', textColor: 'var(--theme)', useTextGradient: false}，默认情况使用随机渐变色背景和文字，如需自定义请修改此处【useTextGradient:当textColor为空时是否使用文字渐变色，默认为false】"
         - $formkit: attachment
           name: author_bg
           label: 博主栏背景图
@@ -1968,7 +1968,7 @@ spec:
 #          if: "$get(enable_copy_right_text).value === true"
           label: 自定义版权文案
           value: ""
-          help: "文章页复制内容时追加的自定义版权文字（如无特殊需要不建议设置，使用默认的即可。若真的要设置，请不要填写表情等特殊内容，否则可能导致网站崩溃）"
+          help: "文章页复制内容时追加的自定义版权文字（如无特殊需要不建议设置，使用默认的即可。若真的要设置，请不要填写表情等特殊内容，否则可能导致网站崩溃）【支持使用变量 {postUrl}、{postTitle}、{postAuthor}、{postDescription}、{BlogTitle}、{BlogUrl}】"
 
 
 
@@ -2018,6 +2018,7 @@ spec:
 
         - $formkit: radio
           name: enable_share_link
+          # id: enable_share_link
           label: 链接分享
           value: true
           options:
@@ -2025,6 +2026,13 @@ spec:
               label: 是
             - value: false
               label: 否
+        - $formkit: textarea
+          name: share_link_template
+          # if: "$get(enable_share_link).value === true"
+          label: 链接分享内容模版
+          value: ""
+          help: "自定义链接分享的内容模版，支持变量 {postUrl}、{postTitle}、{postAuthor}、{postDescription}、{BlogTitle}、{BlogUrl}，留空则使用默认模版(文章链接)，例如: 文章分享: {postAuthor} 发布了文章『{postTitle}』，链接: {postUrl}"
+
 
 
         - $formkit: textarea
@@ -2415,7 +2423,17 @@ spec:
           id: links_default_logo
           label: 友链默认 logo
           value: "/themes/theme-Joe3/assets/img/default_links_logo.png"
-          help: "用于友链 logo 未设置或加载出错时显示的图片，设置为空，会随机根据当前博主名字随机生成一张首字符的渐变色图片（注意：主题优先使用后台配置的 logo，当后台未配置 logo 或 logo 加载出错才会用这里设置的图片。此处是有默认值的）"
+          help: "用于友链 logo 未设置或加载出错时显示的图片，设置为空，会随机根据当前博主名字随机生成一张首字符的渐变色图片"
+        - $formkit: select
+          name: enable_links_comment
+          label: 开启友链评论
+          value: true
+          help: "是否开启友链评论功能"
+          options:
+            - value: true
+              label: 是
+            - value: false
+              label: 否
         - $formkit: code
           name: links_article
           height: 200

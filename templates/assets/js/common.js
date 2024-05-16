@@ -106,6 +106,14 @@ const commonContext = {
 			const shadowDom = comments[i].shadowRoot.getElementById("halo-comment");
 			$(shadowDom)[`${curMode === "light" ? "remove" : "add"}Class`]("dark");
 		}
+
+		const bgaOpts = Joe.bloggerGenerateAvatarOpts;
+		if (
+			(bgaOpts.textColor && /var\(--([\w-]+)\)/.test(bgaOpts.textColor))
+			|| (bgaOpts.bgColor && /var\(--([\w-]+)\)/.test(bgaOpts.bgColor))
+		) { // 当配置的 theme.config.blogger.generate_avatar_opts textColor/bgColor 包含 var(--xxx) 时，需要更新 text avatar image
+			Joe.replaceAllTextAvatarImage();
+		}
 	},
 	/* 初始化代码区域，高亮 + 行号 + 折叠 + 复制 */
 	initCode(isRefresh) {
