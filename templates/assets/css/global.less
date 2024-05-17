@@ -1681,6 +1681,12 @@ body {
             }
 
             .inner {
+              height: 120px;
+
+              .image {
+                height: 100%;
+              }
+
               .title {
                 position: absolute;
                 display: flex;
@@ -1688,14 +1694,15 @@ body {
                 justify-content: center;
                 align-items: center;
                 left: 0;
-                top: 0;
+                top: auto;
                 bottom: 0;
-                right: 0;
+                right: auto;
                 color: #fff;
                 font-size: 14px;
                 background: rgba(0, 0, 0, 0.4);
                 transition: background 0.5s;
                 will-change: background;
+                height: 30px;
               }
 
               &:hover {
@@ -1753,7 +1760,6 @@ body {
 
           .inner {
             position: relative;
-            height: 120px;
 
             &:hover {
               .image {
@@ -1767,7 +1773,7 @@ body {
 
             .image {
               width: 100%;
-              height: 100%;
+              height: 120px;
               object-fit: cover;
               border-radius: var(--radius-inner) var(--radius-inner) 0 0;
               transition: opacity 0.35s, transform 0.3s;
@@ -1776,11 +1782,6 @@ body {
 
             .title {
               font-size: 13px;
-              position: absolute;
-              height: 30px;
-              left: 0;
-              bottom: 0;
-              top: auto;
               white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis;
