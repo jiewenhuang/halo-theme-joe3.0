@@ -18,7 +18,7 @@
         </th:block>
         [[${post.spec.title}]]
     </a>
-    <a class="abstract" th:href="${post.status.permalink}" th:title="${post.spec.title}" target="_blank" rel="noopener noreferrer">[[${post.status.excerpt}]]</a>
+    <a class="abstract" th:href="${post.status.permalink}" th:title="${post.status.excerpt}" target="_blank" rel="noopener noreferrer">[[${post.status.excerpt}]]</a>
     <div class="meta">
         <ul class="items">
             <li>[[${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}]]</li>
