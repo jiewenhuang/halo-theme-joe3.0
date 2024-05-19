@@ -22,10 +22,12 @@
             <h3>友链列表<span class="totals" >
 
             </span></h3>
-            <div class="links-group" th:each="group : ${groups.?[spec.displayName != '']}">
+            <th:block th:each="group : ${groups.?[spec.displayName != '']}">
+            <div class="links-group" th:if="${#annotations.getOrDefault(group,'link_group_enable_show',true)}" th:data-link-group-sort-seq="${#annotations.getOrDefault(group,'link_group_sort_seq',0)}" th:data-link-group-create-time="${group.metadata.creationTimestamp}" >
               <h5>[[${group.spec.displayName}]]</h5>
               <ul class="joe_detail__friends evan-friends">
-                <li class="joe_detail__friends-item" th:each="link : ${group.links}">
+                <th:block th:each="link : ${group.links}">
+                <li class="joe_detail__friends-item" th:if="${#annotations.getOrDefault(link,'link_enable_show',true)}" th:data-link-sort-seq="${#annotations.getOrDefault(link,'link_sort_seq',0)}" th:data-link-create-time="${link.metadata.creationTimestamp}" >
                 <th:block
                   th:with="randomBgColor = ${bgColorArray[#numbers.formatDecimal(T(java.lang.Math).floor(T(java.lang.Math).random()* bgColorArray.length),1,0)]}"
                 >
@@ -54,8 +56,80 @@
                   </a>
                 </th:block>
                 </li>
+                </th:block>
               </ul>
             </div>
+            </th:block>
+
+            <script>
+              // TODO qiushaocloud 最好的办法就是在上面直接排序，我对 thymeleaf 语法不熟悉，尝试使用了 #lists.sort，但一直报错，因此改成了 js 排序，希望有能力的大佬帮忙优化一下
+              (() => {
+                // links-group 排序, link-group-sort-seq 数字越大越靠前
+                const linksGroupDefaultSort = '[[${theme.config.links.links_group_default_sort}]]';
+                const linksDefaultSort = '[[${theme.config.links.links_default_sort}]]';
+                const joeDetailArticle = $('#Joe .page-journals .joe_detail__article');
+                const linksGroupEles = joeDetailArticle.find('.links-group');
+                linksGroupEles.sort((a, b) => {
+                  const aSortSeq = parseInt($(a).data('link-group-sort-seq') || 0);
+                  const bSortSeq = parseInt($(b).data('link-group-sort-seq') || 0);
+              
+                  if (!isNaN(bSortSeq) && !isNaN(aSortSeq)) {
+                    if (bSortSeq > 0 && aSortSeq > 0)
+                      return bSortSeq > aSortSeq ? 1 : -1; // link-group-sort-seq 数字越大越靠前
+
+                    if (bSortSeq > 0)
+                      return 1; // b.link-group-sort-seq 需要排在前面
+
+                    if (aSortSeq > 0)
+                      return -1; // a.link-group-sort-seq 需要排在前面
+                  }
+
+                  // 若 link-group-sort-seq <= 0, 则按默认排序方式进行排序
+                  if (linksGroupDefaultSort === 'links_group_create_time_asc' || linksGroupDefaultSort === 'links_group_create_time_desc') { // 按照创建时间升序/降序排序
+                    const aCreateTime = parseInt(new Date($(a).data('link-group-create-time')).getTime() || 0);
+                    const bCreateTime = parseInt(new Date($(b).data('link-group-create-time')).getTime() || 0);
+                    return linksGroupDefaultSort === 'links_group_create_time_asc' ? (aCreateTime > bCreateTime ? 1 : -1) : (aCreateTime < bCreateTime ? 1 : -1);
+                  }
+
+                  return 0; // 不进行排序，保持原有顺序【即:友链组件原本的排序方式】
+                });
+                // linksGroupEles.remove();
+                joeDetailArticle.append(linksGroupEles);
+
+                linksGroupEles.each((_, linkGroupEle) => {
+                  // links-group 内的 links 排序, link-sort-seq 数字越大越靠前
+                  const linksUlEle = $(linkGroupEle).find('.joe_detail__friends');
+                  const linksLiEles = linksUlEle.find('.joe_detail__friends-item');
+                  linksLiEles.sort((a, b) => {
+                    const aSortSeq = parseInt($(a).data('link-sort-seq') || 0);
+                    const bSortSeq = parseInt($(b).data('link-sort-seq') || 0);
+
+                    if (!isNaN(bSortSeq) && !isNaN(aSortSeq)) {
+                      if (bSortSeq > 0 && aSortSeq > 0)
+                        return bSortSeq > aSortSeq ? 1 : -1; // link-sort-seq 数字越大越靠前
+
+                      if (bSortSeq > 0)
+                        return 1; // b.link-sort-seq 需要排在前面
+
+                      if (aSortSeq > 0)
+                        return -1; // a.link-sort-seq 需要排在前面
+                    }
+
+                    // 若 link-sort-seq <= 0, 则按默认排序方式进行排序
+                    if (linksDefaultSort === 'links_create_time_asc' || linksDefaultSort === 'links_create_time_desc') { // 按照创建时间升序/降序排序
+                      const aCreateTime = parseInt(new Date($(a).data('link-create-time')).getTime() || 0);
+                      const bCreateTime = parseInt(new Date($(b).data('link-create-time')).getTime() || 0);
+                      return linksDefaultSort === 'links_create_time_asc' ? (aCreateTime > bCreateTime ? 1 : -1) : (aCreateTime < bCreateTime ? 1 : -1);
+                    }
+
+                    return 0; // 不进行排序，保持原有顺序【即:友链组件原本的排序方式】
+                  });
+                  // linksLiEles.remove();
+                  linksUlEle.append(linksLiEles);
+                });
+              })();
+            </script>
+
           </article>
           <article class="joe_detail__article animated fadeIn">
             <h3>申请格式</h3>

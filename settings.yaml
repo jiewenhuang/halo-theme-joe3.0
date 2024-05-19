@@ -2434,6 +2434,30 @@ spec:
               label: 是
             - value: false
               label: 否
+        - $formkit: select
+          name: links_group_default_sort
+          label: 链接分类默认排序方式
+          value: "link_group_create_time_asc"
+          help: "设置友链分类默认排序方式，如果链接分类排序序号<=0，则按照默认排序方式进行排序"
+          options:
+            - value: "links_group_create_time_asc"
+              label: 按照创建时间升序
+            - value: "links_group_create_time_desc"
+              label: 按照创建时间降序
+            - value: "links_group_keep_origin_sort"
+              label: 保持原有顺序【即:友链组件原本的排序方式】
+        - $formkit: select
+          name: links_default_sort
+          label: 同一分类内链接默认排序方式
+          value: "link_create_time_asc"
+          help: "设置同一分类内友链默认排序方式，如果同一分类内链接排序序号<=0，则按照默认排序方式进行排序"
+          options:
+            - value: "links_create_time_asc"
+              label: 按照创建时间升序
+            - value: "links_create_time_desc"
+              label: 按照创建时间降序
+            - value: "links_keep_origin_sort"
+              label: 保持原有顺序【即:友链组件原本的排序方式】
         - $formkit: code
           name: links_article
           height: 200
