@@ -3,7 +3,7 @@
 <th:block th:fragment="ads_aside_img(ads_url, ads_img)">
   <section class="joe_aside__item advert">
     <a class="joe_advert" target="_blank" rel="noopener noreferrer nofollow" th:href="${ads_url}" title="广告">
-      <img class="omit lazyload" width="100%" th:data-src="${ads_img}" th:src="${theme.config.home.lazyload_thumbnail}" alt="广告"/>
+      <img class="omit lazyload" width="100%" th:data-src="${ads_img}" th:src="${theme.config.home.lazyload_thumbnail}" alt="广告" onerror="Joe.errorImg(this)" />
       <span class="icon">广告</span>
     </a>
   </section>

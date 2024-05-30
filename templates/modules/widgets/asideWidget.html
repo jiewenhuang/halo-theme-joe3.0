@@ -22,7 +22,7 @@
             <span class="text">[[${pic_data.qrcode_title}]]</span>
         </div>
         <div class="joe_aside__item-contain">
-            <img class="qrcode_img lazyload" th:src="${pic_data.qrcode_url}" th:data-src="${pic_data.qrcode_url}" th:alt="${pic_data.qrcode_title}"/>
+            <img class="qrcode_img lazyload" th:src="${pic_data.qrcode_url}" th:data-src="${pic_data.qrcode_url}" th:alt="${pic_data.qrcode_title}" onerror="Joe.errorImg(this, 'LoadFailedImg')" />
             <th:block th:if="${pic_data.qrcode_description != ''}">
                 <p class="qrcode_description">[[${pic_data.qrcode_description}]]</p>
             </th:block>
@@ -66,7 +66,7 @@
                     th:each="result : ${commentFinder.list(null,1,new_reply_data.show_newreply_num)}">
                 <li class="item">
                     <div class="user">
-                        <img width="35" height="35" class="avatar lazyload" th:data-src="${result.owner.avatar ?: '/themes/theme-Joe3/assets/img/peeps-avatar.png'} " th:src="${theme.config.blogger.lazyload_avatar}"  alt="头像">
+                        <img width="35" height="35" class="avatar lazyload" th:data-src="${result.owner.avatar ?: (theme.config.blogger.default_avatar ?: '/themes/theme-Joe3/assets/img/transparent-placeholder.png')}" th:src="${theme.config.blogger.lazyload_avatar}"  alt="头像" th:data-text-avatar="${result.owner.displayName}" onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')" onerror="Joe.errorImg(this, 'ErrAvatarImg')" >
                         <div class="info">
                             <div class="author">[[${result.owner.displayName}]]</div>
                             <span class="date">[[${#temporals.format(result.spec.creationTime, 'yyyy-MM-dd HH:mm:ss')}]]</span>
@@ -152,7 +152,7 @@
 
                             return `<li class="item">
                     <div class="user">
-                        <img width="35" height="35" class="avatar lazyload" data-src="${comment.avatar}" src="${ThemeConfig.lazyload_avatar}"  alt="头像">
+                        <img width="35" height="35" class="avatar lazyload" data-src="${comment.avatar || '/themes/theme-Joe3/assets/img/transparent-placeholder.png'}" src="${ThemeConfig.lazyload_avatar}"  alt="头像" data-text-avatar="${comment.nick}" onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')" onerror="Joe.errorImg(this, 'ErrAvatarImg')" >
                         <div class="info">
                             <div class="author">${comment.nick}</div>
                             <span class="date">${commentTime}</span>
@@ -183,7 +183,7 @@
         <div class="joe_aside__item-contain">
 
             <div th:class="'tags-cloud-list '+${tag_cloud_data.tag_cloud_width =='responsive' ? 'responsive':'static'}" th:style="${tag_cloud_data.tag_cloud_type == '3d' ? 'display:none':''}">
-                <th:block th:with="tags = ${tagFinder.listAll()}">
+                <th:block th:with="tags = ${#strings.isEmpty(tag_cloud_data.tag_cloud_num) ? tagFinder.listAll() : tagFinder.list(1, tag_cloud_data.tag_cloud_num)}">
 
                     <a th:each="tag : ${tags}"
                        th:data-url="@{${tag.status.permalink}}" th:data-label="${tag.spec.displayName}" th:href="@{${tag.status.permalink}}" th:title="${tag.spec.displayName}">[[${tag.spec.displayName}]]</a>

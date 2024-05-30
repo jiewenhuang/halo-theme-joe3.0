@@ -9,17 +9,17 @@
     <th:block th:if="${theme.config.post.qrcode_zfb} and ${#strings.trim(theme.config.post.qrcode_wx) != ''}">
     <li>
       <p>支付宝打赏</p>
-      <img th:src="${theme.config.post.qrcode_zfb}"  alt="qrcode alipay"/></li>
+      <img th:src="${theme.config.post.qrcode_zfb}"  alt="qrcode alipay" onerror="Joe.errorImg(this, 'LoadFailedImg')" /></li>
     </th:block>
     <th:block th:if="${theme.config.post.qrcode_wx} and ${#strings.trim(theme.config.post.qrcode_wx) != ''}">
     <li>
       <p>微信打赏</p>
-      <img th:src="${theme.config.post.qrcode_wx}"  alt="qrcode weixin"/></li>
+      <img th:src="${theme.config.post.qrcode_wx}"  alt="qrcode weixin" onerror="Joe.errorImg(this, 'LoadFailedImg')" /></li>
     </th:block>
     <th:block th:if="${theme.config.post.qrcode_qq} and ${#strings.trim(theme.config.post.qrcode_qq) != ''}">
     <li>
       <p>QQ打赏</p>
-      <img th:src="${theme.config.post.qrcode_qq}"  alt="qrcode qq"/></li>
+      <img th:src="${theme.config.post.qrcode_qq}"  alt="qrcode qq" onerror="Joe.errorImg(this, 'LoadFailedImg')"/></li>
     </th:block>
 </ol>
 </th:block>

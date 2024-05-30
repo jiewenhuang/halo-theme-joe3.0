@@ -65,11 +65,250 @@
     window.Joe = {
         BASE_API: "",
         isMobile: /windows phone|iphone|android/gi.test(window.navigator.userAgent),
+        bloggerGenerateAvatarOpts: (function() {
+            let generateAvatarOpts = {};
+            let generate_avatar_opts_str = '[[${theme.config.blogger.generate_avatar_opts}]]';
+            if (generate_avatar_opts_str) {
+                // generate_avatar_opts_str 示例：{bgColor:'',textColor:'',useTextGradient:false}, 解析 generate_avatar_opts 配置
+                try {
+                    // 防止 &#39; 等特殊字符导致 JSON 解析失败
+                    const eleTmp =document.createElement('div');
+                    eleTmp.innerHTML = generate_avatar_opts_str;
+                    // key 自动加上 "" 防止报错，’ 自动转成 “
+                    generate_avatar_opts_str = eleTmp.innerHTML.replace(/'/g, '"').replace(/([\w]+):/g, '"$1":');
+                    generateAvatarOpts = JSON.parse(generate_avatar_opts_str);
+                } catch (e) {
+                    console.error('Joe3主题配置：生成文字性头像的配置解析失败，使用默认配置。generate_avatar_opts_str:', generate_avatar_opts_str, ' ,error:', e);
+                }
+            }
+            return generateAvatarOpts;
+        })(),
         errorImg: function(target, src) {
-            target.setAttribute('src', src || '${EMPTY_IMG}');
-            setTimeout(function () {
-                target.setAttribute('onerror', null);
-            }, 1000)
+            const targetSrc = target.getAttribute('src');
+            console.log(
+                '加载图片失败',
+                ' ,srcArg:', src,
+                ' .target.src:', targetSrc,
+                ' ,target.alt:', target.getAttribute('alt'),
+                ' ,target.dataset.errSrc:', target.dataset.errSrc,
+                ' ,target.dataset.textAvatar:', target.dataset.textAvatar,
+            );
+
+            let generatedTextAvatar;
+            let generatedTextAvatarBase64;
+
+            switch (src) {
+                case 'HomeErrImg': { // 如果 src 是 HomeErrImg 则使用首页配置里配置的文章错误缺省图
+                    src = '[[${theme.config.home.fallback_thumbnail}]]';
+                    break;
+                }
+                case 'LinksErrImg': {// 如果 src 是 LinksErrImg 则使用友链配置里配置的友链默认 logo
+                    src = target.dataset.errSrc || '[[${theme.config.links.links_default_logo}]]';
+                    if (!src || src === targetSrc || (targetSrc && targetSrc.indexOf('/assets/img/transparent-placeholder.png') !== -1)) {
+                        if (target.dataset.textAvatar || target.getAttribute('alt')) {
+                            generatedTextAvatar = target.dataset.textAvatar || target.getAttribute('alt');
+                            generatedTextAvatarBase64 = Joe.generateTextAvatarImage(generatedTextAvatar);
+                            src = generatedTextAvatarBase64;
+                        } else {
+                            src = '/themes/theme-Joe3/assets/img/default_links_logo.png';
+                        }
+                    }
+                    break;
+                }
+                case 'ErrAvatarImg': { // 如果 src 是 ErrAvatarImg 则使用博主配置里配置的默认头像
+                    src = target.dataset.errSrc || '[[${theme.config.blogger.default_avatar}]]';
+                    if (!src || src === targetSrc || (targetSrc && targetSrc.indexOf('/assets/img/transparent-placeholder.png') !== -1)) {
+                        if (target.dataset.textAvatar || target.getAttribute('alt')) {
+                            generatedTextAvatar = target.dataset.textAvatar || target.getAttribute('alt');
+                            generatedTextAvatarBase64 = Joe.generateTextAvatarImage(generatedTextAvatar);
+                            src = generatedTextAvatarBase64;
+                        } else {
+                            src = '/themes/theme-Joe3/assets/img/peeps-avatar.png';
+                        }
+                    }
+                    break;
+                }
+                case 'LoadFailedImg': { // 如果 src 是 LoadFailedImg 则使用加载失败的图片
+                    src = target.dataset.errSrc || '/themes/theme-Joe3/assets/img/img_load_failed.jpg';
+                    break;
+                }
+            }
+        
+            const nowSrc = src || target.dataset.errSrc || '/themes/theme-Joe3/assets/img/Joe3.png';
+            if (targetSrc === nowSrc) return;
+
+            if (generatedTextAvatarBase64 && generatedTextAvatar && nowSrc === generatedTextAvatarBase64) {
+                target.setAttribute('data-generated-text-avatar', generatedTextAvatar);
+            } else if (target.getAttribute('data-generated-text-avatar')) {
+                target.removeAttribute('data-generated-text-avatar');
+            }
+
+            console.log('加载图片失败，使用默认图片:', nowSrc, ' ,oldSrc:', targetSrc, ' ,target.alt:', target.getAttribute('alt'));
+            target.setAttribute('onerror', null);
+            target.setAttribute('src', nowSrc);
+        },
+        // 已经加载 transparent-placeholder.png 后替换图片
+        loadedPlaceholderReplaceImg: function(target, src) {
+            const targetSrc = target.getAttribute('src');
+            if (!targetSrc || src === targetSrc || targetSrc.indexOf('/assets/img/transparent-placeholder.png') === -1) {
+                return;
+            }
+
+            console.log(
+                '加载图片 transparent-placeholder.png 后替换图片',
+                ' ,srcArg:', src,
+                ' ,target.alt:', target.getAttribute('alt'),
+                ' ,target.dataset.replaceSrc:', target.dataset.replaceSrc,
+                ' ,target.dataset.textAvatar:', target.dataset.textAvatar,
+            );
+
+            let generatedTextAvatar;
+            let generatedTextAvatarBase64;
+
+            switch (src) {
+                case 'LinksImg': {// 如果 src 是 LinksImg 则使用友链配置里配置的友链默认 logo
+                    src = target.dataset.replaceSrc || '[[${theme.config.links.links_default_logo}]]';
+                    if (!src || src === targetSrc) {
+                        if (target.dataset.textAvatar || target.getAttribute('alt')) {
+                            generatedTextAvatar = target.dataset.textAvatar || target.getAttribute('alt');
+                            generatedTextAvatarBase64 = Joe.generateTextAvatarImage(generatedTextAvatar);
+                            src = generatedTextAvatarBase64;
+                        } else {
+                            src = '/themes/theme-Joe3/assets/img/default_links_logo.png';
+                        }
+                    }
+                    break;
+                }
+                case 'AvatarImg': { // 如果 src 是 AvatarImg 则使用博主配置里配置的默认头像
+                    src = target.dataset.replaceSrc || '[[${theme.config.blogger.default_avatar}]]';
+                    if (!src || src === targetSrc) {
+                        if (target.dataset.textAvatar || target.getAttribute('alt')) {
+                            generatedTextAvatar = target.dataset.textAvatar || target.getAttribute('alt');
+                            target.setAttribute('data-generated-text-avatar', generatedTextAvatar);
+                            generatedTextAvatarBase64 = Joe.generateTextAvatarImage(generatedTextAvatar);
+                            src = generatedTextAvatarBase64;
+                        } else {
+                            src = '/themes/theme-Joe3/assets/img/peeps-avatar.png';
+                        }
+                    }
+                    break;
+                }
+            }
+
+            const nowSrc = src || target.dataset.replaceSrc || '/themes/theme-Joe3/assets/img/Joe3.png';
+            if (targetSrc === nowSrc) return;
+
+            if (generatedTextAvatarBase64 && generatedTextAvatar && nowSrc === generatedTextAvatarBase64) {
+                target.setAttribute('data-generated-text-avatar', generatedTextAvatar);
+            } else if (target.getAttribute('data-generated-text-avatar')) {
+                target.removeAttribute('data-generated-text-avatar');
+            }
+
+            console.log('加载替换后的图片:', nowSrc, ' ,target.alt:', target.getAttribute('alt'));
+            target.setAttribute('onload', null);
+            target.setAttribute('src', nowSrc);
+        },
+        replaceAllTextAvatarImage: function() {
+            console.log('call replaceAllTextAvatarImage')
+            const generatedEles = document.querySelectorAll('img[data-generated-text-avatar]');
+            generatedEles.forEach(function(ele) {
+                const generatedTextAvatar = ele.getAttribute('data-generated-text-avatar');
+                const generatedTextAvatarBase64 = Joe.generateTextAvatarImage(generatedTextAvatar);
+                ele.setAttribute('src', generatedTextAvatarBase64);
+            });
+        },
+        // 生成随机颜色函数
+        getRandomColor: function (alpha) {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            if (alpha !== undefined) {
+                return color + (alpha >= 0 && alpha <= 1 ? Math.round(alpha * 255).toString(16) : 'FF');
+            }
+            return color;
+        },
+        // 生成随机颜色的文字性头像
+        generateTextAvatarImage: function(text, opts) {
+            opts = Object.assign({}, Joe.bloggerGenerateAvatarOpts, opts || {});
+            opts.fontSize = opts.fontSize || 50;
+            opts.font = opts.font || 'Great Vibes';
+            opts.canvasRadius = opts.canvasWidth || 1.5 * opts.fontSize;
+
+            // 如果是 var(--xxxx)，则说明是 css 配置的变量，需要从html样式中解析成具体值
+            if (opts.textColor && /var\(--([\w-]+)\)/.test(opts.textColor)) {
+                const match = opts.textColor.match(/var\(--([\w-]+)\)/);
+                if (match) {
+                    let cssVar = getComputedStyle(document.documentElement).getPropertyValue('--'+match[1]).trim() ||   getComputedStyle(document.body).getPropertyValue('--'+match[1]).trim();
+                    if (cssVar) {
+                        opts.textColor = cssVar;
+                    }
+                }
+            }
+
+            // 如果是 var(--xxxx)，则说明是 css 配置的变量，需要从html样式中解析成具体值
+            if (opts.bgColor && /var\(--([\w-]+)\)/.test(opts.bgColor)) {
+                const match = opts.bgColor.match(/var\(--([\w-]+)\)/);
+                if (match) {
+                    let cssVar = getComputedStyle(document.documentElement).getPropertyValue('--'+match[1]).trim() ||   getComputedStyle(document.body).getPropertyValue('--'+match[1]).trim();
+                    if (cssVar) {
+                        opts.bgColor = cssVar;
+                    }
+                }
+            }
+
+            // 创建一个新的 Canvas 元素
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            // 设置 Canvas 的尺寸
+            canvas.width = opts.canvasRadius;
+            canvas.height = opts.canvasRadius;
+
+            if (opts.bgColor) {
+                ctx.fillStyle = opts.bgColor;
+            } else {
+                // 生成随机颜色的渐变背景
+                const gradient = ctx.createRadialGradient(
+                    canvas.width / 2, canvas.height / 2, 0,
+                    canvas.width / 2, canvas.height / 2, canvas.width / 2
+                );
+                gradient.addColorStop(0, Joe.getRandomColor(0.7));
+                gradient.addColorStop(1, Joe.getRandomColor(0.7));
+
+                // 绘制渐变背景
+                ctx.fillStyle = gradient;
+            }
+
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 2, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 设置文本样式
+            ctx.font = `${opts.fontSize}px ${opts.font}`;
+
+            if (opts.textColor) {
+                ctx.fillStyle = opts.textColor;
+            } else if (opts.useTextGradient) {
+                // 生成文字的线性渐变
+                const textGradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+                textGradient.addColorStop(0, Joe.getRandomColor(0.9)); // 文字的渐变色
+                textGradient.addColorStop(1, Joe.getRandomColor(0.9)); // 文字的渐变色
+                ctx.fillStyle = textGradient;
+            } else if (opts.bgColor) { // 设置了背景色，但是没有设置文字颜色，则需要设置默认文字颜色为黑色，防止文字颜色和背景色一致【注；背景色为渐变色，文字能显示出来，因此不需要设置文字颜色】
+                // 如果 bgColor 为黑色，则文字颜色设置为白色，否则设置为黑色
+                ctx.fillStyle = /(#000000|#000|black)/.test(opts.bgColor) ? '#fff' : '#000';
+            }
+
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            // 在 Canvas 上绘制文本
+            ctx.fillText(text.charAt(0), canvas.width / 2, canvas.height / 2);
+
+            // 返回生成的图片对象 base64 编码
+            return canvas.toDataURL();
         }
     }
     ThemeConfig.enable_console_theme && console.log("%cTheme By  Jiewen" + " | 版本 V" + ThemeConfig.version, "padding: 8px 15px;color:#fff;background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3);border-radius: 0 15px 0 15px;");
