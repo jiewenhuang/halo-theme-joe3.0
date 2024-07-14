@@ -21,7 +21,7 @@
                 <div class="joe_archives-title"><i class="joe-font joe-icon-fenlei"></i>分类</div>
                 <ul class="joe_category-list" th:with="categories = ${categoryFinder.listAll()}">
                   <li class="item" th:each="category : ${categories}">
-                    <a class="link" th:href="@{${category.status.permalink}}" th:title="${category.spec.displayName}"><span th:title="${category.spec.displayName}">[[${category.spec.displayName}]]</span><em>[[${category.status.postCount}]]</em></a>
+                    <a class="link" th:href="@{${category.status.permalink}}" th:title="${category.spec.displayName}"><span th:title="${category.spec.displayName}">[[${category.spec.displayName}]]</span><em th:text="${category.status.visiblePostCount ?: 0}"></em></a>
                   </li>
                 </ul>
               </div>
