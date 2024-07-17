@@ -92,3 +92,11 @@ WIP
 
 <br>
 
+### 交流群
+QQ群号（929708466）欢迎大家前来交流分享  
+
+![QQ群](./doc_images/IMG_3508(20240717-140309).JPG)  
+
+### TinyTale小程序  
+[TinyTale Halo微信小程序正式版发布](https://www.jiewen.run/archives/TinyTale-formal-edition)
+![TinyTale](./doc_images/111.png)
