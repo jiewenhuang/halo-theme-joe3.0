@@ -1,147 +1,238 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{modules/layout :: html(title = ${theme.config.journals.journals_title ?: '我的动态'}+'-'+${site.title},htmlType = journals,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
+<!doctype html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{modules/layout :: html(title = ${theme.config.journals.journals_title ?: '我的动态'}+'-'+${site.title},htmlType = journals,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
 >
-<th:block th:fragment="content">
-
-  <body>
-  <div id="Joe">
-    <th:block th:replace="~{modules/macro/navbar :: navbar}" />
-    <div class="joe_container joe_main_container page-journals"
-         th:classappend="|${theme.config.theme.enable_show_in_up ? 'animated showInUp':''} ${theme.config.aside.aside_position == 'left' ? 'revert':''}|">
-      <div class="joe_main">
-        <div class="joe_detail">
-          <h1 class="joe_detail__title txt-shadow">[[${theme.config.journals.journals_title ?: '我的动态'}]]</h1>
-          <th:block th:if="${theme.config.journals.enable_journal_add}">
-          <a class="joe_journal_add" th:href="@{/console/moments}" target="_blank" rel="nofollow"><i class="joe-font joe-icon-edit"></i></a>
-          </th:block>
-        <div class="joe_detail__count">
-          <div class="joe_detail__count-information">
-            <img width="35" height="35" class="avatar lazyload" th:data-src="${theme.config.blogger.avatar}" th:src="${theme.config.blogger.lazyload_avatar}"  th:alt="${moment.owner.displayName}">
-            <div class="meta">
-              <div class="author">
-                <a class="link" th:href="${site.url}" th:title="${theme.config.blogger.nickname ?: site.title}">[[${theme.config.blogger.nickname ?: site.title}]]</a>
-                <!-- 修改链接指向博客地址 title 和 显示为博主名/博客名 -->
+  <th:block th:fragment="content">
+    <body>
+      <div id="Joe">
+        <th:block th:replace="~{modules/macro/navbar :: navbar}" />
+        <div
+          class="joe_container joe_main_container page-journals"
+          th:classappend="|${theme.config.theme.enable_show_in_up ? 'animated showInUp':''} ${theme.config.aside.aside_position == 'left' ? 'revert':''}|"
+        >
+          <div class="joe_main">
+            <div class="joe_detail">
+              <h1 class="joe_detail__title txt-shadow">
+                [[${theme.config.journals.journals_title ?: '我的动态'}]]
+              </h1>
+              <th:block th:if="${theme.config.journals.enable_journal_add}">
+                <a
+                  class="joe_journal_add"
+                  th:href="@{/console/moments}"
+                  target="_blank"
+                  rel="nofollow"
+                  ><i class="joe-font joe-icon-edit"></i
+                ></a>
+              </th:block>
+              <div class="joe_detail__count">
+                <div class="joe_detail__count-information">
+                  <img
+                    width="35"
+                    height="35"
+                    class="avatar lazyload"
+                    th:data-src="${theme.config.blogger.avatar}"
+                    th:src="${theme.config.blogger.lazyload_avatar}"
+                    th:alt="${theme.config.blogger.nickname ?: site.title}"
+                    onerror="Joe.errorImg(this, 'ErrAvatarImg')"
+                  />
+                  <div class="meta">
+                    <div class="author">
+                      <a
+                        class="link"
+                        th:href="${site.url}"
+                        th:title="${theme.config.blogger.nickname ?: site.title}"
+                        >[[${theme.config.blogger.nickname ?: site.title}]]</a
+                      >
+                      <!-- 修改链接指向博客地址 title 和 显示为博主名/博客名 -->
+                    </div>
+                    <div class="item">
+                      <span class="text"
+                        >[[${theme.config.blogger.motto?:'一句话介绍自己吧！'}]]</span
+                      >
+                      <th:block th:if="${theme.config.other.check_baidu_collect}">
+                        <span class="line">/</span>
+                        <span class="text" id="joe_baidu_record">正在检测是否收录...</span>
+                      </th:block>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="item">
-                <span class="text">[[${theme.config.blogger.motto?:'一句话介绍自己吧！'}]]</span>
-                <th:block th:if="${theme.config.other.check_baidu_collect}">
-                <span class="line">/</span>
-                  <span class="text" id="joe_baidu_record">正在检测是否收录...</span>
-                </th:block>
-            </div>
-          </div>
-        </div>
-      </div>
-          <th:block th:replace="~{modules/macro/loading :: loading}" />
+              <th:block th:replace="~{modules/macro/loading :: loading}" />
 
-      <ul class="joe_journals__list hidden"
-          th:classappend="${theme.config.journals.enable_journal_effect ? 'effects':''}">
-        <th:block th:each="moment,iteration : ${moments.items}" th:with="content=${moment.spec.content}">
-        <li class="joe_journal__item animated wow" th:data-wow-delay="'0.'+${iteration.index}+'s'" th:data-cid="${moment.metadata.name}" th:data-clikes="${moment.stats.upvote}">
-          <p class="joe_journal_date">
-            <i class="joe-font joe-icon-feather"></i>
-            <em class="joe_journal-posttime">[[${#dates.format(moment.spec.releaseTime,'yyyy/MM/dd HH:mm:ss')}]]</em>
-          </p>
-          <div class="joe_journal_block">
-            <div class="joe_journal_body" th:style="'max-height:'+${theme.config.journals.journal_block_height?: '300'}+'px'"
-                 th:classappend="${(theme.config.code_block.enable_code_line_number == true &&theme.config.code_block.enable_code_newline!=true) ?'line-numbers':''}">
-              <div class="content-wrp">
-                <th:block th:utext="${content.html}"></th:block>
-                <th:block th:if="${not #lists.isEmpty(content.medium)}" th:each="momentItem : ${content.medium}">
-                  <img th:if="${momentItem.type.name == 'PHOTO'}" th:src="${momentItem.url}" />
-                  <joe-dplayer th:if="${momentItem.type.name == 'VIDEO'}" th:src="${momentItem.url}"></joe-dplayer>
-                </th:block>
-              </div>
-              <span class="joe_journal_operate_item journal_content_expander"><i class="joe-font joe-icon-arrow-down"></i></span>
-            </div>
-            <th:block th:if="${theme.config.journals.enable_like_journal} or ${theme.config.journals.enable_comment_journal}">
-            <div class="joe_journal_footer">
-              <div class="footer-wrap">
-                <th:block th:if="${theme.config.journals.enable_like_journal}">
-                <span class="joe_journal_operate_item like">
+              <ul
+                class="joe_journals__list hidden"
+                th:classappend="${theme.config.journals.enable_journal_effect ? 'effects':''}"
+              >
+                <th:block
+                  th:each="moment,iteration : ${moments.items}"
+                  th:with="content=${moment.spec.content}"
+                >
+                  <li
+                    class="joe_journal__item animated wow"
+                    th:data-wow-delay="'0.'+${iteration.index}+'s'"
+                    th:data-cid="${moment.metadata.name}"
+                    th:data-clikes="${moment.stats.upvote}"
+                  >
+                    <p class="joe_journal_date">
+                      <i class="joe-font joe-icon-feather"></i>
+                      <em class="joe_journal-posttime"
+                        >[[${#dates.format(moment.spec.releaseTime,'yyyy/MM/dd HH:mm:ss')}]]</em
+                      >
+                    </p>
+                    <div class="joe_journal_block">
+                      <div
+                        class="joe_journal_body"
+                        th:style="'max-height:'+${theme.config.journals.journal_block_height?: '300'}+'px'"
+                        th:classappend="${(theme.config.code_block.enable_code_line_number == true &&theme.config.code_block.enable_code_newline!=true) ?'line-numbers':''}"
+                      >
+                        <div class="content-wrp">
+                          <th:block th:utext="${content.html}"></th:block>
+                          <th:block
+                            th:if="${not #lists.isEmpty(content.medium)}"
+                            th:each="momentItem : ${content.medium}"
+                          >
+                            <img
+                              th:if="${momentItem.type.name == 'PHOTO'}"
+                              th:src="${momentItem.url}"
+                              onerror="Joe.errorImg(this, 'LoadFailedImg')"
+                            />
+                            <joe-dplayer
+                              th:if="${momentItem.type.name == 'VIDEO'}"
+                              th:src="${momentItem.url}"
+                            ></joe-dplayer>
+                          </th:block>
+                        </div>
+                        <span class="joe_journal_operate_item journal_content_expander"
+                          ><i class="joe-font joe-icon-arrow-down"></i
+                        ></span>
+                      </div>
+                      <th:block
+                        th:if="${theme.config.journals.enable_like_journal} or ${theme.config.journals.enable_comment_journal}"
+                      >
+                        <div class="joe_journal_footer">
+                          <div class="footer-wrap">
+                            <th:block th:if="${theme.config.journals.enable_like_journal}">
+                              <span class="joe_journal_operate_item like">
                                 <i class="joe-font joe-icon-xihuan journal-like"></i>
                                 <i class="joe-font joe-icon-xihuan-fill journal-unlike"></i>
                                 <em class="journal-likes-num">[[${moment.stats.upvote}]]</em>
                               </span>
+                            </th:block>
+                            <th:block
+                              th:if="${theme.config.journals.enable_comment_journal} and ${theme.config.other.enable_clean_mode != true}"
+                            >
+                              <th:block
+                                th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}"
+                              >
+                                <span class="joe_journal_operate_item comment"
+                                  ><i class="joe-font joe-icon-message journal-comment"></i
+                                  ><em>[[${moment.stats.totalComment}]]</em></span
+                                >
+                              </th:block>
+                              <th:block
+                                th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}"
+                              >
+                                <span class="joe_journal_operate_item comment"
+                                  ><i class="joe-font joe-icon-message journal-comment"></i
+                                  ><em
+                                    class="waline-comment-count"
+                                    th:data-path="'/moments/'+${moment.metadata.name}"
+                                    >0</em
+                                  ></span
+                                >
+                              </th:block>
+                              <th:block
+                                th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}"
+                              >
+                                <th:block th:if="${moment.stats.totalComment gt 0}">
+                                  <span class="joe_journal_operate_item journal_comment_expander"
+                                    ><em class="journal_comment_expander_txt">查看评论</em
+                                    ><i class="joe-font joe-icon-arrow-downb"></i
+                                  ></span>
+                                </th:block>
+                              </th:block>
+                              <th:block
+                                th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}"
+                              >
+                                <span
+                                  class="joe_journal_operate_item journal_comment_expander"
+                                  th:id="'waline-journal_comment_expander-'+${moment.metadata.name}"
+                                  style="display: none"
+                                  ><em class="journal_comment_expander_txt">查看评论</em
+                                  ><i class="joe-font joe-icon-arrow-downb"></i
+                                ></span>
+                              </th:block>
+                            </th:block>
+                            <th:block
+                              th:if="${theme.config.journals.enable_comment_journal} and ${theme.config.other.enable_clean_mode != true}"
+                            >
+                              <div class="joe_journal_comment">
+                                <th:block
+                                  th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}"
+                                >
+                                  <halo:comment
+                                    group="moment.halo.run"
+                                    kind="Moment"
+                                    th:attr="name=${moment.metadata.name}"
+                                    colorScheme="document.documentElement.getAttribute('data-mode')"
+                                  />
+                                </th:block>
+                                <th:block
+                                  th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}"
+                                >
+                                  <div th:id="${moment.metadata.name}"></div>
+                                  <style>
+                                    #waline .wl-count {
+                                      color: var(--routine);
+                                    }
+                                  </style>
+
+                                  <script type="module" th:inline="javascript">
+                                    import { init } from  /*[[${theme.config.basic.waline.waline_js_comment}]]*/'';
+
+                                    init({
+                                      el: /*[[${'#'+moment.metadata.name}]]*/'',
+                                      dark: 'html[data-mode="dark"]',
+                                      serverURL: /*[[${theme.config.basic.waline.waline_serverURL}]]*/'',
+                                      path: '/moments/'+/*[[${moment.metadata.name}]]*/'',
+                                      comment: true,
+                                      requiredMeta:['nick', 'mail'],
+
+                                    });
+                                    const url = [[${theme.config.basic.waline.waline_serverURL+'/api/comment?type=count&url=/moments/'+moment.metadata.name}]];
+                                    fetch(url).then(async (response) => {
+                                      const data = await response.json();
+                                      const comment_expander = 'waline-journal_comment_expander-'+/*[[${moment.metadata.name}]]*/'';
+                                      if (data.data>0){
+                                        document.getElementById(comment_expander).style.display = 'block';
+                                      }
+                                    });
+                                  </script>
+                                </th:block>
+                              </div>
+                            </th:block>
+                          </div>
+                        </div>
+                      </th:block>
+                    </div>
+                  </li>
                 </th:block>
-                <th:block th:if="${theme.config.journals.enable_comment_journal} and ${theme.config.other.enable_clean_mode != true}">
-                  <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}">
-                  <span class="joe_journal_operate_item comment"><i class="joe-font joe-icon-message journal-comment"></i><em >[[${moment.stats.totalComment}]]</em></span>
-                  </th:block>
-                  <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}">
-                    <span class="joe_journal_operate_item comment"><i class="joe-font joe-icon-message journal-comment"></i><em class="waline-comment-count" th:data-path="'/moments/'+${moment.metadata.name}">0</em></span>
-                  </th:block>
-                  <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}">
-                  <th:block th:if="${moment.stats.totalComment gt 0}">
-              <span class="joe_journal_operate_item journal_comment_expander"><em class="journal_comment_expander_txt">查看评论</em><i class="joe-font joe-icon-arrow-downb"></i></span>
-                  </th:block>
-                  </th:block>
-                  <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}">
-                    <span class="joe_journal_operate_item journal_comment_expander" th:id="'waline-journal_comment_expander-'+${moment.metadata.name}" style="display: none"><em class="journal_comment_expander_txt">查看评论</em><i class="joe-font joe-icon-arrow-downb"></i></span>
-                  </th:block>
-
-                  </th:block>
-                <th:block th:if="${theme.config.journals.enable_comment_journal} and ${theme.config.other.enable_clean_mode != true}">
-          <div class="joe_journal_comment">
-            <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}">
-            <halo:comment
-                    group="moment.halo.run"
-                    kind="Moment"
-                    th:attr="name=${moment.metadata.name}"
-                    colorScheme="document.documentElement.getAttribute('data-mode')"
-            />
-            </th:block>
-            <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}">
-              <div th:id="${moment.metadata.name}"></div>
-              <style>
-                #waline .wl-count{color:var(--routine);}
-              </style>
-
-              <script type="module" th:inline="javascript">
-                import { init } from  /*[[${theme.config.basic.waline.waline_js_comment}]]*/'';
-
-                init({
-                  el: /*[[${'#'+moment.metadata.name}]]*/'',
-                  dark: 'html[data-mode="dark"]',
-                  serverURL: /*[[${theme.config.basic.waline.waline_serverURL}]]*/'',
-                  path: '/moments/'+/*[[${moment.metadata.name}]]*/'',
-                  comment: true,
-                  requiredMeta:['nick', 'mail'],
-
-                });
-                const url = [[${theme.config.basic.waline.waline_serverURL+'/api/comment?type=count&url=/moments/'+moment.metadata.name}]];
-                fetch(url).then(async (response) => {
-                  const data = await response.json();
-                  const comment_expander = 'waline-journal_comment_expander-'+/*[[${moment.metadata.name}]]*/'';
-                  if (data.data>0){
-                    document.getElementById(comment_expander).style.display = 'block';
-                  }
-                });
-              </script>
-            </th:block>
+              </ul>
+              <th:block th:replace="~{modules/common/pagination :: moments}" />
+              <!--<#include "template/common/pager.ftl">-->
+            </div>
           </div>
-                </th:block>
-    </div>
-  </div>
-            </th:block>
-  </div>
-  </li>
-</th:block>
-</ul>
-          <th:block th:replace="~{modules/common/pagination :: moments}" />
-<!--<#include "template/common/pager.ftl">-->
 
-</div>
-</div>
-
-    <th:block th:if="${theme.config.aside.enable_journals_aside}">
-      <th:block th:replace="~{modules/common/aside :: aside}" />
-    </th:block>
-</div>
-    <th:block th:replace="~{modules/common/actions :: actions}" />
-    <th:block th:replace="~{modules/common/footer :: footer}" />
-</div>
-  <th:block th:replace="~{modules/macro/tail :: tail}" /></body>
-</th:block>
+          <th:block th:if="${theme.config.aside.enable_journals_aside}">
+            <th:block th:replace="~{modules/common/aside :: aside}" />
+          </th:block>
+        </div>
+        <th:block th:replace="~{modules/common/actions :: actions}" />
+        <th:block th:replace="~{modules/common/footer :: footer}" />
+      </div>
+      <th:block th:replace="~{modules/macro/tail :: tail}" />
+    </body>
+  </th:block>
 </html>

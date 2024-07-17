@@ -34,7 +34,7 @@
 > 2、部分功能使用插件进行实现  
 > 3、请配合Halo2.8.0及以上版本使用  
 > 4、菜单栏的图标请使用[iconfont](https://www.iconfont.cn/)的图标，需要填入Font Family 和图标代码例如：`jiewen joe-icon-tupian`  
-> 5、使用自定义标签样式请安装[Tool-Bench](https://github.com/DioxideCN/Tool-Bench)插件，标签请参考[Joe3部分样式](https://www.jiewen.run/archives/joe3style)或者直接使用插件标签
+> 5、使用自定义标签样式请以插入HTML文本形式使用，标签请参考[Joe3部分样式](https://www.jiewen.run/archives/joe3style)或者直接使用插件标签
 
 - [x] 卡片化设计
 - [x] 响应式主题
@@ -70,7 +70,8 @@ WIP
 <br>  
 
 ### 奉献提示
-此仓库分为main和dev分支，如何您想奉献代码，请fork dev分支，开发完成后提交pr到dev分支，dev分支会定期合并到main分支，main分支为稳定版本且dev分支才是最新代码，不接受pr。
+~~此仓库分为main和dev分支，如何您想奉献代码，请fork dev分支，开发完成后提交pr到dev分支，dev分支会定期合并到main分支，main分支为稳定版本且dev分支才是最新代码，不接受pr。~~  
+现在只维护main分支，dev分支不再维护，如有需要请直接提交pr到main分支。
 
 
 ### 🙆‍♂️ 感谢
@@ -92,3 +93,11 @@ WIP
 
 <br>
 
+### 交流群
+QQ群号（929708466）欢迎大家前来交流分享  
+
+![QQ群](https://www.jiewen.run/upload/IMG_3508(20240717-140309).JPG)  
+
+### TinyTale小程序  
+[TinyTale Halo微信小程序正式版发布](https://www.jiewen.run/archives/TinyTale-formal-edition)
+![TinyTale](https://www.jiewen.run/upload/111.png)

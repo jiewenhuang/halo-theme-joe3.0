@@ -1,266 +1,463 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<th:block th:fragment="navbar">
-<header class="joe_header">
-  <div class="joe_header__above"
-  th:classappend="|${theme.config.theme.enable_show_in_up ? 'topInDown':''} ${theme.config.navbar.enable_fixed_header ? 'fixed':''} ${theme.config.navbar.enable_fixed_header and theme.config.navbar.enable_glass_blur ? 'glass':''}|">
-    <div class="joe_container joe_header_container"
-    th:classappend="${theme.config.navbar.enable_full_header ? 'full':''}">
-      <i class="joe-font joe-icon-caidan joe_header__above-slideicon"></i>
-      <th:block th:if="${theme.config.navbar.show_logo}"
-                th:with="logoLink = ${theme.config.navbar.logo_link == '#'}?'javascript:;':${theme.config.navbar.logo_link}">
-      <a th:title="${site.title}" class="joe_header__above-logo" th:href="${logoLink == ''?site.url:logoLink}">
-        <img th:style="'border-radius:'+${theme.config.navbar.logo_radius} ?:'4px'" th:src="${site.logo}"  th:alt="${site.title}">
-      </a>
-      </th:block>
-      <nav class="joe_header__above-nav"
-      th:classappend="|${theme.config.navbar.enable_active_shadow ? 'active-shadow':''} ${theme.config.navbar.enable_icon_animate ? 'active-animate':''}|">
-        <th:block th:if="${#lists.isEmpty(theme.config.navbar.menu)}">
-          <th:block th:with="menu = ${menuFinder.getPrimary()}">
-            <th:block th:if="${#lists.isEmpty(menuItem.children)}"
-                      th:with="menuItems = ${menu.menuItems}">
-              <th:block th:each="menuItem : ${menuItems}">
-                <th:block th:replace="~{modules/macro/menu-item :: menu-item(${menuItem})}" />
-              </th:block>
-            </th:block>
-            <th:block th:if="${not #lists.isEmpty(menuItem.children)}">
-        <div class="joe_dropdown" trigger="hover" placement="60px">
-          <div class="joe_dropdown__link">
-            <th:block th:replace="~{modules/macro/menu-item :: menu-item(${menuItem})}" />
-            <i class="joe-font joe-icon-arrow-down joe_dropdown__link-icon" style="color:var(--main)"></i>
-          </div>
-          <nav class="joe_dropdown__menu" style="top: 60px;">
-            <th:block th:each="childMenu : ${menuItem.children}">
-            <li>
-              <th:block th:replace="~{modules/macro/menu-item :: menu-item(${childMenu})}" />
-            </li>
-            </th:block>
-          </nav>
-        </div>
-
-            </th:block>
+  <th:block th:fragment="navbar">
+    <header class="joe_header">
+      <div
+        class="joe_header__above"
+        th:classappend="|${theme.config.theme.enable_show_in_up ? 'topInDown':''} ${theme.config.navbar.enable_fixed_header ? 'fixed':''} ${theme.config.navbar.enable_fixed_header and theme.config.navbar.enable_glass_blur ? 'glass':''}|"
+      >
+        <div
+          class="joe_container joe_header_container"
+          th:classappend="${theme.config.navbar.enable_full_header ? 'full':''}"
+        >
+          <i class="joe-font joe-icon-caidan joe_header__above-slideicon"></i>
+          <th:block
+            th:if="${theme.config.navbar.show_logo}"
+            th:with="logoLink = ${theme.config.navbar.logo_link == '#'}?'javascript:;':${theme.config.navbar.logo_link}"
+          >
+            <a
+              th:title="${site.title}"
+              class="joe_header__above-logo"
+              th:href="${logoLink == ''?site.url:logoLink}"
+            >
+              <img
+                th:style="'border-radius:'+${theme.config.navbar.logo_radius} ?:'4px'"
+                th:src="${site.logo}"
+                th:alt="${site.title}"
+                onerror="Joe.errorImg(this, 'ErrAvatarImg')"
+              />
+            </a>
           </th:block>
-        </th:block>
-<!--        自选导航-->
-        <th:block th:if="${not #lists.isEmpty(theme.config.navbar.menu)}">
-          <th:block th:with="menu = ${menuFinder.getByName(theme.config.navbar.menu)}">
-              <th:block th:with="menuItems = ${menu.menuItems}">
-                <th:block th:each="menuItem : ${menuItems}">
-                <th:block th:if="${#lists.isEmpty(menuItem.children)}">
-                  <th:block th:replace="~{modules/macro/menu-item :: menu-item(${menuItem})}" />
-              </th:block>
-            <th:block th:if="${not #lists.isEmpty(menuItem.children)}">
-              <div class="joe_dropdown" trigger="hover" placement="60px">
-                <div class="joe_dropdown__link">
-                  <th:block th:replace="~{modules/macro/menu-item :: menu-item(${menuItem})}" />
-                  <i class="joe-font joe-icon-arrow-down joe_dropdown__link-icon" style="color:var(--main)"></i>
-                </div>
-                <nav class="joe_dropdown__menu" style="top: 60px;">
-                    <li th:each="childMenu : ${menuItem.children}">
-                      <th:block th:replace="~{modules/macro/menu-item :: menu-item(${childMenu})}" />
-                    </li>
-                </nav>
-              </div>
-            </th:block>
-            </th:block>
-            </th:block>
-          </th:block>
-        </th:block>
-
-      </nav>
-
-      <div class="joe_header__above-search">
-<!--        <div class="nav_login">-->
-<!--          <th:block th:if="${#authentication.name == 'anonymousUser'}">-->
-<!--          <a href="/console" title="搜索"><i class="jiewen joe-icon-zhanghao"></i></a>-->
-<!--          </th:block>-->
-<!--          <th:block th:if="${#authentication.name != 'anonymousUser'}">-->
-<!--            <th:block th:with="contributor = ${contributorFinder.getContributor(#authentication.name)}">-->
-<!--            <img th:src="${contributor.avatar}" th:title="${contributor.displayName}" th:alt="${contributor.displayName}">-->
-<!--            </th:block>-->
-<!--          </th:block>-->
-<!--        </div>-->
-<!--        <input maxlength="16" autocomplete="off" placeholder="请输入关键字..." name="keyword" value="" class="input" type="text">-->
-        <button type="submit" id="halo-search" class="submit" style="border-radius: 17px 17px 17px 17px" aria-label="搜索按钮"><i class="joe-font joe-icon-search"></i></button>
-<!--        <span class="icon"></span>-->
-<th:block th:if="${theme.config.navbar.nav_login}">
-        <div class="nav_login">
-          <th:block th:if="${#authentication.name == 'anonymousUser'}">
-            <a class="login_before" href="/console" title="登入"><i class="jiewen joe-icon-zhanghao" target="_blank"></i></a>
-          </th:block>
-          <th:block th:if="${#authentication.name != 'anonymousUser'}">
-            <th:block th:with="contributor = ${contributorFinder.getContributor(#authentication.name)}">
-              <a class="login_after" href="/console" th:title="${contributor.displayName}" target="_blank">
-              <img th:src="${contributor.avatar}" th:title="${contributor.displayName}" th:alt="${contributor.displayName}">
-              </a>
-            </th:block>
-          </th:block>
-        </div>
-</th:block>
-<!--        <nav class="result">-->
-<!--          <a href="archives/ce-shi-wen-zhang.html" title="测试文章" class="item">-->
-<!--            <span class="sort">1</span>-->
-<!--            <span class="text">测试文章</span>-->
-<!--          </a>-->
-<!--          <a href="archives/hello-halo.html" title="Hello Halo" class="item">-->
-<!--            <span class="sort">2</span>-->
-<!--            <span class="text">Hello Halo</span>-->
-<!--          </a>-->
-<!--        </nav>-->
-      </div>
-
-      <a href="javascript:SearchWidget.open()" title="搜索"><i class="joe-font joe-icon-search joe_header__above-searchicon"></i></a>
-    </div>
-  </div>
-
-  <div class="joe_header__slideout">
-    <div class="joe_header__slideout-wrap">
-      <img width="100%" height="150" class="joe_header__slideout-image" th:src="${theme.config.blogger.author_bg ?: #theme.assets('/img/author_bg.jpg')}"  alt="侧边栏壁纸">
-      <div class="joe_header__slideout-author">
-        <img width="50" height="50" class="avatar ls-is-cached lazyloaded" th:data-src="${theme.config.blogger.lazyload_avatar}" th:src="${theme.config.blogger.avatar ?: theme.config.blogger.default_avatar}"  alt="博主头像">
-        <div class="info">
-          <a class="link" th:href="${site.url}" target="_blank" rel="noopener noreferrer nofollow">[[${theme.config.blogger.name ?: site.title}]]<img class="level" th:src="@{/assets/svg/level_1.svg}"  alt="博主等级"></a>
-
-          <p class="motto joe_motto">[[${theme.config.blogger.motto}]]</p>
-        </div>
-      </div>
-      <ul class="joe_header__slideout-count" th:with="stats = ${siteStatsFinder.getStats()}">
-        <li class="item">
-          <i class="jiewen joe-icon-danganguanli"></i>
-          <span>累计撰写 <strong>[[${stats.post}]]</strong> 篇文章</span>
-        </li>
-        <th:block th:with="tags = ${tagFinder.listAll()}">
-        <li class="item" th:with="tagNum = ${#lists.size(tags)}">
-          <i class="joe-font joe-icon-remen"></i>
-          <span>累计创建 <strong>[[${tagNum}]]</strong> 个标签</span>
-        </li>
-        </th:block>
-        <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}">
-        <li class="item">
-          <i class="joe-font joe-icon-message"></i>
-          <span>累计收到 <strong>[[${stats.comment}]]</strong> 条评论</span>
-        </li>
-        </th:block>
-        <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}">
-          <li class="item">
-            <i class="joe-font joe-icon-message"></i>
-            <span class="m-waline-comment-count">累计收到 <strong>0</strong> 条评论</span>
-          </li>
-          <script th:inline="javascript" th:if="${theme.config.basic.comment_option=='waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}">
-            const url = [[${theme.config.basic.waline.waline_serverURL+'/api/comment?type=count'}]];
-            fetch(url).then(async (response) => {
-              const data = await response.json();
-              document.querySelector('.m-waline-comment-count strong').innerHTML = data.data;
-            });
-          </script>
-        </th:block>
-      </ul>
-      <ul class="joe_header__slideout-menu panel-box">
-        <li>
-          <a class="link panel in" href="#" rel="nofollow">
-            <span>栏目</span>
-            <i class="joe-font joe-icon-arrow-right"></i>
-          </a>
-          <ul class="slides panel-body panel-box panel-side-menu" style="display: block;">
+          <nav
+            class="joe_header__above-nav"
+            th:classappend="|${theme.config.navbar.enable_active_shadow ? 'active-shadow':''} ${theme.config.navbar.enable_icon_animate ? 'active-animate':''}|"
+          >
             <th:block th:if="${#lists.isEmpty(theme.config.navbar.menu)}">
               <th:block th:with="menu = ${menuFinder.getPrimary()}">
-                <th:block th:each="menuItem : ${menuItems}">
-                <th:block th:if="${#lists.isEmpty(menuItem.children)}">
-            <li>
-              <a class="link"
-                 th:href="@{${menuItem.status.href}}"
-                 th:target="${menuItem.spec.target?.value}"
-                 th:title="${menuItem.status.displayName}">[[${menuItem.status.displayName}]]</a>
-            </li>
+                <th:block
+                  th:if="${#lists.isEmpty(menuItem.children)}"
+                  th:with="menuItems = ${menu.menuItems}"
+                >
+                  <th:block th:each="menuItem : ${menuItems}">
+                    <th:block th:replace="~{modules/macro/menu-item :: menu-item(${menuItem})}" />
+                  </th:block>
                 </th:block>
                 <th:block th:if="${not #lists.isEmpty(menuItem.children)}">
-            <li>
-
-              <div class="link panel">
-                <a th:href="@{${menuItem.status.href}}"
-                   th:target="${menuItem.spec.target?.value}"
-                   th:title="${menuItem.status.displayName}">[[${menuItem.status.displayName}]]</a>
-                <i class="joe-font joe-icon-arrow-right"></i>
-              </div>
-              <ul class="slides panel-body">
-                <th:block th:each="childMenu : ${menuItem.children}">
-                <li>
-                  <a class="link" th:href="@{${childMenu.status.href}}"
-                     th:target="${childMenu.spec.target?.value}"
-                     th:title="${childMenu.status.displayName}">[[${childMenu.status.displayName}]]</a>
-                </li>
+                  <div class="joe_dropdown" trigger="hover" placement="60px">
+                    <div class="joe_dropdown__link">
+                      <th:block th:replace="~{modules/macro/menu-item :: menu-item(${menuItem})}" />
+                      <i
+                        class="joe-font joe-icon-arrow-down joe_dropdown__link-icon"
+                        style="color: var(--main)"
+                      ></i>
+                    </div>
+                    <nav class="joe_dropdown__menu" style="top: 60px">
+                      <th:block th:each="childMenu : ${menuItem.children}">
+                        <li
+                          th:class="${not #lists.isEmpty(childMenu.children)} ? 'joe_nav_sub-li' : ''"
+                        >
+                          <th:block
+                            th:replace="~{modules/macro/menu-item :: menu-item(${childMenu})}"
+                          />
+                          <th:block th:if="${not #lists.isEmpty(childMenu.children)}">
+                            <ol class="joe_nav_sub">
+                              <li th:each="subChildMenu : ${childMenu.children}">
+                                <th:block
+                                  th:replace="~{modules/macro/menu-item :: menu-item(${subChildMenu})}"
+                                />
+                              </li>
+                            </ol>
+                          </th:block>
+                        </li>
+                      </th:block>
+                    </nav>
+                  </div>
                 </th:block>
-              </ul>
-            </li>
-                </th:block>
-                </th:block>
-                </th:block>
+              </th:block>
             </th:block>
+            <!--        自选导航-->
             <th:block th:if="${not #lists.isEmpty(theme.config.navbar.menu)}">
               <th:block th:with="menu = ${menuFinder.getByName(theme.config.navbar.menu)}">
                 <th:block th:with="menuItems = ${menu.menuItems}">
                   <th:block th:each="menuItem : ${menuItems}">
-                <th:block th:if="${#lists.isEmpty(menuItem.children)}">
-                  <li>
-                    <a class="link"
-                       th:href="@{${menuItem.status.href}}"
-                       th:target="${menuItem.spec.target?.value}"
-                       th:title="${menuItem.status.displayName}">[[${menuItem.status.displayName}]]</a>
-                  </li>
-                </th:block>
-                <th:block th:if="${not #lists.isEmpty(menuItem.children)}">
-                  <li>
-                    <div class="link panel">
-                      <a th:href="@{${menuItem.status.href}}"
-                         th:target="${menuItem.spec.target?.value}"
-                         th:title="${menuItem.status.displayName}">[[${menuItem.status.displayName}]]</a>
-                      <i class="joe-font joe-icon-arrow-right"></i>
-                    </div>
-                    <ul class="slides panel-body">
-                      <th:block th:each="childMenu : ${menuItem.children}">
-                        <li>
-                          <a class="link" th:href="@{${childMenu.status.href}}"
-                             th:target="${childMenu.spec.target?.value}"
-                             th:title="${childMenu.status.displayName}">[[${childMenu.status.displayName}]]</a>
-                        </li>
-                      </th:block>
-                    </ul>
-                  </li>
-                </th:block>
-                </th:block>
+                    <th:block th:if="${#lists.isEmpty(menuItem.children)}">
+                      <th:block th:replace="~{modules/macro/menu-item :: menu-item(${menuItem})}" />
+                    </th:block>
+                    <th:block th:if="${not #lists.isEmpty(menuItem.children)}">
+                      <div class="joe_dropdown" trigger="hover" placement="60px">
+                        <div class="joe_dropdown__link">
+                          <th:block
+                            th:replace="~{modules/macro/menu-item :: menu-item(${menuItem})}"
+                          />
+                          <i
+                            class="joe-font joe-icon-arrow-down joe_dropdown__link-icon"
+                            style="color: var(--main)"
+                          ></i>
+                        </div>
+                        <nav class="joe_dropdown__menu" style="top: 60px">
+                          <li
+                            th:each="childMenu : ${menuItem.children}"
+                            th:class="${not #lists.isEmpty(childMenu.children)} ? 'joe_nav_sub-li' : ''"
+                          >
+                            <th:block
+                              th:replace="~{modules/macro/menu-item :: menu-item(${childMenu})}"
+                            />
+                            <th:block th:if="${not #lists.isEmpty(childMenu.children)}">
+                              <ol class="joe_nav_sub">
+                                <li th:each="subChildMenu : ${childMenu.children}">
+                                  <th:block
+                                    th:replace="~{modules/macro/menu-item :: menu-item(${subChildMenu})}"
+                                  />
+                                </li>
+                              </ol>
+                            </th:block>
+                          </li>
+                        </nav>
+                      </div>
+                    </th:block>
+                  </th:block>
                 </th:block>
               </th:block>
             </th:block>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
+          </nav>
 
-  <div class="joe_header__searchout">
-    <a href="javascript:SearchWidget.open()" title="搜索"></a>
-<!--    <div class="joe_container">-->
+          <div class="joe_header__above-search">
+            <!--        <div class="nav_login">-->
+            <!--          <th:block th:if="${#authentication.name == 'anonymousUser'}">-->
+            <!--          <a href="/console" title="搜索"><i class="jiewen joe-icon-zhanghao"></i></a>-->
+            <!--          </th:block>-->
+            <!--          <th:block th:if="${#authentication.name != 'anonymousUser'}">-->
+            <!--            <th:block th:with="contributor = ${contributorFinder.getContributor(#authentication.name)}">-->
+            <!--            <img th:src="${contributor.avatar}" th:title="${contributor.displayName}" th:alt="${contributor.displayName}" onerror="Joe.errorImg(this, 'ErrAvatarImg')" >-->
+            <!--            </th:block>-->
+            <!--          </th:block>-->
+            <!--        </div>-->
+            <!--        <input maxlength="16" autocomplete="off" placeholder="请输入关键字..." name="keyword" value="" class="input" type="text">-->
+            <button
+              type="submit"
+              id="halo-search"
+              class="submit"
+              style="border-radius: 17px 17px 17px 17px"
+              aria-label="搜索按钮"
+            >
+              <i class="joe-font joe-icon-search"></i>
+            </button>
+            <!--        <span class="icon"></span>-->
+            <th:block th:if="${theme.config.navbar.nav_login}">
+              <div class="nav_login">
+                <th:block th:if="${#authentication.name == 'anonymousUser'}">
+                  <a
+                    class="login_before"
+                    href="#"
+                    onclick="window.location.href='/console/login?redirect_uri='+window.location.href"
+                    title="登入"
+                    target="_self"
+                    ><i class="jiewen joe-icon-zhanghao" target="_self"></i
+                  ></a>
+                </th:block>
+                <th:block th:if="${#authentication.name != 'anonymousUser'}">
+                  <th:block
+                    th:with="contributor = ${contributorFinder.getContributor(#authentication.name)}"
+                  >
+                    <a
+                      class="login_after"
+                      href="/console"
+                      th:title="${contributor.displayName}"
+                      target="_blank"
+                    >
+                      <img
+                        th:src="${contributor.avatar}"
+                        th:title="${contributor.displayName}"
+                        th:alt="${contributor.displayName}"
+                        onerror="Joe.errorImg(this, 'ErrAvatarImg')"
+                      />
+                    </a>
+                  </th:block>
+                </th:block>
+              </div>
+            </th:block>
+            <!--        <nav class="result">-->
+            <!--          <a href="archives/ce-shi-wen-zhang.html" title="测试文章" class="item">-->
+            <!--            <span class="sort">1</span>-->
+            <!--            <span class="text">测试文章</span>-->
+            <!--          </a>-->
+            <!--          <a href="archives/hello-halo.html" title="Hello Halo" class="item">-->
+            <!--            <span class="sort">2</span>-->
+            <!--            <span class="text">Hello Halo</span>-->
+            <!--          </a>-->
+            <!--        </nav>-->
+          </div>
 
-<!--      <div class="joe_header__searchout-inner">-->
-<!--        <form class="joe_header__above-search-mobile" method="get" action="http://localhost:8093/search">-->
-<!--          <input maxlength="16" autocomplete="off" placeholder="请输入关键字..." name="keyword" value="" class="input" type="text">-->
-<!--          <button type="submit" class="submit">搜索</button>-->
-<!--        </form>-->
-<!--      </div>-->
-<!--    </div>-->
-  </div>
-
-  <div class="joe_header__toc">
-    <div class="joe_header__toc-wrap">
-      <div class="toc_top">
-        <h3>目 录<span>CONTENT</span></h3>
-        <img width="100%" height="150" th:src="${theme.config.blogger.author_bg?:'/themes/theme-Joe3/assets/img/context_bg.png'}"  alt="文章目录">
+          <a href="javascript:SearchWidget.open()" title="搜索"
+            ><i class="joe-font joe-icon-search joe_header__above-searchicon"></i
+          ></a>
+        </div>
       </div>
-      <div id="js-toc-mobile" class="toc"></div>
-    </div>
-  </div>
 
-  <div class="joe_header__mask"></div>
-</header>
-</th:block>
+      <div class="joe_header__slideout">
+        <div class="joe_header__slideout-wrap">
+          <img
+            width="100%"
+            height="150"
+            class="joe_header__slideout-image"
+            th:src="${theme.config.blogger.author_bg ?: #theme.assets('/img/author_bg.jpg')}"
+            alt="侧边栏壁纸"
+            onerror="Joe.errorImg(this)"
+          />
+          <div class="joe_header__slideout-author">
+            <img
+              width="50"
+              height="50"
+              class="avatar ls-is-cached lazyloaded"
+              th:data-src="${theme.config.blogger.lazyload_avatar}"
+              th:src="${theme.config.blogger.avatar ?: (theme.config.blogger.default_avatar ?: '/themes/theme-Joe3/assets/img/transparent-placeholder.png')}"
+              alt="博主头像"
+              th:data-text-avatar="${theme.config.blogger.name ?: site.title}"
+              onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')"
+              onerror="Joe.errorImg(this, 'ErrAvatarImg')"
+            />
+            <div class="info">
+              <a
+                class="link"
+                th:href="${site.url}"
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                >[[${theme.config.blogger.name ?: site.title}]]<img
+                  class="level"
+                  th:src="@{/assets/svg/level_1.svg}"
+                  alt="博主等级"
+              /></a>
+
+              <p class="motto joe_motto">[[${theme.config.blogger.motto}]]</p>
+            </div>
+          </div>
+          <ul class="joe_header__slideout-count" th:with="stats = ${siteStatsFinder.getStats()}">
+            <li class="item">
+              <i class="jiewen joe-icon-danganguanli"></i>
+              <span>累计撰写 <strong>[[${stats.post}]]</strong> 篇文章</span>
+            </li>
+            <th:block th:with="tags = ${tagFinder.listAll()}">
+              <li class="item" th:with="tagNum = ${#lists.size(tags)}">
+                <i class="joe-font joe-icon-remen"></i>
+                <span>累计创建 <strong>[[${tagNum}]]</strong> 个标签</span>
+              </li>
+            </th:block>
+            <th:block
+              th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}"
+            >
+              <li class="item">
+                <i class="joe-font joe-icon-message"></i>
+                <span>累计收到 <strong>[[${stats.comment}]]</strong> 条评论</span>
+              </li>
+            </th:block>
+            <th:block
+              th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}"
+            >
+              <li class="item">
+                <i class="joe-font joe-icon-message"></i>
+                <span class="m-waline-comment-count">累计收到 <strong>0</strong> 条评论</span>
+              </li>
+              <script
+                th:inline="javascript"
+                th:if="${theme.config.basic.comment_option=='waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}"
+              >
+                const url = [[${theme.config.basic.waline.waline_serverURL+'/api/comment?type=count'}]];
+                fetch(url).then(async (response) => {
+                  const data = await response.json();
+                  document.querySelector('.m-waline-comment-count strong').innerHTML = data.data;
+                });
+              </script>
+            </th:block>
+          </ul>
+          <ul class="joe_header__slideout-menu panel-box">
+            <li>
+              <a class="link panel in" href="#" rel="nofollow">
+                <span>栏目</span>
+                <i class="joe-font joe-icon-arrow-right"></i>
+              </a>
+              <ul class="slides panel-body panel-box panel-side-menu" style="display: block">
+                <th:block th:if="${#lists.isEmpty(theme.config.navbar.menu)}">
+                  <th:block th:with="menu = ${menuFinder.getPrimary()}">
+                    <th:block th:each="menuItem : ${menuItems}">
+                      <th:block th:if="${#lists.isEmpty(menuItem.children)}">
+                        <li>
+                          <a
+                            class="link"
+                            th:href="@{${menuItem.status.href}}"
+                            th:target="${menuItem.spec.target?.value}"
+                            th:title="${menuItem.status.displayName}"
+                            >[[${menuItem.status.displayName}]]</a
+                          >
+                        </li>
+                      </th:block>
+                      <th:block th:if="${not #lists.isEmpty(menuItem.children)}">
+                        <li>
+                          <div class="link panel">
+                            <a
+                              th:href="@{${menuItem.status.href}}"
+                              th:target="${menuItem.spec.target?.value}"
+                              th:title="${menuItem.status.displayName}"
+                              >[[${menuItem.status.displayName}]]</a
+                            >
+                            <i class="joe-font joe-icon-arrow-right"></i>
+                          </div>
+                          <ul class="slides panel-body">
+                            <th:block th:each="childMenu : ${menuItem.children}">
+                              <th:block th:if="${#lists.isEmpty(childMenu.children)}">
+                                <li>
+                                  <a
+                                    class="link"
+                                    th:href="@{${childMenu.status.href}}"
+                                    th:target="${childMenu.spec.target?.value}"
+                                    th:title="${childMenu.status.displayName}"
+                                    >[[${childMenu.status.displayName}]]
+                                  </a>
+                                </li>
+                              </th:block>
+                              <th:block th:if="${not #lists.isEmpty(childMenu.children)}">
+                                <li>
+                                  <div class="link panel">
+                                    <a
+                                      th:href="@{${childMenu.status.href}}"
+                                      th:target="${childMenu.spec.target?.value}"
+                                      th:title="${childMenu.status.displayName}"
+                                      >[[${childMenu.status.displayName}]]</a
+                                    >
+                                    <i class="joe-font joe-icon-arrow-right"></i>
+                                  </div>
+
+                                  <ul class="slides panel-body">
+                                    <th:block th:each="subChildMenu : ${childMenu.children}">
+                                      <li>
+                                        <a
+                                          class="link"
+                                          th:href="@{${subChildMenu.status.href}}"
+                                          th:target="${subChildMenu.spec.target?.value}"
+                                          th:title="${subChildMenu.status.displayName}"
+                                          >[[${subChildMenu.status.displayName}]]</a
+                                        >
+                                      </li>
+                                    </th:block>
+                                  </ul>
+                                </li>
+                              </th:block>
+                            </th:block>
+                          </ul>
+                        </li>
+                      </th:block>
+                    </th:block>
+                  </th:block>
+                </th:block>
+                <th:block th:if="${not #lists.isEmpty(theme.config.navbar.menu)}">
+                  <th:block th:with="menu = ${menuFinder.getByName(theme.config.navbar.menu)}">
+                    <th:block th:with="menuItems = ${menu.menuItems}">
+                      <th:block th:each="menuItem : ${menuItems}">
+                        <th:block th:if="${#lists.isEmpty(menuItem.children)}">
+                          <li>
+                            <a
+                              class="link"
+                              th:href="@{${menuItem.status.href}}"
+                              th:target="${menuItem.spec.target?.value}"
+                              th:title="${menuItem.status.displayName}"
+                              >[[${menuItem.status.displayName}]]</a
+                            >
+                          </li>
+                        </th:block>
+                        <th:block th:if="${not #lists.isEmpty(menuItem.children)}">
+                          <li>
+                            <div class="link panel">
+                              <a
+                                th:href="@{${menuItem.status.href}}"
+                                th:target="${menuItem.spec.target?.value}"
+                                th:title="${menuItem.status.displayName}"
+                                >[[${menuItem.status.displayName}]]</a
+                              >
+                              <i class="joe-font joe-icon-arrow-right"></i>
+                            </div>
+                            <ul class="slides panel-body">
+                              <th:block th:each="childMenu : ${menuItem.children}">
+                                <th:block th:if="${#lists.isEmpty(childMenu.children)}">
+                                  <li>
+                                    <a
+                                      class="link"
+                                      th:href="@{${childMenu.status.href}}"
+                                      th:target="${childMenu.spec.target?.value}"
+                                      th:title="${childMenu.status.displayName}"
+                                      >[[${childMenu.status.displayName}]]
+                                    </a>
+                                  </li>
+                                </th:block>
+                                <th:block th:if="${not #lists.isEmpty(childMenu.children)}">
+                                  <li>
+                                    <div class="link panel">
+                                      <a
+                                        th:href="@{${childMenu.status.href}}"
+                                        th:target="${childMenu.spec.target?.value}"
+                                        th:title="${childMenu.status.displayName}"
+                                        >[[${childMenu.status.displayName}]]</a
+                                      >
+                                      <i class="joe-font joe-icon-arrow-right"></i>
+                                    </div>
+
+                                    <ul class="slides panel-body">
+                                      <th:block th:each="subChildMenu : ${childMenu.children}">
+                                        <li>
+                                          <a
+                                            class="link"
+                                            th:href="@{${subChildMenu.status.href}}"
+                                            th:target="${subChildMenu.spec.target?.value}"
+                                            th:title="${subChildMenu.status.displayName}"
+                                            >[[${subChildMenu.status.displayName}]]</a
+                                          >
+                                        </li>
+                                      </th:block>
+                                    </ul>
+                                  </li>
+                                </th:block>
+                              </th:block>
+                            </ul>
+                          </li>
+                        </th:block>
+                      </th:block>
+                    </th:block>
+                  </th:block>
+                </th:block>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="joe_header__searchout">
+        <a href="javascript:SearchWidget.open()" title="搜索"></a>
+        <!--    <div class="joe_container">-->
+
+        <!--      <div class="joe_header__searchout-inner">-->
+        <!--        <form class="joe_header__above-search-mobile" method="get" action="http://localhost:8093/search">-->
+        <!--          <input maxlength="16" autocomplete="off" placeholder="请输入关键字..." name="keyword" value="" class="input" type="text">-->
+        <!--          <button type="submit" class="submit">搜索</button>-->
+        <!--        </form>-->
+        <!--      </div>-->
+        <!--    </div>-->
+      </div>
+
+      <div class="joe_header__toc">
+        <div class="joe_header__toc-wrap">
+          <div class="toc_top">
+            <h3>目 录<span>CONTENT</span></h3>
+            <img
+              width="100%"
+              height="150"
+              th:src="${theme.config.blogger.author_bg?:'/themes/theme-Joe3/assets/img/context_bg.png'}"
+              alt="文章目录"
+              onerror="Joe.errorImg(this)"
+            />
+          </div>
+          <div id="js-toc-mobile" class="toc"></div>
+        </div>
+      </div>
+
+      <div class="joe_header__mask"></div>
+    </header>
+  </th:block>
 </html>

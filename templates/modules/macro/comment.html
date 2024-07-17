@@ -1,39 +1,41 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<th:block th:fragment="comment(name, kind)">
-<div class="joe_comment_box">
-  <div class="box_title">
-  <h2>评论区</h2>
-  </div>
-<th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}">
-  <halo:comment
+  <th:block th:fragment="comment(name, kind)">
+    <div class="joe_comment_box">
+      <div class="box_title">
+        <h2>评论区</h2>
+      </div>
+      <th:block
+        th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}"
+      >
+        <halo:comment
           group="content.halo.run"
           th:attr="name=${name},kind=${kind}"
           colorScheme="document.documentElement.getAttribute('data-mode')"
-  />
-</th:block>
-  <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}">
-  <div id="waline"></div>
-  <style>
-    #waline .wl-count{color:var(--routine);}
-  </style>
+        />
+      </th:block>
+      <th:block
+        th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}"
+      >
+        <div id="waline"></div>
+        <style>
+          #waline .wl-count {
+            color: var(--routine);
+          }
+        </style>
 
-  <script type="module" th:inline="javascript">
-    import { init } from /*[[${theme.config.basic.waline.waline_js_comment}]]*/'';
+        <script type="module" th:inline="javascript">
+          import { init } from /*[[${theme.config.basic.waline.waline_js_comment}]]*/ '';
 
-    init({
-      el: '#waline',
-      dark: 'html[data-mode="dark"]',
-      serverURL: /*[[${theme.config.basic.waline.waline_serverURL}]]*/'',
-      comment: true,
-      requiredMeta:['nick', 'mail'],
-
-
-    });
-  </script>
+          init({
+            el: '#waline',
+            dark: 'html[data-mode="dark"]',
+            serverURL: /*[[${theme.config.basic.waline.waline_serverURL}]]*/ '',
+            comment: true,
+            requiredMeta: ['nick', 'mail'],
+          });
+        </script>
+      </th:block>
+    </div>
   </th:block>
-
-</div>
-
-</th:block>
 </html>

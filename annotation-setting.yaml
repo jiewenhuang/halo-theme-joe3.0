@@ -45,7 +45,7 @@ spec:
           label: 否
     - $formkit: "select"
       name: "enable_read_limit"
-      label: "是否开启评论后可见"
+      label: "是否开启登陆后评论可见"
       value: "false"
       options:
         - value: "true"
@@ -208,7 +208,7 @@ spec:
           label: 否
     - $formkit: "select"
       name: "enable_read_limit"
-      label: "是否开启评论后可见"
+      label: "是否开启登陆后评论可见"
       value: "false"
       options:
         - value: "true"
@@ -291,6 +291,58 @@ spec:
     - $formkit: "select"
       name: "enable_fold_long_code"
       label: "是否开启长代码块自动折叠"
+      value: "true"
+      options:
+        - value: "true"
+          label: 是
+        - value: "false"
+          label: 否
+
+
+---
+
+apiVersion: v1alpha1
+kind: AnnotationSetting
+metadata:
+  generateName: annotation-setting-
+spec:
+  targetRef:
+    group: core.halo.run
+    kind: LinkGroup
+  formSchema:
+    - $formkit: "text"
+      name: "link_group_sort_seq"
+      label: "链接分类排序序号，数字越大越靠前，如果<=0，则按照默认排序方式进行排序"
+      value: "0"
+    - $formkit: "select"
+      name: "link_group_enable_show"
+      label: "是否显示"
+      value: "true"
+      options:
+        - value: "true"
+          label: 是
+        - value: "false"
+          label: 否
+
+
+---
+
+apiVersion: v1alpha1
+kind: AnnotationSetting
+metadata:
+  generateName: annotation-setting-
+spec:
+  targetRef:
+    group: core.halo.run
+    kind: Link
+  formSchema:
+    - $formkit: "text"
+      name: "link_sort_seq"
+      label: "同一分类内链接排序序号，数字越大越靠前，如果<=0，则按照默认排序方式进行排序"
+      value: "0"
+    - $formkit: "select"
+      name: "link_enable_show"
+      label: "是否显示"
       value: "true"
       options:
         - value: "true"

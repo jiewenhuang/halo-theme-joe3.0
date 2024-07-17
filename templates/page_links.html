@@ -1,105 +1,269 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{modules/layout :: html(title = ${singlePage.spec.title}+'-'+${site.title},htmlType = links,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
+<!doctype html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{modules/layout :: html(title = ${singlePage.spec.title}+'-'+${site.title},htmlType = links,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
 >
-<th:block th:fragment="content">
-
+  <th:block th:fragment="content">
     <body>
-    <div id="Joe">
+      <div id="Joe">
         <th:block th:replace="~{modules/macro/navbar :: navbar}" />
         <!--          首页大图-->
         <th:block th:if="${theme.config.beauty.enable_big_banner}">
-            <th:block th:replace="~{modules/macro/big_banner :: big_banner(${title})}" />
+          <th:block th:replace="~{modules/macro/big_banner :: big_banner(${title})}" />
         </th:block>
-        <div class="joe_container joe_main_container page-journals"
-             th:classappend="|${theme.config.theme.enable_show_in_up ? 'animated showInUp':''} ${theme.config.aside.aside_position == 'left' ? 'revert':''}|">
-            <div class="joe_main">
-                <div class="joe_detail">
-                    <h1 class="joe_detail__title txt-shadow">[[${singlePage.spec.title}]]</h1>
-                    <article class="joe_detail__article animated fadeIn" th:with="colorArray=${#strings.arraySplit('#F8D800 ,#0396FF ,#EA5455 ,#7367F0 ,#32CCBC ,#F6416C ,#32B76E ,#9F44D3 ,#F55555 ,#736EFE ,#E96D71 ,#DE4313 ,#D939CD ,#4C83FF ,#F072B6 ,#C346C2 ,#5961F9 ,#FD6585 ,#5569E8 ,#FFC600 ,#FA742B ,#5151E5 ,#BB4E75 ,#FF52E5 ,#4DA037 ,#15D1E2 ,#F067B4 ,#F067B4 ,#ff9a9e ,#00f2fe ,#4facfe ,#f093fb ,#6fa3ef ,#bc99c4 ,#46c47c ,#f9bb3c ,#e8583d ,#f68e5f',',')}">
-                        <h3>友链列表<span class="totals" >
+        <div
+          class="joe_container joe_main_container page-journals"
+          th:classappend="|${theme.config.theme.enable_show_in_up ? 'animated showInUp':''} ${theme.config.aside.aside_position == 'left' ? 'revert':''}|"
+        >
+          <div class="joe_main">
+            <div
+              class="joe_detail"
+              th:with="bgColorArray=${#strings.arraySplit('linear-gradient(-90deg, #29bdd9 0%, #276ace 100%)@ linear-gradient(to right, #ff9569 0%, #e92758 100%)@ linear-gradient(to right, #a1c4fd 0%, #c2e9fb 100%)@ linear-gradient(to right, #f6d365 0%, #fda085 100%)@ linear-gradient(to right, #30cfd0 0%, #330867 100%)@ linear-gradient(to right, #fa709a 0%, #fee140 100%)@ linear-gradient(to right, #a8edea 0%, #fed6e3 100%)@ linear-gradient(to right, #fddb92 0%, #d1fdff 100%)@ linear-gradient(to right, #ebc0fd 0%, #d9ded8 100%),  linear-gradient(to right, #e4afcb 0%, #b8cbb8 0%, #b8cbb8 0%, #e2c58b 30%, #c2ce9c 64%, #7edbdc 100%)@ linear-gradient(to right, #ebbba7 0%, #cfc7f8 100%)@ linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%)@ linear-gradient(to top, #09203f 0%, #537895 100%)@ linear-gradient(to right, #a8caba 0%, #5d4157 100%)@ linear-gradient(-60deg, #16a085 0%, #f4d03f 100%)@ linear-gradient(to right, #3b41c5 0%, #a981bb 49%, #ffc8a9 100%)@ linear-gradient(to right, #0fd850 0%, #f9f047 100%)','@')}"
+            >
+              <h1 class="joe_detail__title txt-shadow">[[${singlePage.spec.title}]]</h1>
+              <article
+                class="joe_detail__article animated fadeIn"
+                th:with="colorArray=${#strings.arraySplit('#F8D800 ,#0396FF ,#EA5455 ,#7367F0 ,#32CCBC ,#F6416C ,#32B76E ,#9F44D3 ,#F55555 ,#736EFE ,#E96D71 ,#DE4313 ,#D939CD ,#4C83FF ,#F072B6 ,#C346C2 ,#5961F9 ,#FD6585 ,#5569E8 ,#FFC600 ,#FA742B ,#5151E5 ,#BB4E75 ,#FF52E5 ,#4DA037 ,#15D1E2 ,#F067B4 ,#F067B4 ,#ff9a9e ,#00f2fe ,#4facfe ,#f093fb ,#6fa3ef ,#bc99c4 ,#46c47c ,#f9bb3c ,#e8583d ,#f68e5f',',')}"
+              >
+                <h3>友链列表<span class="totals"> </span></h3>
+                <th:block
+                  th:each="group : ${linkFinder.groupBy()}"
+                  th:if="${group.spec.displayName != ''}"
+                >
+                  <div
+                    class="links-group"
+                    th:if="${#annotations.getOrDefault(group,'link_group_enable_show',true)}"
+                    th:data-link-group-sort-seq="${#annotations.getOrDefault(group,'link_group_sort_seq',0)}"
+                    th:data-link-group-create-time="${group.metadata.creationTimestamp}"
+                  >
+                    <h5>[[${group.spec.displayName}]]</h5>
+                    <ul class="joe_detail__friends evan-friends">
+                      <th:block th:each="link : ${group.links}">
+                        <li
+                          class="joe_detail__friends-item"
+                          th:if="${#annotations.getOrDefault(link,'link_enable_show',true)}"
+                          th:data-link-sort-seq="${#annotations.getOrDefault(link,'link_sort_seq',0)}"
+                          th:data-link-create-time="${link.metadata.creationTimestamp}"
+                        >
+                          <th:block
+                            th:with="randomBgColor = ${bgColorArray[#numbers.formatDecimal(T(java.lang.Math).floor(T(java.lang.Math).random()* bgColorArray.length),1,0)]}"
+                          >
+                            <a
+                              class="contain"
+                              th:with="randomColor = ${colorArray[#numbers.formatDecimal(T(java.lang.Math).floor(T(java.lang.Math).random()* colorArray.length),1,0)]}"
+                              th:href="${link.spec.url}"
+                              :key="i"
+                              target="_blank"
+                              th:style="'--fcolor:'+${randomColor} + '; background:' + ${randomBgColor}"
+                              rel="noopener noreferrer"
+                            >
+                              <div class="evan-f-left">
+                                <div class="f-avatar">
+                                  <img
+                                    width="40"
+                                    height="40"
+                                    class="avatar lazyload"
+                                    th:src="${theme.config.blogger.lazyload_avatar}"
+                                    th:data-src="${link.spec.logo ?: (theme.config.links.links_default_logo ?: '/themes/theme-Joe3/assets/img/transparent-placeholder.png')}"
+                                    th:alt="${link.spec.displayName}"
+                                    onload="Joe.loadedPlaceholderReplaceImg(this, 'LinksImg')"
+                                    onerror="Joe.errorImg(this, 'LinksErrImg')"
+                                  />
+                                </div>
+                              </div>
+                              <div class="evan-f-right">
+                                <span class="title" th:style="'--fcolor:'+${randomColor}">
+                                  <span
+                                    class="sub-text"
+                                    th:title="${link.spec.displayName}"
+                                    th:text="${link.spec.displayName}"
+                                  ></span>
+                                  <svg
+                                    t="1658027717181"
+                                    class="icon"
+                                    viewBox="0 0 1024 1024"
+                                    version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    p-id="25920"
+                                    width="200"
+                                    height="200"
+                                  >
+                                    <path
+                                      d="M0 0h1024v1024H0V0z"
+                                      fill="#202425"
+                                      opacity=".01"
+                                      p-id="25921"
+                                    ></path>
+                                    <path
+                                      d="M989.866667 512c0 263.918933-213.947733 477.866667-477.866667 477.866667S34.133333 775.918933 34.133333 512 248.081067 34.133333 512 34.133333s477.866667 213.947733 477.866667 477.866667z"
+                                      fill="#FF7744"
+                                      p-id="25922"
+                                    ></path>
+                                    <path
+                                      d="M787.114667 339.285333a51.2 51.2 0 0 1 0 72.362667l-307.2 307.2a51.2 51.2 0 0 1-72.362667 0l-170.666667-170.666667a51.2 51.2 0 0 1 72.362667-72.362666L443.733333 610.235733l271.018667-271.018666a51.2 51.2 0 0 1 72.362667 0z"
+                                      fill="#FFFFFF"
+                                      p-id="25923"
+                                    ></path>
+                                  </svg>
+                                </span>
+                                <div class="content">
+                                  <div class="desc" th:title="${link.spec.description}">
+                                    [[${link.spec.description}]]
+                                  </div>
+                                </div>
+                              </div>
+                            </a>
+                          </th:block>
+                        </li>
+                      </th:block>
+                    </ul>
+                  </div>
+                </th:block>
 
-            </span></h3>
-                        <div class="links-group" th:each="group : ${linkFinder.groupBy()}"
-                        th:if="${group.spec.displayName != ''}">
-                            <h5>[[${group.spec.displayName}]]</h5>
-                            <ul class="joe_detail__friends evan-friends">
-                                <li class="joe_detail__friends-item" th:each="link : ${group.links}">
-                                    <a class="contain"
-                                       th:with="randomColor = ${colorArray[#numbers.formatDecimal(T(java.lang.Math).floor(T(java.lang.Math).random()* colorArray.length),1,0)]}"
-                                       th:href="${link.spec.url}" :key="i" target="_blank"
-                                       th:style="'--fcolor:'+${randomColor}" rel="noopener noreferrer">
-                                        <div class="evan-f-left">
-                                            <div class="f-avatar">
-                                                <img width="40" height="40" class="avatar lazyloaded" th:data-src="${theme.config.blogger.lazyload_avatar}" th:src="${link.spec.logo}" th:alt="${link.spec.displayName}">
-                                            </div>
-                                        </div>
-                                        <div class="evan-f-right">
-              <span class="title" th:style="'--fcolor:'+${randomColor}">
-                 <span class="sub-text" th:text="${link.spec.displayName}"></span>
-                 <svg t="1658027717181" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="25920" width="200" height="200">
-                      <path d="M0 0h1024v1024H0V0z" fill="#202425" opacity=".01" p-id="25921"></path>
-                       <path d="M989.866667 512c0 263.918933-213.947733 477.866667-477.866667 477.866667S34.133333 775.918933 34.133333 512 248.081067 34.133333 512 34.133333s477.866667 213.947733 477.866667 477.866667z" fill="#FF7744" p-id="25922"></path>
-                      <path d="M787.114667 339.285333a51.2 51.2 0 0 1 0 72.362667l-307.2 307.2a51.2 51.2 0 0 1-72.362667 0l-170.666667-170.666667a51.2 51.2 0 0 1 72.362667-72.362666L443.733333 610.235733l271.018667-271.018666a51.2 51.2 0 0 1 72.362667 0z" fill="#FFFFFF" p-id="25923"></path>
-                  </svg>
-              </span>
-                                            <div class="content">
-                                                <div class="desc" th:title="${link.spec.description}">[[${link.spec.description}]]</div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </article>
-                    <article class="joe_detail__article animated fadeIn">
-                        <th:block th:utext="${singlePage.content.content}"></th:block>
-                    </article>
+                <script>
+                  // TODO qiushaocloud 最好的办法就是在上面直接排序，我对 thymeleaf 语法不熟悉，尝试使用了 #lists.sort，但一直报错，因此改成了 js 排序，希望有能力的大佬帮忙优化一下
+                  (() => {
+                    // links-group 排序, link-group-sort-seq 数字越大越靠前
+                    const linksGroupDefaultSort =
+                      '[[${theme.config.links.links_group_default_sort}]]';
+                    const linksDefaultSort = '[[${theme.config.links.links_default_sort}]]';
+                    const joeDetailArticle = $('#Joe .page-journals .joe_detail__article');
+                    const linksGroupEles = joeDetailArticle.find('.links-group');
+                    linksGroupEles.sort((a, b) => {
+                      const aSortSeq = parseInt($(a).data('link-group-sort-seq') || 0);
+                      const bSortSeq = parseInt($(b).data('link-group-sort-seq') || 0);
 
-                </div>
-                <div class="joe_comment">
-                    <div class="joe_comment_box">
-                        <div class="box_title">
-                        <h2 >评论区</h2>
-                        </div>
-                        <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}">
+                      if (!isNaN(bSortSeq) && !isNaN(aSortSeq)) {
+                        if (bSortSeq > 0 && aSortSeq > 0) return bSortSeq > aSortSeq ? 1 : -1; // link-group-sort-seq 数字越大越靠前
 
-                        <halo:comment
-                                group="content.halo.run"
-                                kind="SinglePage"
-                                th:attr="name=${singlePage.metadata.name}"
-                                colorScheme="document.documentElement.getAttribute('data-mode')"
-                        />
-                        </th:block>
-                        <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}">
-                            <div id="waline"></div>
-                            <style>
-                                #waline .wl-count{color:var(--routine);}
-                            </style>
+                        if (bSortSeq > 0) return 1; // b.link-group-sort-seq 需要排在前面
 
-                            <script type="module" th:inline="javascript">
-                                import { init } from  /*[[${theme.config.basic.waline.waline_js_comment}]]*/'';
+                        if (aSortSeq > 0) return -1; // a.link-group-sort-seq 需要排在前面
+                      }
 
-                                init({
-                                    el: '#waline',
-                                    dark: 'html[data-mode="dark"]',
-                                    serverURL: /*[[${theme.config.basic.waline.waline_serverURL}]]*/'',
-                                    requiredMeta:['nick', 'mail'],
+                      // 若 link-group-sort-seq <= 0, 则按默认排序方式进行排序
+                      if (
+                        linksGroupDefaultSort === 'links_group_create_time_asc' ||
+                        linksGroupDefaultSort === 'links_group_create_time_desc'
+                      ) {
+                        // 按照创建时间升序/降序排序
+                        const aCreateTime = parseInt(
+                          new Date($(a).data('link-group-create-time')).getTime() || 0
+                        );
+                        const bCreateTime = parseInt(
+                          new Date($(b).data('link-group-create-time')).getTime() || 0
+                        );
+                        return linksGroupDefaultSort === 'links_group_create_time_asc'
+                          ? aCreateTime > bCreateTime
+                            ? 1
+                            : -1
+                          : aCreateTime < bCreateTime
+                            ? 1
+                            : -1;
+                      }
 
-                                });
-                            </script>
-                        </th:block>
-                    </div>
-                </div>
+                      return 0; // 不进行排序，保持原有顺序【即:友链组件原本的排序方式】
+                    });
+                    // linksGroupEles.remove();
+                    joeDetailArticle.append(linksGroupEles);
+
+                    linksGroupEles.each((_, linkGroupEle) => {
+                      // links-group 内的 links 排序, link-sort-seq 数字越大越靠前
+                      const linksUlEle = $(linkGroupEle).find('.joe_detail__friends');
+                      const linksLiEles = linksUlEle.find('.joe_detail__friends-item');
+                      linksLiEles.sort((a, b) => {
+                        const aSortSeq = parseInt($(a).data('link-sort-seq') || 0);
+                        const bSortSeq = parseInt($(b).data('link-sort-seq') || 0);
+
+                        if (!isNaN(bSortSeq) && !isNaN(aSortSeq)) {
+                          if (bSortSeq > 0 && aSortSeq > 0) return bSortSeq > aSortSeq ? 1 : -1; // link-sort-seq 数字越大越靠前
+
+                          if (bSortSeq > 0) return 1; // b.link-sort-seq 需要排在前面
+
+                          if (aSortSeq > 0) return -1; // a.link-sort-seq 需要排在前面
+                        }
+
+                        // 若 link-sort-seq <= 0, 则按默认排序方式进行排序
+                        if (
+                          linksDefaultSort === 'links_create_time_asc' ||
+                          linksDefaultSort === 'links_create_time_desc'
+                        ) {
+                          // 按照创建时间升序/降序排序
+                          const aCreateTime = parseInt(
+                            new Date($(a).data('link-create-time')).getTime() || 0
+                          );
+                          const bCreateTime = parseInt(
+                            new Date($(b).data('link-create-time')).getTime() || 0
+                          );
+                          return linksDefaultSort === 'links_create_time_asc'
+                            ? aCreateTime > bCreateTime
+                              ? 1
+                              : -1
+                            : aCreateTime < bCreateTime
+                              ? 1
+                              : -1;
+                        }
+
+                        return 0; // 不进行排序，保持原有顺序【即:友链组件原本的排序方式】
+                      });
+                      // linksLiEles.remove();
+                      linksUlEle.append(linksLiEles);
+                    });
+                  })();
+                </script>
+              </article>
+              <article class="joe_detail__article animated fadeIn">
+                <th:block th:utext="${singlePage.content.content}"></th:block>
+              </article>
             </div>
-            <th:block th:if="${theme.config.aside.enable_journals_aside}">
-                <th:block th:replace="~{modules/common/aside :: aside}" />
-            </th:block>
+            <div class="joe_comment">
+              <div class="joe_comment_box">
+                <div class="box_title">
+                  <h2>评论区</h2>
+                </div>
+                <th:block
+                  th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}"
+                >
+                  <halo:comment
+                    group="content.halo.run"
+                    kind="SinglePage"
+                    th:attr="name=${singlePage.metadata.name}"
+                    colorScheme="document.documentElement.getAttribute('data-mode')"
+                  />
+                </th:block>
+                <th:block
+                  th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}"
+                >
+                  <div id="waline"></div>
+                  <style>
+                    #waline .wl-count {
+                      color: var(--routine);
+                    }
+                  </style>
+
+                  <script type="module" th:inline="javascript">
+                    import { init } from /*[[${theme.config.basic.waline.waline_js_comment}]]*/ '';
+
+                    init({
+                      el: '#waline',
+                      dark: 'html[data-mode="dark"]',
+                      serverURL: /*[[${theme.config.basic.waline.waline_serverURL}]]*/ '',
+                      requiredMeta: ['nick', 'mail'],
+                    });
+                  </script>
+                </th:block>
+              </div>
+            </div>
+          </div>
+          <th:block th:if="${theme.config.aside.enable_journals_aside}">
+            <th:block th:replace="~{modules/common/aside :: aside}" />
+          </th:block>
         </div>
         <th:block th:replace="~{modules/common/actions :: actions}" />
         <th:block th:replace="~{modules/common/footer :: footer}" />
-    </div>
-    <th:block th:replace="~{modules/macro/tail :: tail}" />
+      </div>
+      <th:block th:replace="~{modules/macro/tail :: tail}" />
     </body>
-</th:block>
+  </th:block>
 </html>

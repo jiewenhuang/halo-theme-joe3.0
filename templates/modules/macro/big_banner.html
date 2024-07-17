@@ -1,53 +1,69 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<th:block th:fragment="big_banner(title)">
-  <div id="EvanBigBanner" class="evan-big-banner"
-       th:style="'background-image:url('+${theme.config.beauty.big_banner_Photos}+');'+${htmlType == 'index'? 'height:calc(100vh - 60px);margin-top: initial;':''}"
-  >
-    <th:block th:if="${theme.config.beauty.enable_big_banner_video}">
-    <video id="EvanBigBannerVideo" class="video" preload="auto" loop="" autoplay="" muted=""
-           th:src="${theme.config.beauty.big_banner_video}"
-           style="width: 100%;height: 100%;object-fit: cover;"
+  <th:block th:fragment="big_banner(title)">
+    <div
+      id="EvanBigBanner"
+      class="evan-big-banner"
+      th:style="'background-image:url('+${theme.config.beauty.big_banner_Photos}+');'+${htmlType == 'index'? 'height:calc(100vh - 60px);margin-top: initial;':''}"
     >
-    </video>
-    </th:block>
-  <div class="infomation">
-    <div id="EvanBigBanner_Title" class="title">
-      <!-- 标题区域 -->
-      <span id="EvanBigBanner_SubTitle" style="opacity: 0;">
-                [[${htmlType == 'index'? site.title : title}]]
-            </span>
-    </div>
-    <div class="desctitle hitokoto_desctitle">
-      <div id="HitokotoText" class="motto joe_motto hitokoto_text">
-        <!-- 一言，内容 -->
+      <th:block th:if="${theme.config.beauty.enable_big_banner_video}">
+        <video
+          id="EvanBigBannerVideo"
+          class="video"
+          preload="auto"
+          loop=""
+          autoplay=""
+          muted=""
+          th:src="${theme.config.beauty.big_banner_video}"
+          style="width: 100%; height: 100%; object-fit: cover"
+        ></video>
+      </th:block>
+      <div class="infomation">
+        <div id="EvanBigBanner_Title" class="title">
+          <!-- 标题区域 -->
+          <span id="EvanBigBanner_SubTitle" style="opacity: 0">
+            [[${htmlType == 'index'? site.title : title}]]
+          </span>
+        </div>
+        <div class="desctitle hitokoto_desctitle">
+          <div id="HitokotoText" class="motto joe_motto hitokoto_text">
+            <!-- 一言，内容 -->
+          </div>
+          <div id="HitokotoForm" class="motto joe_motto hitokoto_form">
+            <!-- 一言，作者 -->
+          </div>
+        </div>
       </div>
-      <div id="HitokotoForm" class="motto joe_motto hitokoto_form">
-        <!-- 一言，作者 -->
-      </div>
+      <th:block th:if="${htmlType == 'index'}">
+        <a href="#" class="evan-big-banner_goto" id="evan-big-banner_goto">
+          <span class="index-goto-icon jiewen joe-icon-xiangxia"></span>
+        </a>
+      </th:block>
+      <section class="evan-big-banner_bottom" id="indexPosition">
+        <svg
+          id="EvanWaves"
+          class="waves-svg"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 24 150 28"
+          preserveAspectRatio="none"
+          shape-rendering="auto"
+        >
+          <defs>
+            <path
+              id="gentle-wave"
+              d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88
+                    -18 s 58 18 88 18 v 44 h -352 Z"
+            ></path>
+          </defs>
+          <g class="parallax">
+            <use xlink:href="#gentle-wave" fill="#fff" x="48" y="0"></use>
+            <use xlink:href="#gentle-wave" fill="#fff" x="48" y="3"></use>
+            <use xlink:href="#gentle-wave" fill="#fff" x="48" y="5"></use>
+            <use xlink:href="#gentle-wave" fill="#fff" x="48" y="7"></use>
+          </g>
+        </svg>
+      </section>
     </div>
-  </div>
-  <th:block th:if="${htmlType == 'index'}">
-  <a href="#" class="evan-big-banner_goto" id="evan-big-banner_goto">
-    <span class="index-goto-icon jiewen joe-icon-xiangxia"></span>
-  </a>
   </th:block>
-<section class="evan-big-banner_bottom"  id="indexPosition">
-  <svg id="EvanWaves" class="waves-svg" xmlns="http://www.w3.org/2000/svg"
-       xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none"
-       shape-rendering="auto">
-    <defs>
-      <path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88
-                    -18 s 58 18 88 18 v 44 h -352 Z"></path>
-    </defs>
-    <g class="parallax">
-      <use xlink:href="#gentle-wave" fill="#fff" x="48" y="0"></use>
-      <use xlink:href="#gentle-wave" fill="#fff" x="48" y="3"></use>
-      <use xlink:href="#gentle-wave" fill="#fff" x="48" y="5"></use>
-      <use xlink:href="#gentle-wave" fill="#fff" x="48" y="7"></use>
-    </g>
-  </svg>
-</section>
-</div>
-</th:block>
 </html>

@@ -78,15 +78,27 @@ const postContext = {
 	initCopy() {
 		if (PageAttrs.metas_enable_copy === "false" || !ThemeConfig.enable_copy)
 			return;
+
 		const curl = location.href;
 		const author = $(".joe_detail").attr("data-author");
+		const postTitle = $(".joe_detail .joe_detail__title").text();
+		const postDescription = $('html head meta[name=description]').attr('content');
+
 		$(".joe_detail__article").on("copy", function (e) {
 			const selection = window.getSelection();
 			const selectionText = selection.toString().replace(/<已自动折叠>/g, "");
-			const appendLink = ThemeConfig.enable_copy_right_text
+
+			const appendLink = (ThemeConfig.enable_copy_right_text
 				? ThemeConfig.copy_right_text ||
-				`\r\n\r\n====================================\r\n文章作者： ${author}\r\n文章来源： ${ThemeConfig.blog_title}\r\n文章链接： ${curl}\r\n版权声明： 内容遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。`
-				: "";
+				`\r\n\r\n====================================\r\n文章作者： ${author}\r\n文章来源： ${ThemeConfig.blog_title}(${ThemeConfig.blog_url})\r\n文章标题： ${postTitle}\r\n文章链接： ${curl}\r\n版权声明： 内容遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。`
+				: "")
+				.replace(/{postUrl}/g, curl)
+				.replace(/{postTitle}/g, postTitle)
+				.replace(/{postAuthor}/g, author)
+				.replace(/{BlogTitle}/g, ThemeConfig.blog_title)
+				.replace(/{BlogUrl}/g, ThemeConfig.blog_url)
+				.replace(/{postDescription}/g, postDescription);
+				
 			if (window.clipboardData) {
 				const copytext = selectionText + appendLink;
 				window.clipboardData.setData("Text", copytext);
@@ -112,8 +124,29 @@ const postContext = {
 			return;
 		if (ThemeConfig.enable_share_link && $(".icon-share-link").length) {
 			$(".icon-share-link").each((_index, item) => {
-				new ClipboardJS($(item)[0], {
-					text: () => location.href,
+				const shareLinkEle = $(item)[0];
+				const postTitle = shareLinkEle.dataset.postTitle;
+				const postDescription = shareLinkEle.dataset.postDescription;
+				const postAuthor = shareLinkEle.dataset.postAuthor;
+				const template = shareLinkEle.dataset.template;
+				
+				// 自定义分享链接模版，支持变量 {postUrl}、{postTitle}、{postAuthor}、{postDescription}，留空则使用默认模版(文章链接)，例如: 文章分享: {postAuthor} 发布了文章【{postTitle}】，链接: {postUrl}
+				let copyContent = window.location.href;
+				if (template) {
+					copyContent = template.replace(/{postUrl}/g, location.href)
+						.replace(/{postTitle}/g, postTitle)
+						.replace(/{postAuthor}/g, postAuthor)
+						.replace(/{postDescription}/g, postDescription)
+						.replace(/{BlogTitle}/g, ThemeConfig.blog_title)
+						.replace(/{BlogUrl}/g, ThemeConfig.blog_url);
+
+					if (!/{postUrl}/.test(template)) { // 如果模版中没有{postUrl}变量，则需要追加文章链接
+						copyContent += ` ，文章链接: ${location.href}`;
+					}
+				}
+
+				new ClipboardJS(shareLinkEle, {
+					text: () => copyContent,
 				}).on("success", () => Qmsg.success("文章链接已复制"));
 			});
 		}

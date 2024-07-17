@@ -1,109 +1,160 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{modules/layout :: html(title = ${theme.config.archives.archives_title ?: '文章归档'}+'-'+${site.title},htmlType = archives,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
+<!doctype html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{modules/layout :: html(title = ${theme.config.archives.archives_title ?: '文章归档'}+'-'+${site.title},htmlType = archives,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
 >
   <th:block th:fragment="content">
     <body>
-    <div id="Joe">
-      <th:block th:replace="~{modules/macro/navbar :: navbar}" />
-      <!--          首页大图-->
-      <th:block th:if="${theme.config.beauty.enable_big_banner}">
-        <th:block th:replace="~{modules/macro/big_banner :: big_banner(${title})}" />
-      </th:block>
-      <div class="joe_container joe_main_container page-archives"
-           th:classappend="|${theme.config.theme.enable_show_in_up ?'animated showInUp':''} ${theme.config.aside.aside_position == 'left' ? 'revert':''}|">
-        <div class="joe_main">
-          <div class="joe_index joe_archives__filing">
-            <div class="title">[[${theme.config.archives.archives_title ?: '文章归档'}]]</div>
-            <div class="content">
-              <th:block th:if="${theme.config.archives.enable_archives_category}">
-              <div class="joe_archives__category animated fadeIn">
-                <div class="joe_archives-title"><i class="joe-font joe-icon-fenlei"></i>分类</div>
-                <ul class="joe_category-list" th:with="categories = ${categoryFinder.listAll()}">
-                  <li class="item" th:each="category : ${categories}">
-                    <a class="link" th:href="@{${category.status.permalink}}" th:title="${category.spec.displayName}"><span th:title="${category.spec.displayName}">[[${category.spec.displayName}]]</span><em>[[${category.status.postCount}]]</em></a>
-                  </li>
-                </ul>
-              </div>
-              </th:block>
-    <div class="joe_archives__wrapper animated fadeIn">
-      <div class="joe_archives-title">
-        <th:block th:if="${theme.config.archives.archives_list_type == 'timeline'}">
-        <i class="joe-font joe-icon-timeline"></i>时间轴<em>（[[${theme.config.archives.archives_timeline_metric == 'month' ? '月':'年'}]]）</em>
+      <div id="Joe">
+        <th:block th:replace="~{modules/macro/navbar :: navbar}" />
+        <!--          首页大图-->
+        <th:block th:if="${theme.config.beauty.enable_big_banner}">
+          <th:block th:replace="~{modules/macro/big_banner :: big_banner(${title})}" />
         </th:block>
-        <th:block th:if="${theme.config.archives.archives_list_type == 'list'}">
-        <i class="jiewen joe-icon-riqi"></i>列表
-        </th:block>
-    </div>
-      <th:block th:if="${theme.config.archives.archives_list_type =='list'}">
-    <ul class="joe_archives-list">
-      <th:block th:each="archive : ${archives.items}">
-        <th:block th:each="month : ${archive.months}">
-      <li class="item" th:each="post : ${month.posts}">
-        <a rel="noopener noreferrer" target="_blank" th:title="${post.spec.title}" th:href="@{${post.status.permalink}}">[[${post.spec.title}]]</a>
-        <span>[[${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}]]</span>
-      </li>
-        </th:block>
-      </th:block>
-    </ul>
-        <th:block th:replace="~{modules/common/pagination :: archives}" />
-
-  </th:block>
-      <th:block th:if="${theme.config.archives.archives_list_type =='timeline'}">
-    <ul class="joe_archives-timelist" th:with="allArchives = ${postFinder.archives(1,9999)}">
-      <th:block th:each="archive : ${allArchives.items}">
-        <th:block th:if="${theme.config.archives.archives_timeline_metric == 'month'}"
-                  th:each="month : ${archive.months}">
-      <li class="item">
-        <div class="wrapper">
-          <div class="panel in">
-            [[${archive.year}]] 年
-            <th:block th:if="${theme.config.archives.archives_timeline_metric == 'month'}">
-              [[${month.month}]] 月
-            </th:block>
-            <i class="joe-font joe-icon-arrow-down"></i></div>
-        <ol class="panel-body">
-
-          <li th:each="post : ${month.posts}">
-            <a rel="noopener noreferrer" target="_blank" th:title="${post.spec.title}" th:href="@{${post.status.permalink}}">[[${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}]]：[[${post.spec.title}]]</a>
-          </li>
-        </ol>
-        </div>
-      </li>
-  </th:block>
-        <th:block th:if="${theme.config.archives.archives_timeline_metric == 'year'}"
-                  th:each="month : ${archive.months}">
-          <li class="item">
-            <div class="wrapper">
-              <div class="panel in">
-                [[${archive.year}]] 年
-                <i class="joe-font joe-icon-arrow-down"></i></div>
-              <ol class="panel-body">
-                <th:block th:if="${theme.config.archives.archives_timeline_metric == 'year'}"
-                          th:each="month : ${archive.months}">
-                  <li th:each="post : ${month.posts}">
-                    <a rel="noopener noreferrer" target="_blank" th:title="${post.spec.title}" th:href="@{${post.status.permalink}}">[[${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}]]：[[${post.spec.title}]]</a>
-                  </li>
+        <div
+          class="joe_container joe_main_container page-archives"
+          th:classappend="|${theme.config.theme.enable_show_in_up ?'animated showInUp':''} ${theme.config.aside.aside_position == 'left' ? 'revert':''}|"
+        >
+          <div class="joe_main">
+            <div class="joe_index joe_archives__filing">
+              <div class="title">[[${theme.config.archives.archives_title ?: '文章归档'}]]</div>
+              <div class="content">
+                <th:block th:if="${theme.config.archives.enable_archives_category}">
+                  <div class="joe_archives__category animated fadeIn">
+                    <div class="joe_archives-title">
+                      <i class="joe-font joe-icon-fenlei"></i>分类
+                    </div>
+                    <ul
+                      class="joe_category-list"
+                      th:with="categories = ${categoryFinder.listAll()}"
+                    >
+                      <li class="item" th:each="category : ${categories}">
+                        <a
+                          class="link"
+                          th:href="@{${category.status.permalink}}"
+                          th:title="${category.spec.displayName}"
+                        >
+                          <span th:title="${category.spec.displayName}">
+                            [[${category.spec.displayName}]]
+                          </span>
+                          <em th:text="${category.status.visiblePostCount ?: 0}"></em>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 </th:block>
-              </ol>
+                <div class="joe_archives__wrapper animated fadeIn">
+                  <div class="joe_archives-title">
+                    <th:block th:if="${theme.config.archives.archives_list_type == 'timeline'}">
+                      <i class="joe-font joe-icon-timeline"></i>时间轴<em
+                        >（[[${theme.config.archives.archives_timeline_metric == 'month' ?
+                        '月':'年'}]]）</em
+                      >
+                    </th:block>
+                    <th:block th:if="${theme.config.archives.archives_list_type == 'list'}">
+                      <i class="jiewen joe-icon-riqi"></i>列表
+                    </th:block>
+                  </div>
+                  <th:block th:if="${theme.config.archives.archives_list_type =='list'}">
+                    <ul class="joe_archives-list">
+                      <th:block th:each="archive : ${archives.items}">
+                        <th:block th:each="month : ${archive.months}">
+                          <li class="item" th:each="post : ${month.posts}">
+                            <a
+                              rel="noopener noreferrer"
+                              target="_blank"
+                              th:title="${post.spec.title}"
+                              th:href="@{${post.status.permalink}}"
+                              >[[${post.spec.title}]]</a
+                            >
+                            <span> [[${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}]] </span>
+                          </li>
+                        </th:block>
+                      </th:block>
+                    </ul>
+                    <th:block th:replace="~{modules/common/pagination :: archives}" />
+                  </th:block>
+                  <th:block th:if="${theme.config.archives.archives_list_type =='timeline'}">
+                    <ul
+                      class="joe_archives-timelist"
+                      th:with="allArchives = ${postFinder.archives(1,9999)}"
+                    >
+                      <th:block th:each="archive : ${allArchives.items}">
+                        <th:block
+                          th:if="${theme.config.archives.archives_timeline_metric == 'month'}"
+                          th:each="month : ${archive.months}"
+                        >
+                          <li class="item">
+                            <div class="wrapper">
+                              <div class="panel in">
+                                [[${archive.year}]] 年
+                                <th:block
+                                  th:if="${theme.config.archives.archives_timeline_metric == 'month'}"
+                                >
+                                  [[${month.month}]] 月
+                                </th:block>
+                                <i class="joe-font joe-icon-arrow-down"></i>
+                              </div>
+                              <ol class="panel-body">
+                                <li th:each="post : ${month.posts}">
+                                  <a
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                    th:title="${post.spec.title}"
+                                    th:href="@{${post.status.permalink}}"
+                                  >
+                                    [[${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}]]：[[${post.spec.title}]]
+                                  </a>
+                                </li>
+                              </ol>
+                            </div>
+                          </li>
+                        </th:block>
+                        <th:block
+                          th:if="${theme.config.archives.archives_timeline_metric == 'year'}"
+                          th:each="month : ${archive.months}"
+                        >
+                          <li class="item">
+                            <div class="wrapper">
+                              <div class="panel in">
+                                [[${archive.year}]] 年
+                                <i class="joe-font joe-icon-arrow-down"></i>
+                              </div>
+                              <ol class="panel-body">
+                                <th:block
+                                  th:if="${theme.config.archives.archives_timeline_metric == 'year'}"
+                                  th:each="month : ${archive.months}"
+                                >
+                                  <li th:each="post : ${month.posts}">
+                                    <a
+                                      rel="noopener noreferrer"
+                                      target="_blank"
+                                      th:title="${post.spec.title}"
+                                      th:href="@{${post.status.permalink}}"
+                                      >[[${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}]]：[[${post.spec.title}]]</a
+                                    >
+                                  </li>
+                                </th:block>
+                              </ol>
+                            </div>
+                          </li>
+                        </th:block>
+                      </th:block>
+                    </ul>
+                  </th:block>
+                </div>
+              </div>
             </div>
-          </li>
-        </th:block>
-  </th:block>
-  </ul>
-</th:block>
-</div>
-</div>
-</div>
-</div>
-      <th:block th:if="${theme.config.aside.enable_archives_aside}">
-        <th:block th:replace="~{modules/common/aside :: aside}" />
-      </th:block>
-</div>
-    <th:block th:replace="~{modules/common/actions :: actions}" />
-    <th:block th:replace="~{modules/common/footer :: footer}" />
-</div>
-    <th:block th:replace="~{modules/macro/tail :: tail}" />
-</body>
+          </div>
+          <th:block th:if="${theme.config.aside.enable_archives_aside}">
+            <th:block th:replace="~{modules/common/aside :: aside}" />
+          </th:block>
+        </div>
+        <th:block th:replace="~{modules/common/actions :: actions}" />
+        <th:block th:replace="~{modules/common/footer :: footer}" />
+      </div>
+      <th:block th:replace="~{modules/macro/tail :: tail}" />
+    </body>
   </th:block>
 </html>

@@ -1,63 +1,89 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{modules/layout :: html(title = ${theme.config.categories.categories_title ?: '全部标签'}+'-'+${site.title},htmlType = categories,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
+<!doctype html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{modules/layout :: html(title = ${theme.config.categories.categories_title ?: '全部标签'}+'-'+${site.title},htmlType = categories,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
 >
   <th:block th:fragment="content">
     <body>
-    <div id="Joe" th:with="categories = ${categoryFinder.listAll()}">
-      <th:block th:replace="~{modules/macro/navbar :: navbar}" />
-      <!--          首页大图-->
-      <th:block th:if="${theme.config.beauty.enable_big_banner}">
-        <th:block th:replace="~{modules/macro/big_banner :: big_banner(${title})}" />
-      </th:block>
-      <div class="joe_container joe_main_container page-categories"
-           th:classappend="|${theme.config.theme.enable_show_in_up ?'animated showInUp':''} ${theme.config.aside.aside_position == 'left' ? 'revert':''}|">
-        <div class="joe_main">
-          <div class="joe_index">
-            <div class="joe_index__title">
-              <ul class="joe_index__title-title pl-15">
-                <li class="item active">[[${theme.config.categories.categories_title ?: '全部分类'}]]<span class="totals">[[${#lists.size(categories)}]]</span></li>
-              </ul>
-            </div>
-            <div class="joe_index__hot categories">
-
-              <ul th:class="'joe_index__hot-list'+${theme.config.categories.categories_type  == 'card'?' ':'-tag'}+ ' animated fadeIn'">
-                <th:block th:if="${theme.config.categories.categories_type=='card'}">
-                <li class="item" th:each="category : ${categories}">
-                  <a class="link" th:href="${category.status.permalink}" th:title="${category.spec.displayName}">
-                    <figure class="inner">
-                      <th:block th:if="${theme.config.categories.enable_categories_post_num}">
-                        <th:block th:replace="~{modules/macro/post_num :: post_num}" />
-                      </th:block>
-
-                  <img width="100%" height="120" class="image lazyload" th:data-src="${category.spec.cover ?: theme.config.basic.random_img_api_url+'?pageid='+category.metadata.name}" th:src="${theme.config.theme.lazyload_thumbnail}"  th:alt="${category.spec.displayName}">
-                  <figcaption class="title">[[${category.spec.displayName}]]</figcaption>
-                  </figure>
-                  </a>
-                </li>
-                </th:block>
-                <th:block th:if="${theme.config.categories.categories_type=='tag'}">
-                <li class="item" th:each="category : ${categories}">
-                  <a class="link" th:href="${category.status.permalink}" th:title="${category.spec.displayName}">
-                    <span title="${category.name!}">[[${category.spec.displayName}]]</span>
-                    <th:block th:if="${theme.config.categories.enable_categories_post_num}">
-                      <th:block th:replace="~{modules/macro/post_num :: post_num}" />
-                    </th:block>
-                  </a>
-                </li>
-                </th:block>
-            </ul>
-      </div>
-    </div>
-    </div>
-        <th:block th:if="${theme.config.aside.enable_categories_aside}">
-          <th:block th:replace="~{modules/common/aside :: aside}" />
+      <div id="Joe" th:with="categories = ${categoryFinder.listAll()}">
+        <th:block th:replace="~{modules/macro/navbar :: navbar}" />
+        <!--          首页大图-->
+        <th:block th:if="${theme.config.beauty.enable_big_banner}">
+          <th:block th:replace="~{modules/macro/big_banner :: big_banner(${title})}" />
         </th:block>
-    </div>
-      <th:block th:replace="~{modules/common/actions :: actions}" />
-      <th:block th:replace="~{modules/common/footer :: footer}" />
-    </div>
-    <th:block th:replace="~{modules/macro/tail :: tail}" />
+        <div
+          class="joe_container joe_main_container page-categories"
+          th:classappend="|${theme.config.theme.enable_show_in_up ?'animated showInUp':''} ${theme.config.aside.aside_position == 'left' ? 'revert':''}|"
+        >
+          <div class="joe_main">
+            <div class="joe_index">
+              <div class="joe_index__title">
+                <ul class="joe_index__title-title pl-15">
+                  <li class="item active">
+                    [[${theme.config.categories.categories_title ?: '全部分类'}]]<span
+                      class="totals"
+                      >[[${#lists.size(categories)}]]</span
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div class="joe_index__hot categories">
+                <ul
+                  th:class="'joe_index__hot-list'+${theme.config.categories.categories_type  == 'card'?' ':'-tag'}+ ' animated fadeIn'"
+                >
+                  <th:block th:if="${theme.config.categories.categories_type=='card'}">
+                    <li class="item" th:each="category : ${categories}">
+                      <a
+                        class="link"
+                        th:href="${category.status.permalink}"
+                        th:title="${category.spec.displayName}"
+                      >
+                        <figure class="inner">
+                          <th:block th:if="${theme.config.categories.enable_categories_post_num}">
+                            <th:block th:replace="~{modules/macro/post_num :: post_num}" />
+                          </th:block>
+
+                          <img
+                            width="100%"
+                            height="120"
+                            class="image lazyload"
+                            th:data-src="${category.spec.cover ?: theme.config.basic.random_img_api_url+'?pageid='+category.metadata.name}"
+                            th:src="${theme.config.home.lazyload_thumbnail}"
+                            th:alt="${category.spec.displayName}"
+                            onerror="Joe.errorImg(this, 'HomeErrImg')"
+                          />
+                          <figcaption class="title">[[${category.spec.displayName}]]</figcaption>
+                        </figure>
+                      </a>
+                    </li>
+                  </th:block>
+                  <th:block th:if="${theme.config.categories.categories_type=='tag'}">
+                    <li class="item" th:each="category : ${categories}">
+                      <a
+                        class="link"
+                        th:href="${category.status.permalink}"
+                        th:title="${category.spec.displayName}"
+                      >
+                        <span title="${category.name!}">[[${category.spec.displayName}]]</span>
+                        <th:block th:if="${theme.config.categories.enable_categories_post_num}">
+                          <th:block th:replace="~{modules/macro/post_num :: post_num}" />
+                        </th:block>
+                      </a>
+                    </li>
+                  </th:block>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <th:block th:if="${theme.config.aside.enable_categories_aside}">
+            <th:block th:replace="~{modules/common/aside :: aside}" />
+          </th:block>
+        </div>
+        <th:block th:replace="~{modules/common/actions :: actions}" />
+        <th:block th:replace="~{modules/common/footer :: footer}" />
+      </div>
+      <th:block th:replace="~{modules/macro/tail :: tail}" />
     </body>
   </th:block>
 </html>
