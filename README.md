@@ -70,7 +70,8 @@ WIP
 <br>  
 
 ### 奉献提示
-此仓库分为main和dev分支，如何您想奉献代码，请fork dev分支，开发完成后提交pr到dev分支，dev分支会定期合并到main分支，main分支为稳定版本且dev分支才是最新代码，不接受pr。
+~~此仓库分为main和dev分支，如何您想奉献代码，请fork dev分支，开发完成后提交pr到dev分支，dev分支会定期合并到main分支，main分支为稳定版本且dev分支才是最新代码，不接受pr。~~  
+现在只维护main分支，dev分支不再维护，如有需要请直接提交pr到main分支。
 
 
 ### 🙆‍♂️ 感谢
