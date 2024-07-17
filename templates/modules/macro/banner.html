@@ -1,29 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<th:block th:fragment="banner">
-  <div class="joe_index__banner">
-    <div class="swiper">
-      <div class="swiper-wrapper">
-        <th:block th:each="banner_data : ${theme.config.carousel.banner_data_group}">
+  <th:block th:fragment="banner">
+    <div class="joe_index__banner">
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <th:block th:each="banner_data : ${theme.config.carousel.banner_data_group}">
             <th:block th:switch="${banner_data.banner_section_type}">
-                <th:block th:case="'post'">
-                <th:block th:insert="~{modules/macro/banner_item_data :: data_by_post(post_metadata = ${banner_data.data_by_post})}" />
-                </th:block>
-                <th:block th:case="'custom'">
-                <th:block th:insert="~{modules/macro/banner_item_data :: data_by_custom(banner_url = ${banner_data.data_by_custom.banner_url}, banner_cover = ${banner_data.data_by_custom.banner_img}, banner_title = ${banner_data.data_by_custom.banner_title}, banner_excerpt = ${banner_data.data_by_custom.banner_subtitle})}" />
-                </th:block>
+              <th:block th:case="'post'">
+                <th:block
+                  th:insert="~{modules/macro/banner_item_data :: data_by_post(post_metadata = ${banner_data.data_by_post})}"
+                />
+              </th:block>
+              <th:block th:case="'custom'">
+                <th:block
+                  th:insert="~{modules/macro/banner_item_data :: data_by_custom(banner_url = ${banner_data.data_by_custom.banner_url}, banner_cover = ${banner_data.data_by_custom.banner_img}, banner_title = ${banner_data.data_by_custom.banner_title}, banner_excerpt = ${banner_data.data_by_custom.banner_subtitle})}"
+                />
+              </th:block>
             </th:block>
-
+          </th:block>
+        </div>
+        <th:block th:if="${theme.config.carousel.enable_banner_pagination}">
+          <div class="swiper-pagination"></div>
         </th:block>
-</div>
-<th:block th:if="${theme.config.carousel.enable_banner_pagination}">
-<div class="swiper-pagination"></div>
-</th:block>
-<th:block th:if="${theme.config.carousel.enable_banner_handle} and ${theme.config.carousel.enable_banner_switch_button}">
-<div class="swiper-button-next"></div>
-<div class="swiper-button-prev"></div>
-</th:block>
-</div>
-</div>
-</th:block>
+        <th:block
+          th:if="${theme.config.carousel.enable_banner_handle} and ${theme.config.carousel.enable_banner_switch_button}"
+        >
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </th:block>
+      </div>
+    </div>
+  </th:block>
 </html>
