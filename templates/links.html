@@ -241,9 +241,9 @@
                     th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}"
                   >
                     <halo:comment
-                      group="content.halo.run"
-                      kind="SinglePage"
-                      name="links"
+                      group="plugin.halo.run"
+                      kind="Plugin"
+                      th:attr="name=${pluginName}"
                       colorScheme="document.documentElement.getAttribute('data-mode')"
                     />
                   </th:block>
