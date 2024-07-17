@@ -34,7 +34,7 @@
 > 2、部分功能使用插件进行实现  
 > 3、请配合Halo2.8.0及以上版本使用  
 > 4、菜单栏的图标请使用[iconfont](https://www.iconfont.cn/)的图标，需要填入Font Family 和图标代码例如：`jiewen joe-icon-tupian`  
-> 5、使用自定义标签样式请安装[Tool-Bench](https://github.com/DioxideCN/Tool-Bench)插件，标签请参考[Joe3部分样式](https://www.jiewen.run/archives/joe3style)或者直接使用插件标签
+> 5、使用自定义标签样式请以插入HTML文本形式使用，标签请参考[Joe3部分样式](https://www.jiewen.run/archives/joe3style)或者直接使用插件标签
 
 - [x] 卡片化设计
 - [x] 响应式主题
