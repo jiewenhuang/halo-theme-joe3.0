@@ -1,153 +1,173 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<th:block th:fragment="tail" th:with="source_link=${(#strings.trim(theme.config.basic.source_link) !='' && theme.config.basic.enable_source_link)? theme.config.basic.source_link : '/themes/theme-Joe3'}">
-<!--    ===== 引入脚本 start ===== -->
-<!--    <th:block th:if="${htmlType == 'index' && theme.config.home.enable_index_list_effect == true} or ${htmlType == 'journals' && theme.config.journals.enable_journal_effect == true} or ${htmlType == 'photos' && theme.config.photos.enable_photos_effect == true}">-->
-        <script th:src="${source_link+'/assets/lib/wowjs/wow.min.js'}"></script>
-<!--    </th:block>-->
+  <th:block
+    th:fragment="tail"
+    th:with="source_link=${(#strings.trim(theme.config.basic.source_link) !='' && theme.config.basic.enable_source_link)? theme.config.basic.source_link : '/themes/theme-Joe3'}"
+  >
+    <!--    ===== 引入脚本 start ===== -->
+    <!--    <th:block th:if="${htmlType == 'index' && theme.config.home.enable_index_list_effect == true} or ${htmlType == 'journals' && theme.config.journals.enable_journal_effect == true} or ${htmlType == 'photos' && theme.config.photos.enable_photos_effect == true}">-->
+    <script th:src="${source_link+'/assets/lib/wowjs/wow.min.js'}"></script>
+    <!--    </th:block>-->
     <script th:src="${source_link+'/assets/lib/lazysizes/lazysizes.min.js'}"></script>
     <script th:src="${source_link+'/assets/lib/qmsg/qmsg.js'}"></script>
     <th:block th:if="${theme.config.aside.show_newreply == true} or ${htmlType == 'sheet'}">
-        <script th:src="${source_link+'/assets/lib/j-marked/marked.min.js'}"></script>
+      <script th:src="${source_link+'/assets/lib/j-marked/marked.min.js'}"></script>
     </th:block>
     <script th:src="${source_link+'/assets/js/min/utils.min.js'}"></script>
 
     <th:block th:if="${htmlType == 'index' && theme.config.carousel.enable_banner}">
-        <script th:src="${source_link+'/assets/lib/swiper/swiper-bundle.min.js'}"></script>
+      <script th:src="${source_link+'/assets/lib/swiper/swiper-bundle.min.js'}"></script>
     </th:block>
     <th:block th:if="${htmlType == 'post'} and ${theme.config.post.enable_toc == true}">
-        <script th:src="${source_link+'/assets/lib/tocbot/tocbot.min.js'}"></script>
+      <script th:src="${source_link+'/assets/lib/tocbot/tocbot.min.js'}"></script>
     </th:block>
-    <th:block th:if="${theme.config.other.enable_clean_mode != false && (htmlType =='post' || htmlType =='journals' || htmlType =='sheet')}">
-        <script th:src="${source_link+'/assets/lib/vue@2.6.10/vue.min.js'}"></script>
-
+    <th:block
+      th:if="${theme.config.other.enable_clean_mode != false && (htmlType =='post' || htmlType =='journals' || htmlType =='sheet')}"
+    >
+      <script th:src="${source_link+'/assets/lib/vue@2.6.10/vue.min.js'}"></script>
     </th:block>
     <script th:src="${source_link+'/assets/lib/fancybox/jquery.fancybox.min.js'}"></script>
-    <th:block th:each="aside : ${theme.config.aside.enable_outpost_aside}"
-              th:if="${aside.template_aside == 'enable_music_player'} or ${htmlType =='post'}">
-    <th:block th:if="${#strings.trim(aside.aside_music_player.music_id) !=''}" >
-        <link rel="stylesheet" th:href="${source_link+'/assets/lib/APlayer/APlayer.min.css'}">
+    <th:block
+      th:each="aside : ${theme.config.aside.enable_outpost_aside}"
+      th:if="${aside.template_aside == 'enable_music_player'} or ${htmlType =='post'}"
+    >
+      <th:block th:if="${#strings.trim(aside.aside_music_player.music_id) !=''}">
+        <link rel="stylesheet" th:href="${source_link+'/assets/lib/APlayer/APlayer.min.css'}" />
         <script th:src="${source_link+'/assets/lib/APlayer/APlayer.min.js'}"></script>
         <script th:src="${source_link+'/assets/lib/meting/meting.min.js'}"></script>
-    </th:block>
+      </th:block>
     </th:block>
     <script th:src="${source_link+'/assets/js/min/custom.min.js?v='+theme.spec.version}"></script>
     <th:block th:if="${htmlType == 'post'} or ${htmlType == 'journals'} or ${htmlType == 'sheet'}">
-        <script th:src="${source_link+'/assets/lib/clipboard/clipboard.min.js'}"></script>
+      <script th:src="${source_link+'/assets/lib/clipboard/clipboard.min.js'}"></script>
     </th:block>
     <th:block th:if="${theme.config.custom.favicon != null && theme.config.custom.favicon != ''}">
-        <script th:src="${source_link+'/assets/lib/favico/favico.min.js'}"></script>
+      <script th:src="${source_link+'/assets/lib/favico/favico.min.js'}"></script>
     </th:block>
     <th:block th:if="${htmlType == 'post'}">
-        <script th:src="${source_link+'/assets/lib/jquery-qrcode/jquery.qrcode.min.js'}"></script>
+      <script th:src="${source_link+'/assets/lib/jquery-qrcode/jquery.qrcode.min.js'}"></script>
     </th:block>
-<!--相册-->
+    <!--相册-->
     <th:block th:if="${htmlType == 'photos'}">
-        <script th:src="${source_link+'/assets/lib/justifiedGallery/justifiedGallery.min.js'}"></script>
-        <script th:src="${source_link+'/assets/lib/masonry/masonry.pkgd.min.js'}"></script>
-        <script th:src="${source_link+'/assets/lib/masonry/isotope.pkgd.min.js'}"></script>
-        <script th:src="${source_link+'/assets/lib/masonry/imagesloaded.pkgd.min.js'}"></script>
-
+      <script
+        th:src="${source_link+'/assets/lib/justifiedGallery/justifiedGallery.min.js'}"
+      ></script>
+      <script th:src="${source_link+'/assets/lib/masonry/masonry.pkgd.min.js'}"></script>
+      <script th:src="${source_link+'/assets/lib/masonry/isotope.pkgd.min.js'}"></script>
+      <script th:src="${source_link+'/assets/lib/masonry/imagesloaded.pkgd.min.js'}"></script>
     </th:block>
 
-<!--===== 引入页面级js start =====-->
+    <!--===== 引入页面级js start =====-->
     <script th:src="${source_link+'/assets/js/min/common.min.js?v='+theme.spec.version}"></script>
     <th:block th:if="${htmlType == 'post'} or ${htmlType == 'journals'} or ${htmlType == 'sheet'}">
-        <script th:src="${source_link+'/assets/lib/prism/prism.min.js'}"></script>
+      <script th:src="${source_link+'/assets/lib/prism/prism.min.js'}"></script>
     </th:block>
     <th:block th:if="${htmlType == 'index'}">
-        <script th:src="${source_link+'/assets/js/min/index.min.js?v='+theme.spec.version}"></script>
+      <script th:src="${source_link+'/assets/js/min/index.min.js?v='+theme.spec.version}"></script>
     </th:block>
     <th:block th:if="${htmlType == 'archives'}">
-        <script th:src="${source_link+'/assets/js/min/archives.min.js?v='+theme.spec.version}"></script>
+      <script
+        th:src="${source_link+'/assets/js/min/archives.min.js?v='+theme.spec.version}"
+      ></script>
     </th:block>
     <th:block th:if="${htmlType == 'post'}">
-        <script th:src="${source_link+'/assets/js/min/post.min.js?v='+theme.spec.version}"></script>
+      <script th:src="${source_link+'/assets/js/min/post.min.js?v='+theme.spec.version}"></script>
     </th:block>
     <th:block th:if="${htmlType == 'journals'}">
-        <script th:src="${source_link+'/assets/js/min/journals.min.js?v='+theme.spec.version}"></script>
+      <script
+        th:src="${source_link+'/assets/js/min/journals.min.js?v='+theme.spec.version}"
+      ></script>
     </th:block>
     <th:block th:if="${htmlType == 'photos'}">
-        <script th:src="${source_link+'/assets/js/min/photos.min.js?v='+theme.spec.version}"></script>
+      <script th:src="${source_link+'/assets/js/min/photos.min.js?v='+theme.spec.version}"></script>
     </th:block>
     <th:block th:if="${htmlType == 'sheet'}">
-        <script th:src="${source_link+'/assets/lib/draggabilly/draggabilly.min.js'}"></script>
-        <script th:src="${source_link+'/assets/js/min/leaving.min.js'}"></script>
+      <script th:src="${source_link+'/assets/lib/draggabilly/draggabilly.min.js'}"></script>
+      <script th:src="${source_link+'/assets/js/min/leaving.min.js'}"></script>
     </th:block>
     <th:block th:if="${theme.config.beauty.enable_big_banner}">
-    <script th:src="${source_link+'/assets/js/min/beauty.min.js'}"></script>
+      <script th:src="${source_link+'/assets/js/min/beauty.min.js'}"></script>
     </th:block>
 
     <!-- ===== 引入页面级js end ===== -->
 
-<!-- ===== 引入脚本 start ===== -->
+    <!-- ===== 引入脚本 start ===== -->
 
     <th:block th:if="${theme.config.footer.enable_busuanzi}">
-<!-- 卜算子 -->
-        <script th:src="${source_link+'/assets/lib/busuanzi/busuanzi.min.js'}"></script>
+      <!-- 卜算子 -->
+      <script th:src="${source_link+'/assets/lib/busuanzi/busuanzi.min.js'}"></script>
     </th:block>
 
-<!-- ===== 引入脚本 end =====-->
+    <!-- ===== 引入脚本 end =====-->
 
-    <th:block th:if="${theme.config.custom.custom_external_js_body != null} and ${theme.config.custom.custom_external_js_body != ''}">
-<!-- 自定义外部js -->
-        <script th:src="${theme.config.custom.custom_external_js_body}"></script>
+    <th:block
+      th:if="${theme.config.custom.custom_external_js_body != null} and ${theme.config.custom.custom_external_js_body != ''}"
+    >
+      <!-- 自定义外部js -->
+      <script th:src="${theme.config.custom.custom_external_js_body}"></script>
     </th:block>
-    <th:block th:if="${theme.config.custom.custom_js_body != null} and ${#strings.trim(theme.config.custom.custom_js_body) != ''}">
-
-    <!-- 自定义js -->
-        <script type="text/javascript" th:inline="javascript" th:utext="${theme.config.custom.custom_js_body}"></script>
+    <th:block
+      th:if="${theme.config.custom.custom_js_body != null} and ${#strings.trim(theme.config.custom.custom_js_body) != ''}"
+    >
+      <!-- 自定义js -->
+      <script
+        type="text/javascript"
+        th:inline="javascript"
+        th:utext="${theme.config.custom.custom_js_body}"
+      ></script>
     </th:block>
     <th:block th:if="${theme.config.other.enable_debug}">
-    <!-- vconsole -->
-    <script th:src="${source_link+'/assets/lib/vconsole/vconsole.min.js'}"></script>
+      <!-- vconsole -->
+      <script th:src="${source_link+'/assets/lib/vconsole/vconsole.min.js'}"></script>
     </th:block>
 
-<!--搜索点击-->
+    <!--搜索点击-->
     <script>
-        const searchButton = document.getElementById("halo-search");
-        searchButton.addEventListener("click", function() {
-            SearchWidget.open();
-        });
+      const searchButton = document.getElementById('halo-search');
+      searchButton.addEventListener('click', function () {
+        SearchWidget.open();
+      });
     </script>
-<!--    大图配置-->
+    <!--    大图配置-->
     <script th:inline="javascript" th:if="${theme.config.beauty.enable_big_banner}">
-        // 以下配置参数均为默认值
-        new EvanBigBanner({
-            followMode: false,                       // 跟随模式
-            followTheme: false,                      // 跟随主题
-            titlePrint: true,                        // 是否启用打字机效果
-            titlePrintInterval: 300,                 // 打字机速度
-            titleTiktok: false,                      // 标题文字抖音效果
-            titleText: /*[[${(theme.config.beauty.big_banner_title != null and theme.config.beauty.big_banner_title != '') ? theme.config.beauty.big_banner_title : site.title}]]*/ "",    // 标题文字
-            titleColor: "#ffffff",                   // 标题文字颜色
-            titleShadow: "-3px 2px 6px #1c1f21",     // 标题文字阴影
-            hitokotoParams: {},                      // 一言参数，参考：https://developer.hitokoto.cn/sentence/#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0
-            hitokotoApi: "https://v1.hitokoto.cn",   // 一言API
-            hitokotoColor: "#ffffff",                // 一言文字颜色
-            hitokotoEnable: /*[[${theme.config.beauty.enable_big_banner_hitokoto}]]*/true,                    // 是否使用一言
-        });
+      // 以下配置参数均为默认值
+      new EvanBigBanner({
+        followMode: false, // 跟随模式
+        followTheme: false, // 跟随主题
+        titlePrint: true, // 是否启用打字机效果
+        titlePrintInterval: 300, // 打字机速度
+        titleTiktok: false, // 标题文字抖音效果
+        titleText:
+          /*[[${(theme.config.beauty.big_banner_title != null and theme.config.beauty.big_banner_title != '') ? theme.config.beauty.big_banner_title : site.title}]]*/ '', // 标题文字
+        titleColor: '#ffffff', // 标题文字颜色
+        titleShadow: '-3px 2px 6px #1c1f21', // 标题文字阴影
+        hitokotoParams: {}, // 一言参数，参考：https://developer.hitokoto.cn/sentence/#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0
+        hitokotoApi: 'https://v1.hitokoto.cn', // 一言API
+        hitokotoColor: '#ffffff', // 一言文字颜色
+        hitokotoEnable: /*[[${theme.config.beauty.enable_big_banner_hitokoto}]]*/ true, // 是否使用一言
+      });
 
-        // 以上配置均为默认值，可直接使用进行初始化
-        // new EvanBigBanner();
-
+      // 以上配置均为默认值，可直接使用进行初始化
+      // new EvanBigBanner();
     </script>
-    <th:block th:if="${htmlType == 'photos'}">
-    </th:block>
-    <script type="text/javascript" th:if="${theme.config.home.enable_auto_ajax} and ${theme.config.home.enable_index_list_ajax}">
-        const ob =  new IntersectionObserver(entries => {
-            const domClick = document.querySelector('.joe_load')
-            if (entries[0].isIntersecting){
-                domClick.click()
-            }
-
-        }, {
-            threshold:1
-        })
-        const loading = document.querySelector('.joe_load_container')
-        ob.observe(loading)
-
+    <th:block th:if="${htmlType == 'photos'}"> </th:block>
+    <script
+      type="text/javascript"
+      th:if="${theme.config.home.enable_auto_ajax} and ${theme.config.home.enable_index_list_ajax}"
+    >
+      const ob = new IntersectionObserver(
+        (entries) => {
+          const domClick = document.querySelector('.joe_load');
+          if (entries[0].isIntersecting) {
+            domClick.click();
+          }
+        },
+        {
+          threshold: 1,
+        }
+      );
+      const loading = document.querySelector('.joe_load_container');
+      ob.observe(loading);
     </script>
-
-</th:block>
+  </th:block>
 </html>

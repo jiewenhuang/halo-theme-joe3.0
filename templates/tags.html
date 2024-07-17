@@ -1,66 +1,92 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{modules/layout :: html(title = ${theme.config.tags.tags_title ?: '全部标签'}+'-'+${site.title},htmlType = tags,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
+<!doctype html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{modules/layout :: html(title = ${theme.config.tags.tags_title ?: '全部标签'}+'-'+${site.title},htmlType = tags,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
 >
   <th:block th:fragment="content">
     <body>
-    <div id="Joe">
-      <th:block th:replace="~{modules/macro/navbar :: navbar}" />
-      <!--          首页大图-->
-      <th:block th:if="${theme.config.beauty.enable_big_banner}">
-        <th:block th:replace="~{modules/macro/big_banner :: big_banner(${title})}" />
-      </th:block>
-      <div class="joe_container joe_main_container page-tags"
-           th:classappend="|${theme.config.theme.enable_show_in_up ?'animated showInUp':''} ${theme.config.aside.aside_position == 'left' ? 'revert':''}|">
-        <div class="joe_main">
-          <div class="joe_index">
-            <div class="joe_index__title">
-              <ul class="joe_index__title-title pl-15">
-                <li class="item active">[[${theme.config.tags.tags_title ?: '全部标签'}]]<span class="totals">[[${#lists.size(tags)}]]</span></li>
-              </ul>
-            </div>
-            <div class="joe_index__hot">
-              <ul th:class="'joe_index__hot-list'+${theme.config.tags.tags_type != 'card' ? '-tag':''}+' animated fadeIn'"
-                  style="padding-bottom: 10px;">
-
-                <th:block th:if="${theme.config.tags.tags_type=='card'}">
-                <li class="item" th:each="tag : ${tags}">
-                  <a class="link" th:href="${tag.status.permalink}" th:title="${tag.spec.displayName}">
-                    <figure class="inner">
-                      <th:block th:if="${theme.config.tags.enable_tags_post_num}">
-                        <th:block th:replace="~{modules/macro/post_num :: post_num}" />
-                      </th:block>
-                      <th:block th:with="postCover = ${#lists.isEmpty(theme.config.home.post_thumbnail)? theme.config.basic.random_img_api_url+'?pageid='+tag.metadata.name : theme.config.home.post_thumbnail}">
-                        <img width="100%" height="120" class="image lazyload" th:data-src="${tag.spec.cover ?: postCover}" th:src="${theme.config.home.lazyload_thumbnail}"  th:alt="${tag.spec.displayName}" onerror="Joe.errorImg(this, 'HomeErrImg')" >
-                      </th:block>
-                    <figcaption class="title">[[${tag.spec.displayName}]]</figcaption>
-                    </figure>
-                  </a>
-                </li>
-                </th:block>
-                <th:block th:if="${theme.config.tags.tags_type=='tag'}">
-                <li class="item" th:each="tag : ${tags}">
-                  <a class="link" th:href="${tag.status.permalink}" th:title="${tag.spec.displayName}">
-                    <span >[[${tag.spec.displayName}]]</span>
-                    <th:block th:if="${theme.config.tags.enable_tags_post_num}">
-                      <th:block th:replace="~{modules/macro/post_num :: post_num}" />
-                    </th:block>
-                  </a>
-                </li>
-                </th:block>
-
-          </ul>
-        </div>
-      </div>
-    </div>
-        <th:block th:if="${theme.config.aside.enable_tags_aside}">
-          <th:block th:replace="~{modules/common/aside :: aside}" />
+      <div id="Joe">
+        <th:block th:replace="~{modules/macro/navbar :: navbar}" />
+        <!--          首页大图-->
+        <th:block th:if="${theme.config.beauty.enable_big_banner}">
+          <th:block th:replace="~{modules/macro/big_banner :: big_banner(${title})}" />
         </th:block>
-    </div>
-      <th:block th:replace="~{modules/common/actions :: actions}" />
-      <th:block th:replace="~{modules/common/footer :: footer}" />
-    </div>
-    <th:block th:replace="~{modules/macro/tail :: tail}" />
+        <div
+          class="joe_container joe_main_container page-tags"
+          th:classappend="|${theme.config.theme.enable_show_in_up ?'animated showInUp':''} ${theme.config.aside.aside_position == 'left' ? 'revert':''}|"
+        >
+          <div class="joe_main">
+            <div class="joe_index">
+              <div class="joe_index__title">
+                <ul class="joe_index__title-title pl-15">
+                  <li class="item active">
+                    [[${theme.config.tags.tags_title ?: '全部标签'}]]<span class="totals"
+                      >[[${#lists.size(tags)}]]</span
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div class="joe_index__hot">
+                <ul
+                  th:class="'joe_index__hot-list'+${theme.config.tags.tags_type != 'card' ? '-tag':''}+' animated fadeIn'"
+                  style="padding-bottom: 10px"
+                >
+                  <th:block th:if="${theme.config.tags.tags_type=='card'}">
+                    <li class="item" th:each="tag : ${tags}">
+                      <a
+                        class="link"
+                        th:href="${tag.status.permalink}"
+                        th:title="${tag.spec.displayName}"
+                      >
+                        <figure class="inner">
+                          <th:block th:if="${theme.config.tags.enable_tags_post_num}">
+                            <th:block th:replace="~{modules/macro/post_num :: post_num}" />
+                          </th:block>
+                          <th:block
+                            th:with="postCover = ${#lists.isEmpty(theme.config.home.post_thumbnail)? theme.config.basic.random_img_api_url+'?pageid='+tag.metadata.name : theme.config.home.post_thumbnail}"
+                          >
+                            <img
+                              width="100%"
+                              height="120"
+                              class="image lazyload"
+                              th:data-src="${tag.spec.cover ?: postCover}"
+                              th:src="${theme.config.home.lazyload_thumbnail}"
+                              th:alt="${tag.spec.displayName}"
+                              onerror="Joe.errorImg(this, 'HomeErrImg')"
+                            />
+                          </th:block>
+                          <figcaption class="title">[[${tag.spec.displayName}]]</figcaption>
+                        </figure>
+                      </a>
+                    </li>
+                  </th:block>
+                  <th:block th:if="${theme.config.tags.tags_type=='tag'}">
+                    <li class="item" th:each="tag : ${tags}">
+                      <a
+                        class="link"
+                        th:href="${tag.status.permalink}"
+                        th:title="${tag.spec.displayName}"
+                      >
+                        <span>[[${tag.spec.displayName}]]</span>
+                        <th:block th:if="${theme.config.tags.enable_tags_post_num}">
+                          <th:block th:replace="~{modules/macro/post_num :: post_num}" />
+                        </th:block>
+                      </a>
+                    </li>
+                  </th:block>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <th:block th:if="${theme.config.aside.enable_tags_aside}">
+            <th:block th:replace="~{modules/common/aside :: aside}" />
+          </th:block>
+        </div>
+        <th:block th:replace="~{modules/common/actions :: actions}" />
+        <th:block th:replace="~{modules/common/footer :: footer}" />
+      </div>
+      <th:block th:replace="~{modules/macro/tail :: tail}" />
     </body>
   </th:block>
 </html>
