@@ -1,59 +1,78 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{modules/layout :: html(title = ${theme.config.photos.photos_title?:'我的图库'}+'-'+${site.title},htmlType = photos,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
+<!doctype html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{modules/layout :: html(title = ${theme.config.photos.photos_title?:'我的图库'}+'-'+${site.title},htmlType = photos,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
 >
-<th:block th:fragment="content">
+  <th:block th:fragment="content">
     <body>
-    <div id="Joe">
-        <th:block th:replace="~{modules/macro/navbar :: navbar}"/>
-        <div class="joe_container joe_main_container page-photos"
-             th:classappend="|${theme.config.theme.enable_show_in_up ? 'animated showInUp':''} ${theme.config.aside.aside_position == 'left' ? 'revert':''}|">
-            <div class="joe_main">
-                <div class="joe_photos__type">
-                    <div class="joe_photos__type-title">
-                        <i class="jiewen joe-icon-tupian"></i>&nbsp;[[${theme.config.photos.photos_title?:'我的图库'}]]
-                    </div>
-                    <nav class="joe_photos__filter">
-                        <ul>
-                            <li data-sjslink="*" class="active">
-                                <a>全部</a>
-                            </li>
-                            <th:block th:each="group : ${groups}">
-                                <li th:data-sjslink="${group.metadata.name}">
-                                    <a>[[${group.spec.displayName}]]</a>
-                                </li>
-                            </th:block>
-
-                        </ul>
-                    </nav>
-
-                </div>
-
-                <div class="wrapper">
-                    <div class="grid" id="image-grid" th:data-total="${photos.totalPages}" th:data-index="${photos.page}">
-                        <!-- 预留空间 -->
-                        <div class="grid-item wow fadeIn" th:each="photo : ${photos.items}" th:data-sjsel="${photo.spec.groupName}">
-                            <div class="card__picture">
-                                <a class="item animated wow jg-entry" th:href="${photo.spec.url}" data-fancybox="gallery">
-                                    <img class="lazy-load" th:data-src="${photo.spec.url}" th:alt="${photo.spec.displayName}" th:src="@{/assets/img/photo_loading.gif}" onerror="Joe.errorImg(this, 'LoadFailedImg')" >
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <th:block th:replace="~{modules/macro/loading :: loading}"/>
-                </div>
-
-
+      <div id="Joe">
+        <th:block th:replace="~{modules/macro/navbar :: navbar}" />
+        <div
+          class="joe_container joe_main_container page-photos"
+          th:classappend="|${theme.config.theme.enable_show_in_up ? 'animated showInUp':''} ${theme.config.aside.aside_position == 'left' ? 'revert':''}|"
+        >
+          <div class="joe_main">
+            <div class="joe_photos__type">
+              <div class="joe_photos__type-title">
+                <i class="jiewen joe-icon-tupian"></i
+                >&nbsp;[[${theme.config.photos.photos_title?:'我的图库'}]]
+              </div>
+              <nav class="joe_photos__filter">
+                <ul>
+                  <li data-sjslink="*" class="active">
+                    <a>全部</a>
+                  </li>
+                  <th:block th:each="group : ${groups}">
+                    <li th:data-sjslink="${group.metadata.name}">
+                      <a>[[${group.spec.displayName}]]</a>
+                    </li>
+                  </th:block>
+                </ul>
+              </nav>
             </div>
-            <th:block th:if="${theme.config.aside.enable_photos_aside}">
-                <th:block th:replace="~{modules/common/aside :: aside}"/>
-            </th:block>
-        </div>
-        <th:block th:replace="~{modules/common/actions :: actions}"/>
-        <th:block th:replace="~{modules/common/footer :: footer}"/>
-    </div>
-    <th:block th:replace="~{modules/macro/tail :: tail}"/>
-    </body>
 
-</th:block>
+            <div class="wrapper">
+              <div
+                class="grid"
+                id="image-grid"
+                th:data-total="${photos.totalPages}"
+                th:data-index="${photos.page}"
+              >
+                <!-- 预留空间 -->
+                <div
+                  class="grid-item wow fadeIn"
+                  th:each="photo : ${photos.items}"
+                  th:data-sjsel="${photo.spec.groupName}"
+                >
+                  <div class="card__picture">
+                    <a
+                      class="item animated wow jg-entry"
+                      th:href="${photo.spec.url}"
+                      data-fancybox="gallery"
+                    >
+                      <img
+                        class="lazy-load"
+                        th:data-src="${photo.spec.url}"
+                        th:alt="${photo.spec.displayName}"
+                        th:src="@{/assets/img/photo_loading.gif}"
+                        onerror="Joe.errorImg(this, 'LoadFailedImg')"
+                      />
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <th:block th:replace="~{modules/macro/loading :: loading}" />
+            </div>
+          </div>
+          <th:block th:if="${theme.config.aside.enable_photos_aside}">
+            <th:block th:replace="~{modules/common/aside :: aside}" />
+          </th:block>
+        </div>
+        <th:block th:replace="~{modules/common/actions :: actions}" />
+        <th:block th:replace="~{modules/common/footer :: footer}" />
+      </div>
+      <th:block th:replace="~{modules/macro/tail :: tail}" />
+    </body>
+  </th:block>
 </html>

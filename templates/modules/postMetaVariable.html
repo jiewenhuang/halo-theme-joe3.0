@@ -1,25 +1,26 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<th:block th:fragment="postSetting">
-  <script th:inline="javascript" id="theme-config-getter">
-    const PageAttrs = {
-      metas_enable_read_limit: /*[[${#annotations.getOrDefault(post, 'enable_read_limit', 'false')}]]*/ false,
-      metas_enable_page_meta: /*[[${#annotations.getOrDefault(post, 'enable_page_meta','true')}]]*/ true,
-      metas_enable_passage_tips: /*[[${#annotations.getOrDefault(post, 'enable_passage_tips', 'true')}]]*/ true,
-      metas_enable_collect_check: /*[[${#annotations.getOrDefault(post, 'enable_collect_check', 'true')}]]*/ true,
-      metas_use_raw_content: /*[[${#annotations.getOrDefault(post, 'use_raw_content', 'false')}]]*/ false,
-      metas_enable_comment: /*[[${#annotations.getOrDefault(post, 'enable_comment', 'true')}]]*/ true,
-      metas_enable_toc: /*[[${#annotations.getOrDefault(post, 'enable_comment', 'true')}]]*/ true,
-      metas_toc_depth: /*[[${#annotations.getOrDefault(post, 'toc_depth', 0)}]]*/ 0,
-      metas_img_max_width: /*[[${#annotations.getOrDefault(post, 'img_max_width', '100%')}]]*/ '100%',
-      metas_img_align: /*[[${#annotations.getOrDefault(post, 'img_align', 'center')}]]*/ 'center',
-      metas_enable_copy: /*[[${#annotations.getOrDefault(post, 'enable_copy', 'true')}]]*/ true,
-      metas_enable_donate: /*[[${#annotations.getOrDefault(post, 'enable_donate', 'true')}]]*/ true,
-      metas_enable_share: /*[[${#annotations.getOrDefault(post, 'enable_share', 'true')}]]*/ true,
-      metas_enable_like: /*[[${#annotations.getOrDefault(post, 'enable_like', 'true')}]]*/ true,
-      metas_enable_fold_long_code: /*[[${#annotations.getOrDefault(post, 'enable_fold_long_code', 'true')}]]*/ true
-    };
-    PageAttrs.metas_toc_depth = parseInt(PageAttrs.metas_toc_depth);
-  </script>
-</th:block>
+  <th:block th:fragment="postSetting">
+    <script th:inline="javascript" id="theme-config-getter">
+      const PageAttrs = {
+        metas_enable_read_limit: /*[[${#annotations.getOrDefault(post, 'enable_read_limit', 'false')}]]*/ false,
+        metas_enable_page_meta: /*[[${#annotations.getOrDefault(post, 'enable_page_meta','true')}]]*/ true,
+        metas_enable_passage_tips: /*[[${#annotations.getOrDefault(post, 'enable_passage_tips', 'true')}]]*/ true,
+        metas_enable_collect_check: /*[[${#annotations.getOrDefault(post, 'enable_collect_check', 'true')}]]*/ true,
+        metas_use_raw_content: /*[[${#annotations.getOrDefault(post, 'use_raw_content', 'false')}]]*/ false,
+        metas_enable_comment: /*[[${#annotations.getOrDefault(post, 'enable_comment', 'true')}]]*/ true,
+        metas_enable_toc: /*[[${#annotations.getOrDefault(post, 'enable_comment', 'true')}]]*/ true,
+        metas_toc_depth: /*[[${#annotations.getOrDefault(post, 'toc_depth', 0)}]]*/ 0,
+        // prettier-ignore
+        metas_img_max_width: /*[[${#annotations.getOrDefault(post, 'img_max_width', '100%')}]]*/ '100%',
+        metas_img_align: /*[[${#annotations.getOrDefault(post, 'img_align', 'center')}]]*/ 'center',
+        metas_enable_copy: /*[[${#annotations.getOrDefault(post, 'enable_copy', 'true')}]]*/ true,
+        metas_enable_donate: /*[[${#annotations.getOrDefault(post, 'enable_donate', 'true')}]]*/ true,
+        metas_enable_share: /*[[${#annotations.getOrDefault(post, 'enable_share', 'true')}]]*/ true,
+        metas_enable_like: /*[[${#annotations.getOrDefault(post, 'enable_like', 'true')}]]*/ true,
+        metas_enable_fold_long_code: /*[[${#annotations.getOrDefault(post, 'enable_fold_long_code', 'true')}]]*/ true,
+      };
+      PageAttrs.metas_toc_depth = parseInt(PageAttrs.metas_toc_depth);
+    </script>
+  </th:block>
 </html>
