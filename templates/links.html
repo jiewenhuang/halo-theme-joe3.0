@@ -72,7 +72,7 @@
                 linksGroupEles.sort((a, b) => {
                   const aSortSeq = parseInt($(a).data('link-group-sort-seq') || 0);
                   const bSortSeq = parseInt($(b).data('link-group-sort-seq') || 0);
-              
+
                   if (!isNaN(bSortSeq) && !isNaN(aSortSeq)) {
                     if (bSortSeq > 0 && aSortSeq > 0)
                       return bSortSeq > aSortSeq ? 1 : -1; // link-group-sort-seq 数字越大越靠前
@@ -156,13 +156,12 @@
             <h2 >评论区</h2>
             </div>
             <th:block th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}">
-
-            <halo:comment
-                    group="content.halo.run"
-                    kind="SinglePage"
-                    name="links"
-                    colorScheme="document.documentElement.getAttribute('data-mode')"
-            />
+              <halo:comment
+                      group="plugin.halo.run"
+                      kind="Plugin"
+                      th:attr="name=${pluginName}"
+                      colorScheme="document.documentElement.getAttribute('data-mode')"
+              />
             </th:block>
             <th:block th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}">
               <div id="waline"></div>
