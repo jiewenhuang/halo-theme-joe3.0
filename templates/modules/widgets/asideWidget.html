@@ -120,7 +120,7 @@
                   </th:block>
                 </th:block>
                 <th:block
-                  th:if="${result.spec.subjectRef.kind == 'SinglePage'}  and ${result.spec.subjectRef.name == 'links'}"
+                  th:if="${result.spec.subjectRef.kind == 'Plugin'}"
                 >
                   <a class="link aside-reply-content" th:href="@{/links}">
                     <p>[[${result.spec.content}]]</p>
