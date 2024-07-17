@@ -4,7 +4,8 @@
   xmlns:th="http://www.thymeleaf.org"
   th:replace="~{modules/layout :: html(title = ${post.spec.title}+'-'+${site.title},htmlType = post,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
 >
-  <th:block th:fragment="content">
+  <th:block th:fragment="content"
+            th:with="days=${(new java.util.Date().getTime()-post.status.lastModifyTime.toEpochMilli())/86400000}">
     <body>
       <div id="Joe">
         <!--          navbar-->
@@ -147,19 +148,34 @@
                           </svg>
                           <span class="text">温馨提示：</span>
                         </div>
-                        <div class="content">
-                          <th:block
-                            th:if="${theme.config.post.passage_tips_content != null} and ${theme.config.post.passage_tips_content != ''}"
-                          >
-                            [[${theme.config.post.passage_tips_content}]]
-                          </th:block>
-                          <th:block
-                            th:if="${theme.config.post.passage_tips_content == null} or ${theme.config.post.passage_tips_content == ''}"
-                          >
-                            本文最后更新于
-                            [[${#dates.format(post.status.lastModifyTime,'yyyy-MM-dd')}]]，若内容或图片失效，请留言反馈。部分素材来自网络，若不小心影响到您的利益，请联系我们删除。
-                          </th:block>
-                        </div>
+                        <th:block th:if="${theme.config.post.days_type}">
+                          <div class="content">
+                            <th:block
+                              th:if="${theme.config.post.passage_tips_content != null} and ${theme.config.post.passage_tips_content != ''}"
+                            >
+                              <th:block th:if="${days} >= ${theme.config.post.days}">本文最后更新于[[${#dates.format(post.status.lastModifyTime,'yyyy-MM-dd')}]]，若内容或图片失效，请留言反馈。</th:block>
+                              [[${theme.config.post.passage_tips_content}]]
+                            </th:block>
+                            <th:block th:if="${theme.config.post.passage_tips_content == null} or ${theme.config.post.passage_tips_content == ''}">
+                              <th:block th:if="${days} >= ${theme.config.post.days}">本文最后更新于[[${#dates.format(post.status.lastModifyTime,'yyyy-MM-dd')}]]，若内容或图片失效，请留言反馈。</th:block>
+                              部分素材来自网络，若不小心影响到您的利益，请联系我们删除。
+                            </th:block>
+                          </div>
+                        </th:block>
+                        <th:block th:if="${theme.config.post.days_type} != true">
+                          <div class="content">
+                            <th:block
+                                    th:if="${theme.config.post.passage_tips_content != null} and ${theme.config.post.passage_tips_content != ''}"
+                            >
+                              <th:block th:if="${days} >= ${theme.config.post.days}">本文最后更新于[[${days}]]天前，若内容或图片失效，请留言反馈。</th:block>
+                              [[${theme.config.post.passage_tips_content}]]
+                            </th:block>
+                            <th:block th:if="${theme.config.post.passage_tips_content == null} or ${theme.config.post.passage_tips_content == ''}">
+                              <th:block th:if="${days} >= ${theme.config.post.days}">本文最后更新于[[${days}]]天前，若内容或图片失效，请留言反馈。</th:block>
+                              部分素材来自网络，若不小心影响到您的利益，请联系我们删除。
+                            </th:block>
+                          </div>
+                        </th:block>
                       </div>
                     </th:block>
                   </div>

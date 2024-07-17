@@ -1780,7 +1780,22 @@ spec:
               label: 是
             - value: false
               label: 否
-
+        - $formkit: text
+          name: days
+          label: 失效提示天数
+          value: "30"
+          help: "自定义失效提示天数，超过此天数才显示失效提示（默认为 30 天）"
+        - $formkit: radio
+          name: days_type
+          id: days_type
+          label: 失效提示类型
+          value: true
+          help: '日期：本文最后更新于 2024-05-14 / 天数：本文最后更新于 30 天前'
+          options:
+            - value: true
+              label: 日期
+            - value: false
+              label: 天数
         - $formkit: textarea
           #          if: "$get(enable_passage_tips).value"
           name: passage_tips_content
