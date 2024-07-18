@@ -2439,6 +2439,19 @@ spec:
           label: 底部显示内容
           value: ''
           language: html
+    - group: leaving
+      label: 留言页
+      formSchema:
+        - $formkit: radio
+          name: message_source
+          label: 留言页展示来源
+          value: true
+          help: "默认展示全部评论"
+          options:
+            - value: true
+              label: 全部评论
+            - value: false
+              label: 仅留言板评论
     - group: ads
       label: 广告
       formSchema:
