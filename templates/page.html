@@ -84,8 +84,8 @@
                   </div>
                   <time
                     class="joe_detail__count-created"
-                    th:datetime="${#dates.format(singlePage.spec.publishTime,'MM/dd')}"
-                    >[[${#dates.format(singlePage.spec.publishTime,'MM/dd')}]]</time
+                    th:datetime="${#dates.format(singlePage.status.lastModifyTime,'MM/dd')}"
+                    >[[${#dates.format(singlePage.status.lastModifyTime,'MM/dd')}]]</time
                   >
                 </div>
               </th:block>
