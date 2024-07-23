@@ -2037,6 +2037,14 @@ spec:
           value: ''
           help: '打赏用的QQ收款二维码链接，不填不显示'
 
+        # 可以自定义其他收款方式
+        - $formkit: code
+          name: reward_code
+          id: reward_code
+          label: 自定义代码
+          value:
+          language: html
+
     - group: tags
       label: 标签页
       formSchema:
