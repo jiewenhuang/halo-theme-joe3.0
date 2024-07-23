@@ -987,6 +987,16 @@ spec:
           label: 博主显示昵称
           value: ''
           help: '默认使用网站title'
+        - $formkit: select
+          name: enable_blogger_level
+          label: 展示博主等级
+          value: true
+          help: ''
+          options:
+            - value: true
+              label: 开启
+            - value: false
+              label: 关闭
         - $formkit: text
           name: motto
           label: 个人独白
