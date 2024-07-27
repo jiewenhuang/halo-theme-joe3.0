@@ -2554,6 +2554,71 @@ body {
       }
     }
 
+    &.reward {
+      background: var(--background);
+      .pay-tab-content {
+        width: 100%;
+        height: 310px;
+        padding: 0 15px;
+      
+        input[type="radio"]:checked + label + div {
+          display: block;
+          left: 0;
+          opacity: 1;
+        }
+      
+        input[type="radio"]:checked + label {
+          color: var(--theme);
+          border-bottom-color: var(--theme);
+        }
+      
+        ul {
+          display: flex;
+          position: relative;
+          list-style-type: none;
+          padding: 0;
+      
+          > li {
+            flex: 1;
+            list-style-type: none;
+            text-align: center;
+            line-height: 40px;
+            margin: 0 3px;
+      
+            &:hover label {
+              color: var(--theme);
+            }
+      
+            label {
+              width: 100%;
+              cursor: pointer;
+              display: block;
+              border-radius: 3px;
+              transition: color 0.3s;
+              border-bottom: 2px solid transparent;
+            }
+      
+            > input {
+              display: none;
+            }
+      
+            > div {
+              opacity: 0;
+              position: absolute;
+              width: 100%;
+              left: 300px;
+            }
+
+            .reward_image {
+              width: 250px;
+              height: 250px;
+            }
+          }
+        }
+      }
+      
+    }
+
     &.qrcode {
       background: var(--background);
 
