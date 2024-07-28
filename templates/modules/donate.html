@@ -4,11 +4,11 @@
     <div class="joe_donate">
       <i class="joe-font joe-icon-shang"></i>
       <th:block
-        th:if="${theme.config.post.qrcode_zfb != ''} or ${theme.config.post.qrcode_wx != ''}"
+        th:if="${theme.config.post.qrcode_zfb != ''} or ${theme.config.post.qrcode_wx != ''} or ${#strings.trim(theme.config.post.reward_code) != ''}"
       >
         <ol
           class="joe_donate_list"
-          th:classappend="${theme.config.post.qrcode_zfb != '' && theme.config.post.qrcode_wx != '' ?'two':''}"
+          th:classappend="${theme.config.post.qrcode_zfb != '' && theme.config.post.qrcode_wx != '' && theme.config.post.reward_code != '' ?'two':''}"
         >
           <th:block
             th:if="${theme.config.post.qrcode_zfb} and ${#strings.trim(theme.config.post.qrcode_wx) != ''}"
@@ -45,6 +45,9 @@
                 onerror="Joe.errorImg(this, 'LoadFailedImg')"
               />
             </li>
+          </th:block>
+          <th:block th:if="${#strings.trim(theme.config.post.reward_code) != ''}">
+            <li><th:block th:utext="${theme.config.post.reward_code}"></th:block></li>
           </th:block>
         </ol>
       </th:block>

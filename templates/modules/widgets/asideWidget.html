@@ -15,6 +15,39 @@
       </div>
     </section>
   </th:block>
+  <th:block th:fragment="enable_reward(reward_data)">
+    <th:block th:if="${theme.config.other.enable_clean_mode != true}">
+      <section class="joe_aside__item reward">
+        <div class="joe_aside__item-title">
+          <i class="joe-font joe-icon-coffee"></i>
+          <span class="text">请作者喝杯咖啡</span>
+        </div>
+        <div class="pay-tab-content">
+          <ul>
+            <li th:each="reward,iterStat : ${reward_data.reward_list}">
+              <input
+                type="radio"
+                th:value="${iterStat.index}"
+                th:checked="${iterStat.index == 0}"
+                name="radio"
+                th:id="${iterStat.index}"
+              />
+              <label th:for="${iterStat.index}"> [[${reward.reward_label}]] </label>
+              <div th:if="${reward.reward_type == 'image'}">
+                <img
+                  class="reward_image"
+                  th:src="${reward.reward_url}"
+                  alt="打赏"
+                  th:class="reward-image"
+                />
+              </div>
+              <div th:if="${reward.reward_type == 'custom'}" th:utext="${reward.reward_html}"></div>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </th:block>
+  </th:block>
   <th:block th:fragment="enable_picture(pic_data)">
     <section class="joe_aside__item qrcode">
       <div class="joe_aside__item-title">
