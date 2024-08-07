@@ -29,6 +29,33 @@
 ### 下载安装
 下载[releases](https://github.com/jiewenhuang/halo-theme-joe3.0/releases)或者直接[下载代码](https://github.com/jiewenhuang/halo-theme-joe3.0)，通过 Halo Console 后台主题安装处上传即可。
 
+## 主题配置
+
+### 基本设置
+
+#### Waline设置
+
+##### Waline基础配置
+
+该配置项可以对Waline进行自定义基础配置，内容为json格式，如果配置未生效，请先检查填入的内容是否为json格式，可以前往[JSON校验网站](https://www.json.cn/)进行格式校验。为了方便用户填写，这里提供如下样例，具体所代表的含义以及更多配置项请参考[Waline官网](https://waline.js.org/)。
+
+```json
+{
+  "search":false,
+  "reaction":true,
+  "login":"force",
+  "locale": {
+     "placeholder":"欢迎评论啦啦啦"
+  },
+   "emoji": [
+      "//unpkg.com/@waline/emojis@1.2.0/weibo",
+      "//unpkg.com/@waline/emojis@1.2.0/bmoji"
+    ]  
+}
+```
+
+
+
 ## 使用说明
 > 1、首次使用请先把主题所有配置保存一遍  
 > 2、部分功能使用插件进行实现  
