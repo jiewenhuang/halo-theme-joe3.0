@@ -192,6 +192,9 @@
                                   <script type="module" th:inline="javascript">
                                     import { init } from  /*[[${theme.config.basic.waline.waline_js_comment}]]*/'';
 
+                                    const waline_config_basic_jsonString = /*[[${theme.config.basic.waline.waline_config_basic_json}]]*/'';
+                                    const waline_config_basic_object = JSON.parse((waline_config_basic_jsonString === null || waline_config_basic_jsonString.trim() === '') ?'{}':waline_config_basic_jsonString.trim());
+
                                     init({
                                       el: /*[[${'#'+moment.metadata.name}]]*/'',
                                       dark: 'html[data-mode="dark"]',
@@ -199,7 +202,7 @@
                                       path: '/moments/'+/*[[${moment.metadata.name}]]*/'',
                                       comment: true,
                                       requiredMeta:['nick', 'mail'],
-
+                                      ...waline_config_basic_object
                                     });
                                     const url = [[${theme.config.basic.waline.waline_serverURL+'/api/comment?type=count&url=/moments/'+moment.metadata.name}]];
                                     fetch(url).then(async (response) => {

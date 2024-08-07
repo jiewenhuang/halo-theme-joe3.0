@@ -63,6 +63,12 @@ spec:
               label: 列表 JS
               value: 'https://unpkg.com/@waline/client@v2/dist/comment.mjs'
               help: 首页加载显示评论数的 JS 地址
+            - $formkit: code
+              name: waline_config_basic_json
+              label: Waline 基础配置
+              value: ''
+              help: 'Waline 基础配置（json格式），更多配置项请参考 Waline官网：https://waline.js.org'
+              language: json
 
         - $formkit: radio
           name: enable_source_link

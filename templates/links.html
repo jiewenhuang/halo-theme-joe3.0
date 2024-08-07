@@ -260,11 +260,15 @@
                     <script type="module" th:inline="javascript">
                       import { init } from /*[[${theme.config.basic.waline.waline_js_comment}]]*/ '';
 
+                      const waline_config_basic_jsonString = /*[[${theme.config.basic.waline.waline_config_basic_json}]]*/'';
+                      const waline_config_basic_object = JSON.parse((waline_config_basic_jsonString === null || waline_config_basic_jsonString.trim() === '') ?'{}':waline_config_basic_jsonString.trim());
+
                       init({
                         el: '#waline',
                         dark: 'html[data-mode="dark"]',
                         serverURL: /*[[${theme.config.basic.waline.waline_serverURL}]]*/ '',
                         requiredMeta: ['nick', 'mail'],
+                        ...waline_config_basic_object
                       });
                     </script>
                   </th:block>
