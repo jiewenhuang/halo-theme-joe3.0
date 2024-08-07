@@ -29,6 +29,27 @@
 ### 下载安装
 下载[releases](https://github.com/jiewenhuang/halo-theme-joe3.0/releases)或者直接[下载代码](https://github.com/jiewenhuang/halo-theme-joe3.0)，通过 Halo Console 后台主题安装处上传即可。
 
+## 使用说明
+> 1、首次使用请先把主题所有配置保存一遍  
+> 2、部分功能使用插件进行实现  
+> 3、请配合Halo2.8.0及以上版本使用  
+> 4、菜单栏的图标请使用[iconfont](https://www.iconfont.cn/)的图标，需要填入Font Family 和图标代码例如：`jiewen joe-icon-tupian`  
+> 5、使用自定义标签样式请以插入HTML文本形式使用，标签请参考[Joe3部分样式](https://www.jiewen.run/archives/joe3style)或者直接使用插件标签
+
+- [x] 卡片化设计
+- [x] 响应式主题
+- [x] 深色模式
+- [X] 文章目录
+- [X] 代码高亮/语言/复制）
+- [x] [文章搜索](https://github.com/halo-sigs/plugin-search-widget)
+- [x] 显示字数统计
+- [x] 显示相关文章
+- [X] [评论系统](https://github.com/halo-sigs/plugin-comment-widget)
+- [x] [友情链接](https://github.com/halo-sigs/plugin-links)  
+- [x] [瞬时](https://github.com/halo-sigs/plugin-moments)  
+- [x] [图库](https://github.com/halo-sigs/plugin-photos)  
+- [x] 其他功能
+
 ## 主题配置
 
 ### 基本设置
@@ -53,29 +74,6 @@
     ]  
 }
 ```
-
-
-
-## 使用说明
-> 1、首次使用请先把主题所有配置保存一遍  
-> 2、部分功能使用插件进行实现  
-> 3、请配合Halo2.8.0及以上版本使用  
-> 4、菜单栏的图标请使用[iconfont](https://www.iconfont.cn/)的图标，需要填入Font Family 和图标代码例如：`jiewen joe-icon-tupian`  
-> 5、使用自定义标签样式请以插入HTML文本形式使用，标签请参考[Joe3部分样式](https://www.jiewen.run/archives/joe3style)或者直接使用插件标签
-
-- [x] 卡片化设计
-- [x] 响应式主题
-- [x] 深色模式
-- [X] 文章目录
-- [X] 代码高亮/语言/复制）
-- [x] [文章搜索](https://github.com/halo-sigs/plugin-search-widget)
-- [x] 显示字数统计
-- [x] 显示相关文章
-- [X] [评论系统](https://github.com/halo-sigs/plugin-comment-widget)
-- [x] [友情链接](https://github.com/halo-sigs/plugin-links)  
-- [x] [瞬时](https://github.com/halo-sigs/plugin-moments)  
-- [x] [图库](https://github.com/halo-sigs/plugin-photos)  
-- [x] 其他功能
 
 
 ## 预览
