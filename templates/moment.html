@@ -191,6 +191,33 @@
                                     const waline_config_basic_jsonString = /*[[${theme.config.basic.waline.waline_config_basic_json}]]*/'';
                                     const waline_config_basic_object = JSON.parse((waline_config_basic_jsonString === null || waline_config_basic_jsonString.trim() === '') ?'{}':waline_config_basic_jsonString.trim());
 
+                                    let waline_config_imageUpload_option = /*[[${theme.config.basic.waline.waline_config_imageUpload_option}]]*/'';
+                                    let imageUploader = 'true';
+                                    if(waline_config_imageUpload_option === "lskypro"){
+                                      imageUploader = (file) => {
+                          
+                                      let lskypro_apiURL = /*[[${theme.config.basic.waline.lskypro.lskypro_apiURL}]]*/'';
+                                      let lskypro_apiTOKEN = /*[[${theme.config.basic.waline.lskypro.lskypro_apiTOKEN}]]*/'';
+                                      
+                                      let formData = new FormData();
+                                      let headers = new Headers();
+                            
+                                      formData.append('file', file);
+                                      if(lskypro_apiTOKEN.trim()!==''){
+                                        headers.append('Authorization', "Bearer " + lskypro_apiTOKEN.trim());
+                                      }
+                                      headers.append('Accept', 'application/json');    
+                            
+                                      return fetch(lskypro_apiURL.trim(), {
+                                        method: 'POST',
+                                        headers: headers,
+                                        body: formData
+                                      })
+                                        .then((resp) => resp.json())
+                                        .then((resp) => resp.data.links.url);
+                                      }
+                                    }
+
                                     init({
                                       el: /*[[${'#'+moment.metadata.name}]]*/'',
                                       dark: 'html[data-mode="dark"]',
@@ -198,6 +225,7 @@
                                       path: '/moments/'+/*[[${moment.metadata.name}]]*/'',
                                       comment: true,
                                       requiredMeta:['nick', 'mail'],
+                                      imageUploader,
                                       ...waline_config_basic_object
                                     });
                                     const url = [[${theme.config.basic.waline.waline_serverURL+'/api/comment?type=count&url=/moments/'+moment.metadata.name}]];

@@ -69,6 +69,33 @@ spec:
               value: ''
               help: 'Waline 基础配置（json格式），更多配置项请参考 Waline官网：https://waline.js.org'
               language: json
+            - $formkit: radio
+              name: waline_config_imageUpload_option
+              id: waline_config_imageUpload_option
+              value: default
+              label: Waline 图片上传配置
+              help: "选择图片上传方式"
+              options:
+                - value: default
+                  label: 默认
+                - value: lskypro
+                  label: 兰空图床
+            - $formkit: group
+              name: lskypro
+              if: "$get(waline_config_imageUpload_option).value === 'lskypro'"
+              label: 兰空图床上传 设置
+              id: lskypro
+              children:
+                - $formkit: text
+                  name: lskypro_apiURL
+                  label: 兰空图床 服务端地址
+                  value: ""
+                  help: "兰空图床 服务端地址，如 https://img.example.com/api/v1/upload 不要加结尾反斜杠"
+                - $formkit: text
+                  name: lskypro_apiTOKEN
+                  label: 兰空图床 Token
+                  value: ""
+                  help: "兰空图床 Token，如 2|1bJbwlqBfnggmOMEZqXT5XusaIwqiZjCDs7r1Ob5"
 
         - $formkit: radio
           name: enable_source_link
