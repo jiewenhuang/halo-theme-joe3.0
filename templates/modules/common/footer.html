@@ -11,7 +11,7 @@
       >
         <div class="item">
           <p>
-            [[${#dates.format(new java.util.Date().getTime(), 'yyyy')}]] ©<a
+            © [[${#strings.substring(theme.config.footer.custom_birthday, 0, 4)}]] - [[${#dates.format(new java.util.Date().getTime(), 'yyyy')}]]<a
               th:href="${site.url}"
               target="_blank"
               rel="noopener noreferrer"
