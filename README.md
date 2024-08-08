@@ -75,6 +75,55 @@
 }
 ```
 
+##### Waline图片上传配置
+
+该配置项可以配置Waline的图片上传方式
+
++ 默认
+
+默认的图片上传方式上传的图片最大只能128Kb
+
++ 兰空图床
+
+该配置项可以配置Waline的图片上传至兰空图床，需要自建兰空图床服务
+
+##### 兰空图床上传设置
+
++ 兰空图床服务端地址
+
+兰空图床服务端地址，如 https://img.example.com/api/v1/upload 不要加结尾反斜杠
+
++ 兰空图床Token
+
+兰空图床Token，如 `2|1bJbwlqBfnggmOMEZqXT5XusaIwqiZjCDs7r1Ob5`，通过配置Token可以进行图片上传的权限控制，如果为空则以游客身份上传（需要在兰空图床开放游客上传的权限）
+
+如何获取Token?
+
+通过兰空图床api获取，请求示例如下：
+
+```bash
+curl -X POST https://img.example.com/api/v1/tokens \
+-H "Content-Type: application/json" \
+-d '{
+  "email": "email@qq.com",
+  "password": "password***"
+}'
+```
+
+如果出现如下报错，请在末尾加入参数`-k`来忽略证书验证
+
+```bash
+curl: (60) schannel: SEC_E_UNTRUSTED_ROOT (0x80090325) - More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it.
+```
+
+返回结果示例：
+
+```json
+{"status":true,"message":"success","data":{"token":"2|1bJbwlqBfnggmOMEZqXT5XusaIwqiZjCDs7r1Ob5"}}
+```
 
 ## 预览
 WIP
