@@ -1131,6 +1131,8 @@ spec:
                   value: bilibili
                 - label: QQ
                   value: qq
+                - label: 微信
+                  value: wechat
                 - label: 微博
                   value: weibo
                 - label: 豆瓣
