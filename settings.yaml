@@ -1756,7 +1756,7 @@ spec:
           name: post_author_link
           label: 文章页作者跳转链接
           value: ''
-          help: '留空则不跳转'
+          help: '留空则跳转作者文章归档'
 
         - $formkit: radio
           name: enable_page_meta

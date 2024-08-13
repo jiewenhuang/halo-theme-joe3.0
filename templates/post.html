@@ -68,7 +68,7 @@
                           <div class="author">
                             <a
                               class="link"
-                              th:href="${theme.config.post.post_author_link == ''?'javascript:;':theme.config.post.post_author_link}"
+                              th:href="${theme.config.post.post_author_link == '' ? '/authors/' + contributor.name : theme.config.post.post_author_link}"
                               th:title="${contributor.displayName}"
                               >[[${contributor.displayName}]]</a
                             >
