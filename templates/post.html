@@ -68,7 +68,7 @@
                           <div class="author">
                             <a
                               class="link"
-                              th:href="${theme.config.post.post_author_link == ''?'javascript:;':theme.config.post.post_author_link}"
+                              th:href="${theme.config.post.post_author_link == '' ? '/authors/' + contributor.name : theme.config.post.post_author_link}"
                               th:title="${contributor.displayName}"
                               >[[${contributor.displayName}]]</a
                             >
@@ -97,11 +97,7 @@
                             <span class="line">/</span>
                             <span class="text">[[${post.stats.visit}]] 阅读</span>
                             <span class="line">/</span>
-                            <th:block
-                              th:with="wordCount = ${#strings.length(post.content.content)}"
-                            >
-                              <span class="text">[[${wordCount}]] 字</span>
-                            </th:block>
+                            <span class="text" id="wordCount">0 字</span>
                             <th:block
                               th:if="${#annotations.getOrDefault(post, 'enable_collect_check', 'true')} and ${theme.config.other.check_baidu_collect}"
                             >
@@ -328,6 +324,23 @@
           <th:block th:replace="~{modules/common/footer :: footer}" />
         </th:block>
       </div>
+      <script>
+        // 等待文档加载完成
+        document.addEventListener("DOMContentLoaded", function() {
+          // 获取文章内容
+          const postContent = document.getElementById("post-inner").innerText || "";
+
+          // 使用正则表达式匹配中文、数字和字母
+          const matches = postContent.match(/[\u4e00-\u9fa5a-zA-Z0-9]/g);
+
+          // 计算有效字符数
+          const wordCount = matches ? matches.length : 0;
+
+          // 更新字数统计显示
+          document.getElementById("wordCount").innerText = `${wordCount} 字`;
+        });
+
+      </script>
       <th:block th:replace="~{modules/macro/tail :: tail}" />
     </body>
   </th:block>
