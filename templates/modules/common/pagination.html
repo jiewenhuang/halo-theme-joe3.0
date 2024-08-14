@@ -22,8 +22,7 @@
           </li>
           <li
             class="next"
-            th:href="@{${posts.nextUrl}}"
-            th:classappend="${index eq totalPages} ? ' disabled':''"
+            th:classappend="${pageIndex eq totalPages} ? ' disabled':''"
           >
             <a th:href="@{${posts.nextUrl}}">
               <i class="joe-font joe-icon-next"></i>
@@ -83,8 +82,7 @@
           </li>
           <li
             class="next"
-            th:href="@{${posts.nextUrl}}"
-            th:classappend="${index eq totalPages} ? ' disabled':''"
+            th:classappend="${pageIndex eq totalPages} ? ' disabled':''"
           >
             <a th:href="@{${posts.nextUrl}}">
               <i class="joe-font joe-icon-next"></i>
@@ -111,7 +109,7 @@
           >
             <a th:href="@{/archives/page/} + ${index}" th:text="${index}"></a>
           </li>
-          <li class="next" th:classappend="${index eq totalPages} ? ' disabled':''">
+          <li class="next" th:classappend="${pageIndex eq totalPages} ? ' disabled':''">
             <a th:href="@{${archives.nextUrl}}">
               <i class="joe-font joe-icon-next"></i>
             </a>
@@ -170,8 +168,7 @@
           </li>
           <li
             class="next"
-            th:href="@{${archives.nextUrl}}"
-            th:classappend="${index eq totalPages} ? ' disabled':''"
+            th:classappend="${pageIndex eq totalPages} ? ' disabled':''"
           >
             <a th:href="@{${archives.nextUrl}}">
               <i class="joe-font joe-icon-next"></i>
@@ -198,7 +195,7 @@
           >
             <a th:href="${category.status.permalink}+'/page/' + ${index}" th:text="${index}"></a>
           </li>
-          <li class="next" th:classappend="${index eq totalPages} ? ' disabled':''">
+          <li class="next" th:classappend="${pageIndex eq totalPages} ? ' disabled':''">
             <a th:href="@{${posts.nextUrl}}">
               <i class="joe-font joe-icon-next"></i>
             </a>
@@ -261,8 +258,7 @@
           </li>
           <li
             class="next"
-            th:href="@{${posts.nextUrl}}"
-            th:classappend="${index eq totalPages} ? ' disabled':''"
+            th:classappend="${pageIndex eq totalPages} ? ' disabled':''"
           >
             <a th:href="@{${posts.nextUrl}}">
               <i class="joe-font joe-icon-next"></i>
@@ -289,7 +285,7 @@
           >
             <a th:href="${tag.status.permalink}+'/page/' + ${index}" th:text="${index}"></a>
           </li>
-          <li class="next" th:classappend="${index eq totalPages} ? ' disabled':''">
+          <li class="next" th:classappend="${pageIndex eq totalPages} ? ' disabled':''">
             <a th:href="@{${posts.nextUrl}}">
               <i class="joe-font joe-icon-next"></i>
             </a>
@@ -349,8 +345,7 @@
           </li>
           <li
             class="next"
-            th:href="@{${posts.nextUrl}}"
-            th:classappend="${index eq totalPages} ? ' disabled':''"
+            th:classappend="${pageIndex eq totalPages} ? ' disabled':''"
           >
             <a th:href="@{${posts.nextUrl}}">
               <i class="joe-font joe-icon-next"></i>
@@ -377,7 +372,7 @@
           >
             <a th:href="@{/moments}+'/page/'+ ${index}" th:text="${index}"></a>
           </li>
-          <li class="next" th:classappend="${index eq totalPages} ? ' disabled':''">
+          <li class="next" th:classappend="${pageIndex eq totalPages} ? ' disabled':''">
             <a th:href="@{${moments.nextUrl}}">
               <i class="joe-font joe-icon-next"></i>
             </a>
@@ -436,8 +431,7 @@
           </li>
           <li
             class="next"
-            th:href="@{${posts.nextUrl}}"
-            th:classappend="${index eq totalPages} ? ' disabled':''"
+            th:classappend="${pageIndex eq totalPages} ? ' disabled':''"
           >
             <a th:href="@{${moments.nextUrl}}">
               <i class="joe-font joe-icon-next"></i>
