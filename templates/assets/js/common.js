@@ -535,40 +535,74 @@ const commonContext = {
 	},
 	/* 初始化3D标签云 */
 	init3dTag() {
-		ThemeConfig.tag_cloud_type = document.getElementById('tags-3d') ? '3d' : 'list';
-		ThemeConfig.enable_tag_cloud = document.querySelector('.joe_aside__item.tags-cloud') !== null;
+		ThemeConfig.tag_cloud_type = document.getElementById('tags-3d') ? '3d' : 'list'
+		ThemeConfig.enable_tag_cloud=document.querySelector('.joe_aside__item.tags-cloud') !== null
 		// console.log(ThemeConfig.enable_tag_cloud)
 		if (
 			Joe.isMobile ||
-			!ThemeConfig.enable_tag_cloud ||
-			ThemeConfig.tag_cloud_type !== "3d" ||
-			!$(".tags-cloud-list").length
+      !ThemeConfig.enable_tag_cloud ||
+      ThemeConfig.tag_cloud_type !== "3d" ||
+      !$(".tags-cloud-list").length
 		)
 			return;
-
 		$.getScript(
 			`${ThemeConfig.BASE_RES_URL}/assets/lib/3dtag/3dtag.min.js`,
 			(_res) => {
 				const entries = [];
-
-				// 生成随机RGB颜色
-				const getRandomColor = () => {
-					const r = Math.floor(Math.random() * 256);
-					const g = Math.floor(Math.random() * 256);
-					const b = Math.floor(Math.random() * 256);
-					return `rgb(${r}, ${g}, ${b})`;
+				const colors = [
+					"#F8D800",
+					"#0396FF",
+					"#EA5455",
+					"#7367F0",
+					"#32CCBC",
+					"#F6416C",
+					"#28C76F",
+					"#9F44D3",
+					"#F55555",
+					"#736EFE",
+					"#E96D71",
+					"#DE4313",
+					"#D939CD",
+					"#4C83FF",
+					"#F072B6",
+					"#C346C2",
+					"#5961F9",
+					"#FD6585",
+					"#465EFB",
+					"#FFC600",
+					"#FA742B",
+					"#5151E5",
+					"#BB4E75",
+					"#FF52E5",
+					"#49C628",
+					"#00EAFF",
+					"#F067B4",
+					"#F067B4",
+					"#ff9a9e",
+					"#00f2fe",
+					"#4facfe",
+					"#f093fb",
+					"#6fa3ef",
+					"#bc99c4",
+					"#46c47c",
+					"#f9bb3c",
+					"#e8583d",
+					"#f68e5f",
+				];
+				const random = (min, max) => {
+					min = Math.ceil(min);
+					max = Math.floor(max);
+					return Math.floor(Math.random() * (max - min + 1)) + min;
 				};
-
 				$(".tags-cloud-list a").each((i, item) => {
 					entries.push({
 						label: $(item).attr("data-label"),
 						url: $(item).attr("data-url"),
 						target: "_blank",
-						fontColor: getRandomColor(),
+						fontColor: colors[random(0, colors.length - 1)],
 						fontSize: 16,
 					});
 				});
-
 				$("#tags-3d").svg3DTagCloud({
 					entries,
 					width: 250,
@@ -580,13 +614,11 @@ const commonContext = {
 					speed: 0.5,
 					fontWeight: 500,
 				});
-
 				$(".tags-cloud-list").remove();
 				$("#tags-3d .empty").remove();
 			}
 		);
 	},
-
 	/* 搜索框弹窗 */
 	// searchDialog() {
 	// 	const $result = $(".joe_header__above-search .result");
