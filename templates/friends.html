@@ -1,0 +1,88 @@
+<!doctype html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{modules/layout :: html(title = ${theme.config.friends.friends_title ?: '朋友圈'}+'-'+${site.title},htmlType = friends,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
+>
+  <th:block th:fragment="content">
+    <body>
+      <div id="Joe">
+        <th:block th:replace="~{modules/macro/navbar :: navbar}" />
+        <div
+          class="joe_container joe_main_container page-friends"
+          th:classappend="|${theme.config.theme.enable_show_in_up ? 'animated showInUp':''} ${theme.config.aside.aside_position == 'left' ? 'revert':''}|"
+        >
+          <div class="joe_main">
+            <div class="joe_detail">
+              <h1 class="joe_detail__title txt-shadow">
+                [[${theme.config.friends.friends_title ?: '朋友圈'}]]
+              </h1>
+              <th:block th:if="${theme.config.friends.enable_friend_add}">
+                <a
+                  class="joe_friend_add"
+                  th:href="@{/console/friends}"
+                  target="_blank"
+                  rel="nofollow"
+                  ><i class="joe-font joe-icon-edit"></i
+                ></a>
+              </th:block>
+              <th:block th:replace="~{modules/macro/loading :: loading}" />
+              <ul
+                class="joe_friends__list hidden"
+                th:classappend="${theme.config.friends.enable_friend_effect ? 'effects':''}"
+              >
+                <th:block
+                  th:each="postInfo, iteration: ${friends.items}" 
+                  th:with="spec = ${postInfo.spec}"
+                >
+                  <li
+                    class="joe_friend__item animated wow"
+                    th:data-wow-delay="'0.'+${iteration.index}+'s'"
+                    th:data-cid="${postInfo.metadata.name}"
+                  >
+                    <p class="joe_friend_info" >
+                      <a th:href="${spec.url}">
+                        <img 
+                          class="joe_friend_info_logo"
+                          th:src="${spec.logo}"
+                        />
+                      </a>
+                      <a 
+                        class="joe_friend_info_author" 
+                        th:text="${spec.author}" th:href="${spec.url}">
+                      </a>
+                      <span 
+                        class="joe_friend_info_pubDate" 
+                        th:text="${#dates.format(spec.pubDate, 'yyyy/MM/dd')}">
+                      </span>
+                    </p>
+                    <div class="joe_friend_block">
+                      <div class="joe_friend_body">
+                        <h2 class="joe_friend_content_title">
+                          <a 
+                            target="_blank" 
+                            th:href="${spec.link}" 
+                            th:text="${spec.title}"></a
+                        ></h2>
+                        <div class="joe_friend_content_description">
+                          <th:block th:text="${spec.description}"></th:block>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </th:block>
+              </ul>
+              <th:block th:replace="~{modules/common/pagination::friends(${friends},'/friends')}" />
+            </div>
+          </div>
+          <th:block th:if="${theme.config.aside.enable_friends_aside}">
+            <th:block th:replace="~{modules/common/aside :: aside}" />
+          </th:block>
+        </div>
+        <th:block th:replace="~{modules/common/actions :: actions}" />
+        <th:block th:replace="~{modules/common/footer :: footer}" />
+      </div>
+      <th:block th:replace="~{modules/macro/tail :: tail}" />
+    </body>
+  </th:block>
+</html>

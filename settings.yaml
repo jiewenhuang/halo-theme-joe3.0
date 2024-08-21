@@ -1590,6 +1590,16 @@ spec:
             - value: false
               label: 否
         - $formkit: select
+          name: enable_friends_aside
+          label: 朋友圈侧边栏
+          value: true
+          help: '朋友圈右侧是否展示侧边栏'
+          options:
+            - value: true
+              label: 是
+            - value: false
+              label: 否
+        - $formkit: select
           name: enable_sheet_aside
           label: 自定义页侧边栏
           value: false
@@ -2459,6 +2469,188 @@ spec:
           label: 底部显示内容
           value: ''
           language: html
+    - group: friends
+      label: 朋友圈
+      formSchema:
+        - $formkit: select
+          name: enable_friend_effect
+          label: 开启缓入动画
+          value: true
+          help: '是否开启朋友圈列表缓入动画'
+          options:
+            - value: true
+              label: 是
+            - value: false
+              label: 否
+        - $formkit: text
+          name: friends_title
+          label: 朋友圈标题
+          value: '朋友圈'
+        - $formkit: select
+          name: enable_friend_add
+          label: 展示新增订阅按钮
+          value: false
+          options:
+            - value: true
+              label: 是
+            - value: false
+              label: 否
+        - $formkit: select
+          name: friend_list_effect_class
+          label: 动画效果类名
+          value: 'fadeInUp'
+          help: '朋友圈列表动画效果类名，来自 animate.css，默认 fadeInUp'
+          options:
+            - value: 'fadeIn'
+              label: 'fadeIn'
+            - value: 'fadeInUp'
+              label: 'fadeInUp'
+            - value: 'fadeInDown'
+              label: 'fadeInDown'
+            - value: 'fadeInDownBig'
+              label: 'fadeInDownBig'
+            - value: 'fadeInLeft'
+              label: 'fadeInLeft'
+            - value: 'fadeInLeftBig'
+              label: 'fadeInLeftBig'
+            - value: 'fadeInRight'
+              label: 'fadeInRight'
+            - value: 'fadeInRightBig'
+              label: 'fadeInRightBig'
+            - value: 'fadeInUpBig'
+              label: 'fadeInUpBig'
+            - value: 'fadeOut'
+              label: 'fadeOut'
+            - value: 'fadeOutDown'
+              label: 'fadeOutDown'
+            - value: 'fadeOutDownBig'
+              label: 'fadeOutDownBig'
+            - value: 'fadeOutLeft'
+              label: 'fadeOutLeft'
+            - value: 'fadeOutLeftBig'
+              label: 'fadeOutLeftBig'
+            - value: 'fadeOutRight'
+              label: 'fadeOutRight'
+            - value: 'fadeOutRightBig'
+              label: 'fadeOutRightBig'
+            - value: 'fadeOutUp'
+              label: 'fadeOutUp'
+            - value: 'fadeOutUpBig'
+              label: 'fadeOutUpBig'
+            - value: 'bounce'
+              label: 'bounce'
+            - value: 'flash'
+              label: 'flash'
+            - value: 'pulse'
+              label: 'pulse'
+            - value: 'rubberBand'
+              label: 'rubberBand'
+            - value: 'headShake'
+              label: 'headShake'
+            - value: 'swing'
+              label: 'swing'
+            - value: 'tada'
+              label: 'tada'
+            - value: 'wobble'
+              label: 'wobble'
+            - value: 'jello'
+              label: 'jello'
+            - value: 'heartBeat'
+              label: 'heartBeat'
+            - value: 'bounceIn'
+              label: 'bounceIn'
+            - value: 'bounceInDown'
+              label: 'bounceInDown'
+            - value: 'bounceInLeft'
+              label: 'bounceInLeft'
+            - value: 'bounceInRight'
+              label: 'bounceInRight'
+            - value: 'bounceInUp'
+              label: 'bounceInUp'
+            - value: 'bounceOut'
+              label: 'bounceOut'
+            - value: 'bounceOutDown'
+              label: 'bounceOutDown'
+            - value: 'bounceOutLeft'
+              label: 'bounceOutLeft'
+            - value: 'bounceOutRight'
+              label: 'bounceOutRight'
+            - value: 'bounceOutUp'
+              label: 'bounceOutUp'
+            - value: 'flip'
+              label: 'flip'
+            - value: 'flipInX'
+              label: 'flipInX'
+            - value: 'flipInY'
+              label: 'flipInY'
+            - value: 'flipOutX'
+              label: 'flipOutX'
+            - value: 'flipOutY'
+              label: 'flipOutY'
+            - value: 'rotateIn'
+              label: 'rotateIn'
+            - value: 'rotateInDownLeft'
+              label: 'rotateInDownLeft'
+            - value: 'rotateInDownRight'
+              label: 'rotateInDownRight'
+            - value: 'rotateInUpLeft'
+              label: 'rotateInUpLeft'
+            - value: 'rotateInUpRight'
+              label: 'rotateInUpRight'
+            - value: 'rotateOut'
+              label: 'rotateOut'
+            - value: 'rotateOutDownLeft'
+              label: 'rotateOutDownLeft'
+            - value: 'rotateOutDownRight'
+              label: 'rotateOutDownRight'
+            - value: 'rotateOutUpLeft'
+              label: 'rotateOutUpLeft'
+            - value: 'rotateOutUpRight'
+              label: 'rotateOutUpRight'
+            - value: 'hinge'
+              label: 'hinge'
+            - value: 'jackInTheBox'
+              label: 'jackInTheBox'
+            - value: 'rollIn'
+              label: 'rollIn'
+            - value: 'rollOut'
+              label: 'rollOut'
+            - value: 'zoomIn'
+              label: 'zoomIn'
+            - value: 'zoomInDown'
+              label: 'zoomInDown'
+            - value: 'zoomInLeft'
+              label: 'zoomInLeft'
+            - value: 'zoomInRight'
+              label: 'zoomInRight'
+            - value: 'zoomInUp'
+              label: 'zoomInUp'
+            - value: 'zoomOut'
+              label: 'zoomOut'
+            - value: 'zoomOutDown'
+              label: 'zoomOutDown'
+            - value: 'zoomOutLeft'
+              label: 'zoomOutLeft'
+            - value: 'zoomOutRight'
+              label: 'zoomOutRight'
+            - value: 'zoomOutUp'
+              label: 'zoomOutUp'
+            - value: 'slideInDown'
+              label: 'slideInDown'
+            - value: 'slideInLeft'
+              label: 'slideInLeft'
+            - value: 'slideInRight'
+              label: 'slideInRight'
+            - value: 'slideInUp'
+              label: 'slideInUp'
+            - value: 'slideOutDown'
+              label: 'slideOutDown'
+            - value: 'slideOutLeft'
+              label: 'slideOutLeft'
+            - value: 'slideOutRight'
+              label: 'slideOutRight'
+            - value: 'slideOutUp'
+              label: 'slideOutUp'
     - group: ads
       label: 广告
       formSchema:
