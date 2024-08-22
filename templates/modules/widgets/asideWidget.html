@@ -214,17 +214,20 @@
         <a class="tags_more" th:href="@{/tags}">更多<i class="joe-font joe-icon-more-right"></i></a>
       </div>
       <div class="joe_aside__item-contain">
-        <div th:class="'tags-cloud-list '+${tag_cloud_data.tag_cloud_width =='responsive' ? 'responsive':'static'}" th:style="${tag_cloud_data.tag_cloud_type == '3d' ? 'display:none':''}">
+        <div th:class="'tags-cloud-list '+${tag_cloud_data.tag_cloud_width =='responsive' ? 'responsive':'static'}"
+             th:style="${tag_cloud_data.tag_cloud_type == '3d' ? 'display:none':''}">
           <th:block th:if="${tag_cloud_data.tag_cloud_num_type} == num">
             <th:block th:with="tags = ${tagFinder.list(1,tag_cloud_num)}">
-              <a th:each="tag : ${tags}"
-                 th:data-url="@{${tag.status.permalink}}" th:data-label="${tag.spec.displayName}" th:href="@{${tag.status.permalink}}" th:title="${tag.spec.displayName}">[[${tag.spec.displayName}]]</a>
+              <a th:data-label="${tag.spec.displayName}"
+                 th:data-url="@{${tag.status.permalink}}" th:each="tag : ${tags}" th:href="@{${tag.status.permalink}}"
+                 th:title="${tag.spec.displayName}">[[${tag.spec.displayName}]]</a>
             </th:block>
           </th:block>
           <th:block th:if="${tag_cloud_data.tag_cloud_num_type} == all">
             <th:block th:with="tags = ${tagFinder.listAll()}">
-              <a th:each="tag : ${tags}"
-                 th:data-url="@{${tag.status.permalink}}" th:data-label="${tag.spec.displayName}" th:href="@{${tag.status.permalink}}" th:title="${tag.spec.displayName}">[[${tag.spec.displayName}]]</a>
+              <a th:data-label="${tag.spec.displayName}"
+                 th:data-url="@{${tag.status.permalink}}" th:each="tag : ${tags}" th:href="@{${tag.status.permalink}}"
+                 th:title="${tag.spec.displayName}">[[${tag.spec.displayName}]]</a>
             </th:block>
           </th:block>
         </div>
@@ -234,10 +237,40 @@
           </div>
         </th:block>
       </div>
-      <!--    <#else>-->
-      <!--    <div class="empty">暂无标签</div>-->
-      <!--  </#if>-->
-      <!--</@tagTag>-->
+    </section>
+  </th:block>
+  <th:block th:fragment="enable_category_cloud(category_cloud_data)"
+            th:with="category_cloud_num = ${category_cloud_data.category_cloud_num}">
+    <section class="joe_aside__item tags-cloud" id="categories-cloud">
+      <div class="joe_aside__item-title">
+        <i class="joe-font joe-icon-tag"></i>
+        <span class="text">分类云</span>
+        <a class="tags_more" th:href="@{/categories}">更多<i class="joe-font joe-icon-more-right"></i></a>
+      </div>
+      <div class="joe_aside__item-contain">
+        <div th:class="'categories-cloud-list '+${category_cloud_data.category_cloud_width =='responsive' ? 'responsive':'static'}"
+             th:style="${category_cloud_data.category_cloud_type == '3d' ? 'display:none':''}">
+          <th:block th:if="${category_cloud_data.category_cloud_num_type} == num">
+            <th:block th:with="categories = ${categoryFinder.list(1,category_cloud_num)}">
+              <a th:data-label="${category.spec.displayName}"
+                 th:data-url="@{${category.status.permalink}}" th:each="category : ${categories}" th:href="@{${category.status.permalink}}"
+                 th:title="${category.spec.displayName}">[[${category.spec.displayName}]]</a>
+            </th:block>
+          </th:block>
+          <th:block th:if="${category_cloud_data.category_cloud_num_type} == all">
+            <th:block th:with="categories = ${categoryFinder.listAll()}">
+              <a th:data-label="${category.spec.displayName}"
+                 th:data-url="@{${category.status.permalink}}" th:each="category : ${categories}" th:href="@{${category.status.permalink}}"
+                 th:title="${category.spec.displayName}">[[${category.spec.displayName}]]</a>
+            </th:block>
+          </th:block>
+        </div>
+        <th:block th:if="${category_cloud_data.category_cloud_type == '3d'}">
+          <div id="categories-3d">
+            <div class="empty">加载中…</div>
+          </div>
+        </th:block>
+      </div>
     </section>
   </th:block>
   <th:block th:fragment="enable_ads_aside(ads_data)">

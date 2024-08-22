@@ -533,68 +533,45 @@ const commonContext = {
 			});
 		}
 	},
-	/* 初始化3D标签云 */
-	init3dTag() {
-		ThemeConfig.tag_cloud_type = document.getElementById('tags-3d') ? '3d' : 'list'
-		ThemeConfig.enable_tag_cloud=document.querySelector('.joe_aside__item.tags-cloud') !== null
-		// console.log(ThemeConfig.enable_tag_cloud)
+	/* 初始化3D标签云和分类云的通用函数 */
+	init3dCloud(type) {
+		const isTagCloud = type === 'tag';
+		const cloudElementId = isTagCloud ? 'tags-3d' : 'categories-3d';
+		const listClass = isTagCloud ? '.tags-cloud-list' : '.categories-cloud-list';
+		const entries = [];
+		const colors = [
+			"#F8D800", "#0396FF", "#EA5455", "#7367F0",
+			"#32CCBC", "#F6416C", "#28C76F", "#9F44D3",
+			"#F55555", "#736EFE", "#E96D71", "#DE4313",
+			"#D939CD", "#4C83FF", "#F072B6", "#C346C2",
+			"#5961F9", "#FD6585", "#465EFB", "#FFC600",
+			"#FA742B", "#5151E5", "#BB4E75", "#FF52E5",
+			"#49C628", "#00EAFF", "#F067B4", "#F067B4",
+			"#ff9a9e", "#00f2fe", "#4facfe", "#f093fb",
+			"#6fa3ef", "#bc99c4", "#46c47c", "#f9bb3c",
+			"#e8583d", "#f68e5f",
+		];
+
+		const random = (min, max) => {
+			min = Math.ceil(min);
+			max = Math.floor(max);
+			return Math.floor(Math.random() * (max - min + 1)) + min;
+		};
+
+		ThemeConfig[`${type}_cloud_type`] = document.getElementById(cloudElementId) ? '3d' : 'list';
+		ThemeConfig[`enable_${type}_cloud`] = document.querySelector('.joe_aside__item.tags-cloud') !== null;
+
 		if (
 			Joe.isMobile ||
-      !ThemeConfig.enable_tag_cloud ||
-      ThemeConfig.tag_cloud_type !== "3d" ||
-      !$(".tags-cloud-list").length
-		)
-			return;
+			!ThemeConfig[`enable_${type}_cloud`] ||
+			ThemeConfig[`${type}_cloud_type`] !== "3d" ||
+			!$(listClass).length
+		) return;
+
 		$.getScript(
 			`${ThemeConfig.BASE_RES_URL}/assets/lib/3dtag/3dtag.min.js`,
 			(_res) => {
-				const entries = [];
-				const colors = [
-					"#F8D800",
-					"#0396FF",
-					"#EA5455",
-					"#7367F0",
-					"#32CCBC",
-					"#F6416C",
-					"#28C76F",
-					"#9F44D3",
-					"#F55555",
-					"#736EFE",
-					"#E96D71",
-					"#DE4313",
-					"#D939CD",
-					"#4C83FF",
-					"#F072B6",
-					"#C346C2",
-					"#5961F9",
-					"#FD6585",
-					"#465EFB",
-					"#FFC600",
-					"#FA742B",
-					"#5151E5",
-					"#BB4E75",
-					"#FF52E5",
-					"#49C628",
-					"#00EAFF",
-					"#F067B4",
-					"#F067B4",
-					"#ff9a9e",
-					"#00f2fe",
-					"#4facfe",
-					"#f093fb",
-					"#6fa3ef",
-					"#bc99c4",
-					"#46c47c",
-					"#f9bb3c",
-					"#e8583d",
-					"#f68e5f",
-				];
-				const random = (min, max) => {
-					min = Math.ceil(min);
-					max = Math.floor(max);
-					return Math.floor(Math.random() * (max - min + 1)) + min;
-				};
-				$(".tags-cloud-list a").each((i, item) => {
+				$(listClass + ' a').each((i, item) => {
 					entries.push({
 						label: $(item).attr("data-label"),
 						url: $(item).attr("data-url"),
@@ -603,7 +580,8 @@ const commonContext = {
 						fontSize: 16,
 					});
 				});
-				$("#tags-3d").svg3DTagCloud({
+
+				$(`#${cloudElementId}`).svg3DTagCloud({
 					entries,
 					width: 250,
 					height: 250,
@@ -614,11 +592,23 @@ const commonContext = {
 					speed: 0.5,
 					fontWeight: 500,
 				});
-				$(".tags-cloud-list").remove();
-				$("#tags-3d .empty").remove();
+
+				$(listClass).remove();
+				$(`#${cloudElementId} .empty`).remove();
 			}
 		);
 	},
+
+	/* 初始化3D标签云 */
+	init3dTag() {
+		this.init3dCloud('tag');
+	},
+
+	/* 初始化3D分类云 */
+	init3dCategory() {
+		this.init3dCloud('category');
+	},
+
 	/* 搜索框弹窗 */
 	// searchDialog() {
 	// 	const $result = $(".joe_header__above-search .result");
@@ -983,6 +973,7 @@ const commonContext = {
 	const omits = [
 		"loadingBar",
 		"init3dTag",
+		"init3dCategory",
 		"foldCode",
 		"loadMouseEffect",
 		"loadBackdropEffect",
