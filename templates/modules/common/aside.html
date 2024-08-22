@@ -17,6 +17,12 @@
               th:insert="~{modules/widgets/asideWidget :: enable_notice(notice_data = ${aside.aside_notice})}"
             />
           </th:block>
+          <th:block th:case="'enable_reward'">
+            <!--        打赏-->
+            <th:block
+              th:insert="~{modules/widgets/asideWidget :: enable_reward(reward_data = ${aside.aside_reward})}"
+            />
+          </th:block>
           <th:block th:case="'enable_picture'">
             <!--        图片-->
             <th:block
