@@ -85,13 +85,15 @@
             th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}"
             th:each="result : ${commentFinder.list(null,1,new_reply_data.show_newreply_num)}"
           >
+            <!--th:data-src="${result.owner.avatar ?: (theme.config.blogger.default_avatar ?: '/themes/theme-Joe3/assets/img/transparent-placeholder.png')}"-->
+
             <li class="item">
               <div class="user">
                 <img
                   width="35"
                   height="35"
                   class="avatar lazyload"
-                  th:data-src="${result.owner.avatar ?: (theme.config.blogger.default_avatar ?: '/themes/theme-Joe3/assets/img/transparent-placeholder.png')}"
+                  th:data-src="${#strings.isEmpty(result.owner.avatar)? 'https://cravatar.cn/avatar/'+result.spec.owner.annotations['email-hash'] :result.owner.avatar}"
                   th:src="${theme.config.blogger.lazyload_avatar}"
                   alt="头像"
                   th:data-text-avatar="${result.owner.displayName}"
