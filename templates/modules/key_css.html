@@ -131,11 +131,24 @@
       [/]
       [# th:if="${theme.config.basic.enable_background_dark} and ${theme.config.basic.background_dark_mode != ''}"]
       html[data-mode="dark"] body {
+          width: 100vw;
+          height: 100vh;
+          margin: 0;
+          padding: 0;
+      }
+
+      html[data-mode="dark"] body {
           background-position: top center;
           background-attachment: fixed;
           background-repeat: no-repeat;
           background-size: cover;
           background-image: url("[[${theme.config.basic.background_dark_mode}]]");
+          content: "";
+          display: flex;
+          position: fixed;
+          z-index: -1;
+          width: 100vw;
+          height: 100vh;
       }
       [/]
       [# th:if="${theme.config.basic.enable_background_dark != true} or ${theme.config.basic.background_dark_mode == ''} or ${theme.config.basic.background_dark_mode == null}"]
