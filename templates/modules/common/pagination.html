@@ -526,8 +526,11 @@
         baseUrl = permalink + '/page/';
       }
 
-      if (pageNumber) {
+      // 检查页码是否在有效范围内
+      if (pageNumber >= 1 && pageNumber <= /*[[${totalPages}]]*/ 0) {
         window.location.href = baseUrl + pageNumber;
+      } else {
+        Qmsg.error('请输入有效的页码！');
       }
     }
 
