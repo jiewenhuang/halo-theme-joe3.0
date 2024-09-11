@@ -1950,7 +1950,15 @@ spec:
           label: 相关文章最大条数
           value: '5'
           help: '相关文章模块展示的最大文章数，默认5条'
-
+        - $formkit: select
+          name: enable_edit
+          label: 文章编辑
+          value: true
+          options:
+            - value: true
+              label: 是
+            - value: false
+              label: 否
         - $formkit: select
           name: enable_comment
           label: 文章评论
