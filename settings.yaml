@@ -982,6 +982,15 @@ spec:
               label: 开启
             - value: false
               label: 关闭
+        - $formkit: select
+          name: show_level
+          label: 展示博主等级
+          value: true
+          options:
+            - value: true
+              label: 开启
+            - value: false
+              label: 关闭
         - $formkit: text
           name: nickname
           label: 博主显示昵称

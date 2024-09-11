@@ -217,17 +217,11 @@
               onerror="Joe.errorImg(this, 'ErrAvatarImg')"
             />
             <div class="info">
-              <a
-                class="link"
-                th:href="${site.url}"
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                >[[${theme.config.blogger.name ?: site.title}]]<img
-                  class="level"
-                  th:src="@{/assets/svg/level_1.svg}"
-                  alt="博主等级"
-              /></a>
-
+              <a class="link" th:href="${site.url}" target="_blank" rel="noopener noreferrer nofollow">[[${theme.config.blogger.name ?: site.title}]]
+                <th:block th:if="${theme.config.blogger.show_level}">
+                <img class="level" th:src="@{/assets/svg/level_1.svg}" alt="博主等级"/>
+                </th:block>
+              </a>
               <p class="motto joe_motto">[[${theme.config.blogger.motto}]]</p>
             </div>
           </div>
