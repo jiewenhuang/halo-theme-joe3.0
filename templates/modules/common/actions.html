@@ -7,7 +7,7 @@
                 <i class="jiewen joe-icon-mulu" title="文章目录"></i>
             </div>
         </th:block>
-        <th:block th:if="${theme.config.post.enable_edit}">
+        <th:block th:if="${theme.config.post.enable_edit} and ${htmlType} == 'post' or ${htmlType} == 'sheet'">
           <a sec:authorize="isAuthenticated()">
               <div class="joe_action_item edit">
                   <a th:href="@{/console/posts/editor(name=${post.metadata.name}, returnToView=true)}" target="_blank">
