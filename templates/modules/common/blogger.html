@@ -42,6 +42,7 @@
         </div>
         <a class="link" th:href="${site.url}" target="_blank" rel="noopener noreferrer nofollow">
           [[${theme.config.blogger.nickname ?: site.title}]]
+
           <th:block th:if="${theme.config.blogger.enable_blogger_level}">
             <img class="level" th:src="@{/assets/svg/level_1.svg}" alt="博主等级" />
           </th:block>

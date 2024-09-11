@@ -533,68 +533,45 @@ const commonContext = {
 			});
 		}
 	},
-	/* 初始化3D标签云 */
-	init3dTag() {
-		ThemeConfig.tag_cloud_type = document.getElementById('tags-3d') ? '3d' : 'list'
-		ThemeConfig.enable_tag_cloud=document.querySelector('.joe_aside__item.tags-cloud') !== null
-		// console.log(ThemeConfig.enable_tag_cloud)
+	/* 初始化3D标签云和分类云的通用函数 */
+	init3dCloud(type) {
+		const isTagCloud = type === 'tag';
+		const cloudElementId = isTagCloud ? 'tags-3d' : 'categories-3d';
+		const listClass = isTagCloud ? '.tags-cloud-list' : '.categories-cloud-list';
+		const entries = [];
+		const colors = [
+			"#F8D800", "#0396FF", "#EA5455", "#7367F0",
+			"#32CCBC", "#F6416C", "#28C76F", "#9F44D3",
+			"#F55555", "#736EFE", "#E96D71", "#DE4313",
+			"#D939CD", "#4C83FF", "#F072B6", "#C346C2",
+			"#5961F9", "#FD6585", "#465EFB", "#FFC600",
+			"#FA742B", "#5151E5", "#BB4E75", "#FF52E5",
+			"#49C628", "#00EAFF", "#F067B4", "#F067B4",
+			"#ff9a9e", "#00f2fe", "#4facfe", "#f093fb",
+			"#6fa3ef", "#bc99c4", "#46c47c", "#f9bb3c",
+			"#e8583d", "#f68e5f",
+		];
+
+		const random = (min, max) => {
+			min = Math.ceil(min);
+			max = Math.floor(max);
+			return Math.floor(Math.random() * (max - min + 1)) + min;
+		};
+
+		ThemeConfig[`${type}_cloud_type`] = document.getElementById(cloudElementId) ? '3d' : 'list';
+		ThemeConfig[`enable_${type}_cloud`] = document.querySelector('.joe_aside__item.tags-cloud') !== null;
+
 		if (
 			Joe.isMobile ||
-      !ThemeConfig.enable_tag_cloud ||
-      ThemeConfig.tag_cloud_type !== "3d" ||
-      !$(".tags-cloud-list").length
-		)
-			return;
+			!ThemeConfig[`enable_${type}_cloud`] ||
+			ThemeConfig[`${type}_cloud_type`] !== "3d" ||
+			!$(listClass).length
+		) return;
+
 		$.getScript(
 			`${ThemeConfig.BASE_RES_URL}/assets/lib/3dtag/3dtag.min.js`,
 			(_res) => {
-				const entries = [];
-				const colors = [
-					"#F8D800",
-					"#0396FF",
-					"#EA5455",
-					"#7367F0",
-					"#32CCBC",
-					"#F6416C",
-					"#28C76F",
-					"#9F44D3",
-					"#F55555",
-					"#736EFE",
-					"#E96D71",
-					"#DE4313",
-					"#D939CD",
-					"#4C83FF",
-					"#F072B6",
-					"#C346C2",
-					"#5961F9",
-					"#FD6585",
-					"#465EFB",
-					"#FFC600",
-					"#FA742B",
-					"#5151E5",
-					"#BB4E75",
-					"#FF52E5",
-					"#49C628",
-					"#00EAFF",
-					"#F067B4",
-					"#F067B4",
-					"#ff9a9e",
-					"#00f2fe",
-					"#4facfe",
-					"#f093fb",
-					"#6fa3ef",
-					"#bc99c4",
-					"#46c47c",
-					"#f9bb3c",
-					"#e8583d",
-					"#f68e5f",
-				];
-				const random = (min, max) => {
-					min = Math.ceil(min);
-					max = Math.floor(max);
-					return Math.floor(Math.random() * (max - min + 1)) + min;
-				};
-				$(".tags-cloud-list a").each((i, item) => {
+				$(listClass + ' a').each((i, item) => {
 					entries.push({
 						label: $(item).attr("data-label"),
 						url: $(item).attr("data-url"),
@@ -603,7 +580,8 @@ const commonContext = {
 						fontSize: 16,
 					});
 				});
-				$("#tags-3d").svg3DTagCloud({
+
+				$(`#${cloudElementId}`).svg3DTagCloud({
 					entries,
 					width: 250,
 					height: 250,
@@ -614,11 +592,23 @@ const commonContext = {
 					speed: 0.5,
 					fontWeight: 500,
 				});
-				$(".tags-cloud-list").remove();
-				$("#tags-3d .empty").remove();
+
+				$(listClass).remove();
+				$(`#${cloudElementId} .empty`).remove();
 			}
 		);
 	},
+
+	/* 初始化3D标签云 */
+	init3dTag() {
+		this.init3dCloud('tag');
+	},
+
+	/* 初始化3D分类云 */
+	init3dCategory() {
+		this.init3dCloud('category');
+	},
+
 	/* 搜索框弹窗 */
 	// searchDialog() {
 	// 	const $result = $(".joe_header__above-search .result");
@@ -977,12 +967,125 @@ const commonContext = {
 		// 重置操作
 		commonContext.loadingBar.hide();
 	},
+
+	//友链随机传送
+	travelling() {
+		/**
+		 * 模拟一个本地存储的工具类，用于设置和获取带过期时间的项
+		 */
+		const saveToLocal = {
+			/**
+			 * 设置项到本地存储，包括过期时间
+			 * @param {string} key - 存储的键名
+			 * @param {any} value - 存储的值
+			 * @param {number} expirationMinutes - 过期时间（分钟）
+			 */
+			set: function(key, value, expirationMinutes) {
+				const now = new Date();
+				const item = {
+					value: value,
+					expiry: now.getTime() + expirationMinutes * 60000,
+				};
+				localStorage.setItem(key, JSON.stringify(item));
+			},
+			/**
+			 * 从本地存储获取项，如果项已过期则删除该项并返回null
+			 * @param {string} key - 存储的键名
+			 * @returns {any|null} - 存储的值或null
+			 */
+			get: function(key) {
+				const itemStr = localStorage.getItem(key);
+				if (!itemStr) {
+					return null;
+				}
+				const item = JSON.parse(itemStr);
+				const now = new Date();
+				if (now.getTime() > item.expiry) {
+					localStorage.removeItem(key);
+					return null;
+				}
+				return item.value;
+			}
+		};
+
+		/**
+		 * 获取链接数据的函数，从API获取并存储到本地
+		 */
+		function getLinks() {
+			const links = "/apis/api.plugin.halo.run/v1alpha1/plugins/PluginLinks/links?keyword=";
+			fetch(links)
+				.then(res => res.json())
+				.then(json => {
+					// 将获取的链接数据存储到本地，并设置过期时间
+					saveToLocal.set('links-data', JSON.stringify(json.items), 10 / (60 * 24));
+					// 渲染链接数据
+					renderer(json.items);
+				});
+		}
+
+		/**
+		 * 从数组中获取指定数量的项
+		 * @param {Array} arr - 原数组
+		 * @param {number} num - 需要获取的数量
+		 * @returns {Array|null} - 获取的项数组或null
+		 */
+		function getArrayItems(arr, num) {
+			if (num > arr.length) {
+				return null;
+			}
+			const shuffled = arr.sort(() => 0.5 - Math.random());
+			return shuffled.slice(0, num);
+		}
+
+		/**
+		 * 渲染链接数据到页面
+		 * @param {Array} data - 链接数据数组
+		 */
+		function renderer(data) {
+			const linksData = data;
+			const actionItem = document.querySelector('.joe_action_item.random');
+			actionItem.onclick = function () {
+				if (linksData.length > 0) {
+					// 随机获取一个链接项
+					const randomFriendLinks = getArrayItems(linksData, 1);
+					const name = randomFriendLinks[0].spec.displayName;
+					const link = randomFriendLinks[0].spec.url;
+					const msg = "即将跳转到：「" + name + "」";
+					// 显示成功消息
+					Qmsg.success(msg);
+
+					// 设置定时器，延迟跳转
+					setTimeout(() => {
+						window.open(link, '_blank');
+					}, 3000);
+				}
+			};
+		}
+
+		/**
+		 * 初始化函数，检查本地是否有链接数据，没有则从API获取
+		 */
+		function init() {
+			const data = saveToLocal.get('links-data');
+			if (data) {
+				// 如果本地有数据，则渲染
+				renderer(JSON.parse(data));
+			} else {
+				// 如果本地没有数据，则从API获取
+				getLinks();
+			}
+		}
+
+		// 执行初始化函数
+		init();
+	},
 };
 
 !(function () {
 	const omits = [
 		"loadingBar",
 		"init3dTag",
+		"init3dCategory",
 		"foldCode",
 		"loadMouseEffect",
 		"loadBackdropEffect",
@@ -991,6 +1094,7 @@ const commonContext = {
 		"showLoadTime",
 		"debug",
 		"clean",
+		"travelling",
 	];
 
 	document.addEventListener("DOMContentLoaded", function () {
