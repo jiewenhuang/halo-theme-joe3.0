@@ -987,6 +987,16 @@ spec:
           label: 博主显示昵称
           value: ''
           help: '默认使用网站title'
+        - $formkit: select
+          name: enable_blogger_level
+          label: 展示博主等级
+          value: true
+          help: ''
+          options:
+            - value: true
+              label: 开启
+            - value: false
+              label: 关闭
         - $formkit: text
           name: motto
           label: 个人独白
@@ -1585,6 +1595,8 @@ spec:
                   label: 博主信息
                 - value: 'enable_notice'
                   label: 网站公告
+                - value: 'enable_reward'
+                  label: 打赏
                 - value: 'enable_picture'
                   label: 图片
                 - value: 'enable_music_player'
@@ -1618,6 +1630,51 @@ spec:
                   value: '这是你的公告'
                   help: '支持html代码'
                   language: html
+            - $formkit: group
+              if: $value.template_aside === 'enable_reward'
+              name: aside_reward
+              label: 打赏数据
+              value: []
+              children:
+                - $formkit: repeater
+                  name: reward_list
+                  id: reward_list
+                  key: reward_list
+                  max: 3
+                  min: 1
+                  label: 打赏列表
+                  value: []
+                  children:
+                    - $formkit: text
+                      name: reward_label
+                      label: 打赏标签
+                      value: ''
+                    - $formkit: radio
+                      name: reward_type
+                      id: reward_type
+                      label: 类型
+                      value: image
+                      options:
+                        - value: image
+                          label: 图片
+                        - value: custom
+                          label: 自定义内容
+                    - $formkit: attachment
+                      if: $value.reward_type === 'image'
+                      name: reward_url
+                      id: reward_url
+                      key: reward_url
+                      label: 图片链接
+                      value: ''
+                    - $formkit: code
+                      if: $value.reward_type === 'custom'
+                      name: reward_html
+                      id: reward_html
+                      key: reward_html
+                      label: 自定义HTML内容
+                      value: ''
+                      help: '在这里输入自定义HTML内容'
+                      language: html
             - $formkit: group
               if: $value.template_aside === 'enable_picture'
               name: aside_picture
@@ -2051,6 +2108,14 @@ spec:
           label: QQ二维码
           value: ''
           help: '打赏用的QQ收款二维码链接，不填不显示'
+
+        # 可以自定义其他收款方式
+        - $formkit: code
+          name: reward_code
+          id: reward_code
+          label: 自定义代码
+          value:
+          language: html
 
     - group: tags
       label: 标签页
