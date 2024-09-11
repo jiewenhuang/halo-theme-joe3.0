@@ -967,6 +967,118 @@ const commonContext = {
 		// 重置操作
 		commonContext.loadingBar.hide();
 	},
+
+	//友链随机传送
+	travelling() {
+		/**
+		 * 模拟一个本地存储的工具类，用于设置和获取带过期时间的项
+		 */
+		const saveToLocal = {
+			/**
+			 * 设置项到本地存储，包括过期时间
+			 * @param {string} key - 存储的键名
+			 * @param {any} value - 存储的值
+			 * @param {number} expirationMinutes - 过期时间（分钟）
+			 */
+			set: function(key, value, expirationMinutes) {
+				const now = new Date();
+				const item = {
+					value: value,
+					expiry: now.getTime() + expirationMinutes * 60000,
+				};
+				localStorage.setItem(key, JSON.stringify(item));
+			},
+			/**
+			 * 从本地存储获取项，如果项已过期则删除该项并返回null
+			 * @param {string} key - 存储的键名
+			 * @returns {any|null} - 存储的值或null
+			 */
+			get: function(key) {
+				const itemStr = localStorage.getItem(key);
+				if (!itemStr) {
+					return null;
+				}
+				const item = JSON.parse(itemStr);
+				const now = new Date();
+				if (now.getTime() > item.expiry) {
+					localStorage.removeItem(key);
+					return null;
+				}
+				return item.value;
+			}
+		};
+
+		/**
+		 * 获取链接数据的函数，从API获取并存储到本地
+		 */
+		function getLinks() {
+			const links = "/apis/api.plugin.halo.run/v1alpha1/plugins/PluginLinks/links?keyword=";
+			fetch(links)
+				.then(res => res.json())
+				.then(json => {
+					// 将获取的链接数据存储到本地，并设置过期时间
+					saveToLocal.set('links-data', JSON.stringify(json.items), 10 / (60 * 24));
+					// 渲染链接数据
+					renderer(json.items);
+				});
+		}
+
+		/**
+		 * 从数组中获取指定数量的项
+		 * @param {Array} arr - 原数组
+		 * @param {number} num - 需要获取的数量
+		 * @returns {Array|null} - 获取的项数组或null
+		 */
+		function getArrayItems(arr, num) {
+			if (num > arr.length) {
+				return null;
+			}
+			const shuffled = arr.sort(() => 0.5 - Math.random());
+			return shuffled.slice(0, num);
+		}
+
+		/**
+		 * 渲染链接数据到页面
+		 * @param {Array} data - 链接数据数组
+		 */
+		function renderer(data) {
+			const linksData = data;
+			const actionItem = document.querySelector('.joe_action_item.random');
+			actionItem.onclick = function () {
+				if (linksData.length > 0) {
+					// 随机获取一个链接项
+					const randomFriendLinks = getArrayItems(linksData, 1);
+					const name = randomFriendLinks[0].spec.displayName;
+					const link = randomFriendLinks[0].spec.url;
+					const msg = "即将跳转到：「" + name + "」";
+					// 显示成功消息
+					Qmsg.success(msg);
+
+					// 设置定时器，延迟跳转
+					setTimeout(() => {
+						window.open(link, '_blank');
+					}, 3000);
+				}
+			};
+		}
+
+		/**
+		 * 初始化函数，检查本地是否有链接数据，没有则从API获取
+		 */
+		function init() {
+			const data = saveToLocal.get('links-data');
+			if (data) {
+				// 如果本地有数据，则渲染
+				renderer(JSON.parse(data));
+			} else {
+				// 如果本地没有数据，则从API获取
+				getLinks();
+			}
+		}
+
+		// 执行初始化函数
+		init();
+	},
 };
 
 !(function () {
@@ -982,6 +1094,7 @@ const commonContext = {
 		"showLoadTime",
 		"debug",
 		"clean",
+		"travelling",
 	];
 
 	document.addEventListener("DOMContentLoaded", function () {

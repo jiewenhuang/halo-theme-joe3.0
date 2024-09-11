@@ -4953,17 +4953,20 @@ body:after {
   color: var(--theme);
 }
 .joe_action_item.edit,
+.joe_action_item.random,
 .joe_action_item.mode {
   pointer-events: auto;
   margin-bottom: 15px;
 }
 .joe_action_item.edit svg,
+.joe_action_item.random svg,
 .joe_action_item.mode svg {
   transform: scale(0);
   opacity: 0;
   transition: transform 0.85s, opacity 0.85s;
 }
 .joe_action_item.edit svg.active,
+.joe_action_item.random svg.active,
 .joe_action_item.mode svg.active {
   transform: scale(1);
   opacity: 1;

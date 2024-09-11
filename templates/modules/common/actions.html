@@ -16,6 +16,11 @@
               </div>
           </a>
         </th:block>
+        <th:block th:if="${theme.config.links.enable_links_random} and ${htmlType} == 'links'">
+            <div class="joe_action_item random">
+                <i class="iconfont icon-suiji-copy" title="随机前往"></i>
+            </div>
+        </th:block>
         <th:block th:if="${theme.config.basic.theme_mode == 'user'}">
             <div class="joe_action_item mode">
                 <svg class="mode-light"

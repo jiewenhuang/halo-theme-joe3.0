@@ -2491,6 +2491,15 @@ spec:
             - value: false
               label: 否
         - $formkit: select
+          name: enable_links_random
+          label: 随机前往
+          value: true
+          options:
+            - value: true
+              label: 是
+            - value: false
+              label: 否
+        - $formkit: select
           name: links_group_default_sort
           label: 链接分类默认排序方式
           value: 'link_group_create_time_asc'
