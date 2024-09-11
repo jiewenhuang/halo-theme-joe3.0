@@ -44,7 +44,7 @@
     <link
       rel="preload stylesheet"
       as="style"
-      href="//at.alicdn.com/t/c/font_4198339_jcoci5bgy7.css"
+      href="//at.alicdn.com/t/c/font_4012291_c41rv0yhzme.css"
     />
     <th:block
       th:if="${theme.config.custom.iconfont != '' and theme.config.custom.iconfont != null}"
@@ -117,6 +117,13 @@
         rel="preload stylesheet"
         as="style"
         th:href="${source_link+'/assets/css/min/journals.min.css?v='+theme.spec.version}"
+      />
+    </th:block>
+    <th:block th:if="${htmlType == 'friends'}">
+      <link
+        rel="preload stylesheet"
+        as="style"
+        th:href="${source_link+'/assets/css/min/friends.min.css?v='+theme.spec.version}"
       />
     </th:block>
     <th:block th:if="${htmlType == 'archives'}">

@@ -187,15 +187,15 @@
                               const minutes = timestamp.getMinutes();
                               const seconds = timestamp.getSeconds();
 
-                              // 构建日期时间字符串
-                              const commentTime = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day} ${hours < 10 ? '0' : ''}${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 
+                            // 构建日期时间字符串
+                            const commentTime = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
                               return `<li class="item">
               <div class="user">
                 <img class="avatar lazyload" src="${ThemeConfig.lazyload_avatar}" alt="用户头像"
                      data-src="${comment.avatar || '/themes/theme-Joe3/assets/img/transparent-placeholder.png'}" data-text-avatar="${comment.nick}" onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')" onerror="Joe.errorImg(this, 'ErrAvatarImg')" />
                 <div class="nickname" >${comment.nick}</div>
-                <div class="date" th:text="${commentTime}"></div>
+                <div class="date" >${commentTime}</div>
               </div>
               <div class="wrapper">
                 <div class="content leaving-content" >${comment.comment}</div>
