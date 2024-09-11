@@ -77,6 +77,11 @@
       <script
         th:src="${source_link+'/assets/js/min/journals.min.js?v='+theme.spec.version}"
       ></script>
+    </th:block>    
+    <th:block th:if="${htmlType == 'friends'}">
+      <script
+        th:src="${source_link+'/assets/js/min/friends.min.js?v='+theme.spec.version}"
+      ></script>
     </th:block>
     <th:block th:if="${htmlType == 'photos'}">
       <script th:src="${source_link+'/assets/js/min/photos.min.js?v='+theme.spec.version}"></script>
