@@ -68,11 +68,7 @@
                         <span class="line">/</span>
                         <span class="text">[[${singlePage.stats.visit}]] 阅读</span>
                         <span class="line">/</span>
-                        <th:block
-                          th:with="wordCount = ${#strings.length(singlePage.content.content)}"
-                        >
-                          <span class="text">[[${wordCount}]] 字</span>
-                        </th:block>
+                        <span class="text" id="wordCount">0 字</span>
                         <th:block
                           th:if="${#annotations.getOrDefault(singlePage, 'enable_collect_check', 'true')} and ${theme.config.other.check_baidu_collect}"
                         >
@@ -84,8 +80,8 @@
                   </div>
                   <time
                     class="joe_detail__count-created"
-                    th:datetime="${#dates.format(singlePage.spec.publishTime,'MM/dd')}"
-                    >[[${#dates.format(singlePage.spec.publishTime,'MM/dd')}]]</time
+                    th:datetime="${#dates.format(singlePage.status.lastModifyTime,'MM/dd')}"
+                    >[[${#dates.format(singlePage.status.lastModifyTime,'MM/dd')}]]</time
                   >
                 </div>
               </th:block>
@@ -184,6 +180,23 @@
         <th:block th:replace="~{modules/common/actions :: actions}" />
         <th:block th:replace="~{modules/common/footer :: footer}" />
       </div>
+      <script>
+        // 等待文档加载完成
+        document.addEventListener("DOMContentLoaded", function() {
+          // 获取文章内容
+          const postContent = document.getElementById("singlePage-inner").innerText || "";
+
+          // 使用正则表达式匹配中文、数字和字母
+          const matches = postContent.match(/[\u4e00-\u9fa5a-zA-Z0-9]/g);
+
+          // 计算有效字符数
+          const wordCount = matches ? matches.length : 0;
+
+          // 更新字数统计显示
+          document.getElementById("wordCount").innerText = `${wordCount} 字`;
+        });
+
+      </script>
       <th:block th:replace="~{modules/macro/tail :: tail}" />
     </body>
   </th:block>
