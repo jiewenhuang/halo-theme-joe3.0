@@ -41,19 +41,18 @@
                     th:data-cid="${postInfo.metadata.name}"
                   >
                     <p class="joe_friend_info" >
-                      <a th:href="${spec.url}">
-                        <img 
+                      <img 
                           class="joe_friend_info_logo"
                           th:src="${spec.logo}"
-                        />
-                      </a>
+                          th:alt="${spec.author}"
+                      />
                       <a 
                         class="joe_friend_info_author" 
                         th:text="${spec.author}" th:href="${spec.url}">
                       </a>
                       <span 
                         class="joe_friend_info_pubDate" 
-                        th:text="${#dates.format(spec.pubDate, 'yyyy/MM/dd')}">
+                        th:text="${#dates.format(spec.pubDate, 'yyyy-MM-dd')}">
                       </span>
                     </p>
                     <div class="joe_friend_block">
