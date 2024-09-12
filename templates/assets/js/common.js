@@ -1044,7 +1044,11 @@ const commonContext = {
 		function renderer(data) {
 			const linksData = data;
 			const actionItem = document.querySelector('.joe_action_item.random');
-			actionItem.onclick = function () {
+		// 	判断元数据是否存在
+			if(!actionItem){
+				return;
+			}
+			actionItem.addEventListener('click', function() {
 				if (linksData.length > 0) {
 					// 随机获取一个链接项
 					const randomFriendLinks = getArrayItems(linksData, 1);
@@ -1059,7 +1063,7 @@ const commonContext = {
 						window.open(link, '_blank');
 					}, 3000);
 				}
-			};
+			})
 		}
 
 		/**
