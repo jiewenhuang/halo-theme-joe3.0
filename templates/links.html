@@ -43,16 +43,14 @@
                           th:data-link-sort-seq="${#annotations.getOrDefault(link,'link_sort_seq',0)}"
                           th:data-link-create-time="${link.metadata.creationTimestamp}"
                         >
-                          <th:block
-                            th:with="randomBgColor = ${bgColorArray[#numbers.formatDecimal(T(java.lang.Math).floor(T(java.lang.Math).random()* bgColorArray.length),1,0)]}"
-                          >
+                          <th:block>
                             <a
                               class="contain"
                               th:with="randomColor = ${colorArray[#numbers.formatDecimal(T(java.lang.Math).floor(T(java.lang.Math).random()* colorArray.length),1,0)]}"
                               th:href="${link.spec.url}"
                               :key="i"
                               target="_blank"
-                              th:style="'--fcolor:'+${randomColor} + '; background:' + ${randomBgColor}"
+                              th:style="'--fcolor:'+${randomColor} +';'"
                               rel="noopener noreferrer"
                             >
                               <div class="evan-f-left">
@@ -260,34 +258,42 @@
                     <script type="module" th:inline="javascript">
                       import { init } from /*[[${theme.config.basic.waline.waline_js_comment}]]*/ '';
 
-                      const waline_config_basic_jsonString = /*[[${theme.config.basic.waline.waline_config_basic_json}]]*/'';
-                      const waline_config_basic_object = JSON.parse((waline_config_basic_jsonString === null || waline_config_basic_jsonString.trim() === '') ?'{}':waline_config_basic_jsonString.trim());
+                      const waline_config_basic_jsonString =
+                        /*[[${theme.config.basic.waline.waline_config_basic_json}]]*/ '';
+                      const waline_config_basic_object = JSON.parse(
+                        waline_config_basic_jsonString === null ||
+                          waline_config_basic_jsonString.trim() === ''
+                          ? '{}'
+                          : waline_config_basic_jsonString.trim()
+                      );
 
-                      let waline_config_imageUpload_option = /*[[${theme.config.basic.waline.waline_config_imageUpload_option}]]*/'';
+                      let waline_config_imageUpload_option =
+                        /*[[${theme.config.basic.waline.waline_config_imageUpload_option}]]*/ '';
                       let imageUploader = 'true';
-                      if(waline_config_imageUpload_option === "lskypro"){
+                      if (waline_config_imageUpload_option === 'lskypro') {
                         imageUploader = (file) => {
-            
-                        let lskypro_apiURL = /*[[${theme.config.basic.waline.lskypro.lskypro_apiURL}]]*/'';
-                        let lskypro_apiTOKEN = /*[[${theme.config.basic.waline.lskypro.lskypro_apiTOKEN}]]*/'';
-                        
-                        let formData = new FormData();
-                        let headers = new Headers();
-              
-                        formData.append('file', file);
-                        if(lskypro_apiTOKEN.trim()!==''){
-                          headers.append('Authorization', "Bearer " + lskypro_apiTOKEN.trim());
-                        }
-                        headers.append('Accept', 'application/json');    
-              
-                        return fetch(lskypro_apiURL.trim(), {
-                          method: 'POST',
-                          headers: headers,
-                          body: formData
-                        })
-                          .then((resp) => resp.json())
-                          .then((resp) => resp.data.links.url);
-                        }
+                          let lskypro_apiURL =
+                            /*[[${theme.config.basic.waline.lskypro.lskypro_apiURL}]]*/ '';
+                          let lskypro_apiTOKEN =
+                            /*[[${theme.config.basic.waline.lskypro.lskypro_apiTOKEN}]]*/ '';
+
+                          let formData = new FormData();
+                          let headers = new Headers();
+
+                          formData.append('file', file);
+                          if (lskypro_apiTOKEN.trim() !== '') {
+                            headers.append('Authorization', 'Bearer ' + lskypro_apiTOKEN.trim());
+                          }
+                          headers.append('Accept', 'application/json');
+
+                          return fetch(lskypro_apiURL.trim(), {
+                            method: 'POST',
+                            headers: headers,
+                            body: formData,
+                          })
+                            .then((resp) => resp.json())
+                            .then((resp) => resp.data.links.url);
+                        };
                       }
 
                       init({
@@ -296,7 +302,7 @@
                         serverURL: /*[[${theme.config.basic.waline.waline_serverURL}]]*/ '',
                         requiredMeta: ['nick', 'mail'],
                         imageUploader,
-                        ...waline_config_basic_object
+                        ...waline_config_basic_object,
                       });
                     </script>
                   </th:block>
