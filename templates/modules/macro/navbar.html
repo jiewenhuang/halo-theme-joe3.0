@@ -217,25 +217,32 @@
               onerror="Joe.errorImg(this, 'ErrAvatarImg')"
             />
             <div class="info">
-              <a class="link" th:href="${site.url}" target="_blank" rel="noopener noreferrer nofollow">[[${theme.config.blogger.name ?: site.title}]]
-                <th:block th:if="${theme.config.blogger.show_level}">
-                <img class="level" th:src="@{/assets/svg/level_1.svg}" alt="博主等级"/>
+              <a
+                class="link"
+                th:href="${site.url}"
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                >[[${theme.config.blogger.name ?: site.title}]]
+                <th:block th:if="${theme.config.blogger.enable_blogger_level}">
+                  <img class="level" th:src="@{/assets/svg/level_1.svg}" alt="博主等级" />
                 </th:block>
               </a>
               <p class="motto joe_motto">[[${theme.config.blogger.motto}]]</p>
             </div>
           </div>
-          <th:block th:if="(${not #lists.isEmpty(theme.config.blogger.socials)} or ${not #lists.isEmpty(theme.config.blogger.custom_socials)}) and ${theme.config.blogger.enable_social} and ${theme.config.blogger.enable_mobile_social}">
+          <th:block
+            th:if="(${not #lists.isEmpty(theme.config.blogger.socials)} or ${not #lists.isEmpty(theme.config.blogger.custom_socials)}) and ${theme.config.blogger.enable_social} and ${theme.config.blogger.enable_mobile_social}"
+          >
             <th:block th:if="${theme.config.blogger.option_social_data == 'default'}">
               <div class="social-account">
                 <th:block th:each="socials : ${theme.config.blogger.socials}">
-                  <th:block th:replace="~{modules/widgets/social :: ${socials.socials_select}}"/>
+                  <th:block th:replace="~{modules/widgets/social :: ${socials.socials_select}}" />
                 </th:block>
               </div>
             </th:block>
             <th:block th:if="${theme.config.blogger.option_social_data == 'custom'}">
               <div class="social-account">
-                <th:block th:replace="~{modules/widgets/social :: custom_socials}"/>
+                <th:block th:replace="~{modules/widgets/social :: custom_socials}" />
               </div>
             </th:block>
           </th:block>

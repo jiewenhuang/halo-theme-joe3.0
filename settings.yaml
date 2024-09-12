@@ -74,7 +74,7 @@ spec:
               id: waline_config_imageUpload_option
               value: default
               label: Waline 图片上传配置
-              help: "选择图片上传方式"
+              help: '选择图片上传方式'
               options:
                 - value: default
                   label: 默认
@@ -89,13 +89,13 @@ spec:
                 - $formkit: text
                   name: lskypro_apiURL
                   label: 兰空图床 服务端地址
-                  value: ""
-                  help: "兰空图床 服务端地址，如 https://img.example.com/api/v1/upload 不要加结尾反斜杠"
+                  value: ''
+                  help: '兰空图床 服务端地址，如 https://img.example.com/api/v1/upload 不要加结尾反斜杠'
                 - $formkit: text
                   name: lskypro_apiTOKEN
                   label: 兰空图床 Token
-                  value: ""
-                  help: "兰空图床 Token，如 2|1bJbwlqBfnggmOMEZqXT5XusaIwqiZjCDs7r1Ob5"
+                  value: ''
+                  help: '兰空图床 Token，如 2|1bJbwlqBfnggmOMEZqXT5XusaIwqiZjCDs7r1Ob5'
 
         - $formkit: radio
           name: enable_source_link
@@ -1015,15 +1015,6 @@ spec:
               label: 开启
             - value: false
               label: 关闭
-        - $formkit: select
-          name: show_level
-          label: 展示博主等级
-          value: true
-          options:
-            - value: true
-              label: 开启
-            - value: false
-              label: 关闭
         - $formkit: text
           name: nickname
           label: 博主显示昵称
@@ -1640,51 +1631,51 @@ spec:
             - $formkit: select
               name: template_aside
               id: template_aside
-              label: "侧边栏模块"
-              value: "none"
+              label: '侧边栏模块'
+              value: 'none'
               options:
-                - value: "none"
+                - value: 'none'
                   label: 无
-                - value: "enable_blogger"
+                - value: 'enable_blogger'
                   label: 博主信息
-                - value: "enable_notice"
+                - value: 'enable_notice'
                   label: 网站公告
                 - value: 'enable_reward'
                   label: 打赏
                 - value: 'enable_picture'
                   label: 图片
-                - value: "enable_music_player"
+                - value: 'enable_music_player'
                   label: 音乐播放器
-                - value: "enable_newest_post"
+                - value: 'enable_newest_post'
                   label: 最新文章
-                - value: "enable_lifetime"
+                - value: 'enable_lifetime'
                   label: 人生倒计时
-                - value: "show_newreply"
+                - value: 'show_newreply'
                   label: 最新评论
-                - value: "enable_tag_cloud"
+                - value: 'enable_tag_cloud'
                   label: 标签云
-                - value: "enable_category_cloud"
+                - value: 'enable_category_cloud'
                   label: 分类云
-                - value: "enable_ads_aside"
+                - value: 'enable_ads_aside'
                   label: 侧边栏广告
-                - value: "enable_custom"
+                - value: 'enable_custom'
                   label: 自定义内容
             - $formkit: group
               if: $value.template_aside === 'enable_notice'
               name: aside_notice
               label: 网站公告
-              value: [ ]
+              value: []
               children:
                 - $formkit: text
                   name: notice_title
                   label: 公告标题
-                  value: "网站公告"
-                  help: "公告标题，留空则不显示"
+                  value: '网站公告'
+                  help: '公告标题，留空则不显示'
                 - $formkit: code
                   name: site_notice
                   label: 网站公告内容
-                  value: "这是你的公告"
-                  help: "支持html代码"
+                  value: '这是你的公告'
+                  help: '支持html代码'
                   language: html
             - $formkit: group
               if: $value.template_aside === 'enable_reward'
@@ -1735,55 +1726,55 @@ spec:
               if: $value.template_aside === 'enable_picture'
               name: aside_picture
               label: 图片
-              value: [ ]
+              value: []
               children:
                 - $formkit: attachment
                   name: qrcode_url
                   label: 图片链接
-                  value: ""
+                  value: ''
                 - $formkit: text
                   name: qrcode_title
                   label: 图片标题
-                  value: "我的二维码"
+                  value: '我的二维码'
                 - $formkit: textarea
                   name: qrcode_description
                   label: 图片描述
-                  value: ""
+                  value: ''
             - $formkit: group
               if: $value.template_aside === 'enable_music_player'
               name: aside_music_player
               label: 音乐播放器
-              value: [ ]
+              value: []
               children:
                 - $formkit: text
                   name: music_id
                   label: 歌单ID
-                  help: "为音乐播放器配置歌单ID，大家在网页歌单页直接复制地址栏id参数后面那串数字即可，不填或填错将不会展示播放器（注意：仅支持网易云歌单ID，且不支持私密歌单）"
-                  value: ""
+                  help: '为音乐播放器配置歌单ID，大家在网页歌单页直接复制地址栏id参数后面那串数字即可，不填或填错将不会展示播放器（注意：仅支持网易云歌单ID，且不支持私密歌单）'
+                  value: ''
             - $formkit: group
               if: $value.template_aside === 'show_newreply'
               name: aside_newreply
               label: 最新评论
-              value: [ ]
+              value: []
               children:
                 - $formkit: number
                   name: show_newreply_num
                   label: 展示最新评论
                   value: 3
-                  help: "在侧边栏展示最新评论的数量"
+                  help: '在侧边栏展示最新评论的数量'
             - $formkit: group
               if: $value.template_aside === 'enable_tag_cloud'
               name: aside_tag_cloud
               label: 标签云
-              value: [ ]
-              help: "数据不同，不能在这里选择分类云"
+              value: []
+              help: '数据不同，不能在这里选择分类云'
               children:
                 - $formkit: select
                   name: tag_cloud_type
                   id: tag_cloud_type
                   label: 标签云类型
-                  value: "3d"
-                  help: "设置标签云的展示形式，默认为 “3D标签云”，标签太多或卡顿时建议限制展示的标签数量"
+                  value: '3d'
+                  help: '设置标签云的展示形式，默认为 “3D标签云”，标签太多或卡顿时建议限制展示的标签数量'
                   options:
                     - value: 3d
                       label: 3D标签云
@@ -1793,7 +1784,7 @@ spec:
                   name: tag_cloud_num_type
                   id: tag_cloud_num_type
                   label: 标签数量类型
-                  help: "默认标签数量"
+                  help: '默认标签数量'
                   value: num
                   options:
                     - value: num
@@ -1805,14 +1796,14 @@ spec:
                   name: tag_cloud_num
                   id: tag_cloud_num
                   label: 标签数量
-                  help: "标签数量，默认为15"
-                  value: "15"
+                  help: '标签数量，默认为15'
+                  value: '15'
                 - $formkit: select
                   if: $value.tag_cloud_type === 'list'
                   name: tag_cloud_width
                   id: tag_cloud_width
                   label: 标签宽度
-                  value: "static"
+                  value: 'static'
                   options:
                     - value: static
                       label: 固定宽度
@@ -1822,15 +1813,15 @@ spec:
               if: $value.template_aside === 'enable_category_cloud'
               name: aside_category_cloud
               label: 分类云
-              value: [ ]
-              help: "数据不同，不能在这里选择标签云"
+              value: []
+              help: '数据不同，不能在这里选择标签云'
               children:
                 - $formkit: select
                   name: category_cloud_type
                   id: category_cloud_type
                   label: 分类云类型
-                  value: "3d"
-                  help: "设置标签云的展示形式，默认为 “3D分类云”，标签太多或卡顿时建议限制展示的数量"
+                  value: '3d'
+                  help: '设置标签云的展示形式，默认为 “3D分类云”，标签太多或卡顿时建议限制展示的数量'
                   options:
                     - value: 3d
                       label: 3D分类云
@@ -1840,7 +1831,7 @@ spec:
                   name: category_cloud_num_type
                   id: category_cloud_num_type
                   label: 分类数量类型
-                  help: "默认分类数量"
+                  help: '默认分类数量'
                   value: num
                   options:
                     - value: num
@@ -1852,14 +1843,14 @@ spec:
                   name: category_cloud_num
                   id: category_cloud_num
                   label: 分类数量
-                  help: "分类数量，默认为15"
-                  value: "15"
+                  help: '分类数量，默认为15'
+                  value: '15'
                 - $formkit: select
                   if: $value.category_cloud_type === 'list'
                   name: category_cloud_width
                   id: category_cloud_width
                   label: 标签宽度
-                  value: "static"
+                  value: 'static'
                   options:
                     - value: static
                       label: 固定宽度
@@ -1869,14 +1860,14 @@ spec:
               if: $value.template_aside === 'enable_ads_aside'
               name: aside_ads
               label: 侧边栏广告
-              value: [ ]
+              value: []
               children:
                 - $formkit: radio
                   name: aside_ads_type
                   id: aside_ads_type
                   label: 广告数据
-                  value: ""
-                  help: "广告类型，支持图片和自定义代码"
+                  value: ''
+                  help: '广告类型，支持图片和自定义代码'
                   options:
                     - value: img
                       label: 图片
@@ -1886,32 +1877,32 @@ spec:
                   if: $value.aside_ads_type === 'img'
                   name: aside_ads_img
                   label: 侧边栏广告图片
-                  value: ""
-                  help: "侧边栏广告图片链接"
+                  value: ''
+                  help: '侧边栏广告图片链接'
                 - $formkit: text
                   if: $value.aside_ads_type === 'img'
                   name: aside_ads_url
                   label: 广告链接
-                  value: ""
-                  help: "广告跳转链接"
+                  value: ''
+                  help: '广告跳转链接'
                 - $formkit: code
                   if: $value.aside_ads_type === 'code'
                   name: aside_ads_code
                   label: 自定义代码
-                  value: ""
-                  help: "支持html代码"
+                  value: ''
+                  help: '支持html代码'
                   language: html
             - $formkit: group
               if: $value.template_aside === 'enable_custom'
               name: aside_custom
               label: 自定义html
-              value: [ ]
+              value: []
               children:
                 - $formkit: code
                   name: aside_custom_code
                   label: 自定义代码
                   language: html
-                  help: "支持html代码"
+                  help: '支持html代码'
 
     #
     - group: post
@@ -1958,8 +1949,8 @@ spec:
         - $formkit: text
           name: days
           label: 失效提示天数
-          value: "30"
-          help: "自定义失效提示天数，超过此天数才显示失效提示（默认为 30 天）"
+          value: '30'
+          help: '自定义失效提示天数，超过此天数才显示失效提示（默认为 30 天）'
         - $formkit: radio
           name: days_type
           id: days_type
@@ -2828,7 +2819,7 @@ spec:
           name: message_source
           label: 留言页展示来源
           value: true
-          help: "默认展示全部评论"
+          help: '默认展示全部评论'
           options:
             - value: true
               label: 全部评论

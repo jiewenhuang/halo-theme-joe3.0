@@ -81,7 +81,7 @@
             </div>
             <!--                  pagination-->
             <th:block th:if="${!theme.config.home.enable_index_list_ajax}">
-              <th:block th:replace="~{modules/common/pagination :: index}" />
+              <th:block th:replace="~{modules/common/pagination :: pagination}" />
             </th:block>
             <th:block th:if="${posts.hasNext()} and ${theme.config.home.enable_index_list_ajax}">
               <div
