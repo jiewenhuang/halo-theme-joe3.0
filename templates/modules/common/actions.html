@@ -10,9 +10,13 @@
       <th:block
         th:if="${theme.config.post.enable_edit} and ${htmlType} == 'post' or ${htmlType} == 'sheet'"
       >
-        <div class="joe_action_item edit" sec:authorize="isAuthenticated()">
+        <div
+          class="joe_action_item edit"
+          sec:authorize="isAuthenticated()"
+          th:with="pageType=${htmlType == 'post' ? 'posts':'single-pages'}"
+        >
           <a
-            th:href="@{/console/posts/editor(name=${post.metadata.name}, returnToView=true)}"
+            th:href="@{${'/console/'+pageType+'/editor'}(name=${htmlType == 'post' ? post.metadata.name: singlePage.metadata.name }, returnToView=true)}"
             target="_blank"
           >
             <svg
