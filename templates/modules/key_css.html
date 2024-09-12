@@ -104,52 +104,47 @@
       }
       [# th:if="${theme.config.basic.enable_background_light} and ${theme.config.basic.background_light_mode != ''}"]
       html[data-mode="light"] body {
-          width: 100vw;
-          height: 100vh;
-          margin: 0;
-          padding: 0;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
       }
 
-      html[data-mode="light"] body:before {
-          background-position: top center;
-          background-attachment: fixed;
-          background-repeat: no-repeat;
-          background-size: cover;
-          background-image: url("[[${theme.config.basic.background_light_mode}]]");
-          content: "";
-          display: flex;
-          position: fixed;
-          z-index: -1;
-          width: 100vw;
-          height: 100vh;
+      html[data-mode="light"] body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("[[${theme.config.basic.background_light_mode}]]");
+        background-position: top center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        z-index: -1; /* 保证内容层在背景之上 */
       }
+
       [/]
       [# th:if="${theme.config.basic.enable_background_light != true} or ${theme.config.basic.background_light_mode == ''} or ${theme.config.basic.background_light_mode == null}"]
-      html[data-mode="light"] body {
-          background-image: none;
-      }
-      [/]
-      [# th:if="${theme.config.basic.enable_background_dark} and ${theme.config.basic.background_dark_mode != ''}"]
       html[data-mode="dark"] body {
-          width: 100vw;
-          height: 100vh;
-          margin: 0;
-          padding: 0;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
       }
 
-      html[data-mode="dark"] body:before {
-          background-position: top center;
-          background-attachment: fixed;
-          background-repeat: no-repeat;
-          background-size: cover;
-          background-image: url("[[${theme.config.basic.background_dark_mode}]]");
-          content: "";
-          display: flex;
-          position: fixed;
-          z-index: -1;
-          width: 100vw;
-          height: 100vh;
+      html[data-mode="dark"] body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("[[${theme.config.basic.background_dark_mode}]]");
+        background-position: top center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        z-index: -1; /* 保证内容层在背景之上 */
       }
+
       [/]
       [# th:if="${theme.config.basic.enable_background_dark != true} or ${theme.config.basic.background_dark_mode == ''} or ${theme.config.basic.background_dark_mode == null}"]
       html[data-mode="dark"] body {
