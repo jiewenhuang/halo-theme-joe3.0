@@ -39,6 +39,10 @@
             <!--        最新文章-->
             <th:block th:insert="~{modules/widgets/asideWidget :: enable_newest_post}" />
           </th:block>
+          <th:block th:case="'enable_hot_post'">
+            <!--        热门文章-->
+            <th:block th:insert="~{modules/widgets/asideWidget :: enable_hot_post}" />
+          </th:block>
           <th:block th:case="'enable_lifetime'">
             <!--        人生倒计时-->
             <th:block th:insert="~{modules/widgets/asideWidget :: enable_lifetime}" />
@@ -57,7 +61,9 @@
           </th:block>
           <th:block th:case="'enable_category_cloud'">
             <!--        分类云-->
-            <th:block th:insert="~{modules/widgets/asideWidget :: enable_category_cloud(category_cloud_data = ${aside.aside_category_cloud})}"/>
+            <th:block
+              th:insert="~{modules/widgets/asideWidget :: enable_category_cloud(category_cloud_data = ${aside.aside_category_cloud})}"
+            />
           </th:block>
           <th:block th:case="'enable_ads_aside'">
             <!--        侧边栏广告-->

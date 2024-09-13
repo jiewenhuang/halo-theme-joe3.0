@@ -1648,6 +1648,8 @@ spec:
                   label: 音乐播放器
                 - value: 'enable_newest_post'
                   label: 最新文章
+                - value: 'enable_hot_post'
+                  label: 热门文章
                 - value: 'enable_lifetime'
                   label: 人生倒计时
                 - value: 'show_newreply'

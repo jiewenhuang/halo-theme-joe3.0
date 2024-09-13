@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-  <th:block th:fragment="latest">
+  <th:block th:fragment="hot">
     <section class="joe_aside__item newest">
       <div class="joe_aside__item-title">
         <i class="joe-font joe-icon-huo"></i>
-        <span class="text">最新文章</span>
+        <span class="text">热门文章</span>
       </div>
       <div class="joe_aside__item-contain">
         <ul class="list">
@@ -12,7 +12,7 @@
             th:with="posts = ${postFinder.list({
   page: 1,
   size: 5,
-  sort: {'spec.publishTime,desc', 'metadata.creationTimestamp,asc'}
+  sort: {'stats.visit,desc', 'metadata.creationTimestamp,asc'}
 })}"
           >
             <li class="item" th:each="post : ${posts.items}">
