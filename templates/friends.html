@@ -48,7 +48,7 @@
                       />
                       <a 
                         class="joe_friend_info_author" 
-                        th:text="${spec.author}" th:href="${spec.url}">
+                        th:text="${spec.author}" th:href="${spec.authorUrl}">
                       </a>
                       <span 
                         class="joe_friend_info_pubDate" 
@@ -60,7 +60,7 @@
                         <h2 class="joe_friend_content_title">
                           <a 
                             target="_blank" 
-                            th:href="${spec.link}" 
+                            th:href="${spec.postLink}" 
                             th:text="${spec.title}"></a
                         ></h2>
                         <div class="joe_friend_content_description">
