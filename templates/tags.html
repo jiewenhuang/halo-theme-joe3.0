@@ -50,7 +50,13 @@
                               width="100%"
                               height="120"
                               class="image lazyload"
-                              th:data-src="${tag.spec.cover ?: postCover}"
+                              th:with="cover = ${tag.spec.cover?: postCover}"
+                              th:data-src="${cover}"
+                              th:srcset="|${thumbnail.gen(cover, 's')} 400w,
+              ${thumbnail.gen(cover, 'm')} 800w,
+              ${thumbnail.gen(cover, 'l')} 1200w,
+              ${thumbnail.gen(cover, 'xl')} 1600w|"
+                              sizes="(max-width: 1600px) 100vw, 1600px"
                               th:src="${theme.config.home.lazyload_thumbnail}"
                               th:alt="${tag.spec.displayName}"
                               onerror="Joe.errorImg(this, 'HomeErrImg')"
