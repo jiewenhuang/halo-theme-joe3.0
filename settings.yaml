@@ -2285,7 +2285,7 @@ spec:
           value: '暂无日志数据'
           help: '修改无数据时展示的文案'
         - $formkit: select
-          name: index_list_effect_class
+          name: journal_list_effect_class
           label: 动画效果类名
           value: 'fadeInUp'
           help: '日志页列表动画效果类名，来自 animate.css，默认 fadeInUp'
