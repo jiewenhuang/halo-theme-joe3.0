@@ -16,6 +16,11 @@
                   th:insert="~{modules/macro/banner_item_data :: data_by_custom(banner_url = ${banner_data.data_by_custom.banner_url}, banner_cover = ${banner_data.data_by_custom.banner_img}, banner_title = ${banner_data.data_by_custom.banner_title}, banner_excerpt = ${banner_data.data_by_custom.banner_subtitle})}"
                 />
               </th:block>
+              <th:block th:case="'hot_post'">
+                <th:block
+                  th:replace="~{modules/macro/banner_item_data :: data_by_hot(num = ${banner_data.hot_post_num})}"
+                />
+              </th:block>
             </th:block>
           </th:block>
         </div>

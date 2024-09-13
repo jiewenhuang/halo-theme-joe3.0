@@ -701,12 +701,20 @@ spec:
                   value: post
                 - label: 自定义数据
                   value: custom
+                - label: 热门文章（按阅读量）
+                  value: hot_post
             - $formkit: postSelect
               if: $value.banner_section_type === 'post'
               name: data_by_post
               label: 选择已有文章
               id: data_by_post
               value: ''
+            - $formkit: number
+              if: $value.banner_section_type === 'hot_post'
+              name: hot_post_num
+              label: 热门文章数量
+              id: hot_post_num
+              value: '3'
             - $formkit: group
               if: $value.banner_section_type === 'custom'
               name: data_by_custom
