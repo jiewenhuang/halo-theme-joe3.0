@@ -1035,7 +1035,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					color: this.getAttribute("color") || "inherit",
 					bold: this.getAttribute("bold") != null ? "bold" : "normal",
 				};
-				this.innerHTML = `<span class="joe_copy" style="cursor: pointer; user-select: none;word-break: break-all;font-weight:${this.options.bold};color:${this.options.color};">${this.options.title}<i style="margin-left:2px;" class="${this.options.icon}"></i></span>`;
+				this.innerHTML = `<span class="joe_copy" style="cursor: pointer; user-select: none;word-break: break-all;font-weight:${this.options.bold};color:${this.options.color};">${this.options.title}<i style="margin-left:2px;display:inline;" class="${this.options.icon}"></i></span>`;
 				const button = getChildren(this, "joe_copy");
 				if (typeof ClipboardJS !== "undefined" && typeof Qmsg !== "undefined") {
 					new ClipboardJS(button, { text: () => this.options.content }).on(
