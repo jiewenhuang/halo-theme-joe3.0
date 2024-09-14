@@ -10,6 +10,7 @@
     <!--    </th:block>-->
     <script th:src="${source_link+'/assets/lib/lazysizes/lazysizes.min.js'}"></script>
     <script th:src="${source_link+'/assets/lib/qmsg/qmsg.js'}"></script>
+    <script th:src="${source_link+'/assets/lib/clipboard/clipboard.min.js'}"></script>
     <th:block th:if="${theme.config.aside.show_newreply == true} or ${htmlType == 'sheet'}">
       <script th:src="${source_link+'/assets/lib/j-marked/marked.min.js'}"></script>
     </th:block>
@@ -38,9 +39,6 @@
       </th:block>
     </th:block>
     <script th:src="${source_link+'/assets/js/min/custom.min.js?v='+theme.spec.version}"></script>
-    <th:block th:if="${htmlType == 'post'} or ${htmlType == 'journals'} or ${htmlType == 'sheet'}">
-      <script th:src="${source_link+'/assets/lib/clipboard/clipboard.min.js'}"></script>
-    </th:block>
     <th:block th:if="${theme.config.custom.favicon != null && theme.config.custom.favicon != ''}">
       <script th:src="${source_link+'/assets/lib/favico/favico.min.js'}"></script>
     </th:block>
@@ -77,7 +75,7 @@
       <script
         th:src="${source_link+'/assets/js/min/journals.min.js?v='+theme.spec.version}"
       ></script>
-    </th:block>    
+    </th:block>
     <th:block th:if="${htmlType == 'friends'}">
       <script
         th:src="${source_link+'/assets/js/min/friends.min.js?v='+theme.spec.version}"

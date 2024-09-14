@@ -11,7 +11,7 @@
           th:classappend="${theme.config.post.qrcode_zfb != '' && theme.config.post.qrcode_wx != '' && theme.config.post.reward_code != '' ?'two':''}"
         >
           <th:block
-            th:if="${theme.config.post.qrcode_zfb} and ${#strings.trim(theme.config.post.qrcode_wx) != ''}"
+            th:if="${theme.config.post.qrcode_zfb} and ${#strings.trim(theme.config.post.qrcode_zfb) != ''}"
           >
             <li>
               <p>支付宝打赏</p>
