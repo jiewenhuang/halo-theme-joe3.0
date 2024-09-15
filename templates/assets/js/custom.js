@@ -1032,10 +1032,10 @@ document.addEventListener("DOMContentLoaded", () => {
 					title: this.getAttribute("title") || '',
 					icon: this.getAttribute("icon") || "joe-font joe-icon-copy",
 					content: this.getAttribute("content") || "默认文本",
-					color: this.getAttribute("color") || "inherit",
-					bold: this.getAttribute("bold") != null ? "bold" : "normal",
+					spanStyle: this.getAttribute("spanStyle") || "",
+					iconStyle: this.getAttribute("iconStyle") || "",
 				};
-				this.innerHTML = `<span class="joe_copy" style="cursor: pointer; user-select: none;word-break: break-all;font-weight:${this.options.bold};color:${this.options.color};">${this.options.title}<i style="margin-left:2px;display:inline;" class="${this.options.icon}"></i></span>`;
+				this.innerHTML = `<span class="joe_copy" style="cursor: pointer; user-select: none;word-break: break-all;${this.options.spanStyle}">${this.options.title}<i style="margin-left:4px;display:inline;${this.options.iconStyle}" class="${this.options.icon}"></i></span>`;
 				const button = getChildren(this, "joe_copy");
 				if (typeof ClipboardJS !== "undefined" && typeof Qmsg !== "undefined") {
 					new ClipboardJS(button, { text: () => this.options.content }).on(
