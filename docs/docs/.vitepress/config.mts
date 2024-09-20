@@ -23,6 +23,14 @@ export default defineConfig({
         ],
         collapsible: true,
         collapsed: true
+      },
+      {
+        text: '功能',
+        items: [
+          { text: '自定义标签', link: '/theme-style/custom-labels' },
+        ],
+        collapsible: true,
+        collapsed: true
       }
     ],
 
@@ -37,6 +45,7 @@ export default defineConfig({
           return `https://github.com/jiewenhuang/halo-theme-joe3.0/tree/main/docs/docs/${filePath}`
         }
       }
-    }
+    },
+    lastUpdated: true
   }
 })
