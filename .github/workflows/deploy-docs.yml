@@ -29,9 +29,9 @@ jobs:
       - name: Build
         run: |
           cd docs
-          bun run build
+          bun run docs:build
 
       # 部署到 Halo
       - name: Deploy to Halo
         run: |
-          npx halo-static-pages-deploy-cli deploy -e ${{ secrets.ENDPOINT }} -i ${{ secrets.ID }} -t ${{ secrets.PAT }} -f dist
+          npx halo-static-pages-deploy-cli deploy -e ${{ secrets.ENDPOINT }} -i ${{ secrets.ID }} -t ${{ secrets.PAT }} -f docs/docs/.vitepress/dist
