@@ -1902,13 +1902,6 @@ body {
     display: none;
   }
 
-  &.pos_left {
-    #he-plugin-simple {
-      right: auto !important;
-      left: 4px;
-    }
-  }
-
   &__item {
     position: relative;
     width: 280px;
@@ -1973,33 +1966,15 @@ body {
             var(--background));
       }
 
-      #he-plugin-simple {
-        top: 4px;
-        right: 4px;
+      #tp-weather-widget {
+        position: absolute;
+        top: 5px;
+        right: 8px;
         z-index: 6;
 
-        .s-sticker {
-          background-color: rgba(0, 0, 0, 0.5) !important;
-        }
-
-        .s-sticker-cond img {
-          position: relative;
-          top: -2px;
-        }
-
-        &.he_left {
-          right: auto;
-          left: 4px;
-        }
-
-        >div:last-child {
-          margin-top: -5px !important;
-
-          >div {
-            overflow: hidden;
-            background-color: #242422;
-            border-radius: 4px;
-          }
+        .sw-typography {
+          font-family: "Joe Font", "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, "sans-serif";
+          color: white;
         }
       }
 
@@ -4458,7 +4433,6 @@ body {
       }
 
       &:last-child {
-        width: 100%;
         margin-right: 0;
       }
 

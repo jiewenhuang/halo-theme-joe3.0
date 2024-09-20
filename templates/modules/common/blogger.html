@@ -186,9 +186,9 @@
         </th:block>
       </div>
       <th:block
-        th:if="${theme.config.blogger.enable_weather and theme.config.blogger.weather_key !=''}"
+        th:if="${theme.config.blogger.enable_weather and theme.config.blogger.weather_token !=''}"
       >
-        <div id="he-plugin-simple"></div>
+        <div id="tp-weather-widget"></div>
       </th:block>
       <th:block
         th:if="(${not #lists.isEmpty(theme.config.blogger.socials)} or ${not #lists.isEmpty(theme.config.blogger.custom_socials)}) and ${theme.config.blogger.enable_social}"
