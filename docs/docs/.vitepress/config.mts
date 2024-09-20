@@ -32,9 +32,9 @@ export default defineConfig({
     editLink: {
       pattern: ({ filePath }) => {
         if (filePath.startsWith('packages/')) {
-          return `https://github.com/jiewenhuang/halo-theme-joe3.0/docs/docs/${filePath}`
+          return `https://github.com/jiewenhuang/halo-theme-joe3.0/tree/main/docs/docs/${filePath}`
         } else {
-          return `https://github.com/jiewenhuang/halo-theme-joe3.0/docs/docs/${filePath}`
+          return `https://github.com/jiewenhuang/halo-theme-joe3.0/tree/main/docs/docs/${filePath}`
         }
       }
     }
