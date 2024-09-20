@@ -11,15 +11,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      # 检出代码
+      - uses: actions/checkout@v4
 
-      # 安装 bun
-      - name: Setup Bun
-        run: |
-          curl -fsSL https://bun.sh/install | bash
-          export BUN_INSTALL="$HOME/.bun"
-          export PATH="$BUN_INSTALL/bin:$PATH"
+      # 使用官方的 Bun 安装 Action
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
 
       # 进入 docs 目录并安装依赖
       - name: Install dependencies
@@ -31,9 +29,9 @@ jobs:
       - name: Build
         run: |
           cd docs
-          bun build
+          bun run build
 
       # 部署到 Halo
-      - name: Deploy to Halo # 关键步骤
+      - name: Deploy to Halo
         run: |
           npx halo-static-pages-deploy-cli deploy -e ${{ secrets.ENDPOINT }} -i ${{ secrets.ID }} -t ${{ secrets.PAT }} -f dist
