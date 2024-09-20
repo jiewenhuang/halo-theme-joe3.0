@@ -237,7 +237,7 @@
 
 
 
-```HTML、
+```HTML
 <joe-message type="info" content="普通消息"></joe-message>
 <joe-message type="warning" content="警告消息"></joe-message>
 <joe-message type="error" content="错误消息"></joe-message>
