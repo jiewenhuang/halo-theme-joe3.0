@@ -4,7 +4,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "Halo-theme-Joe3",
   description: "Halo-theme-Joe3 base docs",
-  base: '/theme-joe3',
+  base: '/theme-Joe3/',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     search: {
