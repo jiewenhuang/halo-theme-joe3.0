@@ -1,0 +1,39 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**' # 监听 docs 目录中的所有文件变化
+  workflow_dispatch: # 手动触发
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 安装 bun
+      - name: Setup Bun
+        run: |
+          curl -fsSL https://bun.sh/install | bash
+          export BUN_INSTALL="$HOME/.bun"
+          export PATH="$BUN_INSTALL/bin:$PATH"
+
+      # 进入 docs 目录并安装依赖
+      - name: Install dependencies
+        run: |
+          cd docs
+          bun install
+
+      # 进入 docs 目录并构建项目
+      - name: Build
+        run: |
+          cd docs
+          bun build
+
+      # 部署到 Halo
+      - name: Deploy to Halo # 关键步骤
+        run: |
+          npx halo-static-pages-deploy-cli deploy -e ${{ secrets.ENDPOINT }} -i ${{ secrets.ID }} -t ${{ secrets.PAT }} -f dist
