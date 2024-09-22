@@ -11,7 +11,7 @@
           <th:block
             th:with="posts = ${postFinder.list({
   page: 1,
-  size: 5,
+  size: #conversions.convert(theme.config.aside.set_hot_post_num, 'java.lang.Integer'),
   sort: {'stats.visit,desc', 'metadata.creationTimestamp,asc'}
 })}"
           >
