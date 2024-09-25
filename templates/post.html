@@ -317,8 +317,9 @@
         </th:block>
         <th:block
           th:if="${theme.config.post.enable_mobile_toc} or ${theme.config.theme.enable_back2top} or ${theme.config.basic.theme_mode == 'user'}"
+          th:with="contributor = ${contributorFinder.getContributor(post.status.contributors[post.status.contributors.size()-1])}"
         >
-          <th:block th:replace="~{modules/common/actions :: actions}" />
+          <th:block th:replace="~{modules/common/actions :: actions_edit(contributor=${contributor.name})}" />
         </th:block>
         <th:block th:if="${theme.config.footer.enable_footer}">
           <th:block th:replace="~{modules/common/footer :: footer}" />

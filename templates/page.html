@@ -177,7 +177,9 @@
           </th:block>
         </div>
         <!--    action-->
-        <th:block th:replace="~{modules/common/actions :: actions}" />
+        <th:block th:with="contributor = ${contributorFinder.getContributor(singlePage.status.contributors[0])}">
+          <th:block th:replace="~{modules/common/actions :: actions_edit(contributor=${contributor.name})}" />
+        </th:block>
         <th:block th:replace="~{modules/common/footer :: footer}" />
       </div>
       <script>
