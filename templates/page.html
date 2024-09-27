@@ -15,7 +15,7 @@
           <div class="joe_main">
             <div
               class="joe_detail"
-              th:with="contributor = ${contributorFinder.getContributor(singlePage.status.contributors[0])}"
+              th:with="contributor = ${contributorFinder.getContributor(singlePage.owner.name)}"
             >
               <h1
                 class="joe_detail__title"
@@ -33,8 +33,8 @@
                       height="35"
                       class="avatar lazyload"
                       th:src="${theme.config.blogger.lazyload_avatar}"
-                      th:data-src="${contributor.avatar}"
-                      th:alt="${contributor.displayName}"
+                      th:data-src="${singlePage.owner.avatar}"
+                      th:alt="${singlePage.owner.displayName}"
                       onerror="Joe.errorImg(this, 'ErrAvatarImg')"
                     />
                     <div class="meta">
@@ -42,7 +42,7 @@
                         <a
                           class="link"
                           th:href="${contributor.permalink}"
-                          th:title="${contributor.displayName}"
+                          th:title="${singlePage.owner.displayName}"
                           >[[${contributor.displayName}]]</a
                         >
                       </div>
@@ -177,9 +177,7 @@
           </th:block>
         </div>
         <!--    action-->
-        <th:block th:with="contributor = ${contributorFinder.getContributor(singlePage.status.contributors[0])}">
-          <th:block th:replace="~{modules/common/actions :: actions_edit(contributor=${contributor.name})}" />
-        </th:block>
+        <th:block th:replace="~{modules/common/actions :: actions_edit(contributor=${singlePage.owner.name})}" />
         <th:block th:replace="~{modules/common/footer :: footer}" />
       </div>
       <script>
