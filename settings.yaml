@@ -1668,6 +1668,8 @@ spec:
                   label: 分类云
                 - value: 'enable_ads_aside'
                   label: 侧边栏广告
+                - value: 'enable_moments'
+                  label: 瞬间
                 - value: 'enable_custom'
                   label: 自定义内容
             - $formkit: group
@@ -1902,6 +1904,18 @@ spec:
                   value: ''
                   help: '支持html代码'
                   language: html
+            - $formkit: group
+              if: $value.template_aside === 'enable_moments'
+              name: moments
+              label: 瞬间
+              value: []
+              children:
+                - $formkit: code
+                  name: moments_num
+                  id: moments_num
+                  label: 瞬间数量
+                  help: '展示的瞬间数量，默认为5'
+                  value: '5'
             - $formkit: group
               if: $value.template_aside === 'enable_custom'
               name: aside_custom

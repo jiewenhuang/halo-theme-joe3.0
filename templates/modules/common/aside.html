@@ -71,6 +71,12 @@
               th:insert="~{modules/widgets/asideWidget :: enable_ads_aside(ads_data = ${aside.aside_ads})}"
             />
           </th:block>
+          <th:block th:case="'enable_moments'">
+            <!--        瞬间-->
+            <th:block
+              th:insert="~{modules/widgets/asideWidget :: enable_moments(moments_data = ${aside.moments})}"
+            />
+          </th:block>
           <th:block th:case="'enable_custom'">
             <!--        侧边栏广告-->
             <th:block
