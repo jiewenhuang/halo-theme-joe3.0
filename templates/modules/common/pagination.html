@@ -545,7 +545,7 @@
                th:text="${index}"></a>
           </li>
           <li class="next"
-              th:classappend="${index eq totalPages} ? ' disabled':''">
+              th:classappend="${pageIndex eq totalPages} ? ' disabled':''">
             <a th:href="@{${posts.nextUrl}}">
               <i class="joe-font joe-icon-next"></i>
             </a>
@@ -605,7 +605,7 @@
             </a>
           </li>
           <li class="next"
-              th:classappend="${index eq totalPages} ? ' disabled':''">
+              th:classappend="${pageIndex eq totalPages} ? ' disabled':''">
             <a th:href="@{${posts.nextUrl}}">
               <i class="joe-font joe-icon-next"></i>
             </a>
@@ -613,6 +613,5 @@
         </ul>
       </th:block>
     </th:block>
-
   </th:block>
 </html>
