@@ -970,189 +970,99 @@ const commonContext = {
 
 	/* 友链随机跳转 */
 	travelling() {
-
 		/**
-		 * 定义一个对象用于操作本地存储
+		 * 定义一个对象用于本地存储
 		 */
 		const saveToLocal = {
-		    /**
-		     * 设置本地存储项，并设置过期时间
-		     * @param {string} key - 存储项的键名
-		     * @param {*} value - 需要存储的值
-		     * @param {number} expirationMinutes - 过期时间（分钟）
-		     */
-		    set: function (key, value, expirationMinutes) {
-		        // 获取当前时间
-		        const now = new Date();
-		        // 构建存储对象，包含值和过期时间
-		        const item = {
-		            value: value,
-		            expiry: now.getTime() + expirationMinutes * 60000, // 将分钟转换为毫秒，计算过期时间
-		        };
-		        // 将对象转换为字符串，然后存储到本地存储中
-		        localStorage.setItem(key, JSON.stringify(item));
-		    },
-		    /**
-		     * 从本地存储获取未过期的项
-		     * @param {string} key - 存储项的键名
-		     * @returns {*} - 存储项的值，如果项已过期或不存在，则返回null
-		     */
-		    get: function (key) {
-		        // 从本地存储获取项字符串
-		        const itemStr = localStorage.getItem(key);
-		        if (!itemStr) {
-		            // 如果项不存在，返回null
-		            return null;
-		        }
-		        // 将字符串解析为对象
-		        const item = JSON.parse(itemStr);
-		        // 获取当前时间
-		        const now = new Date();
-		        // 如果当前时间超过项的过期时间，则删除该项并返回null
-		        if (now.getTime() > item.expiry) {
-		            localStorage.removeItem(key);
-		            return null;
-		        }
-		        // 返回存储项的值
-		        return item.value;
-		    }
+			set: function (key, value, expirationMinutes) {
+				const now = new Date();
+				const item = {
+					value: value,
+					expiry: now.getTime() + expirationMinutes * 60000,
+				};
+				localStorage.setItem(key, JSON.stringify(item));
+			},
+			get: function (key) {
+				const itemStr = localStorage.getItem(key);
+				if (!itemStr) {
+					return null;
+				}
+				const item = JSON.parse(itemStr);
+				const now = new Date();
+				if (now.getTime() > item.expiry) {
+					localStorage.removeItem(key);
+					return null;
+				}
+				return item.value;
+			}
 		};
-
 		/**
-		 * 获取链接列表
-		 *
-		 * 本函数通过调用API获取链接列表，并将结果存储到本地存储中
-		 *
-		 * @return {Promise<Array>} 一个Promise对象，解析后包含链接列表
+		 * 从 HTML 中获取链接数据
+		 * @returns {Array} 包含链接数据的数组
 		 */
-		function getLinks() {
-		    // 定义获取链接数据的API endpoint
-		    const linksAPI = "/apis/api.plugin.halo.run/v1alpha1/plugins/PluginLinks/links";
-
-		    // 发起网络请求获取链接数据
-		    return fetch(linksAPI)
-		        .then(res => res.json()) // 将响应的数据解析为JSON格式
-		        .then(json => {
-		            // 将获取的链接数据存储到本地，并设置过期时间
-		            saveToLocal.set('links-data', JSON.stringify(json.items), 10 / (60 * 24));
-		            return json.items; // 返回解析后的链接列表
-		        });
+		function getLinksFromHTML() {
+			const links = [];
+			const friendItems = document.querySelectorAll('.joe_detail__friends-item');
+			friendItems.forEach(item => {
+				const link = {
+					spec: {
+						url: item.querySelector('a').getAttribute('href'),
+						displayName: item.querySelector('.sub-text').innerText,
+					},
+					metadata: {
+						annotations: {
+							link_enable_show: 'true'
+						}
+					}
+				};
+				links.push(link);
+			});
+			return links;
 		}
-
 		/**
-		 * 获取链接组数据
-		 *
-		 * 本函数通过调用API接口获取链接组数据，并将数据缓存到本地
-		 *
-		 * @returns {Promise<Array>} 返回一个Promise对象，该对象解析后包含链接组数据数组
-		 */
-		function getLinkGroups() {
-		    // 定义链接组的API接口地址
-		    const linkGroupsAPI = "/apis/core.halo.run/v1alpha1/linkgroups";
-
-		    // 使用fetch函数对API接口进行GET请求
-		    return fetch(linkGroupsAPI)
-		        .then(res => res.json()) // 将响应体解析为JSON格式
-		        .then(json => {
-		            // 将获取的链接组数据存储到本地，并设置过期时间
-		            // 这里使用了一个假定的saveToLocal.set函数，参数分别为键、值、过期时间（天）
-		            saveToLocal.set('link-groups-data', JSON.stringify(json.items), 10 / (60 * 24));
-		            return json.items; // 返回解析后的链接组数据数组
-		        });
-		}
-
-		/**
-		 * 从数组中随机获取指定数量的元素
+		 * 随机获取数组中的指定数量的元素
 		 * @param {Array} arr - 输入的数组
 		 * @param {number} num - 需要获取的元素数量
 		 * @returns {Array|null} - 返回包含指定数量元素的新数组，如果num大于数组长度则返回null
 		 */
 		function getArrayItems(arr, num) {
-		    // 如果需要获取的元素数量大于数组长度，则返回null
-		    if (num > arr.length) {
-		        return null;
-		    }
-		    // 通过 Fisher-Yates 洗牌算法打乱数组元素顺序
-		    const shuffled = arr.sort(() => 0.5 - Math.random());
-		    // 返回打乱顺序后的数组的前num个元素
-		    return shuffled.slice(0, num);
+			if (num > arr.length) {
+				return null;
+			}
+			const shuffled = arr.sort(() => 0.5 - Math.random());
+			return shuffled.slice(0, num);
 		}
-
 		/**
-		 * 渲染器函数，用于处理数据和链接组并响应点击事件
+		 * 渲染器函数，用于处理数据并响应点击事件
 		 * @param {Array} data - 包含链接项的数据数组
-		 * @param {Array} linkGroups - 链接组的元数据数组
 		 */
-		function renderer(data, linkGroups) {
+		function renderer(data) {
 			const actionItem = document.querySelector('.joe_action_item.random');
 			if (!actionItem) {
 				return;
 			}
-			// 为选取的元素添加点击事件监听器
 			actionItem.addEventListener('click', function () {
-				// 当数据数组非空时执行以下逻辑
 				if (data.length > 0) {
-					// 随机获取一个链接项
 					const randomFriendLinks = getArrayItems(data, 1);
 					const selectedLink = randomFriendLinks[0];
-					// 匹配 链接 中的 groupName 与 链接组 中的 name
-					const groupName = selectedLink.spec.groupName;
-					const groupData = linkGroups.find(group => group.metadata.name === groupName);
-					// 先检查 链接组 中的 link_group_enable_show 是否为 false
-					const groupEnableShowFlag = groupData?.metadata?.annotations?.link_group_enable_show;
-					if (groupEnableShowFlag === "false") {
-						// 如果 group_enable_show 为 false，不进行跳转
-						Qmsg.info("该链接组不可见，跳转取消。");
-						return;
-					}
-					// 如果 group_enable_show 为 true，检查 链接 中的 link_enable_show
-					const enableShowFlag = selectedLink.metadata.annotations && selectedLink.metadata.annotations.link_enable_show;
-					if (enableShowFlag === "false") {
-						// 如果 link_enable_show 为 false，不进行跳转
-						Qmsg.info("该链接不可见，跳转取消。");
-						return;
-					}
-					// 正常处理，进行跳转
-					const name = selectedLink.spec.displayName;
 					const link = selectedLink.spec.url;
+					const name = selectedLink.spec.displayName;
 					const msg = "即将跳转到：「" + name + "」";
 					Qmsg.success(msg);
 					setTimeout(() => {
 						window.open(link, '_blank');
 					}, 3000);
 				}
-			})
+			});
 		}
-
 		/**
 		 * 初始化函数
-		 * 该函数在初始化时会检查本地存储中是否存在链接和链接组的数据，并根据数据的存在与否采取相应的加载措施
+		 * 该函数在初始化时会从 HTML 获取链接的数据并渲染
 		 */
 		function init() {
-		    let linksData = saveToLocal.get('links-data');
-		    let linkGroupsData = saveToLocal.get('link-groups-data');
-		    if (linksData && linkGroupsData) {
-		        // 如果本地有数据，则直接渲染
-		        renderer(JSON.parse(linksData), JSON.parse(linkGroupsData));
-		    } else {
-		        // 如果本地数据缺失，则通过 Promise.all 并发获取 links 和 linkGroups
-		        Promise.all([
-		            // 对 linksData 的存在性进行判断，如果存在则解析，否则调用 getLinks()
-		            linksData ? JSON.parse(linksData) : getLinks(),
-		            // 对 linkGroupsData 的存在性进行判断，如果存在则解析，否则调用 getLinkGroups()
-		            linkGroupsData ? JSON.parse(linkGroupsData) : getLinkGroups()
-		        ])
-		        .then(([links, linkGroups]) => {
-		            // 当所有数据成功获取后，调用 renderer 进行渲染
-		            renderer(links, linkGroups);
-		        })
-		        .catch(err => {
-		            console.error("Error fetching data:", err);
-		        });
-		    }
+			const linksData = getLinksFromHTML();
+			renderer(linksData);
 		}
-
-		// 执行初始化函数
 		init();
 	},
 };
