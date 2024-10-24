@@ -77,7 +77,7 @@
       <script
         th:src="${source_link+'/assets/js/min/journals.min.js?v='+theme.spec.version}"
       ></script>
-    </th:block>    
+    </th:block>
     <th:block th:if="${htmlType == 'friends'}">
       <script
         th:src="${source_link+'/assets/js/min/friends.min.js?v='+theme.spec.version}"
@@ -133,6 +133,7 @@
         SearchWidget.open();
       });
     </script>
+
     <!--    大图配置-->
     <script th:inline="javascript" th:if="${theme.config.beauty.enable_big_banner}">
       // 以下配置参数均为默认值
@@ -174,5 +175,6 @@
       const loading = document.querySelector('.joe_load_container');
       ob.observe(loading);
     </script>
+    <halo:footer />
   </th:block>
 </html>
