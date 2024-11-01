@@ -22,6 +22,28 @@ spec:
             - value: dark
               label: 暗黑模式
         - $formkit: radio
+          name: enable_index_list_ajax
+          id: enable_index_list_ajax
+          label: 加载形式
+          value: false
+          help: ""
+          options:
+            - value: true
+              label: 加载
+            - value: false
+              label: 分页
+        - $formkit: select
+          name: enable_auto_ajax
+          if: "$get(enable_index_list_ajax).value === true"
+          label: 是否开启自动加载
+          value: false
+          help: "开启后滑到底部自动加载文章(默认关闭)"
+          options:
+            - value: true
+              label: 是
+            - value: false
+              label: 否
+        - $formkit: radio
           name: comment_option
           id: comment_option
           value: default
@@ -206,27 +228,6 @@ spec:
     - group: home
       label: 首页
       formSchema:
-        - $formkit: radio
-          name: enable_index_list_ajax
-          label: 文章加载形式
-          value: false
-          help: ''
-          options:
-            - value: true
-              label: 加载
-            - value: false
-              label: 分页
-        - $formkit: radio
-          name: enable_auto_ajax
-          label: 是否开启自动加载
-          value: false
-          help: '开启后滑到底部自动加载文章(默认关闭)'
-          options:
-            - value: true
-              label: 是
-            - value: false
-              label: 否
-
         - $formkit: select
           name: enable_post_thumbnail
           label: 开启文章缩略图
@@ -2583,6 +2584,16 @@ spec:
           label: 相册页标题
           value: '我的图库'
           help: '修改相册页顶部展示的标题'
+        - $formkit: select
+          name: photos_type
+          label: 展示形式
+          value: "card"
+          help: "配置相册的展示形式，默认为 <卡片形式>"
+          options:
+            - value: tag
+              label: 标签
+            - value: card
+              label: 卡片
         - $formkit: number
           name: photos_gap
           label: 图片间距

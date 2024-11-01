@@ -158,7 +158,7 @@
     <th:block th:if="${htmlType == 'photos'}"> </th:block>
     <script
       type="text/javascript"
-      th:if="${theme.config.home.enable_auto_ajax} and ${theme.config.home.enable_index_list_ajax}"
+      th:if="${theme.config.home.enable_auto_ajax} and ${theme.config.basic.enable_index_list_ajax}"
     >
       const ob = new IntersectionObserver(
         (entries) => {
