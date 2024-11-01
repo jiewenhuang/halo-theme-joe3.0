@@ -2,7 +2,7 @@
 <html
   lang="en"
   xmlns:th="http://www.thymeleaf.org"
-  th:replace="~{modules/layout :: html(title = ${theme.config.journals.journals_title ?: '我的动态'}+'-'+${site.title},htmlType = journals,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
+  th:replace="~{modules/layout :: html(title = ${theme.config.journals.journals_title ?: '动态'}+'-'+${site.title},htmlType = journals,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
 >
   <th:block th:fragment="content">
     <body>
@@ -15,7 +15,7 @@
           <div class="joe_main">
             <div class="joe_detail">
               <h1 class="joe_detail__title txt-shadow">
-                [[${theme.config.journals.journals_title ?: '我的动态'}]]
+                [[${theme.config.journals.journals_title ?: '动态'}]]
               </h1>
               <th:block th:if="${theme.config.journals.enable_journal_add}">
                 <a
@@ -26,39 +26,6 @@
                   ><i class="joe-font joe-icon-edit"></i
                 ></a>
               </th:block>
-              <div class="joe_detail__count">
-                <div class="joe_detail__count-information">
-                  <img
-                    width="35"
-                    height="35"
-                    class="avatar lazyload"
-                    th:data-src="${theme.config.blogger.avatar}"
-                    th:src="${theme.config.blogger.lazyload_avatar}"
-                    th:alt="${theme.config.blogger.nickname ?: site.title}"
-                    onerror="Joe.errorImg(this, 'ErrAvatarImg')"
-                  />
-                  <div class="meta">
-                    <div class="author">
-                      <a
-                        class="link"
-                        th:href="${site.url}"
-                        th:title="${theme.config.blogger.nickname ?: site.title}"
-                        >[[${theme.config.blogger.nickname ?: site.title}]]</a
-                      >
-                      <!-- 修改链接指向博客地址 title 和 显示为博主名/博客名 -->
-                    </div>
-                    <div class="item">
-                      <span class="text"
-                        >[[${theme.config.blogger.motto?:'一句话介绍自己吧！'}]]</span
-                      >
-                      <th:block th:if="${theme.config.other.check_baidu_collect}">
-                        <span class="line">/</span>
-                        <span class="text" id="joe_baidu_record">正在检测是否收录...</span>
-                      </th:block>
-                    </div>
-                  </div>
-                </div>
-              </div>
               <th:block th:replace="~{modules/macro/loading :: loading}" />
 
               <ul
@@ -81,6 +48,38 @@
                         >[[${#dates.format(moment.spec.releaseTime,'yyyy/MM/dd HH:mm:ss')}]]</em
                       >
                     </p>
+                    <div class="joe_detail__count">
+                      <div class="joe_detail__count-information">
+                        <img
+                                width="35"
+                                height="35"
+                                class="avatar lazyload"
+                                th:data-src="${moment.owner.avatar}"
+                                th:src="${theme.config.blogger.lazyload_avatar}"
+                                th:alt="${moment.owner.displayName}"
+                                onerror="Joe.errorImg(this, 'ErrAvatarImg')"
+                        />
+                        <div class="meta">
+                          <div class="author">
+                            <a
+                                    class="link"
+                                    th:href="${'/authors/' + moment.owner.name}"
+                                    th:title="${moment.owner.displayName}"
+                            >[[${moment.owner.displayName}]]</a
+                            >
+                          </div>
+                          <div class="item">
+                      <span class="text"
+                      >[[${moment.owner.bio?:'一句话介绍自己吧！'}]]</span
+                      >
+                            <th:block th:if="${theme.config.other.check_baidu_collect}">
+                              <span class="line">/</span>
+                              <span class="text" id="joe_baidu_record">正在检测是否收录...</span>
+                            </th:block>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     <div class="joe_journal_block">
                       <div
                         class="joe_journal_body"

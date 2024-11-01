@@ -2369,7 +2369,7 @@ spec:
         - $formkit: text
           name: journals_title
           label: 日志页标题
-          value: '我的动态'
+          value: ''
           help: '修改日志页顶部展示的标题'
         - $formkit: text
           name: journals_empty_text
