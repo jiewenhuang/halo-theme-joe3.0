@@ -349,20 +349,3 @@ spec:
           label: 是
         - value: "false"
           label: 否
-
----
-apiVersion: v1alpha1
-kind: AnnotationSetting
-metadata:
-  generateName: annotation-setting-
-spec:
-  targetRef:
-    group: core.halo.run
-    kind: PhotoGroup
-  formSchema:
-    - $formkit: "attachment"
-      name: "cover"
-      label: "分组相册封面"
-    - $formkit: "textarea"
-      name: "description"
-      label: "分组相册描述"

@@ -80,10 +80,10 @@
               </div>
             </div>
             <!--                  pagination-->
-            <th:block th:if="${!theme.config.basic.enable_index_list_ajax}">
+            <th:block th:if="${!theme.config.home.enable_index_list_ajax}">
               <th:block th:replace="~{modules/common/pagination :: pagination}" />
             </th:block>
-            <th:block th:if="${posts.hasNext()} and ${theme.config.basic.enable_index_list_ajax}">
+            <th:block th:if="${posts.hasNext()} and ${theme.config.home.enable_index_list_ajax}">
               <div
                 class="joe_load_container"
                 th:with="nextPage = ${posts.totalPages == posts.page?'':posts.nextUrl}"

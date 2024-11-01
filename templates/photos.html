@@ -21,7 +21,12 @@
               <nav class="joe_photos__filter">
                 <ul>
                   <li data-sjslink="*" class="active">
-                    <a>全部图片</a>
+                    <a class="link" href="/photos">全部图片</a>
+                  </li>
+                  <li th:each="group : ${photoFinder.groupBy()}">
+                    <a class="link" th:href="'/photos?group='+${group.metadata.name}" th:title="${group.spec.displayName}">
+                      <span>[[${group.spec.displayName}]]</span>
+                    </a>
                   </li>
                 </ul>
               </nav>
@@ -57,11 +62,11 @@
                   </div>
                 </div>
               </div>
-              <th:block th:if="${!theme.config.basic.enable_index_list_ajax}"
+              <th:block th:if="${!theme.config.photos.enable_index_list_ajax}"
                         th:with="groupName = ${param.group}, param_group = ${not #strings.isEmpty(param.group) ? 'photoGroup' : 'photoAll'}">
                 <th:block th:replace="~{modules/common/pagination :: ${param_group}(groupName = ${groupName})}" />
               </th:block>
-              <th:block th:if="${theme.config.basic.enable_index_list_ajax}">
+              <th:block th:if="${theme.config.photos.enable_index_list_ajax}">
                 <th:block th:replace="~{modules/macro/loading :: loading}" />
               </th:block>
             </div>

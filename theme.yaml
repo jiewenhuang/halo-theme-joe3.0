@@ -25,7 +25,3 @@ spec:
         description: 友链模板
         screenshot:
         file: page_links.html
-      - name: 相册
-        description: 相册模板
-        screenshot:
-        file: page_photos.html
