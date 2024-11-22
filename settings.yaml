@@ -921,6 +921,16 @@ spec:
               label: 开启
             - value: false
               label: 关闭
+        - $formkit: select
+          name: enable_ali_iconfont_symbol_header
+          label: 阿里巴巴IconFont Symbol
+          value: true
+          help: '开启后，可以使用阿里IconFont的Symbol彩色图标。语法为 #icon-xxx，例如 #icon-shouye'
+          options:
+            - value: true
+              label: 开启
+            - value: false
+              label: 关闭
         - $formkit: radio
           name: nav_login
           label: 导航栏登入按钮

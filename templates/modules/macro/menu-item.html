@@ -10,9 +10,28 @@
       <th:block th:if="${theme.config.navbar.enable_navbar_icon}">
         <i
           th:class="'m-icon '+${#annotations.getOrDefault(menuItem, 'icon','jiewen joe-icon-zuzhijiagou')}"
+          th:if="${theme.config.navbar.enable_ali_iconfont_symbol_header}==false"
         ></i>
+        <svg
+          class="ali_icon"
+          aria-hidden="true"
+          th:if="${theme.config.navbar.enable_ali_iconfont_symbol_header}"
+        >
+          <use
+            th:href="${#annotations.getOrDefault(menuItem, 'icon','jiewen joe-icon-zuzhijiagou')}"
+          ></use>
+        </svg>
       </th:block>
       [[${menuItem.status.displayName}]]
     </a>
+    <style type="text/css">
+      .ali_icon {
+        width: 1.2em;
+        height: 1.2em;
+        vertical-align: -0.15em;
+        fill: currentColor;
+        overflow: hidden;
+      }
+    </style>
   </th:block>
 </html>
