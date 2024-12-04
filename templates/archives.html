@@ -38,7 +38,7 @@
                           <span th:title="${category.spec.displayName}">
                             [[${category.spec.displayName}]]
                           </span>
-                          <em th:text="${category.status.visiblePostCount ?: 0}"></em>
+                          <em th:text="${category.postCount ?: 0}"></em>
                         </a>
                       </li>
                     </ul>
