@@ -2067,6 +2067,48 @@ spec:
             - value: false
               label: 否
 
+        - $formkit: select
+          name: enable_aside_donate
+          label: 展示打赏模块
+          value: true
+          help: '在侧边栏展示打赏模块'
+          options:
+            - value: true
+              label: 是
+            - value: false
+              label: 否
+
+        - $formkit: select
+          name: enable_aside_picture
+          label: 展示图片模块
+          value: true
+          help: '在侧边栏展示图片模块'
+          options:
+            - value: true
+              label: 是
+            - value: false
+              label: 否
+        - $formkit: select
+          name: enable_aside_music
+          label: 展示侧边栏音乐播放器模块
+          value: true
+          help: '在侧边栏展示音乐播放器模块'
+          options:
+            - value: true
+              label: 是
+            - value: false
+              label: 否
+        - $formkit: select
+          name: enable_aside_adv
+          label: 展示侧边栏广告模块
+          value: true
+          help: '在侧边栏展示广告模块'
+          options:
+            - value: true
+              label: 是
+            - value: false
+              label: 否
+
         - $formkit: text
           name: relate_post_max
           label: 相关文章最大条数

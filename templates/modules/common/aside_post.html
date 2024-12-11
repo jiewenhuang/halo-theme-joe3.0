@@ -16,9 +16,61 @@
             <div id="js-toc" class="toc"></div>
           </div>
         </th:block>
+
         <th:block th:if="${theme.config.post.enable_relate_post == true}">
           <th:block th:replace="~{modules/macro/relate :: relate}" />
         </th:block>
+
+        <th:block th:each="aside : ${theme.config.aside.enable_outpost_aside}">
+          <th:block th:switch="${aside.template_aside}">
+            <th:block
+              th:case="'enable_reward'"
+              th:if="${theme.config.post.enable_aside_donate == true}"
+            >
+              <!--        打赏-->
+              <th:block
+                th:insert="~{modules/widgets/asideWidget :: enable_reward(reward_data = ${aside.aside_reward})}"
+              />
+            </th:block>
+            <th:block
+              th:case="'enable_picture'"
+              th:if="${theme.config.post.enable_aside_picture == true}"
+            >
+              <!--        图片-->
+              <th:block
+                th:insert="~{modules/widgets/asideWidget :: enable_picture(pic_data = ${aside.aside_picture})}"
+              />
+            </th:block>
+            <th:block
+              th:case="'enable_music_player'"
+              th:if="${theme.config.post.enable_aside_music == true}"
+            >
+              <!--        音乐播放器-->
+              <th:block
+                th:insert="~{modules/widgets/asideWidget :: enable_music_player(music_data = ${aside.aside_music_player})}"
+              />
+            </th:block>
+            <th:block
+              th:case="'enable_ads_aside'"
+              th:if="${theme.config.post.enable_aside_adv == true}"
+            >
+              <!--        侧边栏广告-->
+              <th:block
+                th:insert="~{modules/widgets/asideWidget :: enable_ads_aside(ads_data = ${aside.aside_ads})}"
+              />
+            </th:block>
+            <th:block
+              th:case="'enable_custom'"
+              th:if="${theme.config.post.enable_aside_adv == true}"
+            >
+              <!--        侧边栏广告-->
+              <th:block
+                th:insert="~{modules/widgets/asideWidget :: enable_custom(custom_data = ${aside.aside_custom})}"
+              />
+            </th:block>
+          </th:block>
+        </th:block>
+
         <th:block
           th:if="${theme.config.ads.enable_ads_aside != 'none'} and ${not #lists.isEmpty(theme.config.ads.ads_aside)}"
           th:each="ads_data : ${theme.config.ads.ads_aside}"
