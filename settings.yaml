@@ -3091,7 +3091,47 @@ spec:
               label: 是
             - value: false
               label: 否
-
+    - group: memos
+      label: Memos
+      formSchema:
+        - $formkit: text
+          name: memos_title
+          label: Memos页面标题
+          value: '日常随记'
+        - $formkit: text
+          name: memos_host
+          label: Memos Host URL
+          value: ''
+          help: '填写Memos服务的地址'
+        - $formkit: select
+          name: enable_memos_link
+          label: Memos页面跳转按钮
+          value: false
+          help: '是否展示Memos跳转按钮，用于跳转Memos页面'
+          options:
+            - value: true
+              label: 是
+            - value: false
+              label: 否
+        - $formkit: select
+          name: enable_memos_aside
+          label: Memos页侧边栏
+          value: true
+          help: 'Memos页是否展示侧边栏'
+          options:
+            - value: true
+              label: 是
+            - value: false
+              label: 否
+        - $formkit: number
+          name: memos_page_size
+          label: 一次渲染的Memo条数
+          value: '20'
+        - $formkit: number
+          name: memos_block_height
+          label: 一条Memo内容展示块的最大高度
+          value: '300'
+          help: '设置内容区域的最大高度（单位像素），超过此高度则显示折叠/展开按钮，默认值为 300，最小值为 100（若输入的值小于 100 则按 100 处理）'
     - group: custom
       label: 自定义
       formSchema:
@@ -3194,7 +3234,7 @@ spec:
               label: 关闭
         - $formkit: text
           name: baidu_token
-          label: 百度推送Token
+          label: 百度baiduToken
           value: ''
           help: '文章页未收录时会自动将当前链接推送给百度加快收录，Token在百度收录平台注册账号获取（必须启用“检查百度收录”并填入token才生效），https://ziyuan.baidu.com/linksubmit'
         - $formkit: select

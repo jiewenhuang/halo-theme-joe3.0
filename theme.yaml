@@ -25,3 +25,8 @@ spec:
         description: 友链模板
         screenshot:
         file: page_links.html
+      - name: 哔哔
+        description: BB
+        screenshot:
+        file: memos_display.html
+
