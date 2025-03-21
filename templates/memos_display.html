@@ -38,7 +38,7 @@
                     height="35"
                     class="avatar lazyload"
                     th:src="${theme.config.blogger.lazyload_avatar}"
-                    th:data-src="${contributor.avatar ?: (theme.config.blogger.default_avatar ?: '/themes/theme-Joe3/assets/img/transparent-placeholder.png')}"
+                    th:data-src="${theme.config.blogger.default_avatar ?: '/themes/theme-Joe3/assets/img/transparent-placeholder.png'}"
                     th:alt="${contributor.displayName}"
                     onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')"
                     onerror="Joe.errorImg(this, 'ErrAvatarImg')"
@@ -47,7 +47,7 @@
                     <div class="author">
                       <a
                         class="link"
-                        th:href="${site.url}"
+                        th:href="${theme.config.blogger.homepage}"
                         th:title="${theme.config.blogger.nickname ?: site.title}"
                         >[[${theme.config.blogger.nickname ?: site.title}]]</a
                       >
@@ -69,28 +69,17 @@
                 </div>
               </div>
               <!--头像名称end-->
-
               <th:block th:replace="~{modules/macro/loading :: loading}" />
 
               <ul class="joe_memos_list" id="memos_container"></ul>
-              <script th:inline="javascript"> // 服务器端注入数据
-                // 将动态值注入到全局变量中
-                const memosConfig = {
-                    memosHost: /*[[${theme.config.memos.memos_host}]]*/ '',
-                    memosBlockHeight: /*[[${theme.config.memos.memos_block_height}]]*/ 300,
-                    memosPageSize: /*[[${theme.config.memos.memos_page_size}]]*/ 10,
-                    memosLinkShow: /*[[${theme.config.memos.enable_memos_link}]]*/ true
-                };
-              </script>
-              <script th:src="@{/assets/js/min/marked.umd.min.js}"></script>
-              <script th:src="@{/assets/js/memos.js}"></script>
-
+              
+              
               <!--<#include "template/common/pager.ftl">-->
             </div>
           </div>
 
-          <!--是否开启瞬间的侧边栏-->
-          <th:block th:if="${theme.config.memos.enable_memos_aside}">
+          <!--是否开启侧边栏-->
+          <th:block th:if="${#annotations.getOrDefault(singlePage, 'enable_aside', 'true') == 'true'}">
             <th:block th:replace="~{modules/common/aside :: aside}" />
           </th:block>
           <!--end-->
@@ -101,6 +90,19 @@
         <th:block th:replace="~{modules/common/footer :: footer}" />
       </div>
       <th:block th:replace="~{modules/macro/tail :: tail}" />
+      
+      <script th:src="@{/assets/lib/j-marked/marked.min.js}"></script>
+      <script th:inline="javascript"> // 服务器端注入数据
+        // 将动态值注入到全局变量中
+        const memosConfig = {
+            memosHost: /*[[${theme.config.memos.memos_host}]]*/ '',
+            memosBlockHeight: /*[[${theme.config.memos.memos_block_height}]]*/ 300,
+            memosPageSize: /*[[${theme.config.memos.memos_page_size}]]*/ 10,
+            memosLinkShow: /*[[${theme.config.memos.enable_memos_link}]]*/ true
+        };
+      </script>
+      <script th:src="@{/assets/js/memos.js}"></script>
+      
     </body>
   </th:block>
 </html>

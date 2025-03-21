@@ -1028,6 +1028,11 @@ spec:
           label: 博主显示昵称
           value: ''
           help: '默认使用网站title'
+        - $formkit: text
+          name: homepage
+          label: 博主主页
+          value: '/'
+          help: '用于部分页面头像的跳转(Memos、timeline..)，默认为博客首页'
         - $formkit: select
           name: enable_blogger_level
           label: 展示博主等级
@@ -3113,16 +3118,6 @@ spec:
               label: 是
             - value: false
               label: 否
-        - $formkit: select
-          name: enable_memos_aside
-          label: Memos页侧边栏
-          value: true
-          help: 'Memos页是否展示侧边栏'
-          options:
-            - value: true
-              label: 是
-            - value: false
-              label: 否
         - $formkit: number
           name: memos_page_size
           label: 一次渲染的Memo条数
@@ -3132,6 +3127,13 @@ spec:
           label: 一条Memo内容展示块的最大高度
           value: '300'
           help: '设置内容区域的最大高度（单位像素），超过此高度则显示折叠/展开按钮，默认值为 300，最小值为 100（若输入的值小于 100 则按 100 处理）'
+    - group: timeline
+      label: 里程碑页面
+      formSchema:
+        - $formkit: text
+          name: timeline_title
+          label: 里程碑页面标题
+          value: '里程碑'
     - group: custom
       label: 自定义
       formSchema:

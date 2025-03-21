@@ -25,8 +25,12 @@ spec:
         description: 友链模板
         screenshot:
         file: page_links.html
-      - name: 哔哔
-        description: BB
+      - name: Memos
+        description: Memos
         screenshot:
         file: memos_display.html
+      - name: 时间轴/里程碑
+        description: 里程碑页面
+        screenshot:
+        file: time_line.html
 
