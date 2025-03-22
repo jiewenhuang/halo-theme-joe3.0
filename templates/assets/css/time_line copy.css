@@ -36,6 +36,9 @@
 	}
 }
 
+a {
+	color: inherit;
+}
 img {
 	display: block;
 	max-width: 100%;
@@ -129,7 +132,6 @@ img {
 	flex-shrink: 0;
 	width: 40px;
 	height: 40px;
-	margin-bottom: auto;
 	&.small {
 		width: 28px;
 		height: 28px;
@@ -147,10 +149,17 @@ img {
 	font-weight: 700;
 	color: var(--classF);
 	align-items: center;
-	margin-bottom: auto;
-
 	img {
 		flex-shrink: 0;
+	}
+	a {
+		font-weight: 500;
+		text-decoration: none;
+		&:hover,
+		&:focus {
+			outline: 0;
+			color: var(--c-blue-500);
+		}
 	}
 	time{
 		color: var(--c-grey-400);
@@ -245,15 +254,14 @@ img {
 	}
 }
 
-.article-card-container {
+.article-container {
 	display: flex;
-	width: 100%;
+	width: 80%;
 	max-width: 800px;
 	background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.05);
-	border-radius: 12px;
+	border-radius: 16px;
 	overflow: hidden;
-	margin-top: 12px;
 	transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 	cursor: pointer;
 	animation: fadeIn 0.5s ease-out;
@@ -270,22 +278,27 @@ img {
 	}
 }
 
-.article-card-container:hover {
+.article-container:hover {
 	transform: translateY(-8px);
 	box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.1);
 }
 
-.article-card-container:active {
+.article-container:active {
 	transform: scale(0.98);
 	background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
 }
 
-.article-card-image {
-	flex: 0 0 40%; /* 图片占容器宽度的 40% */
-	aspect-ratio: 4 / 3; /* 设置宽高比为 4:3 */
+.article-image {
+	flex: 0 0 40%;
+	aspect-ratio: 4 / 3;
+	background-image: url('https://dummyimage.com/1100x700/000/fff');
 	background-size: cover;
 	background-position: center;
 	border-right: 1px solid #e0e0e0;
+	box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+	transition: opacity 0.3s ease-in-out;
+	opacity: 0;
+	animation: fadeInImage 0.5s forwards 0.2s;
 }
 
 @keyframes fadeInImage {
@@ -293,71 +306,78 @@ img {
 		opacity: 1;
 	}
 }
-.article-card-info {
+
+.article-info {
 	flex: 1;
-	padding: 6px 20px 10px 20px;
+	padding: 32px;
 }
 
-.article-card-title {
-	font-size: 20px;
-	font-weight: bold;
+.article-title {
+	font-size: 32px;
+	font-weight: 600;
+	margin-bottom: 20px;
 	text-decoration: none;
 	color: #2c3e50;
 	transition: text-decoration 0.2s ease-in-out, color 0.2s ease-in-out;
 	letter-spacing: 0.5px;
 }
 
-.article-card-title:hover {
+.article-title:hover {
+	text-decoration: underline;
+	text-decoration-color: #3498db;
+	text-underline-offset: 6px;
 	color: #3498db;
 }
 
-.article-card-meta {
+.article-meta {
 	font-size: 14px;
 	color: #7f8c8d;
+	margin-bottom: 16px;
 	letter-spacing: 0.3px;
-	margin-bottom: 3px;
 }
 
-.article-card-tags {
-	font-size: 11px;
-	color: #3498db;
-	margin-bottom: 5px;
-}
-.article-card-tags span {
-	border: 1px solid #3498db;
-	border-radius: 4px;
-	padding: 0px 4px;
-	margin-right: 6px;
-	display: inline-block;
-	transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-}
-
-.article-card-tags span:hover {
-	background-color: #007BFF;
-	color: white;
-	border-color: #007BFF;
-}
-
-.article-card-summary {
-	font-size: 16px;
+.article-tags {
+	font-size: 14px;
 	color: #666;
+	margin-bottom: 24px;
+}
+
+.article-tags span {
+	border: 1px solid #bdc3c7;
+	border-radius: 20px;
+	padding: 6px 12px;
+	margin-right: 8px;
+	display: inline-block;
+	background: linear-gradient(135deg, #ecf0f1 0%, #dde4e6 100%);
+	transition: background 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+	letter-spacing: 0.2px;
+}
+
+.article-tags span:hover {
+	background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+	color: white;
+	border-color: #2980b9;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.article-tags span:active {
+	transform: scale(0.95);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.article-summary {
+	font-size: 16px;
+	color: #555;
 	line-height: 1.6;
 	margin-bottom: 12px;
 }
 
-.timeline-item-img {
-	max-width: 100%;
-	height: auto;
-	padding: 10px;
-	will-change: transform;
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-	max-width: 50%;
-	cursor: pointer;
-	img {
-		border-radius: 5px;
-	}
+.article-summary p {
+	margin: 0;
+	margin-bottom: 10px;
 }
 
-.timeline-item-img:hover {
-	transform: scale(1.1);
+a {
+	text-decoration: none;
+	color: inherit;
 }
