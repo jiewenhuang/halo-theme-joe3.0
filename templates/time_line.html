@@ -17,7 +17,7 @@
             <div
               class="joe_detail">
               <h1 class="joe_detail__title txt-shadow">
-                [[${theme.config.timeline.timeline_title ?: '里程碑'}]]
+                [[${theme.config.timeline.title ?: '里程碑'}]]
               </h1>
               <th:block
                 th:if="${theme.config.post.enable_page_meta} and ${#annotations.getOrDefault(singlePage, 'enable_page_meta', 'true')}"
@@ -75,7 +75,7 @@
                   </div>
                   <!--修改时间-->
                   <div style="margin-left:auto;margin-top:auto;color:#585a5ad6;font-size:12px;position:relative;top:12px">
-                    不积跬步，无以至千里，不积小流，无以成江海。
+                    [[${theme.config.timeline.quote}]]
                   </div>
                 </div>
               </th:block>

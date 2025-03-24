@@ -671,6 +671,12 @@ spec:
               label: 'Joe Slate'
             - value: 'joe_future.woff2'
               label: 'Joe Future'
+            - value: 'lxgw-wen-kai-gb-screen.woff2'
+              label: 'Lxgw Wen Kai Gb Screen'
+            - value: 'smiley-sans-oblique-regular.woff2'
+              label: 'Smiley Sans Oblique Regular'
+            - value: 'Y.OzFont.woff2'
+              label: 'Y.OzFont'
     - group: carousel
       label: 轮播图
       formSchema:
@@ -3108,16 +3114,16 @@ spec:
           label: Memos Host URL
           value: ''
           help: '填写Memos服务的地址'
-        - $formkit: select
+        - $formkit: radio
           name: enable_memos_link
           label: Memos页面跳转按钮
           value: false
           help: '是否展示Memos跳转按钮，用于跳转Memos页面'
           options:
             - value: true
-              label: 是
+              label: 开启
             - value: false
-              label: 否
+              label: 隐藏
         - $formkit: number
           name: memos_page_size
           label: 一次渲染的Memo条数
@@ -3127,13 +3133,31 @@ spec:
           label: 一条Memo内容展示块的最大高度
           value: '300'
           help: '设置内容区域的最大高度（单位像素），超过此高度则显示折叠/展开按钮，默认值为 300，最小值为 100（若输入的值小于 100 则按 100 处理）'
+        - $formkit: text
+          name: photo_page_title
+          label: 随手拍页面标题
+          value: '随手拍'
+        - $formkit: text
+          name: filter_tag
+          label: 筛选标签
+          value: '随手拍'
+          help: '根据此标签从Memos所有条目中筛选出要展示处理的条目，默认为（随手拍）'
+        - $formkit: text
+          name: photo_tags
+          label: 相册分类标签
+          value: ''
+          help: '用于随手拍页面导航栏选择，需要根据Memos的标签来填，用空格隔开'
     - group: timeline
-      label: 里程碑页面
+      label: 里程碑
       formSchema:
         - $formkit: text
-          name: timeline_title
+          name: title
           label: 里程碑页面标题
           value: '里程碑'
+        - $formkit: text
+          name: quote
+          label: 里程碑页面名言警句
+          value: '不积跬步，无以至千里，不积小流，无以成江海。'
     - group: custom
       label: 自定义
       formSchema:

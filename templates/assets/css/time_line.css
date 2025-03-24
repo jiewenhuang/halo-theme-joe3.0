@@ -13,7 +13,6 @@
 	--c-grey-300: #b2b2b2;
 	--c-grey-400: #7b7b7b;
 	--c-grey-500: #3d3d3d;
-
 	--c-blue-500: #688afd;
 }
 
@@ -249,7 +248,7 @@ img {
 	display: flex;
 	width: 100%;
 	max-width: 800px;
-	background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+	background: linear-gradient(65deg, #ffffff 0%, #efefef9f 100%);
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.05);
 	border-radius: 12px;
 	overflow: hidden;

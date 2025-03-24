@@ -29,8 +29,20 @@ spec:
         description: Memos
         screenshot:
         file: memos_display.html
+      - name: 随手拍
+        description: Memos相册页面
+        screenshot:
+        file: memos_photos.html
       - name: 时间轴/里程碑
         description: 里程碑页面
         screenshot:
         file: time_line.html
+      - name: 相册
+        description: 相册页面
+        screenshot:
+        file: photos.html
+      - name: 朋友圈
+        description: 朋友圈页面
+        screenshot:
+        file: friends.html
 

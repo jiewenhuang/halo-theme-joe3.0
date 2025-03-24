@@ -27,17 +27,17 @@ document.addEventListener('DOMContentLoaded', async () => { // DOM 加载后执�
 
     // 初次获取数据 intiLoad()
     const intiLoad = async () => {
-      try {
-        const response = await fetch(host_url);
-        const { memos, nextPageToken } = await response.json(); //获取memos和nextPageToken
-        document.getElementById('memos_container').innerHTML = ''; // 清空容器
-        all_memos = memos;
-        page_token = nextPageToken;
-        loadData();
+        try {
+            const response = await fetch(host_url);
+            const { memos, nextPageToken } = await response.json(); //获取memos和nextPageToken
+            document.getElementById('memos_container').innerHTML = ''; // 清空容器
+            all_memos = memos;
+            page_token = nextPageToken;
+            loadData();
 
-      } catch (error) {
-        console.error('数据加载失败:', error);
-      }
+        } catch (error) {
+            console.error('数据加载失败:', error);
+        }
     };
 
     //渲染以及预获取下一部分数据 loadData()
@@ -47,20 +47,20 @@ document.addEventListener('DOMContentLoaded', async () => { // DOM 加载后执�
 
       renderMemos();
       
-      if(page_token != '') {
-        let token_url = host_url + page_token;
-        try {
-          const response = await fetch(token_url);
-          const { memos, nextPageToken } = await response.json();
-          all_memos = [...all_memos, ...memos]; // 追加预加载的数据
-          page_token = nextPageToken;
+        if(page_token != '') {
+            let token_url = host_url + page_token;
+            try {
+                const response = await fetch(token_url);
+                const { memos, nextPageToken } = await response.json();
+                all_memos = [...all_memos, ...memos]; // 追加预加载的数据
+                page_token = nextPageToken;
 
-        } catch (error) {
-          console.error('预加载失败:', error);
-        } finally {
-          isLoading = false;
+            } catch (error) {
+                console.error('预加载失败:', error);
+            } finally {
+                isLoading = false;
+            }
         }
-      }
     };
     
 
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', async () => { // DOM 加载后执�
         const item = document.createElement('li');
         item.className = `joe_momos_item ${config.enableEffect ? 'animated wow' : ''}`;
         item.setAttribute('data-wow-delay', `0.${index}s`);
-        item.setAttribute('data-cid', memo.creator);
+        item.setAttribute('data-cid', "memo.creator");
         item.innerHTML = `
           <!-- 发布时间 -->
         <p class="joe_memos_date">
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', async () => { // DOM 加载后执�
         if(memosLinkShow) {
             let memo_url = memosHost + memo.name;
             result +=`<div class="memos_link_tag">
-                <a title="前往 Memos" href="${memo_url}" target="_blank" rel="noopener noreferrer"">
+                <a title="前往 Memos" href="${memo_url}" target="_blank" rel="noopener noreferrer">
                 <i class="joe-font joe-icon-link font-link-tag"></i></a></div>`
         }
 
@@ -173,7 +173,6 @@ document.addEventListener('DOMContentLoaded', async () => { // DOM 加载后执�
     // 监听滚动事件（防抖处理）
     window.addEventListener('scroll', debounce(handleScroll, 100));
 
-    // 初始化加载
     intiLoad();
 });
 
@@ -222,6 +221,8 @@ const formatDate = (isoString, format) => {
         ss: String(date.getSeconds()).padStart(2, '0')
     })[tag]);
 };
+
+
 
 
 
