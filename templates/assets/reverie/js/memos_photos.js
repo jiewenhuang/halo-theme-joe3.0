@@ -1,13 +1,13 @@
-const memosHost = memosPhotos.memosHost;
+const memosHost = memosPhotos.memosHost.endsWith("/") ? 
+                    memosPhotos.memosHost:memosPhotos.memosHost + "/";;
 const memosFilterTag = memosPhotos.memosFilterTag;
 const memosPhotoTags = memosPhotos.memosPhotoTags;
 
 const photo_tags = memosPhotoTags.split(' ');
   
-const memosApiUrl = "http://42.193.148.76:20032/api/v1/memos"
-const photoLinkPrefix = `${memosHost}/file/`;
+const photoLinkPrefix = `${memosHost}file/`;
 const pageSize = 25;
-const memosPageApi = `${memosApiUrl}?filter=tag%20in%20["${memosFilterTag}"]&pageSize=${pageSize}&pageToken=`; // 构建 API 请求 URL
+const memosPageApi = `${memosHost}api/v1/memos?filter=tag%20in%20["${memosFilterTag}"]&pageSize=${pageSize}&pageToken=`; // 构建 API 请求 URL
 
 $(document).ready(async function () {
     const $grid = $('#image-grid').isotope({

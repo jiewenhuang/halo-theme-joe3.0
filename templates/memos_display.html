@@ -6,7 +6,7 @@
 >
   <th:block th:fragment="content">
     <body>
-      <link rel="stylesheet" th:href="@{/assets/css/memos.css}" />
+      <link rel="stylesheet" th:href="@{/assets/reverie/css/memos.css}" />
 
       <div id="Joe">
         <th:block th:replace="~{modules/macro/navbar :: navbar}" />
@@ -23,7 +23,7 @@
               <th:block th:if="${theme.config.memos.enable_memos_link}">
                 <a
                   class="joe_journal_add"
-                  href="http://42.193.148.76:20032/"
+                  th:href="${theme.config.memos.memos_host+(not #strings.endsWith(theme.config.memos.memos_host,'/')?'/':'')+'explore'}"
                   target="_blank"
                   rel="nofollow"
                   ><i class="joe-font joe-icon-link"></i
@@ -101,7 +101,7 @@
             memosLinkShow: /*[[${theme.config.memos.enable_memos_link}]]*/ true
         };
       </script>
-      <script th:src="@{/assets/js/memos.js}"></script>
+      <script th:src="@{/assets/reverie/js/memos.js}"></script>
       
     </body>
   </th:block>

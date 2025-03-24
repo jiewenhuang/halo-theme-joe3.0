@@ -1,10 +1,5 @@
-.joe_memos_list {
-  padding:10px 0 20px;
-}
-.joe_momos_item {
-  padding:0 0 30px 40px;
-  position:relative
-}
+.joe_memos_list {padding:10px 0 20px;}
+.joe_momos_item {padding:0 0 30px 40px;position:relative}
 .joe_momos_item:before {
   border-left: 1px dashed var(--classG);
   content: "";
@@ -32,29 +27,16 @@
   position:relative;
   z-index:1
 }
-.joe_memos_date i {
-  margin-right:8px
-}
-.joe_memos_date em {
-  font-style:normal
-}
+.joe_memos_date i {margin-right:8px}
+.joe_memos_date em {font-style:normal}
 .joe_memos_block{box-shadow:3px 8px 15px 0 var(--box-shadow-journal)}
 .joe_memos_block{background:var(--background-journal);border-bottom:1px solid var(--classC);border:1px solid var(--classC);border-radius:0 18px 18px 18px;box-shadow:1px 1px 5px 0 var(--box-shadow-journal);box-sizing:border-box;color:var(--main);margin-top:10px;padding:10px;position:relative;transition:box-shadow .2s;word-break:break-word;z-index:2}
 .joe_memos_body{background:var(--background-journal-block);border-radius:0 6px 6px 6px;box-sizing:content-box;max-height:300px;overflow:hidden;padding:10px 12px;position:relative;transition:height .2s}
 .joe_memos_body.open{max-height:unset!important}
-.marked-content {
-  font-size: 14px;
-}
-.marked-content p{
-  line-height: 1.7
-}
-.marked-content ul{
-  padding: 5px 0px 5px 3px;
-  line-height: 1.7
-}
-.marked-content hr{
-  margin: 3px 0px 8px 0px;
-}
+.marked-content {font-size: 14px;}
+.marked-content p{line-height: 1.7}
+.marked-content ul{padding: 5px 0px 5px 3px;line-height: 1.7}
+.marked-content hr{margin: 3px 0px 8px 0px;}
 .memos-tag {
   list-style: none;
   padding: 3px 4px;
@@ -85,8 +67,8 @@
   border-radius: 9999px;
   border-style: solid;
   border-width: 1px;
-  border-color: var(--overdue-border);
-  background-color: var(--overdue-background);
+  border-color: var(--minor);
+  /*background-color: var(--classB);*/
   box-sizing: border-box;
   padding-left: .5rem;
   padding-right: .5rem;
@@ -113,7 +95,6 @@
   margin-left: auto;
   font-size: .925rem;
 }
-.font-link-tag{color:#303133;font-size:20px;}
-.font-link-tag:hover {color:#fb6c28;}
-
+.font-link-tag{color:#303133;font-size:20px;}.font-link-tag:hover {color:#fb6c28;}
 .g-progress{font-size:12px;margin:2px 0px 10px 5px;& span{display:inline-block;vertical-align:middle;width:200px;height:5px;border-radius:25px;background:linear-gradient(90deg,#0f0,#0ff var(--progress),transparent 0);border:1px solid #eee}& i{font-size:10px}}
+.memos_img{padding-top:14px}

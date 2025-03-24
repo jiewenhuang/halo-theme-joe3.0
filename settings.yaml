@@ -3145,7 +3145,7 @@ spec:
         - $formkit: text
           name: photo_tags
           label: 相册分类标签
-          value: ''
+          value: ' '
           help: '用于随手拍页面导航栏选择，需要根据Memos的标签来填，用空格隔开'
     - group: timeline
       label: 里程碑

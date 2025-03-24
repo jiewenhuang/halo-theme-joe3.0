@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', async () => { // DOM 加载后执�
         if (memo.resources?.length) {
             mediaContent = memo.resources.map(res => {
             if (res.type.startsWith('image/')) {
-                return `<img src="/${res.name}" alt="${res.filename}" 
+                return `<img class="memos_img lazyload" src="/${res.name}" alt="${res.filename}" 
                         onerror="Joe.errorImg(this, 'LoadFailedImg')">`;
             }
             if (res.type.startsWith('video/')) {

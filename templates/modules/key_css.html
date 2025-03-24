@@ -124,7 +124,7 @@
       }
 
       [/]
-      [# th:if="${theme.config.basic.enable_background_light != true} or ${theme.config.basic.background_light_mode == ''} or ${theme.config.basic.background_light_mode == null}"]
+      [# th:if="${theme.config.basic.enable_background_dark} or ${theme.config.basic.background_dark_mode != ''}"]
       html[data-mode="dark"] body {
         background-repeat: no-repeat;
         background-size: cover;

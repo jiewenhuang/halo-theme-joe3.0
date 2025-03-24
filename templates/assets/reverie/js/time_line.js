@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', async () => { // DOM 加载后执�
                         <div class="timeline-item-description">
                             <p>${timeline_item.description}</p>
                             <div class="timeline-item-img" data-fancybox="Joe" href="${timeline_item.img_url}">
-                                <img src="${timeline_item.img_url}" />
+                                <img class="lazyload" src="${timeline_item.img_url}" />
                             </div>
                         </div>
                     </div>
@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', async () => { // DOM 加载后执�
                             <p>${timeline_item.description}</p>
                         <a href="${post_data.link}" target="_blank" rel="noopener noreferrer">
                             <div class="article-card-container">
-                                <div class="article-card-image" style="background-image:url(${post_data.cover})"></div>
+                                <div class="lazyload article-card-image" style="background-image:url(${post_data.cover})"></div>
                                 <div class="article-card-info">
                                     <div class="article-card-title"> ${post_data.title}</div>
                                         ${renderPostMetadata(post_data)}
