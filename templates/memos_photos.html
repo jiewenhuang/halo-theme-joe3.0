@@ -1,0 +1,68 @@
+<!doctype html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{modules/layout :: html(title = ${theme.config.memos.photo_page_title?:'随手拍'}+'-'+${site.title},htmlType = memos,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
+>
+  <th:block th:fragment="content">
+    <body>
+      <link rel="stylesheet" th:href="@{/assets/css/min/photos.min.css}" />
+
+
+      <div id="Joe">
+        <th:block th:replace="~{modules/macro/navbar :: navbar}" />
+        <div
+          class="joe_container joe_main_container page-photos"
+          th:classappend="|${theme.config.theme.enable_show_in_up ? 'animated showInUp':''} ${theme.config.aside.aside_position == 'left' ? 'revert':''}|"
+        >
+          <div class="joe_main">
+            <div class="joe_photos__type">
+              <div class="joe_photos__type-title">
+                <i class="jiewen joe-icon-tupian"></i
+                >&nbsp;[[${theme.config.memos.photo_page_title?:'随手拍'}]]
+              </div>
+
+              <!--标签筛选-->
+              <nav class="joe_photos__filter">
+                <ul id="tag_filter"></ul>
+              </nav>
+            </div>
+            <div class="wrapper">
+                <div
+                    class="grid"
+                    id="image-grid"
+                    th:data-total="0"
+                    th:data-index="0"
+                >
+                        <!-- 预留空间 -->
+                </div>
+              <th:block th:replace="~{modules/macro/loading :: loading}" />
+
+            </div>
+          </div>
+          <th:block th:if="${theme.config.aside.enable_photos_aside}">
+            <th:block th:replace="~{modules/common/aside :: aside}" />
+          </th:block>
+        </div>
+        <th:block th:replace="~{modules/common/actions :: actions}" />
+        <th:block th:replace="~{modules/common/footer :: footer}" />
+      </div>
+      <th:block th:replace="~{modules/macro/tail :: tail}" />
+      <script th:src="@{/assets/lib/justifiedGallery/justifiedGallery.min.js}"></script>
+      <script th:src="@{/assets/lib/masonry/masonry.pkgd.min.js}"></script>
+      <script th:src="@{/assets/lib/masonry/isotope.pkgd.min.js}"></script>
+      <script th:src="@{/assets/lib/masonry/imagesloaded.pkgd.min.js}"></script>
+
+      <script th:inline="javascript"> // 服务器端注入数据
+        // 将动态值注入到全局变量中
+        const memosPhotos = {
+            memosHost: /*[[${theme.config.memos.memos_host}]]*/ '',
+            memosFilterTag: /*[[${theme.config.memos.filter_tag}]]*/ '',
+            memosPhotoTags: /*[[${theme.config.memos.photo_tags}]]*/ '',
+        };
+      </script>
+      <script th:src="@{/assets/js/memos_photos.js}"></script>
+
+    </body>
+  </th:block>
+</html>
