@@ -95,6 +95,6 @@
   margin-left: auto;
   font-size: .925rem;
 }
-.font-link-tag{color:#303133;font-size:20px;}.font-link-tag:hover {color:#fb6c28;}
+.font-link-tag{color:var(--main);font-size:20px;}.font-link-tag:hover {color:#fb6c28;}
 .g-progress{font-size:12px;margin:2px 0px 10px 5px;& span{display:inline-block;vertical-align:middle;width:200px;height:5px;border-radius:25px;background:linear-gradient(90deg,#0f0,#0ff var(--progress),transparent 0);border:1px solid #eee}& i{font-size:10px}}
 .memos_img{padding-top:14px}

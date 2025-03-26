@@ -1,0 +1,107 @@
+
+.music_main_container {
+    flex: 1;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.music_main {
+    min-width: 0;
+    padding-bottom: 15px;
+}
+
+.music_list {
+	background: var(--background);
+	border-radius: var(--radius-wrap);
+	box-shadow: var(--box-shadow);
+	margin-bottom: 15px;
+	padding: 60px 15px 15px;
+	position: relative;
+    flex-grow: 0;
+}
+
+
+.music_list-title {
+	background: var(--theme);
+	border-radius: 2px 2px 2px 0;
+	box-shadow: 2px 5px 10px rgba(49, 58, 70, .15);
+	color: #fff;
+	font-weight: 500;
+	height: 30px;
+	left: -10px;
+	line-height: 30px;
+	padding: 0 12px;
+	position: absolute;
+	top: 15px;
+	user-select: none
+}
+
+.music_list-title:before {
+	border-color: var(--theme) transparent transparent;
+	border-style: solid;
+	border-width: 10px;
+	bottom: -10px;
+	content: "";
+	left: -10px;
+	position: absolute;
+	transform: rotate(90deg)
+}
+
+.music_list-title .joe-font {
+	vertical-align: bottom
+}
+
+.music_list__filter {
+    display: block;
+    position: relative;
+    top: 12px;
+}
+.music_list__filter ul {
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    list-style: none;
+    margin: 0 0 20px;
+    padding: 0;
+    user-select: none;
+}
+.music_list__filter ul li {
+    display: inline-block;
+    font-size: 0;
+    margin: 0 20px 12px 0;
+    position: relative;
+    vertical-align: bottom;
+}
+.music_list__filter ul li:after {
+    background: var(--theme);
+    border-radius: 3px;
+    bottom: -4px;
+    content: "";
+    height: 3px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    transform: scaleX(0);
+    transform-origin: 50% 0;
+    transition: transform 0.35s;
+    width: 0;
+    will-change: transform;
+}
+.music_list__filter ul li:hover:after {
+    transform: scale(1);
+    width: 100%;
+}
+.music_list__filter ul li a {
+    color: var(--main);
+    display: block;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.music_list__filter ul li.active {
+    font-weight: 700;
+}
+.music_list__filter ul li.active:after {
+    transform: scale(1);
+    width: 100%;
+}

@@ -421,7 +421,8 @@
 .joe_photos__filter ul li a {
 	color: var(--main);
 	display: block;
-	font-size: 14px
+	font-size: 14px;
+	cursor: pointer;
 }
 
 .joe_photos__filter ul li.active {

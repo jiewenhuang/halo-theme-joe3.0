@@ -45,4 +45,8 @@ spec:
         description: 朋友圈页面
         screenshot:
         file: friends.html
+      - name: 音乐播放器
+        description: 音乐播放页面
+        screenshot:
+        file: music_player.html
 

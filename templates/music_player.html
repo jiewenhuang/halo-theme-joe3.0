@@ -1,0 +1,107 @@
+<!doctype html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{modules/layout :: html(title = ${theme.config.musicplayer.title?:'音乐播放器'}+'-'+${site.title},htmlType = memos,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
+>
+  <th:block th:fragment="content">
+    <body>
+        <link rel="stylesheet" th:href="@{/assets/reverie/css/music_player.css}" />
+        <link rel="stylesheet" type="text/css" th:href="@{/assets/reverie/HeoMusic/css/APlayer.css}" />
+        <link rel="stylesheet" type="text/css" th:href="@{/assets/reverie/HeoMusic/css/main.css}" />
+        <link rel="icon" type="image/x-icon" href="/themes/theme-Joe3/assets/HeoMusic/img/icon.webp">
+        <link rel="apple-touch-icon" href="/themes/theme-Joe3/assets/HeoMusic/img/icon-r.webp">
+        <link rel="bookmark" href="/themes/theme-Joe3/assets/HeoMusic/img/icon.webp">
+        <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/themes/theme-Joe3/assets/HeoMusic/img/icon-r.webp">
+        <link rel="manifest" href="/themes/theme-Joe3/assets/HeoMusic/manifest.json"> 
+
+      <div id="Joe">
+        <th:block th:replace="~{modules/macro/navbar :: navbar}" />
+        <div class="joe_container music_main_container"
+          th:classappend="|${theme.config.theme.enable_show_in_up ? 'animated showInUp':''} ${theme.config.aside.aside_position == 'left' ? 'revert':''}|">
+            <!--标签选择栏-->
+            <div class="music_main">
+                <div class="music_list">
+                    <div class="music_list-title">
+                      <i class="jiewen joe-icon-tupian"></i
+                      >&nbsp;[[${theme.config.musicplayer.title?:'音乐播放器'}]]
+                    </div>
+                    <nav class="music_list__filter">
+                      <ul>
+                        <!-- 显示默认歌单 -->
+                        <th:block  th:switch="${#arrays.length(theme.config.musicplayer.play_list) > 0 ? 'play_list' : (#arrays.length(theme.config.musicplayer.resource_list) > 0 ? 'resource_list' : 'default')}">
+                          <li th:case="'play_list'" th:attr="data-listname=${theme.config.musicplayer.play_list[0].list_name}, data-listtype=1" th:classappend="'active'">
+                            <a th:text="${theme.config.musicplayer.play_list[0].list_name}">歌单</a>
+                              <script th:inline="javascript">
+                                var userId = /*[[${theme.config.musicplayer.play_list[0].id}]]*/ "";
+                                var userServer = /*[[${theme.config.musicplayer.play_list[0].server_type}]]*/ "";
+                                var userType = /*[[${theme.config.musicplayer.play_list[0].list_type}]]*/ "";
+                              </script>
+                          </li>
+                          <li th:case="'resource_list'" th:attr="data-listname=${theme.config.musicplayer.resource_list[0].list_name}, data-listtype=2" th:classappend="'active'">
+                            <a th:text="${theme.config.musicplayer.resource_list[0].list_name}">歌单</a>
+                            
+                            <script th:inline="javascript">
+                              var localMusic = /*[[${theme.config.musicplayer.resource_list[0].resource_list}]]*/ [];
+                            </script>
+                          </li>
+                          <li th:case="'default'" th:attr="data-listname='def_list', data-listtype=3" th:classappend="'active'">
+                            <a th:text="'默认歌单'">默认歌单</a>
+                            <script>
+                              var userId = "8152976493";
+                              var userServer = "netease";
+                              var userType = "playlist";
+                            </script>
+                          </li>
+                        </th:block>
+
+                        <!-- 显示 play_list 剩余歌单 -->
+                        <th:block th:each="playlist, iterStat : ${theme.config.musicplayer.play_list}" th:if="${iterStat.index > 0}">
+                          <li th:data-listname="${playlist.list_name}" data-listtype="1">
+                            <a th:text="${playlist.list_name}">默认显示文本</a>
+                          </li>
+                        </th:block>
+
+                        <!-- 显示 resource_list 剩余歌单 -->
+                        <th:block th:each="playlist, iterStat : ${theme.config.musicplayer.resource_list}">
+                          <li th:if="${#arrays.length(theme.config.musicplayer.play_list) > 0 || iterStat.index > 0}"
+                            th:data-listname="${playlist.list_name}" data-listtype="2">
+                            <a th:text="${playlist.list_name}">默认显示文本</a>
+                          </li>
+                        </th:block>
+                      </ul>
+                    </nav>
+                  </div>
+            </div>
+
+
+            <script th:inline="javascript">
+              const isLyricsLeft = /*[[${theme.config.musicplayer.lyrics_left}]]*/ true;
+              const styleItem = document.createElement('style');
+                styleItem.textContent = `#heoMusic-page .aplayer {flex-direction: ${isLyricsLeft ? 'row-reverse' : 'row'};}`;
+              document.head.appendChild(styleItem);
+            </script>
+
+            <div id="heoMusic-page"></div>
+
+        </div>
+        <th:block th:replace="~{modules/common/actions :: actions}" />
+      </div>
+      <th:block th:replace="~{modules/macro/tail :: tail}" />
+
+      <script>
+
+      </script>
+      <script th:src="@{/assets/reverie/HeoMusic/js/APlayer.min.js}"></script>
+      <script th:src="@{/assets/reverie/HeoMusic/js/main.js}"></script>
+      <script th:inline="javascript">
+        musicList = {
+          playList : /*[[${theme.config.musicplayer.play_list}]]*/ [],
+          resourceList : /*[[${theme.config.musicplayer.resource_list}]]*/ [],
+        }
+      </script>
+      <script th:src="@{/assets/reverie/js/music_player.js}"></script>
+
+    </body>
+  </th:block>
+</html>
