@@ -143,6 +143,15 @@ spec:
           label: 是
         - value: "false"
           label: 否
+    - $formkit: "select"
+      name: "enable_hidden"
+      label: "是否在主页列表隐藏文章"
+      value: "false"
+      options:
+        - value: "true"
+          label: 是
+        - value: "false"
+          label: 否
 
 ---
 

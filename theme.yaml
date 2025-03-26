@@ -16,6 +16,11 @@ spec:
   version: '1.4.0'
   require: '>=2.19.0'
   customTemplates:
+    post:
+      - name: 链接跳转
+        description: 链接跳转
+        screenshot: 
+        file: jump_link.html
     page:
       - name: 留言板
         description: 留言板文章

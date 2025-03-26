@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <script th:inline="javascript">
+            const post_content = /*[[${post.content.content}]]*/ '';
+            const match = post_content.match(/\{([^}]+)\}/);
+            window.location.href = match ? match[1] : '/';
+        </script>
+    </body>
+</html>

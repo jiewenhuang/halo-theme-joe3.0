@@ -73,7 +73,9 @@
                 <div class="joe_index__list">
                   <ul class="joe_list">
                     <th:block th:each="post, iteration : ${posts.items}">
-                      <th:block th:replace="~{modules/macro/post_item :: post_item}" />
+                      <th:block th:if="!(${#annotations.getOrDefault(post, 'enable_hidden', 'false')})">
+                        <th:block th:replace="~{modules/macro/post_item :: post_item}" />
+                      </th:block>
                     </th:block>
                   </ul>
                 </div>
