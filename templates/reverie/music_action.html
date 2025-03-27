@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <th:block th:fragment="music_action">
+    <th:block th:if="${htmlType} == 'index' or ${htmlType} == 'post'">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/reverie/css/min/APlayer.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/reverie/css/music_action.css}" /> 
+       
+
+    
+
+
+    <th:block th:if="${htmlType} == 'index'">
+      <div class="needEndHide" id="nav-music">
+        <div id="nav-music-hoverTips" onclick="sco.musicToggle()">音乐已暂停</div>
+        <div id="meting_js"></div>
+      </div>
+      <script th:inline="javascript">
+        const music_data = {
+          server : /*[[${theme.config.musicplayer.music_action.index_playlist.server_type}]]*/ '',
+          type : /*[[${theme.config.musicplayer.music_action.index_playlist.list_type}]]*/ '',
+          id : /*[[${theme.config.musicplayer.music_action.index_playlist.id}]]*/ ''
+        };
+  
+        document.getElementById('meting_js').innerHTML = 
+          `<meting-js id="${music_data.id}" server="${music_data.server}" type="${music_data.type}" 
+            mutex="true" preload="none" data-lrctype="0" order="random" volume="0.8"></meting-js>`
+      </script>
+    </th:block>
+
+    <th:block th:if="${htmlType} == 'post'">
+      <div class="needEndHide" id="nav-music">
+        <div id="nav-music-hoverTips" onclick="sco.musicToggle()">音乐已暂停</div>
+          <div th:if="${#annotations.contains(post, 'post_song_id')}">
+            <meting-js th:id="(${#annotations.get(post, 'post_song_id')} == '#' 
+              ? ${theme.config.musicplayer.music_action.post.post_song_id} : ${#annotations.get(post, 'post_song_id')})" 
+                  server="netease" type="song" 
+              mutex="true" preload="none" data-lrctype="0" order="random" volume="0.8"></meting-js>
+          </div>
+      </div>
+    </th:block>
+
+    <script th:inline="javascript">
+      window.meting_api = /*[[${theme.config.musicplayer.meting_api}]]*/ '';
+    </script>
+    <script th:src="@{/assets/reverie/js/lib/APlayer.min.js}"></script>
+    <script th:src="@{/assets/reverie/js/lib/Meting.min.js}"></script>
+    <script th:src="@{/assets/reverie/js/music_action.js}"></script>
+  </th:block>
+</th:block>
+</html>

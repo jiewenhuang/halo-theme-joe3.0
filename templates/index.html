@@ -73,7 +73,7 @@
                 <div class="joe_index__list">
                   <ul class="joe_list">
                     <th:block th:each="post, iteration : ${posts.items}">
-                      <th:block th:if="!(${#annotations.getOrDefault(post, 'enable_hidden', 'false')})">
+                      <th:block th:if="!(${#annotations.getOrDefault(post, 'enable_hidden', 'false')})"> <!--隐藏单个文章-->
                         <th:block th:replace="~{modules/macro/post_item :: post_item}" />
                       </th:block>
                     </th:block>
@@ -106,6 +106,12 @@
         >
           <th:block th:replace="~{modules/common/actions :: actions}" />
         </th:block>
+
+        <!--音乐播放器-->
+        <th:block th:if="${theme.config.musicplayer.music_action.index.enable}">
+          <th:block th:replace="~{reverie/music_action :: music_action}" />
+        </th:block>
+        
         <th:block th:if="${theme.config.footer.enable_footer}">
           <th:block th:replace="~{modules/common/footer :: footer}" />
         </th:block>

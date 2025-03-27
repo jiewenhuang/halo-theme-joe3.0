@@ -320,6 +320,12 @@
         >
           <th:block th:replace="~{modules/common/actions :: actions}" />
         </th:block>
+
+        <!--音乐播放器-->
+        <th:block th:if="${theme.config.musicplayer.music_action.post.enable}">
+          <th:block th:replace="~{reverie/music_action :: music_action}" />
+        </th:block>
+
         <th:block th:if="${theme.config.footer.enable_footer}">
           <th:block th:replace="~{modules/common/footer :: footer}" />
         </th:block>
