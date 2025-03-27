@@ -3247,9 +3247,8 @@ spec:
                 - $formkit: text
                   name: artist
                   label: 作者
-                  value: ''
+                  value: 'nullptr'
                   placeholder: 请输入歌曲作者
-                  default: '佚名'
                 - $formkit: attachment
                   name: url
                   label: 歌曲文件
@@ -3259,15 +3258,102 @@ spec:
                 - $formkit: attachment
                   name: cover
                   label: 封面图
-                  value: ''
-                  default: '/theme-Joe3/templates/assets/reverie/HeoMusic/img/cover.png'
-                  help: '填写URL或本地上传'
+                  value: '/themes/theme-Joe3/assets/reverie/HeoMusic/img/cover.png'
+                  validation: 'required'
+                  help: '填写URL或本地上传，默认值为缺省封面图'
                 - $formkit: attachment
                   name: lrc
                   label: 歌词文件
                   value: ''
-                  default: '/theme-Joe3/templates/assets/reverie/HeoMusic/no_lyrics.lrc'
-                  help: '填写URL或本地上传'
+                  placeholder: lrc歌词文件
+                  help: '填写URL或本地上传，默认值为空歌词文件'
+        - $formkit: group
+          name: music_action
+          label: 页底音乐播放器
+          children:
+            - $formkit: group
+              name: index
+              label: 首页
+              children:
+                - $formkit: radio
+                  name: enable
+                  id: music_action_index
+                  label: 启用首页音乐播放器
+                  value: false
+                  options:
+                    - value: true
+                      label: 启用
+                    - value: false
+                      label: 关闭
+                - $formkit: group
+                  name: index_playlist
+                  if: $get(music_action_index).value
+                  label: 首页音乐播放器歌单
+                  help: 音乐软件歌单
+                  children:  
+                    - $formkit: select
+                      name: server_type
+                      label: 添加方式
+                      value: 'netease'
+                      options:
+                        - value: 'netease'
+                          label: 网易云
+                        - value: 'tencent'
+                          label: QQ音乐
+                        - value: 'kugou'
+                          label: 酷狗
+                        - value: 'xiami'
+                          label: 小米音乐
+                        - value: 'baidu'
+                          label: 百度音乐
+                    - $formkit: select
+                      name: list_type
+                      label: 歌单类型
+                      value: 'playlist'
+                      options:
+                        - value: 'playlist'
+                          label: 歌单
+                        - value: 'song'
+                          label: 单曲
+                        - value: 'album'
+                          label: 专辑
+                        - value: 'artist'
+                          label: 歌手
+                        - value: 'search'
+                          label: 搜索结果
+                    - $formkit: text
+                      name: id
+                      label: 歌单ID
+                      value: '8407304077'
+                      help: '从音乐歌单分享的链接中获取，例如https://y.qq.com/n/ryqq/playlist/8668419170中id为8668419170'
+                      validation: 'required'
+            - $formkit: group
+              name: post
+              label: 文章页
+              children:
+                - $formkit: radio
+                  name: enable
+                  id: music_action_post
+                  label: 启用文章页单曲音乐播放器
+                  value: false
+                  options:
+                    - value: true
+                      label: 启用
+                    - value: false
+                      label: 关闭
+                - $formkit: text
+                  name: post_song_id
+                  if: $get(music_action_post).value
+                  label: 文章页默认背景歌曲单曲ID
+                  value: '1361299492'
+                  help: '只能填网易云单曲的ID'
+                  validation: 'required'
+        - $formkit: text
+          name: meting_api
+          label: Meting API
+          value: 'https://music.zhheo.com/meting-api/?server=:server&type=:type&id=:id&r=:r'
+          help: 配置Meting API，默认https://music.zhheo.com/meting-api/?server=:server&type=:type&id=:id&r=:r
+          validation: 'required'
     - group: custom
       label: 自定义
       formSchema:

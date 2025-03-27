@@ -152,6 +152,9 @@ spec:
           label: 是
         - value: "false"
           label: 否
+    - $formkit: "text"
+      name: "post_song_id"
+      label: "配置网易云单曲ID，填'#'则使用后台配置的默认背景音乐，为空则不开启音乐播放功能"
 
 ---
 

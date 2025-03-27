@@ -20,7 +20,7 @@ spec:
       - name: 链接跳转
         description: 链接跳转
         screenshot: 
-        file: jump_link.html
+        file: reverie/jump_link.html
     page:
       - name: 留言板
         description: 留言板文章
@@ -33,15 +33,15 @@ spec:
       - name: Memos
         description: Memos
         screenshot:
-        file: memos_display.html
+        file: reverie/memos_display.html
       - name: 随手拍
         description: Memos相册页面
         screenshot:
-        file: memos_photos.html
+        file: reverie/memos_photos.html
       - name: 时间轴/里程碑
         description: 里程碑页面
         screenshot:
-        file: time_line.html
+        file: reverie/time_line.html
       - name: 相册
         description: 相册页面
         screenshot:
@@ -53,5 +53,5 @@ spec:
       - name: 音乐播放器
         description: 音乐播放页面
         screenshot:
-        file: music_player.html
+        file: reverie/music_player.html
 

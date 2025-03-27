@@ -248,6 +248,7 @@ img {
 	display: flex;
 	width: 100%;
 	max-width: 800px;
+	max-height: 200px;
 	background: linear-gradient(65deg, #ffffff 0%, #efefef9f 100%);
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.05);
 	border-radius: 12px;
@@ -295,15 +296,25 @@ img {
 .article-card-info {
 	flex: 1;
 	padding: 6px 20px 10px 20px;
+	justify-content: center;
+	display: flex;
+    flex-direction: column;
 }
 
 .article-card-title {
+	flex-shrink: 0;
 	font-size: 20px;
 	font-weight: bold;
+	height: 1.5em;
 	text-decoration: none;
 	color: #2c3e50;
 	transition: text-decoration 0.2s ease-in-out, color 0.2s ease-in-out;
 	letter-spacing: 0.5px;
+	display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
 }
 
 .article-card-title:hover {
@@ -341,7 +352,7 @@ img {
 	font-size: 16px;
 	color: #666;
 	line-height: 1.6;
-	margin-bottom: 12px;
+	overflow: hidden;
 }
 
 .timeline-item-img {

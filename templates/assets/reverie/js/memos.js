@@ -171,13 +171,13 @@ document.addEventListener('DOMContentLoaded', async () => { // DOM 加载后执�
     };
     
     // 监听滚动事件（防抖处理）
-    window.addEventListener('scroll', debounce(handleScroll, 100));
+    window.addEventListener('scroll', Debounce(handleScroll, 100));
 
     intiLoad();
 });
 
 // 防抖函数
-const debounce = (func, delay) => {
+const Debounce = (func, delay) => {
     let timeout;
     return (...args) => {
         clearTimeout(timeout);

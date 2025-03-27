@@ -2,7 +2,7 @@
 <html
   lang="en"
   xmlns:th="http://www.thymeleaf.org"
-  th:replace="~{modules/layout :: html(title = ${theme.config.musicplayer.title?:'音乐播放器'}+'-'+${site.title},htmlType = memos,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
+  th:replace="~{modules/layout :: html(title = ${theme.config.musicplayer.title?:'音乐播放器'}+'-'+${site.title},htmlType = music_player,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
 >
   <th:block th:fragment="content">
     <body>
@@ -42,7 +42,8 @@
                             <a th:text="${theme.config.musicplayer.resource_list[0].list_name}">歌单</a>
                             
                             <script th:inline="javascript">
-                              var localMusic = /*[[${theme.config.musicplayer.resource_list[0].resource_list}]]*/ [];
+                              var localMusic = /*[[${theme.config.musicplayer.resource_list[0].resource_list.realNode}]]*/ [];
+                              console.log(localMusic)
                             </script>
                           </li>
                           <li th:case="'default'" th:attr="data-listname='def_list', data-listtype=3" th:classappend="'active'">
