@@ -1,3 +1,20 @@
+html {
+    --colorA: #d1dfe9;
+    --colorB: #d1dfe9;
+    --colorC: #00000073;
+    --colorD: #00000073;
+    --colorE: #ffffff00;
+    --colorF: #00000000;
+
+    &[data-mode="dark"] {
+        --colorA: #1b1c20;
+        --colorB: #3d3d3f;
+        --colorC: #f7f7fa;
+        --colorD: #fff;
+        --colorE: #3d3d3f;
+        --colorF: #00000000;
+    }
+}
 
 #nav-music {
     display: flex;
@@ -19,7 +36,7 @@
 }
 
 #nav-music.playing {
-    border: 1px solid #3d3d3f;
+    border: 1px solid var(--colorE);
     box-shadow: 0 0 12px -3px rgba(0, 0, 0, 0);
     animation: playingShadow 5s linear infinite
 }
@@ -94,14 +111,14 @@
 }
 
 #nav-music .aplayer {
-    background: #1b1c20;
+    background: var(--colorA);
     border-radius: 60px;
     min-height: 41px !important;
     height: 41px;
     display: flex;
     margin: 0;
     transition: .3s;
-    border: 1px solid #3d3d3f;
+    border: 1px solid var(--colorB);
     box-shadow: none
 }
 
@@ -134,7 +151,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
     transition: .3s;
-    user-select: none
+    user-select: none;
+    color: var(--colorC)
 }
 
 #nav-music .aplayer .aplayer-info .aplayer-controller {
@@ -202,7 +220,7 @@
 }
 
 #nav-music .aplayer .aplayer-lrc p.aplayer-lrc-current {
-    color: #fff;
+    color: var(--colorD);
     border: none;
     min-height: 20px;
     filter: none
@@ -278,40 +296,48 @@
 
 @-moz-keyframes playingShadow {
     0%,100% {
+        border: var(--colorF);
         box-shadow: 0 0 12px -3px rgba(0, 0, 0, 0);
     }
 
     50% {
+        border: var(--colorF);
         box-shadow: 0 0 12px 0 #ffc848;
     }
 }
 
 @-webkit-keyframes playingShadow {
     0%,100% {
+        border: var(--colorF);
         box-shadow: 0 0 12px -3px rgba(0, 0, 0, 0);
     }
 
     50% {
+        border: var(--colorF);
         box-shadow: 0 0 12px 0 #ffc848;
     }
 }
 
 @-o-keyframes playingShadow {
     0%,100% {
+        border: var(--colorF);
         box-shadow: 0 0 12px -3px rgba(0, 0, 0, 0);
     }
 
     50% {
+        border: var(--colorF);
         box-shadow: 0 0 12px 0 #ffc848;
     }
 }
 
 @keyframes playingShadow {
     0%,100% {
+        border: var(--colorF);
         box-shadow: 0 0 12px -3px rgba(0, 0, 0, 0);
     }
 
     50% {
+        border: var(--colorF);
         box-shadow: 0 0 12px 0 #ffc848;
     }
 }

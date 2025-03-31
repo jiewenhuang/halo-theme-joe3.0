@@ -2,7 +2,7 @@
 const memosHost = memosConfig.memosHost.endsWith("/") ? 
                 memosConfig.memosHost:memosConfig.memosHost + "/";
 const memosBlockHeight = memosConfig.memosBlockHeight;
-const memosPageSize = memosConfig.memosPageSize > 20 ? memosConfig.memosPageSize : 20;
+const memosPageSize = memosConfig.memosPageSize;
 const memosLinkShow = memosConfig.memosLinkShow;
 
 marked.setOptions({
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', async () => { // DOM 加载后执�
         if (memo.resources?.length) {
             mediaContent = memo.resources.map(res => {
             if (res.type.startsWith('image/')) {
-                return `<img class="memos_img lazyload" src="/${res.name}" alt="${res.filename}" 
+                return `<img class="memos_img lazyload" src="${memosHost}file/${res.name}/${res.filename}?thumbnail=true" alt="${res.filename}" 
                         onerror="Joe.errorImg(this, 'LoadFailedImg')">`;
             }
             if (res.type.startsWith('video/')) {

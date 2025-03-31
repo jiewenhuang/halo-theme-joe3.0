@@ -3126,11 +3126,13 @@ spec:
         - $formkit: number
           name: memos_page_size
           label: 一次渲染的Memo条数
-          value: '20'
+          value: 15
+          validation: required
+          min: 10
         - $formkit: number
           name: memos_block_height
           label: 一条Memo内容展示块的最大高度
-          value: '300'
+          value: 300
           help: '设置内容区域的最大高度（单位像素），超过此高度则显示折叠/展开按钮，默认值为 300，最小值为 100（若输入的值小于 100 则按 100 处理）'
         - $formkit: text
           name: photo_page_title

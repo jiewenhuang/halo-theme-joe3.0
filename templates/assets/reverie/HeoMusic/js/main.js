@@ -100,9 +100,9 @@ var heo = {
     if (params.get("id") && params.get("server")) {
       var id = params.get("id")
       var server = params.get("server")
-      heoMusicPage.innerHTML = `<meting-js id="${id}" server="${server}" type="${playlistType}" mutex="true" preload="auto" order="random"></meting-js>`;
+      heoMusicPage.innerHTML = `<meting-js id="${id}" server="${server}" type="${playlistType}" mutex="true" preload="auto" order="random" volume="0.5"></meting-js>`;
     } else {
-      heoMusicPage.innerHTML = `<meting-js id="${userId}" server="${userServer}" type="${userType}" mutex="true" preload="auto" order="random"></meting-js>`;
+      heoMusicPage.innerHTML = `<meting-js id="${userId}" server="${userServer}" type="${userType}" mutex="true" preload="auto" order="random" volume="0.5"></meting-js>`;
     }
   },
 

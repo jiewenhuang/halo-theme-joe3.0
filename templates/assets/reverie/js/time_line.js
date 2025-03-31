@@ -303,11 +303,6 @@ async function getPostDataByName(name) {
         const url = `${post_api}${name}`;
         const response = await fetch(url);
 
-        // 检查响应状态码
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
         const responseData = await response.json();
 
         // 检查属性是否存在
