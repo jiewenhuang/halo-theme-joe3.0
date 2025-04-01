@@ -3356,6 +3356,47 @@ spec:
           value: 'https://music.zhheo.com/meting-api/?server=:server&type=:type&id=:id&r=:r'
           help: 配置Meting API，默认https://music.zhheo.com/meting-api/?server=:server&type=:type&id=:id&r=:r
           validation: 'required'
+
+    - group: emaction
+      label: Emaction
+      formSchema:
+        - $formkit: text
+          name: endpoint
+          label: Emaction后端访问地址
+          value: ''
+          help: Emaction功能需要部署后端才能使用，参考：
+        - $formkit: radio
+          name: post_enable
+          label: 启用文章页Reaction点赞
+          help: 文章面Reaction总开关
+          value: false
+          options:
+            - value: true
+              label: 启用
+            - value: false
+              label: 关闭
+        - $formkit: radio
+          name: page_enable
+          label: 启用独立页面Reaction点赞
+          value: false
+          help: 独立页面Reaction总开关
+          options:
+            - value: true
+              label: 启用
+            - value: false
+              label: 关闭
+        - $formkit: repeater
+          name: emotion_list
+          label: 自定义表情
+          help: 自定义reaciton列表
+          value: [ ]
+          children:
+            - $formkit: text
+              name: emoji
+              label: 表情
+              value: ''
+              placeholder: 🐱
+              validation: 'required'
     - group: custom
       label: 自定义
       formSchema:

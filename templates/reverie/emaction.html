@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <th:block th:fragment="emaction">
+    <th:block th:if="${theme.config.emaction.endpoint != ''}">
+        <link rel="stylesheet" type="text/css" th:href="@{/assets/reverie/css/emaction.css}" /> 
+        <div id="emaction_container"></div>
+
+        <script th:inline="javascript">
+            const emoji_list = /*[[${theme.config.emaction.emotion_list}]]*/'';
+            const endpoint = /*[[${theme.config.emaction.endpoit}]]*/ '';
+            const post_emoji_list = /*[[${#annotations.get(post, 'post_reaction_list')}]]*/ '';
+            const post_name = /*[[${post.spec.slug}]]*/ '';     //文章别名
+            let emojiListStr = "";
+            if (post_emoji_list == '#') {
+                emoji_list.forEach(item => {
+                    emojiListStr += `${item.realNode.emoji},${item.realNode.emoji};`;
+                });
+            } else {
+                const emojis = post_emoji_list.split(';');
+                emojis.forEach((val) => {
+                    emojiListStr += `${val},${val};`;
+                });
+            }
+            const emactionContainer = document.getElementById('emaction_container');
+            const emojiReaction = document.createElement('emoji-reaction');
+            emojiReaction.classList.add('reactions');
+            emojiReaction.setAttribute('endpoint', endpoint);
+            emojiReaction.setAttribute('reacttargetid', post_name);
+
+            // 如果表情列表字符串不为空，设置 availableArrayString 属性
+            if (emojiListStr) {
+                emojiReaction.setAttribute('availableArrayString', emojiListStr);
+            }
+            emactionContainer.appendChild(emojiReaction);
+        </script>
+
+        <script type="module" th:src="@{/assets/reverie/js/lib/emaction.js}"></script>
+    
+  </th:block>
+</th:block>
+</html>

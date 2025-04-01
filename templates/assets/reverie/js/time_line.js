@@ -172,7 +172,6 @@ document.addEventListener('DOMContentLoaded', async () => { // DOM 加载后执�
                 }
             }
         }
-
         /* 时间线尾部按钮 */
         const btn_item = document.createElement('li');
         btn_item.className = ` animated wow`;
@@ -302,6 +301,11 @@ async function getPostDataByName(name) {
         // 使用模板字符串确保 URL 格式正确
         const url = `${post_api}${name}`;
         const response = await fetch(url);
+
+        // 检查响应状态码
+        if (!response.ok) { //可能执行不到这个判断，如果出错
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
 
         const responseData = await response.json();
 

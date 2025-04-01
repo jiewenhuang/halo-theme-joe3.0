@@ -154,7 +154,12 @@ spec:
           label: 否
     - $formkit: "text"
       name: "post_song_id"
-      label: "配置网易云单曲ID，填'#'则使用后台配置的默认背景音乐，为空则不开启音乐播放功能"
+      label: "配置网易云单曲ID"
+      help:  填 '#' 使用后台配置的音乐，为空则不开启音乐播放功能
+    - $formkit: "text"
+      name: "post_reaction_list"
+      label: "配置文章的Rection表情列表(用 ';' 隔开每个emoji)"
+      help: 填 '#' 使用后台配置，为空则不开启文章reaction功能
 
 ---
 

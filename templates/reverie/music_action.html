@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
   <th:block th:fragment="music_action">
-    <th:block th:if="${htmlType} == 'index' or ${htmlType} == 'post'">
 
     <link rel="stylesheet" type="text/css" th:href="@{/assets/reverie/css/min/APlayer.min.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/assets/reverie/css/music_action.css}" /> 
@@ -26,12 +25,22 @@
     <th:block th:if="${htmlType} == 'post'">
       <div class="needEndHide" id="nav-music">
         <div id="nav-music-hoverTips" onclick="sco.musicToggle()">音乐已暂停</div>
-          <div th:if="${#annotations.contains(post, 'post_song_id')}">
+          <div id="meting_js">
             <meting-js th:id="(${#annotations.get(post, 'post_song_id')} == '#' 
               ? ${theme.config.musicplayer.music_action.post.post_song_id} : ${#annotations.get(post, 'post_song_id')})" 
                   server="netease" type="song" 
               mutex="true" preload="none" data-lrctype="0" order="random" volume="0.5"></meting-js>
           </div>
+      </div>
+    </th:block>
+
+    <th:block th:if="${htmlType} == 'sheet'">
+      <div class="needEndHide" id="nav-music">
+        <div id="nav-music-hoverTips" onclick="sco.musicToggle()">音乐已暂停</div>
+        <meting-js th:id="(${#annotations.get(post, 'post_song_id')} == '#' ? 
+        ${theme.config.musicplayer.music_action.post.post_song_id} : ${#annotations.get(singlePage, 'post_song_id')})" 
+            server="netease" type="song" 
+        mutex="true" preload="none" data-lrctype="0" order="random" volume="0.5"></meting-js>
       </div>
     </th:block>
 
@@ -41,6 +50,5 @@
     <script th:src="@{/assets/reverie/js/lib/APlayer.min.js}"></script>
     <script th:src="@{/assets/reverie/js/lib/Meting.min.js}"></script>
     <script th:src="@{/assets/reverie/js/music_action.js}"></script>
-  </th:block>
 </th:block>
 </html>

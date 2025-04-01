@@ -1,0 +1,45 @@
+html {
+    --start-smile-border-color-default: #b7babd;
+    --start-smile-border-color-hover-default: #1f232826;
+    --start-smile-bg-color-default: #f6f8fa;
+    --start-smile-svg-fill-color-default: #656d76;
+    --reaction-got-not-reacted-bg-color-default: transparent;
+    --reaction-got-not-reacted-bg-color-hover-default: #c7defe;
+    --reaction-got-not-reacted-border-color-default: #d1d9e0;
+    --reaction-got-not-reacted-text-color-default: #656d76;
+    --reaction-got-reacted-bg-color-default: #ddf4ff;
+    --reaction-got-reacted-bg-color-hover-default: #b6e3ff;
+    --reaction-got-reacted-border-color-default: #0969da;
+    --reaction-got-reacted-text-color-default: #0969da;
+    --reaction-available-popup-bg-color-default: #fff;
+    --reaction-available-popup-border-color-default: #d0d7de;
+    --reaction-available-popup-box-shadow-default: #8c959f33 0px 8px 24px 0px;
+    --reaction-available-emoji-reacted-bg-color-default: #d8e6f8;
+    --reaction-available-emoji-bg-color-hover-default: #e3e3e4;
+    --reaction-available-emoji-z-index-default: 100;
+    --reaction-available-mask-z-index-default: 80;
+    
+    &[data-mode="dark"] {
+        --start-smile-border-color-default: #21262d;
+        --start-smile-border-color-hover-default: #8b949e;
+        --start-smile-bg-color-default: #30363d;
+        --start-smile-svg-fill-color-default: #7d8590;
+        
+        --reaction-got-not-reacted-bg-color-default: #00000000;
+        --reaction-got-not-reacted-bg-color-hover-default: #21262d;
+        --reaction-got-not-reacted-border-color-default: #414952;
+        --reaction-got-not-reacted-text-color-default: #7d8590;
+
+        --reaction-got-reacted-bg-color-default: #388bfd1a;
+        --reaction-got-reacted-bg-color-hover-default: #0c2d6b;
+        --reaction-got-reacted-border-color-default: #1f6feb;
+        --reaction-got-reacted-text-color-default: #2f81f7;
+        --reaction-available-popup-bg-color-default: #161b22;
+        --reaction-available-popup-border-color-default: #30363d;
+        --reaction-available-popup-box-shadow-default: #010409 0px 8px 24px 0px;
+        --reaction-available-emoji-reacted-bg-color-default: #388bfd1a;
+        --reaction-available-emoji-bg-color-hover-default: #30363d;
+        --reaction-available-emoji-z-index-default: 100;
+        --reaction-available-mask-z-index-default: 80;
+    }
+}
