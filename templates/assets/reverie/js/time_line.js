@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', async () => { // DOM 加载后执�
             if (timeline_item.type == '1') { //只有内容
                 item.className = `timeline-item animated wow`;
                 item.setAttribute('data-wow-delay', `0.${index + 1}s`);
-                item.setAttribute('data-cid', "timeline");
+                item.setAttribute('data-cid', "1");
                 item.innerHTML = `
                     <span class="timeline-item-icon | faded-icon">
                         ${timeline_item.svg || level_svgs[timeline_item.level]}
@@ -195,7 +195,8 @@ document.addEventListener('DOMContentLoaded', async () => { // DOM 加载后执�
     }
 
     document.addEventListener("click", function (event) {
-        if (event.target && event.target.id === "backToTop") {
+        var backToTopButton = document.getElementById("backToTop");
+        if (event.target === backToTopButton || backToTopButton.contains(event.target)) {
             window.scrollTo({
                 top: 0,
                 behavior: "smooth"
