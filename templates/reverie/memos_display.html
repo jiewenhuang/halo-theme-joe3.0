@@ -96,13 +96,13 @@
         // 将动态值注入到全局变量中
         const memosConfig = {
             memosHost: /*[[${theme.config.memos.memos_host}]]*/ '',
+            memosUserId: /*[[${theme.config.memos.memos_user}]]*/ '',
             memosBlockHeight: /*[[${theme.config.memos.memos_block_height}]]*/ 300,
             memosPageSize: /*[[${theme.config.memos.memos_page_size}]]*/ 10,
             memosLinkShow: /*[[${theme.config.memos.enable_memos_link}]]*/ true
         };
       </script>
-      <script th:src="@{/assets/reverie/js/memos.js}"></script>
-      
+      <script th:src="@{/assets/reverie/js/memos_display.js}"></script>
     </body>
   </th:block>
 </html>

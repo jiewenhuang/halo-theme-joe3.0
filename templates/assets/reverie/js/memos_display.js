@@ -1,6 +1,7 @@
 // 使用从 HTML 中注入的全局变量
 const memosHost = memosConfig.memosHost.endsWith("/") ? 
                 memosConfig.memosHost:memosConfig.memosHost + "/";
+const memosUserId = memosConfig.memosUserId;
 const memosBlockHeight = memosConfig.memosBlockHeight;
 const memosPageSize = memosConfig.memosPageSize;
 const memosLinkShow = memosConfig.memosLinkShow;
@@ -8,9 +9,6 @@ const memosLinkShow = memosConfig.memosLinkShow;
 marked.setOptions({
     breaks: true // 将 \n 解析为 <br>
 });
-
-const TAG_REG = /(?<=^|\s)#([^\s#]+)(?=\s|$)/g;
-const HTML_REG = /```__html([\s\S]*?)```/gm;
 
 document.addEventListener('DOMContentLoaded', async () => { // DOM 加载后执行
               
@@ -21,7 +19,9 @@ document.addEventListener('DOMContentLoaded', async () => { // DOM 加载后执�
     };
 
     let all_memos = [];
-    var host_url = memosHost + 'api/v1/memos?pageSize=' + memosPageSize + '&pageToken=';
+    //var host_url = memosHost + 'api/v1/memos?pageSize=' + memosPageSize + '&pageToken=';
+    const user_param = memosUserId == '' ? '' : `parent=${memosUserId}&`;
+    const host_url = `${memosHost}api/v1/memos?${user_param}pageSize=${memosPageSize}&pageToken=`;
     var page_token = '';
     let isLoading = false; // 防止重复加载
 
@@ -42,7 +42,9 @@ document.addEventListener('DOMContentLoaded', async () => { // DOM 加载后执�
 
     //渲染以及预获取下一部分数据 loadData()
     const loadData = async () => {
-      if (isLoading) return;
+      if (isLoading) {
+        return;
+      }
       isLoading = true;
 
       renderMemos();
@@ -52,6 +54,7 @@ document.addEventListener('DOMContentLoaded', async () => { // DOM 加载后执�
             try {
                 const response = await fetch(token_url);
                 const { memos, nextPageToken } = await response.json();
+                console.log(memos);
                 all_memos = [...all_memos, ...memos]; // 追加预加载的数据
                 page_token = nextPageToken;
 
@@ -107,11 +110,12 @@ document.addEventListener('DOMContentLoaded', async () => { // DOM 加载后执�
     // 内容渲染函数
     const renderContent = (memo) => {
         //markdown语法渲染
+        let TAG_REG = /(^|\s)#([^\s#]+)(?=\s|$)/g;///(?<=^|\s)#([^\s#]+)(?=\s|$)/g;
+        let HTML_REG = /```__html([\s\S]*?)```/gm;
         var memoContREG = memo.content.replace(TAG_REG,   //tag#匹配
             "<span><a class='memos-tag' rel='noopener noreferrer' href='"
-                + memosHost +"?filter=tagSearch:$1' target='_blank' rel='noopener noreferrer'>#$1</a></span>")
+                + memosHost +"?filter=tagSearch:$2' target='_blank' rel='noopener noreferrer'>#$2</a></span>")
             .replace(HTML_REG, "$1");   //匹配```__html```
-            
             memoContREG = marked.parse(memoContREG);
             
         //资源渲染
@@ -119,7 +123,9 @@ document.addEventListener('DOMContentLoaded', async () => { // DOM 加载后执�
         if (memo.resources?.length) {
             mediaContent = memo.resources.map(res => {
             if (res.type.startsWith('image/')) {
-                return `<img class="memos_img lazyload" src="${memosHost}file/${res.name}/${res.filename}?thumbnail=true" alt="${res.filename}" 
+                let res_url = `${memosHost}file/${res.name}/${res.filename}?thumbnail=true`;
+
+                return `<img class="memos_img lazyload" data-fancybox="Joe" href="${res_url}" src="${res_url}" alt="${res.filename}" 
                         onerror="Joe.errorImg(this, 'LoadFailedImg')">`;
             }
             if (res.type.startsWith('video/')) {
@@ -195,21 +201,22 @@ const formatDate = (isoString, format) => {
     if (diffInSeconds < 60) {
         return '刚刚';
     }
-    if (diffInSeconds < 3600) {
+    else if (diffInSeconds < 3600) {
         const minutes = Math.floor(diffInSeconds / 60);
         return `${minutes} 分钟前`;
     }
-    if (diffInSeconds < 86400) {
+    else if (diffInSeconds < 86400) {
         const hours = Math.floor(diffInSeconds / 3600);
         return `${hours} 小时前`;
     }
-    if (diffInSeconds < 172800) { // 48 小时内
+    else if (diffInSeconds < 172800) { // 48 小时内
         return '昨天';
     }
-    if (diffInSeconds < 604800) { // 7 天内
+    else if (diffInSeconds < 1296000) { // 15 天内
         const days = Math.floor(diffInSeconds / 86400);
         return `${days}天前`;
     }
+
 
     // 超过一周显示具体时间
     return format.replace(/yyyy|MM|dd|HH|mm|ss/g, tag => ({

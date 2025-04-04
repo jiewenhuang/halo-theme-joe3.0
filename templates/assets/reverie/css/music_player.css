@@ -9,6 +9,7 @@
 .music_main {
     min-width: 0;
     padding-bottom: 15px;
+    z-index: 2;
 }
 
 .music_list {

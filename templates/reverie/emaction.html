@@ -4,10 +4,9 @@
     <th:block th:if="${theme.config.emaction.endpoint != ''}">
         <link rel="stylesheet" type="text/css" th:href="@{/assets/reverie/css/emaction.css}" /> 
         <div id="emaction_container"></div>
-
         <script th:inline="javascript">
             const emoji_list = /*[[${theme.config.emaction.emotion_list}]]*/'';
-            const endpoint = /*[[${theme.config.emaction.endpoit}]]*/ '';
+            const endpoint = /*[[${theme.config.emaction.endpoint}]]*/ '';
             const post_emoji_list = /*[[${#annotations.get(post, 'post_reaction_list')}]]*/ '';
             const post_name = /*[[${post.spec.slug}]]*/ '';     //文章别名
             let emojiListStr = "";

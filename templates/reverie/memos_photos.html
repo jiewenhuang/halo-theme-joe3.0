@@ -6,7 +6,7 @@
 >
   <th:block th:fragment="content">
     <body>
-      <link rel="stylesheet" th:href="@{/assets/css/min/photos.min.css}" />
+      <link rel="stylesheet" th:href="@{/assets/reverie/css/memos_photos.css}" />
 
 
       <div id="Joe">
@@ -61,6 +61,7 @@
             memosPhotoTags: /*[[${theme.config.memos.photo_tags}]]*/ '',
         };
       </script>
+      <script th:src="@{/assets/reverie/js/utils.js}"></script>
       <script th:src="@{/assets/reverie/js/memos_photos.js}"></script>
 
     </body>
