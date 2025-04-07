@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html
+lang="en"
+xmlns:th="http://www.thymeleaf.org"
+th:replace="~{reverie/heolink/layout :: html(content = ~{::content}, head = null, title = null)}"
+>
+<th:block th:fragment="content">
+  <body th:style="'background-color: '+${theme.config.heo_link.style.background_color ?: '#f2f2f2'}" th:with="logon = ${#authentication.name != 'anonymousUser'}">
+    <section id="123">
+      <div class="heolink_site"  th:if="${pluginFinder.available('PluginLinks')}">
+        <th:block
+        th:replace="~{reverie/heolink/widgets/nav}"
+      />
+        <div id="web_content">
+  <div class="linkPage">
+    <div class="linkPage_content">
+      <div class="site_info_group" th:if="${theme.config.heo_link.style.show_cover_img == 'true'}">
+        <div class="site_info_text">
+          <h1 class="site_info_group_title" th:text="${site.title}"></h1>
+          <span class="site_info_group_desc" th:text="${site.subtitle}"></span>
+        </div>
+
+        <img class="site_info_group_back_cover"
+          th:src="${theme.config.heo_link.style.cover_img ?: #theme.assets('/reverie/heolink/images/index_cover2.jpg')}" alt="cover" />
+      </div>
+
+      <th:block
+        th:replace="~{reverie/heolink/widgets/search}"
+      />
+
+      <th:block th:each="group : ${linkFinder.groupBy()}"
+                th:if="${#annotations.getOrDefault(group, 'show_on_heolink', 'true') == 'true' and (#annotations.getOrDefault(group, 'show_group_anonymous', 'false') != 'true' or #annotations.getOrDefault(group, 'show_group_anonymous', 'false') == 'true' and logon)}">
+        <div class="link_group" th:if="${#lists.size(group.links) > 0}">
+          <div class="link_group_title_content" th:if="${group.spec.displayName != ''}" >
+            <i th:class="${#annotations.getOrDefault(group, 'icon', 'ri-archive-stack-fill')}"></i>
+            <h2 class="link_group_title" th:text="${group.spec.displayName}"
+              th:id="${group.spec.displayName}"></h2>
+          </div>
+
+          <div class="link_group_content">
+            <a class="link_group_content_link" th:each="link : ${group.links}" :key="i"
+               th:with="to_post_radio = ${#annotations.get(link, 'to_post_radio')},
+                        to_post = ${#annotations.get(link, 'to_post')},
+                        shouldLinkToPost = ${to_post_radio == 'true' and to_post != null and to_post != ''},
+                        item_url = ${shouldLinkToPost ? postFinder.getByName(to_post).status.permalink : link.spec.url}"
+               th:href="${item_url}"
+               th:target="${shouldLinkToPost ? '' : '_blank'}"
+               th:if="${(#annotations.getOrDefault(link, 'show_link_anonymous', 'false') != 'true' or #annotations.getOrDefault(link, 'show_link_anonymous', 'false') == 'true' and logon)}">
+              <div class="link_group_content_item">
+                <div class="link_group_content_item_logo">
+                  <img class="link_group_content_item_logo_img"
+                       th:with="icon_api= ${theme.config.heo_link.info.icon_api ?: 'https://api.zhheo.com/favicon/get.php?url={url}'}, 
+                                isRelativeUrl=${item_url.startsWith('/')},
+                                custom_logo=${link.spec.logo},
+                                used_logo= ${custom_logo ?: icon_api.replace('{url}', item_url)},
+                                used_site_logo = ${custom_logo ?: (site.favicon ?: #theme.assets('/reverie/heolink/images/logo_cover.jpg'))}"
+                       th:src="${isRelativeUrl ? used_site_logo : used_logo}"
+                       th:alt="${link.spec.displayName}" loading="lazy"/>
+                </div>
+                <div class="link_group_content_item_info">
+                  <div class="link_group_content_item_info_content">
+                    <p class="link_group_content_item_info_content_title" th:text="${link.spec.displayName}"></p>
+                    <p class="link_group_content_item_info_content_description" th:text="${link.spec.description}"></p>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>          
+        </div>
+      </th:block>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+</body>
+</html>

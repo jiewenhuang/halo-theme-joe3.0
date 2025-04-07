@@ -3402,6 +3402,90 @@ spec:
               value: ''
               placeholder: 🐱
               validation: 'required'
+    - group: heo_link
+      label: Heo Link
+      formSchema:
+        - $formkit: group
+          name: info
+          label: 信息
+          children:
+            - $formkit: text
+              name: index_title
+              label: 导航标题
+              help: 可以自定义为页面标题，留空则使用站点标题
+            - $formkit: radio
+              name: icp_enable
+              label: 是否显示备案信息
+              value: false
+              options:
+                - value: true
+                  label: 显示
+                - value: false
+                  label: 不显示
+            - $formkit: select
+              name: search_engine
+              label: 搜索引擎
+              value: ""
+              help: 在首页封面下方的搜索框跳转的搜索引擎
+              options: 
+                - label: 关闭
+                  value: ""
+                - label: PostChat(需要PostChat插件)
+                  value: "postchat"
+                - label: 本地（需要搜索组件插件）
+                  value: "local"
+                - label: 百度
+                  value: "https://www.baidu.com/s?wd="
+                - label: 谷歌
+                  value: "https://www.google.com/search?q="
+                - label: 必应
+                  value: "https://cn.bing.com/search?q="
+                - label: 搜狗
+                  value: "https://www.sogou.com/web?query="
+            - $formkit: text
+              name: icon_api
+              label: 图标API
+              value: "https://api.zhheo.com/favicon/get.php?url={url}"
+              help: "默认的API服务器不保证可用性，仅供演示使用。{url}为链接的地址。搭建自有API方法：https://github.com/owen0o0/getFavicon"
+        - $formkit: group
+          name: style
+          label: 样式
+          children:
+            - $formkit: radio
+              name: show_cover_img
+              id: show_cover_img
+              label: 显示背景图片
+              help: 控制首页是否显示背景图片
+              value: "true"
+              options:
+                - label: 显示
+                  value: "true" 
+                - label: 不显示
+                  value: "false"
+            - $formkit: attachment
+              name: cover_img
+              if: $get(show_cover_img).value == "true"
+              value: /themes/theme-heolink/assets/images/index_cover2.jpg
+              label: 首页背景图片
+        - $formkit: group
+          name: extension
+          label: 扩展
+          children:
+            - $formkit: radio
+              name: postchat_enable
+              label: PostChat智能对话按钮
+              help: 控制是否启用PostChat智能对话按钮
+              value: "true"
+              options:
+                - label: 启用
+                  value: "true"
+                - label: 不启用
+                  value: "false"
+            - $formkit: text
+              name: postchat_button_text
+              label: PostChat智能对话按钮文本
+              value: "智能对话"
+              help: 在使用PostChat插件时，智能对话按钮的文本
     - group: custom
       label: 自定义
       formSchema:

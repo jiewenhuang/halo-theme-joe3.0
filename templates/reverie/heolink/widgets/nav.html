@@ -1,0 +1,51 @@
+<div class="nav">
+  <a class="show_nav" onclick="showNav()" href="javascript:void(0)">
+    <i class="ri-menu-line"></i>
+  </a>
+  <a class="nav_site_name" href="/#" th:text="${site.title}"></a>
+</div>
+
+<div class="nav_list" id="nav_list">
+  <a class="site_logo" href="/#">
+    <img th:src="${site.logo ?: #theme.assets('/reverie/heolink/images/logo_cover.webp')}" alt="logo" />
+  </a>
+  <div class="left_nav_group" id="left_nav_group">
+    <th:block th:each="group : ${linkFinder.groupBy()}"
+              th:if="${#annotations.getOrDefault(group, 'show_on_heolink', 'true') == 'true' && (#annotations.getOrDefault(group, 'show_group_anonymous', 'false') != 'true' || #annotations.getOrDefault(group, 'show_group_anonymous', 'false') == 'true' && logon)}">
+      <div th:class="${#annotations.getOrDefault(group, 'icon', 'ri-archive-stack-fill') == 'ri-' || #annotations.getOrDefault(group, 'icon', 'ri-archive-stack-fill') == '' ? 'left_nav_item nav_center' : 'left_nav_item'}" th:if="${group.spec.displayName != ''}">
+        <a class="left_nav_link_group_title" th:data-target="${group.spec.displayName}" href="javascript:void(0)" onclick="hideNav()">
+          <i th:if="${#annotations.getOrDefault(group, 'icon', 'ri-archive-stack-fill') != 'ri-' && #annotations.getOrDefault(group, 'icon', 'ri-archive-stack-fill') != ''}" th:class="${#annotations.getOrDefault(group, 'icon', 'ri-archive-stack-fill')}"></i>
+          <span th:text="${group.spec.displayName}"></span>
+        </a>
+      </div>
+    </th:block>
+    <div class="left_nav_item nav_postchat"> 
+      <a th:if="${pluginFinder.available('postchat') && (theme.config.heo_link.extension.postchat_enable == null || theme.config.heo_link.extension.postchat_enable != 'false')}" class="left_nav_link_group_title notneedjump" onclick="postChatUser.setPostChatTag('chat');return false;">
+        <i class="ri-chat-ai-fill"></i>
+        <span th:text="${theme.config.heo_link.extension.postchat_button_text ?: '智能对话'}">智能对话</span>
+      </a>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <th:block th:if="${theme.config.heo_link.info.icp_enable}">
+    <div class="footer_icp_group">
+      <a chref="${theme.config.basic.icp_police.icp_link}" th:if="${theme.config.basic.icp_police.icp}">
+        <span th:text="${theme.config.basic.icp_police.icp}"></span>
+      </a>
+      <a icp_linkhref="${theme.config.basic.icp_police.gongan_link}" th:if="${theme.config.basic.icp_police.police}">
+        <span th:text="${theme.config.basic.icp_police.police}"></span>
+      </a>
+    </div>
+  </th:block>
+    <div class="footer_console">
+      <a th:href="${logon ? '/console' : '/login?redirect_uri=/'}" th:target="${logon ? '_blank' : '_self'}" title="管理后台" data-pjax-state="external">
+        <i class="ri-settings-4-fill"></i>
+      </a>
+      <a href="https://github.com/zhheo/halo-theme-heolink" target="_blank" class="theme_info" title="Theme HeoLink by Halo">Theme HeoLink by Halo</a>
+    </div>
+
+  </div>
+
+</div>

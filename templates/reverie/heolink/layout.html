@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  th:fragment="html (title,content,head)"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=2"
+    />
+    <title th:text="${title != null ? title : site.title}">Heolink</title>
+    <link rel="stylesheet" th:href="@{/assets/reverie/heolink/css/style.css}" />
+    <link th:href="@{/assets/reverie/heolink/fonts/remixicon.css}" rel="stylesheet">
+    <script th:src="@{/assets/reverie/heolink/js/main.js}"></script>
+    <script th:src="@{/assets/reverie/heolink/js/heolink.js}"></script>
+    <script th:src="@{/assets/js/min/pjax.min.js}"></script>
+    <th:block th:if="${head != null}">
+      <th:block th:replace="${head}" />
+    </th:block>
+  </head>
+  <th:block th:replace="${content}"></th:block>
+
+</html>

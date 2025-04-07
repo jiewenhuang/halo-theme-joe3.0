@@ -341,6 +341,31 @@ spec:
         - value: "false"
           label: 否
 
+    - $formkit: text
+      name: icon
+      label: 图标
+      value: 'ri-'
+      help: "图标库：https://remixicon.com/ 需要带'ri-'前缀"
+    - $formkit: radio
+      name: show_on_heolink
+      label: 显示在HeoLink中
+      help: 控制此分组是否显示在HeoLink中
+      value: "true"
+      options: 
+        - label: 显示
+          value: "true"
+        - label: 不显示
+          value: "false"
+    - $formkit: radio
+      name: show_group_anonymous
+      label: 分组是否登录可见
+      help: 控制此分组是否登录可见
+      value: "false"
+      options:
+        - label: 是
+          value: "true"
+        - label: 否
+          value: "false"
 
 ---
 
@@ -366,3 +391,30 @@ spec:
           label: 是
         - value: "false"
           label: 否
+
+    - $formkit: radio
+      name: to_post_radio
+      id: to_post_radio
+      label: 关联文章
+      help: 控制此链接是否关联文章
+      value: "false"
+      options: 
+        - label: 关联
+          value: "true"
+        - label: 不关联
+          value: "false"
+    - $formkit: postSelect
+      name: to_post
+      if: $get(to_post_radio).value == "true"
+      label: 关联的文章
+      help: "当有关联的文章时，则跳转到对应文章，而不是直接访问地址。上方的关联文章选择 关联 后有效"
+    - $formkit: radio
+      name: show_link_anonymous
+      label: 链接是否登录可见
+      help: 控制此链接是否登录可见
+      value: "false"
+      options:
+        - label: 是
+          value: "true"
+        - label: 否
+          value: "false"

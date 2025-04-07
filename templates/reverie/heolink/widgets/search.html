@@ -1,0 +1,70 @@
+<div class="widget_search" th:if="${theme.config.heo_link.info.search_engine != ''}" >
+  <div class="search-engine-icon">
+    <img th:if="${theme.config.heo_link.info.search_engine.contains('baidu')}" 
+         th:src="@{/assets/reverie/heolink/images/search/baidu.svg}" alt="百度搜索">
+    <img th:if="${theme.config.heo_link.info.search_engine.contains('google')}"
+         th:src="@{/assets/reverie/heolink/images/search/google.svg}" alt="谷歌搜索">
+    <img th:if="${theme.config.heo_link.info.search_engine.contains('bing')}"
+         th:src="@{/assets/reverie/heolink/images/search/bing.svg}" alt="必应搜索">
+    <img th:if="${theme.config.heo_link.info.search_engine.contains('sogou')}"
+         th:src="@{/assets/reverie/heolink/images/search/sougou.svg}" alt="搜狗搜索">
+    <img th:if="${theme.config.heo_link.info.search_engine == 'postchat'}"
+         th:src="@{/assets/reverie/heolink/images/search/postchat.svg}" alt="PostChat搜索">
+    <img th:if="${theme.config.heo_link.info.search_engine == 'local'}"
+         th:src="@{/assets/reverie/heolink/images/search/local.svg}" alt="本地搜索">
+  </div>
+
+  <form id="searchForm" method="get">
+    <input type="text" id="searchInput" 
+           th:placeholder="${theme.config.heo_link.info.search_engine == 'postchat' && !pluginFinder.available('postchat') ? '未安装PostChat插件' : 
+                          theme.config.heo_link.info.search_engine == 'local' && !pluginFinder.available('PluginSearchWidget') ? '未安装搜索组件插件' : 
+                          '输入搜索内容...'}"
+           th:disabled="${(theme.config.heo_link.info.search_engine == 'postchat' && !pluginFinder.available('postchat')) || 
+                        (theme.config.heo_link.info.search_engine == 'local' && !pluginFinder.available('PluginSearchWidget'))}"
+           th:onclick="${theme.config.heo_link.info.search_engine == 'local' && pluginFinder.available('PluginSearchWidget')} ? 'SearchWidget.open()' : null}">
+    <button type="submit">
+      <i class="ri-search-2-line"></i>
+    </button>
+  </form>
+  
+  <script th:inline="javascript">
+    //<![CDATA[
+    var searchEngineUrl = /*[[${theme.config.heo_link.info.search_engine}]]*/ 'defaultURL';
+  
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.getElementById('searchForm');
+        var input = document.getElementById('searchInput');
+
+        if (searchEngineUrl === 'postchat') {
+            form.onsubmit = function(e) {
+                e.preventDefault();
+                if (typeof postChatUser !== 'undefined') {
+                    postChatUser.sendSearchMsg(input.value);
+                }
+            };
+        } else if (searchEngineUrl === 'local') {
+            form.onsubmit = function(e) {
+                e.preventDefault();
+                if (typeof SearchWidget !== 'undefined') {
+                    SearchWidget.open();
+                }
+            };
+            input.onclick = function() {
+                if (typeof SearchWidget !== 'undefined') {
+                    SearchWidget.open();
+                }
+            };
+        } else {
+            var urlParts = searchEngineUrl.split('?');
+            var baseUrl = urlParts[0];
+            var paramName = urlParts.length > 1 ? urlParts[1].split('=')[0] : '';
+            
+            form.action = baseUrl + '?';
+            input.name = paramName;
+        }
+    });
+    //]]>
+  </script>
+  
+</div>
+

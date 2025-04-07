@@ -30,6 +30,14 @@ spec:
         description: 友链模板
         screenshot:
         file: page_links.html
+      - name: 相册
+        description: 相册页面
+        screenshot:
+        file: photos.html
+      - name: 朋友圈
+        description: 朋友圈页面
+        screenshot:
+        file: friends.html
       - name: Memos
         description: Memos
         screenshot:
@@ -42,16 +50,16 @@ spec:
         description: 里程碑页面
         screenshot:
         file: reverie/time_line.html
-      - name: 相册
-        description: 相册页面
-        screenshot:
-        file: photos.html
-      - name: 朋友圈
-        description: 朋友圈页面
-        screenshot:
-        file: friends.html
       - name: 音乐播放器
         description: 音乐播放页面
         screenshot:
         file: reverie/music_player.html
+      - name: 数据统计
+        description: 博客数据统计页面
+        screenshot:
+        file: reverie/statistics.html
+      - name: 导航页
+        description: 导航页面
+        screenshot:
+        file: reverie/heolink/heo_link.html
 
