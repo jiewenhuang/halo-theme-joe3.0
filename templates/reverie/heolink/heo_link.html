@@ -45,7 +45,7 @@ th:replace="~{reverie/heolink/layout :: html(content = ~{::content}, head = null
                         item_url = ${shouldLinkToPost ? postFinder.getByName(to_post).status.permalink : link.spec.url}"
                th:href="${item_url}"
                th:target="${shouldLinkToPost ? '' : '_blank'}"
-               th:if="${(#annotations.getOrDefault(link, 'show_link_anonymous', 'false') != 'true' or #annotations.getOrDefault(link, 'show_link_anonymous', 'false') == 'true' and logon)}">
+               th:if="${(#annotations.getOrDefault(link, 'link_enable_show', 'true') == 'true') and ((#annotations.getOrDefault(link, 'show_link_anonymous', 'false') != 'true') or (#annotations.getOrDefault(link, 'show_link_anonymous', 'false') == 'true' and logon))}">
               <div class="link_group_content_item">
                 <div class="link_group_content_item_logo">
                   <img class="link_group_content_item_logo_img"

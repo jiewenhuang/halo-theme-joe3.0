@@ -331,15 +331,15 @@ spec:
       name: "link_group_sort_seq"
       label: "链接分类排序序号，数字越大越靠前，如果<=0，则按照默认排序方式进行排序"
       value: "0"
-    - $formkit: "select"
+    - $formkit: "radio"
       name: "link_group_enable_show"
-      label: "是否显示"
+      label: "是否在友链页面显示"
       value: "true"
       options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
+        - label: 显示
+          value: "true"
+        - label: 不显示
+          value: "false"
 
     - $formkit: text
       name: icon
@@ -348,7 +348,7 @@ spec:
       help: "图标库：https://remixicon.com/ 需要带'ri-'前缀"
     - $formkit: radio
       name: show_on_heolink
-      label: 显示在HeoLink中
+      label: 是否在HeoLink页面显示
       help: 控制此分组是否显示在HeoLink中
       value: "true"
       options: 
@@ -382,15 +382,15 @@ spec:
       name: "link_sort_seq"
       label: "同一分类内链接排序序号，数字越大越靠前，如果<=0，则按照默认排序方式进行排序"
       value: "0"
-    - $formkit: "select"
+    - $formkit: "radio"
       name: "link_enable_show"
-      label: "是否显示"
+      label: "是否显示此链接（友链页面&Heolink）"
       value: "true"
       options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
+        - label: 是
+          value: "true"
+        - label: 否
+          value: "false"
 
     - $formkit: radio
       name: to_post_radio

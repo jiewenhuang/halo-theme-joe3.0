@@ -7,7 +7,7 @@
 
 <div class="nav_list" id="nav_list">
   <a class="site_logo" href="/#">
-    <img th:src="${site.logo ?: #theme.assets('/reverie/heolink/images/logo_cover.webp')}" alt="logo" />
+    <img th:src="${#theme.assets('/reverie/heolink/images/logo_cover.webp')}" alt="logo" />
   </a>
   <div class="left_nav_group" id="left_nav_group">
     <th:block th:each="group : ${linkFinder.groupBy()}"
