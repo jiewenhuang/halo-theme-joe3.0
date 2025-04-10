@@ -108,7 +108,7 @@ img {
 	}
 
 	&.faded-icon {
-		background-color: var(--c-grey-100);
+		background-color: var(--c-grey-200);
 		color: var(--c-grey-400);
 	}
 

@@ -54,7 +54,7 @@
             localStorage.removeItem('data-mode');
           } else if (ThemeConfig.theme_mode === 'user') {
             // 用户模式下优先从本地取主题模式，默认为浅色
-            curMode = localStorage.getItem('data-mode') || 'light';
+            curMode = localStorage.getItem('data-mode') || 'dark';
             localStorage.setItem('data-mode', curMode);
           } else {
             // 非用户模式下直接取后台配置的模式
