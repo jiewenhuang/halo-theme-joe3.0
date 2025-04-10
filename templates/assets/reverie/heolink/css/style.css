@@ -58,6 +58,7 @@
   --heo-post-blockquote-bg: #fafcff;
   --heo-post-tabs-bg: #f2f5f8;
   --heo-secondbg: #f7f7f9;
+  --heo-nav-item-bg: #425aef2e;
   --heo-shadow-nav: 0 5px 12px -5px rgba(102, 68, 68, 0.05);
   --heo-card-bg: #fff;
   --heo-card-bg-op: var(--heo-black-op);
@@ -593,13 +594,13 @@ li {
 
 @media (hover:hover) {
   a.link_group_content_link:hover {
-    background: var(--heo-theme);
-    color: var(--heo-white);
-    box-shadow: var(--heo-shadow-theme);
+    background: var(--heo-theme) !important;
+    color: var(--heo-white) !important;
+    box-shadow: var(--heo-shadow-theme) ;
   }
 
   a.left_nav_link_group_title:hover {
-    background: var(--heo-secondbg);
+    background: var(--heo-nav-item-bg);
   }
 
   #searchForm button:hover {

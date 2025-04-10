@@ -5,6 +5,7 @@ const memosUserId = memosConfig.memosUserId;
 const memosBlockHeight = memosConfig.memosBlockHeight;
 const memosPageSize = memosConfig.memosPageSize;
 const memosLinkShow = memosConfig.memosLinkShow;
+const memosCacheApi = memosConfig.memosCacheApi;
 
 marked.setOptions({
     breaks: true // 将 \n 解析为 <br>
@@ -19,12 +20,16 @@ document.addEventListener('DOMContentLoaded', async () => { // DOM 加载后执�
     };
 
     let all_memos = [];
-    //var host_url = memosHost + 'api/v1/memos?pageSize=' + memosPageSize + '&pageToken=';
-    const user_param = memosUserId == '' ? '' : `parent=${memosUserId}&`;
-    const host_url = `${memosHost}api/v1/memos?${user_param}pageSize=${memosPageSize}&pageToken=`;
-    var page_token = '';
     let isLoading = false; // 防止重复加载
-
+    let page_token = '';
+    let host_url = '';
+    
+    if(memosCacheApi != '') {
+        host_url = `${memosCacheApi}/data?pageSize=${memosPageSize}&pageToken=`
+    } else {
+        const user_param = memosUserId == '' ? '' : `parent=${memosUserId}&`;
+        host_url = `${memosHost}api/v1/memos?${user_param}pageSize=${memosPageSize}&pageToken=`;
+    }
     // 初次获取数据 intiLoad()
     const intiLoad = async () => {
         try {
@@ -54,7 +59,6 @@ document.addEventListener('DOMContentLoaded', async () => { // DOM 加载后执�
             try {
                 const response = await fetch(token_url);
                 const { memos, nextPageToken } = await response.json();
-                console.log(memos);
                 all_memos = [...all_memos, ...memos]; // 追加预加载的数据
                 page_token = nextPageToken;
 
@@ -114,7 +118,7 @@ document.addEventListener('DOMContentLoaded', async () => { // DOM 加载后执�
         let HTML_REG = /```__html([\s\S]*?)```/gm;
         var memoContREG = memo.content.replace(TAG_REG,   //tag#匹配
             "<span><a class='memos-tag' rel='noopener noreferrer' href='"
-                + memosHost +"?filter=tagSearch:$2' target='_blank' rel='noopener noreferrer'>#$2</a></span>")
+                + memosHost +"explore?filter=tagSearch:$2' target='_blank' rel='noopener noreferrer'>#$2</a></span>")
             .replace(HTML_REG, "$1");   //匹配```__html```
             memoContREG = marked.parse(memoContREG);
             

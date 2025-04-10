@@ -44,12 +44,13 @@ html {
 .joe_memos_body{background:var(--background-journal-block);border-radius:0 6px 6px 6px;border:1px solid var(--colorA);box-sizing:content-box;max-height:300px;overflow:hidden;padding:10px 12px;position:relative;transition:height .2s}
 .joe_memos_body.open{max-height:unset!important}
 .marked-content {font-size: 14px;}
-.marked-content p{line-height: 1.7}
+.marked-content p{line-height: 26px}
 .marked-content ul{padding: 5px 0px 5px 3px;line-height: 1.7}
 .marked-content hr{margin: 3px 0px 8px 0px;}
 .memos-tag {
   list-style: none;
   padding: 3px 4px;
+  margin-right: 3px;
   font-size: 12px;
   font-weight: 400;
   border-radius: 4px;
@@ -107,4 +108,4 @@ html {
 }
 .font-link-tag{color:var(--main);font-size:20px;}.font-link-tag:hover {color:#fb6c28;}
 .g-progress{font-size:12px;margin:2px 0px 10px 5px;& span{display:inline-block;vertical-align:middle;width:200px;height:5px;border-radius:25px;background:linear-gradient(90deg,#0f0,#0ff var(--progress),transparent 0);border:1px solid #eee}& i{font-size:10px}}
-.memos_img,.marked-content img{max-height:200px;margin:5px 5px 0px 0px;border-radius:2px;cursor: pointer;}
+.memos_img,.marked-content img{max-height:150px;max-width:280px !important;margin:5px 5px 0px 0px;border-radius:2px;cursor:pointer;}
