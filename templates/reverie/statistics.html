@@ -1,0 +1,109 @@
+<!doctype html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{modules/layout :: html(title = ${site.title},htmlType = tags,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
+>
+  <th:block th:fragment="content">
+    <script>
+      document.querySelector('html').setAttribute('data-mode', "dark");
+    </script>
+    <body>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <link rel="stylesheet" th:href="@{/assets/reverie/css/statistics.css}" />
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+      <script src="https://cdn.bootcdn.net/ajax/libs/Chart.js/4.4.1/chart.min.js"></script>
+      <!-- <script th:src="@{/assets/reverie/js/lib/chart.js}"></script> -->
+
+      <div id="Joe">
+        <th:block th:replace="~{modules/macro/navbar :: navbar}" />
+
+        <div class="flex flex-col items-center mb-auto mt-20"  th:classappend="${theme.config.theme.enable_show_in_up ? 'animated showInUp':''}">
+
+            <h1 class="	text-4xl font-bold text-slate-200 flex justify-center">博客数据统计</h1>
+          </br>
+
+            <!--热力图-->
+            <p class="w-200 flex float-left px-2 pt-4 pb-3 text-xl font-bold text-slate-200">文章热力图</p>
+            <div class="w-200 animated fadeIn">
+              <th:block th:replace="~{reverie/widgets/heat_map :: heatMap(numMonths=12)}" />
+            </div>
+
+            <!--博客基本信息-->
+            <p class="w-200 flex float-left px-2 pt-5 pb-4 text-xl font-bold text-slate-200">博客数据</p>
+            <div class="w-200 block">
+            <div class="float-left pb-2 info-container">
+              <div class="flex flex-col gap-1 pl-10 pr-14 text-base font-semibold text-slate-400">
+                <p class="site_life">🕑 博客至今已运行&nbsp;
+                  <strong class="joe_run__day">00</strong> 天 
+                  <strong class="joe_run__hour">00</strong> 时
+                  <strong class="joe_run__minute">00</strong> 分
+                  <strong class="joe_run__second">00</strong> 秒
+                </p>
+                <p>✒️ 文章：<span th:utext="${postFinder.list({}).total}"></span> 篇</p>
+                <p>🏷️ 标签：<span th:utext="${tagFinder.list(1,1).total}"></span> 个</p>
+                <p>📍 分类：<span th:utext="${categoryFinder.list(1,1).total}"></span> 个</p>
+                <p>📃 独立页面：<span th:utext="${singlePageFinder.list(1,1).total}"></span> 个</p>
+                <p>💬 评论：<span th:utext="${commentFinder.list({},1,1).total}"></span> 条</p>
+                <p>🪁 Memos：哔哔了 <span class="memos-count">0</span> 条</p>
+                <p>🔖 Memos： <span class="memos-tags-count">0</span> 种哔哔方向</p>
+                <p>📷 随手拍：<span class="memos-photo-count">0</span> 张照片</p>
+                <p class="mt-3">🐦‍🔥🐦‍🔥🐦‍🔥🐦‍🔥🐦‍🔥🐦‍🔥🐦‍🔥🐦‍🔥</p>
+                <p>🌿🌿🌿🌿🌿🌿🌿🌿</p>
+              </div>
+            </div> 
+
+            <div class="w-[400px] flex float-left px-8 items-center justify-items-center overflow-visible">
+              <p class="font-bold text-slate-200 text-xl mr-3">标签数据</p>
+              <canvas id="tagChart" class=""></canvas>
+            </div>
+
+            </div>
+
+            <!--分类信息-->
+            <p class="w-200 flex float-left px-2 pt-5 pb-3 text-xl font-bold text-slate-200">分类数据</p>
+            <!-- <div class="w-200 inline-block"> -->
+            <div class="w-200 mt-2 mr-5 flex float-left px-8 items-center justify-items-center overflow-visible">
+              <canvas id="categoryChart" class="max-w-64"></canvas>
+              <div id="categoryInfoList" class="items-center grid grid-flow-col grid-rows-4 gap-y-2 gap-x-8 ml-8"> 
+              </div>
+            </div>
+
+            <!-- <p class="w-200 flex float-left px-2 pt-5 pb-4 text-xl font-bold text-slate-200">标签数据</p> -->
+            
+            <!-- </div> -->
+
+            <!--博客标签-->
+            <p class="w-200 flex float-left px-2 mt-10 pb-4 text-xl font-bold text-slate-200">博客标签</p>
+            <div class="w-200 flex px-1.5 animated fadeIn">
+              <ul class="stats-tag_list overflow-visible">
+                  <li class="item mt-1 mr-3 mb-2.5 bg-[#35353e] border border-[#454545] group" th:each="tag : ${tagFinder.listAll()}">
+                    <a th:href="${tag.status.permalink}" th:title="${tag.spec.displayName}" >
+                      <span class="text-slate-200">[[${tag.spec.displayName}]]</span>
+                      <em class="text-[#9999ff]" th:text="|${tag.status.visiblePostCount ?: 0 }篇|"></em>
+                    </a>
+                  </li>
+              </ul>
+            </div>
+
+            <!--Memos标签-->
+            <p class="w-200 flex float-left px-2 mt-6 pb-4 text-xl font-bold text-slate-200">Memos 标签</p>
+            <div class="memos-tags_list w-200 mt-1 float-left px-1.5 pb-10">
+            </div>
+
+            
+        </div>
+        <th:block th:replace="~{modules/common/footer :: footer}" />
+      </div>
+      <th:block th:replace="~{modules/macro/tail :: tail}" />
+      <script th:inline="javascript">
+        const categoryList = /*[[${categoryFinder.listAll()}]]*/[];
+        const tagList = /*[[${tagFinder.listAll()}]]*/[];
+        var memosHost = /*[[${theme.config.memos.memos_host}]]*/"";
+        memosHost = memosHost.endsWith('/') ? memosHost : `${memosHost}/`;
+        memosCacheApi = /*[[${theme.config.memos.memos_cache_api}]]*/'';
+      </script>
+     <script th:src="@{/assets/reverie/js/statistics.js}"></script>
+    </body>
+  </th:block>
+</html>

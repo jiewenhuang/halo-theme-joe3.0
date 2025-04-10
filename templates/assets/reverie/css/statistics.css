@@ -1,0 +1,65 @@
+.stats-heaMap_container {
+    min-width: 808px;
+}
+
+.w-200 {
+    width: 880px;
+}
+
+
+@media screen and (max-width: 1000px) {
+    .w-200 {
+      width: 66%;
+    }
+}
+
+.site_life strong {
+    font-weight: 600;
+}
+
+.info-container p span {
+    color:#9999ff;
+    font-weight: 600;
+}
+
+.stats-tag_list {
+    overflow: hidden;
+}
+
+.stats-tag_list .item {
+    float: left;
+    font-size: 14px;
+    border-radius: 3px;
+    transition: transform .25s;
+}
+
+.stats-tag_list .item a {
+    display: block;
+    padding: 0 10px;
+    height: 28px;
+    line-height: 28px;
+    font-size: 0;
+}
+.stats-tag_list .item a span {
+    display: inline-block;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+}
+.stats-tag_list .item a em {
+    display: inline-block;
+    padding-left: 5px;
+    vertical-align: top;
+    font-size: 14px;
+    font-style: normal;
+}
+
+.joe_footer {
+    margin-top:15rem;
+}
+
+.site_driven {
+    display: flex;
+}

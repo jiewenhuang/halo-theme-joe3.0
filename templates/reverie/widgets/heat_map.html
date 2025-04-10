@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <th:block th:fragment="heatMap (numMonths)">
+    <link rel="stylesheet" th:href="@{/assets/reverie/css/heat_map.css}" />
+
+  <div class="heatmap_wrapper">
+    <div class="heatmap_container"> <!-- 全部用 Flex 排版 -->
+      <div class="heatmap_content">
+          <div class="heatmap_week">
+            <span>Mon</span>
+            <span>&nbsp;</span> <!-- 不需要显示的星期用空格表示 -->
+            <span>Wed</span>
+            <span>&nbsp;</span>
+            <span>Fri</span>
+            <span>&nbsp;</span>
+            <span>Sun</span>
+          </div>
+          <div class="heatmap_main">
+            <div class="month heatmap_month">
+                <!-- js 检测屏幕宽度动态生成月份 -->
+            </div>
+            <div id="heatmap" class="heatmap">
+                <!-- js 检测屏幕宽度动态生成年度日历小方块 -->
+            </div>
+          </div>
+      </div>
+      <div class="heatmap_footer">
+        <div class="heatmap_less">Less</div>
+        <div class="heatmap_level">
+          <span class="heatmap_level_item heatmap_level_0"></span>
+          <span class="heatmap_level_item heatmap_level_1"></span>
+          <span class="heatmap_level_item heatmap_level_2"></span>
+          <span class="heatmap_level_item heatmap_level_3"></span>
+          <span class="heatmap_level_item heatmap_level_4"></span>
+        </div>
+        <div class="heatmap_more">More</div>
+      </div>
+    </div>
+  </div>
+
+      <script th:inline="javascript">
+        const months = /*[[${numMonths}]]*/0;
+        const postsData = /*[[${postFinder.listAll()}]]*/ [];
+        // const blogInfo = {"pages":[]};
+        // function DateFormat(isoString, format) {
+        //   const date = new Date(isoString);
+        //   return format.replace(/yyyy|MM|dd|HH|mm|ss/g, tag => ({
+        //     yyyy: date.getFullYear(),
+        //     MM: String(date.getMonth() + 1).padStart(2, '0'),
+        //     dd: String(date.getDate()).padStart(2, '0'),
+        //     HH: String(date.getHours()).padStart(2, '0'),
+        //     mm: String(date.getMinutes()).padStart(2, '0'),
+        //     ss: String(date.getSeconds()).padStart(2, '0')
+        //   })[tag]);
+        // };
+      </script>
+
+    <!--/*  后端处理数据法（会导致前端的html代码很乱）
+    <th:block th:each="post : ${postFinder.listAll()}">
+        <! --/* <th:block th:with="word_count = ${#strings.length(#strings.replace(postFinder.content(post.metadata.name).content, '(<[^>]*>)|[^\\u4e00-\\u9fa5a-zA-Z0-9]', ''))}"></th:block> */-- >
+        <script th:inline="javascript">
+        postTitle = /*[[${post.spec.title}]]*/{};
+        publicTime = /*[[${post.spec.publishTime}]]*/{};
+        matches = (/*[[${postFinder.content(post.metadata.name).content}]]*/"").replace(/<[^>]*>/g, '').match(/[\u4e00-\u9fa5a-zA-Z0-9]/g);
+
+        data = {
+          "title": `《${postTitle}》`,
+          "date": DateFormat(publicTime, "yyyy-MM-dd"),
+          "year":DateFormat(publicTime, "yyyy"),
+          "month": DateFormat(publicTime, "MM"),
+          "day": DateFormat(publicTime, "dd"),
+          "word_count": matches ? matches.length : 0
+        }
+        blogInfo.pages.push(data);
+      </script>
+      
+    </th:block>
+    */-->
+    
+
+    <script th:src="@{/assets/reverie/js/heat_map.js}"></script> 
+  </th:block>
+</html>

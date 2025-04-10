@@ -3118,6 +3118,11 @@ spec:
           label: User Id
           value: ''
           help: '填写用户ID（users/-），默认为全部用户，即展示全部用户的 Memos，初始用户为 users/1'
+        - $formkit: text
+          name: memos_cache_api
+          label: API URL
+          value: ''
+          help: 配置则使用缓存 API 来获取 Memos 页面数据，为空则不适用，结尾不要"/"（缓存 API 目前只作用于 Memos 页面）
         - $formkit: radio
           name: enable_memos_link
           label: Memos页面跳转按钮

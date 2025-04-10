@@ -1,0 +1,188 @@
+html {
+    /* GitHub Light Color */
+    --ht-main: #334155;
+    --ht-day-bg: #ebedf0;
+    --ht-tooltip: #24292f;
+    --ht-tooltip-bg: #fff;
+    --ht-lv-0: #ebedf0;
+    --ht-lv-1: #9be9a8;
+    --ht-lv-2: #40c463;
+    --ht-lv-3: #30a14e;
+    --ht-lv-4: #216e39;
+    
+    &[data-mode="dark"] {
+        /* GitHub Dark Dimmed Color */
+        --ht-main: #94a3b8;
+        --ht-day-bg: #161b22;
+        --ht-tooltip: #24292f;
+        --ht-tooltip-bg: #fff;
+        --ht-lv-0: #161b22;
+        --ht-lv-1: #0e4429;
+        --ht-lv-2: #006d32;
+        --ht-lv-3: #26a641;
+        --ht-lv-4: #39d353;
+    }
+}
+    
+    .heatmap_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heatmap_container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 10px;
+    line-height: 12px;
+    color: var(--ht-main);
+}
+
+.heatmap_content {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end
+}
+
+.heatmap_week {
+    display: flex;
+    margin-top: 0.25rem;
+    margin-right: 0.25rem;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    text-align: right
+}
+
+.heatmap_main {
+    display: flex;
+    flex-direction: column
+}
+
+.heatmap_month {
+    display: flex;
+    margin-top: 0.25rem;
+    margin-right: 0.25rem;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-end;
+    text-align: right;
+}
+
+.heatmap {
+    display: flex;
+    flex-direction: row;
+    height: 84px;
+}
+
+.heatmap_footer {
+    display: flex;
+    margin-top: 0.5rem;
+    align-items: center
+}
+
+.heatmap_level {
+    display: flex;
+    gap: 2px;
+    margin: 0 0.25rem;
+    flex-direction: row;
+    align-items: center;
+    width: max-content;
+    height: 10px
+}
+
+.heatmap_level_item {
+    display: block;
+    border-radius: 0.125rem;
+    width: 10px;
+    height: 10px;
+}
+
+.heatmap_level_0 {
+    background: var(--ht-lv-0);
+}
+
+.heatmap_level_1 {
+    background: var(--ht-lv-1);
+}
+
+.heatmap_level_2 {
+    background: var(--ht-lv-2);
+}
+
+.heatmap_level_3 {
+    background: var(--ht-lv-3);
+}
+
+.heatmap_level_4 {
+    background: var(--ht-lv-4);
+}
+
+.heatmap_week {
+    display: flex;
+    flex-direction: column;
+}
+
+.heatmap_day {
+    width: 10px;
+    height: 10px;
+    background-color: var(--ht-day-bg);
+    margin: 1px;
+    border-radius: 2px;
+    display: inline-block;
+    position: relative;
+}
+
+.heatmap_tooltip {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    width: max-content;
+    color: var(--ht-tooltip);
+    background-color: var(--ht-tooltip-bg);
+    font-size: 12px;
+    line-height: 16px;
+    padding: 8px;
+    border-radius: 3px;
+    white-space: pre-wrap;
+    opacity: 1;
+    transition: 0.3s;
+    z-index: 1000;
+    text-align: right;
+    transform: translateX(-50%);
+}
+
+.heatmap_tooltip_count,
+.heatmap_tooltip_post {
+    display: inline-block;
+}
+
+.heatmap_tooltip_title,
+.heatmap_tooltip_date {
+    display: block;
+}
+
+.heatmap_tooltip_date {
+    margin: 0 0.25rem;
+}
+
+.heatmap_day_level_0 {
+    background-color: var(--ht-lv-0);
+}
+
+.heatmap_day_level_1 {
+    background-color: var(--ht-lv-1);
+}
+
+.heatmap_day_level_2 {
+    background-color: var(--ht-lv-2);
+}
+
+.heatmap_day_level_3 {
+    background-color: var(--ht-lv-3);
+}
+
+.heatmap_day_level_4 {
+    background-color: var(--ht-lv-4);
+}
