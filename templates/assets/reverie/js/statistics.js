@@ -1,4 +1,3 @@
-
 function categoryDataHandle() {
     let postCount = [];
     let categoryNames = [];
@@ -10,7 +9,7 @@ function categoryDataHandle() {
         categoryLink.push(item.status.permalink)
         
     });
-    const colorList = ['#4dabf7', '#ffa8a8', '#099268', '#ae3ec9', '#3bc9db', '#f03e3e','#6e9bc5', '#c3d94e', '#b1d5c8', '#bba1cb'];
+    const colorList = ['#4dabf7', '#ffa8a8', '#099268', '#ae3ec9', '#3bc9db', '#f03e3e','#6e9bc5', '#c3d94e', '#b1d5c8', '#bba1cb', '#e66767', '#706fd3', '#0be881', '#fff200'];
 
     const ctx = document.getElementById('categoryChart');
     const data = {
@@ -30,8 +29,13 @@ function categoryDataHandle() {
             maintainAspectRatio: false,// 保持图表原有比例
             plugins: {
                 legend: {
-                    position: false
+                  position: false,
                 }
+            },
+            //animation: false,
+            animation: {
+                delay: 300,
+                duration: 1500
             },
             onClick: (event, elements, chart) => {
                 if (elements.length > 0) {
@@ -48,10 +52,13 @@ function categoryDataHandle() {
                     right:20
                 } //不被隐藏
             }
-                // onHover: (event, elements, chart) => {
-                //     event.native.target.style.cursor = elements.length > 0? 'pointer' : 'default';
-                // }
-        }
+        },
+        plugins: [{
+            afterDraw: function(chart, options) {
+                chart.options.animation.delay = 0;
+                chart.options.animation.duration= 0;
+            }
+        }]
     };
     const myChart = new Chart(ctx, config);
 
@@ -59,6 +66,7 @@ function categoryDataHandle() {
     canvas.addEventListener('mousemove', function (event) {
         const elements = myChart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, true);
         canvas.style.cursor = elements.length > 0? 'pointer' : 'default';
+        //myChart.options.animation.delay = 0;
     });
 
     canvas.addEventListener('mouseout', function () {
@@ -104,16 +112,19 @@ function tagDataHandle() {
             label: '标签文章数',
             data: postCount,
             backgroundColor: colorList,
-            hoverOffset: 10
+            hoverOffset: 20
         }]
     };
     const config = {
         type: 'polarArea',
         data: data,
         options: {
-            animation: {
-                duration: 1000 // 设置动画时长为 1000 毫秒（即 1 秒），可根据需要调整
-            },
+        //animation: false,
+        animation: {
+            delay: 100,
+            duration: 1000,
+            easing: 'easeInOutCubic'
+        },
           responsive: true,
           borderWidth: 1,
           circular: false,
@@ -133,21 +144,46 @@ function tagDataHandle() {
           },
           onHover: (event, elements, chart) => {
             event.native.target.style.cursor = elements.length > 0? 'pointer' : 'default';
-          }
+            if (elements.length > 0) {
+                // 鼠标悬停时进行缩放，增强交互感
+                event.native.target.style.transform = 'scale(1.1)';
+            } else {
+                event.native.target.style.transform = 'scale(1)';
+            }
+          },
         }
     };
     const myChart = new Chart(ctx, config);
 }
 tagDataHandle();
 
+const sortedTagList = tagList.sort((a, b) => b.postCount - a.postCount);
+function createHaloTagList() {
+    const haloTagList = document.querySelector(".stats-tag_list");
+    sortedTagList.forEach(tag => {
+        const tagItem = document.createElement('li');
+        tagItem.className = "item mt-1 mr-3 mb-2.5 bg-[#35353e] border border-[#454545] group";
+        tagItem.innerHTML = `
+            <a th:href="${tag.status.permalink}" th:title="${tag.spec.displayName}" >
+                <span class="text-slate-200">${tag.spec.displayName}</span>
+                <em class="text-[#9999ff]">${tag.status.visiblePostCount ? tag.status.visiblePostCount : 0 }篇</em>
+            </a>
+        `;
+        haloTagList.appendChild(tagItem);
+    });
+}
+
 // Memos API 数据处理
 const level_color = ['', '#4dabf7', '#4dabf7', '#2ecc71', '#4caf50', '#afb42b', '#ff8f00', '#fa541c', '#fa541c']
 $(document).ready(function () {
+    createHaloTagList();
+
     const memosUrl = `${memosCacheApi}/stats/1`;
     $.getJSON(memosUrl, function (data) {
         document.querySelector(".memos-count").textContent = data.total;
         document.querySelector(".memos-tags-count").textContent = data.tagTotal;
         document.querySelector(".memos-photo-count").textContent = data.photoTotal;
+
 
         const memosTagList = document.querySelector(".memos-tags_list");
         for (const [tag, count] of Object.entries(data.tags)) {
