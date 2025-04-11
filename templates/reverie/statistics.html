@@ -55,7 +55,7 @@
 
             <div class="w-[400px] flex float-left px-8 items-center justify-items-center overflow-visible">
               <p class="font-bold text-slate-200 text-xl mr-3">标签数据</p>
-              <canvas id="tagChart" style="transition: transform 0.3s ease;"></canvas>
+              <canvas id="tagChart" class="hover:scale-110" style="transition: transform 0.23s ease-out;"></canvas>
             </div>
 
             </div>
@@ -87,11 +87,158 @@
             </div>
 
             <!--Memos标签-->
-            <p class="w-200 flex float-left px-2 mt-6 pb-4 text-xl font-bold text-slate-200">Memos 标签</p>
-            <div class="memos-tags_list w-200 mt-1 float-left px-1.5 pb-10">
+            <p class="w-200 flex float-left px-2 mt-10 pb-4 text-xl font-bold text-slate-200">Memos 标签</p>
+            <div class="memos-tags_list w-200 mt-1 float-left px-1.5">
             </div>
 
+            <p class="w-200 flex flex-wrap float-left px-2 mt-12 pb-4 text-xl font-bold text-slate-200">状态</p>
+            <div class="w-200 flex px-2.5 animated fadeIn gap-x-3 stats-badges">
+
+            <th:block th:with="posts = ${postFinder.list({page: 1,size: 5,sort: {'spec.publishTime,desc'}})}">
+              <a th:href="${posts.items[0].status.permalink}" target="_blank" rel="noopener noreferrer">
+                <img th:src="'https://img.shields.io/badge/文章最新发布-' + ${#dates.format(posts.items[0].spec.publishTime,'yyyy--MM--dd')+'T'+#dates.format(posts.items[0].spec.publishTime,'HH:mm:ss')} +'Z-blue'" />
+              </a>
+            </th:block>
             
+            <a href="http://memo.reverier16.com/explore" target="_blank" rel="noopener noreferrer">
+              <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.reverier16.com%2Fmemos%2Fdata%3FpageSize%3D20&query=memos%5B0%5D.createTime&label=Memos%E6%9C%80%E8%BF%91%E5%8F%91%E5%B8%83" />
+            </a>
+            
+
+            </div>
+            <div class="w-200 flex flex-wrap px-2.5 mt-4 animated fadeIn gap-x-3 gap-y-4">
+
+              <a href="https://github.com/ihavenoideaa/halo-theme-joe3.0" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/github/last-commit/ihavenoideaa/halo-theme-joe3.0" />
+              </a>
+              <a href="https://github.com/ihavenoideaa/halo-theme-joe3.0" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/github/commits-since/ihavenoideaa/halo-theme-joe3.0/v1.4.0?label=commits%20since%20fork" />
+              </a>
+              <a href="https://github.com/ihavenoideaa/halo-theme-joe3.0" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/github/repo-size/ihavenoideaa/halo-theme-joe3.0" />
+              </a>
+
+              <!--uptime kuma-->
+
+              <a href="https://github.com/ihavenoideaa/halo-theme-joe3.0" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/github/repo-size/ihavenoideaa/halo-theme-joe3.0" />
+              </a>
+            </div>
+
+
+            <div class="w-200 flex flex-wrap px-2.5 mt-4 animated fadeIn gap-x-3 gap-y-4">
+              <th:block th:with="theme = ${themeFinder.activation()}">
+                <object 
+                  type="image/svg+xml" 
+                  th:data="'https://img.shields.io/badge/主题-'+ ${theme.spec.displayName} +'-eb6ea5?link='+ ${theme.spec.website}">
+                </object>
+
+                <th:block th:each="page, iter : ${theme.spec.customTemplates.page}">
+                  <th:block th:with="breakFlag = false">
+                      <th:block th:if="${iter.index >= 4}" th:each="singlePages : ${singlePageFinder.list(1, 10).items}">
+                          <th:block th:if="${!breakFlag}">
+                              <a th:if="${singlePages.spec.template == page.file}" th:href="${singlePages.status.permalink}" th:with="breakFlag = true" target="_blank" rel="noopener noreferrer">
+                                  <img th:src="'https://img.shields.io/badge/custom page-' + ${page.name} + '-eb6ea5'" />
+                              </a>
+                          </th:block>
+                      </th:block>
+                  </th:block>
+              </th:block>
+            </th:block >
+            </div>  
+            
+            <p class="w-200 flex flex-wrap float-left px-2 mt-12 pb-4 text-xl font-bold text-slate-200">开发/技术/应用</p>
+            <div class="w-200 flex flex-wrap px-2.5 animated fadeIn gap-x-3 gap-y-4">
+              <img src="https://img.shields.io/badge/-HTML5-E34F26?style=plastic&logo=html5&logoColor=white" /> 
+              <img src="https://img.shields.io/badge/-CSS-663399?style=plastic&logo=css&logoColor=white" />
+              <img src="https://img.shields.io/badge/-JavaScript-73d13d?style=plastic&logo=javascript&logoColor=white" />
+              <img src="https://img.shields.io/badge/-Thymeleaf-005F0F?style=plastic&logo=thymeleaf&logoColor=white" />
+              <img src="https://img.shields.io/badge/-Markdown-000000?style=plastic&logo=markdown&logoColor=white" />
+              <img src="https://img.shields.io/badge/-Python-3776AB?style=plastic&logo=python&logoColor=white" />
+              <img src="https://img.shields.io/badge/-YAML-CB171E?style=plastic&logo=yaml&logoColor=white" />
+            </div>
+            <div class="w-200 flex flex-wrap px-2.5 mt-4 animated fadeIn gap-x-3 gap-y-4">
+              <a href="https://nodejs.org/zh-cn" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/-Node.js-5FA04E?style=plastic&logo=nodedotjs&logoColor=white" />
+              </a>
+              <a href="https://tailwindcss.com/" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/-Tailwind_CSS-06B6D4?style=plastic&logo=tailwindcss&logoColor=white" />
+              </a>
+              <a href="https://jquery.com/" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/-JQuery-0769AD?style=plastic&logo=jquery&logoColor=white" />
+              </a>
+
+              <a href="https://github.com/chartjs/Chart.js" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/-Chart.js-FF6384?style=plastic&logo=chartdotjs&logoColor=white" />
+              </a>
+              <a href="https://github.com/DIYgod/APlayer" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/-_Aplayer.js_-white?style=plastic&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAA6JJREFUeJyllU1IVFEUx988P0opkoRoIUFtzBRaCLVo06KIInDTpk0QQbQIotYGLSKoRZsQLBBBCosgP7JkzDQRETW13ORXNuOoMzrpfL158+bd++Z2//c543szbwYl9ajozPm9c87//I8kSZJcKMbGxipi0ciVREJ5SpLhDyQRdBMt1JnU4s9jitIwtzhb6ZJdLqnQZ77kf4PBWk1Za9ZXO2Jk5i4jX08x/eNBRrrKmN59gOlfTjL68zYjq+9ULeZt24qE6gtDzF9E8sbGxhI1Hnmgr7wPksGzzOjez1KdMg8XM/jP7KCdpYwOnmZJb0tYU0OP3P3u0oKVTE9PH0oo/ib9xz0Db0ZiM+SCYQKLGfl+I5VUlt/4vL7Ddsh2FagAADJ1S7xhtwB7FDEyfo3pMU/70ODQvpxKRIt4BSZgL4ntwbo4aOI6S8bDT0qKS3YgGDJmsNN/e5BPR0QryOxjRmYfMjJ6mRk9FQXax1u31BwLR0LnzFq4/KAi+u1MTouM7nIGZaX0TWZ+pDJhxBcFDC1yAtH+aqZFf3eUl5W5JAwbMjWrsEJ42fzJU4Zm5k0zLCDAyehVZwgXDvG26msry1USFk08bVYVdPi8CcgQbPkzYShzzHAfc24zF4EaV25KYpMH6nL76u+1ZOPJNkeZUF7CZwfxb3TmvqMaMUtdC7+WYBXYYCNrcCKZpQrqbRFJsPk0PLVD4V/E1+4IQct0xTMsCS/iVmFk/TNFIsz6kYYIEG+vFUIDfY4QPGwyOjcpwexyK5GFepwgQr6a39ayQhBdWRqR4KYwu2wIXXphg2DA+JuoMGv4dGPAuV09lYwkt95KsGu4qRUiQFwx4oktw3dSl+gYB2NWOZCxBqaqyh1pcX6hEnadve2wBzpyiRmqxy7jfFLmrxOyt7SK/nlJ1wOB49y4ZBfuAeza0Ye4vPXlVr4zsfylbAf1vMpUQ/tOsGT4l7umuloWkEgoUk88bWEnc2Qd5vbDq2AVRn+dYyApVJl+PZl/psai0YsyfB4QUQ0/ODDBbC/Cm/YaUKCmbjTV1tTINoi7112KgwMr+B+IPnyB6dGFzxMT4+UA2CAIXDQcHNyDdOt2m1y0iJslAOv+wFG4uyMEgYuGg4N7IGbAYYWSCxXxeWAGaNHU9GSmgrwQBC4aDg7uAfG06GghzM68+0VmYr5o2APIFCrCkNMz2BUkHTg4gTV/FewabgqzgxfBKrDJWDTsAWTqlDwd/wBvITmSg57kUgAAAABJRU5ErkJggg==" />
+              </a>
+              <a href="" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/-Formik-2563EB?style=plastic&logo=formik&logoColor=white" />
+              </a>
+
+            </div>
+            <div class="w-200 flex flex-wrap px-2.5 mt-4 animated fadeIn gap-x-3 gap-y-4">    
+              <a href="https://www.halo.run/" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/-Halo_2.20-white?labelColor=white&style=plastic&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAA8dJREFUeJx9VkurXEUQrqrTM9cbIyRx4QMSLwhBuBtBQVwE3OhKEHThypD8DLe6dCMiunPlKqC/wHUCEV24CMkmAV+YF/dhhntnzukqq6ofp8/ciT3MmdPd1VVf1VdVPeHM5/sXOJy+FoneBJEOgKEdIgKIXZ5xnmOek7/bWhllT1eiIN/exqNPQqTta4zylvCQ1EjUo2TSZiEbGqbzqjKaWkDOimk0qMY6FNpd8daPYRB+A4YGvfQgFfn6oPR0tMUbcaPmLbI0suk9IuwE3QjVBHJGHqvCuiUJOeo6kxmamt90Jh0ECMCmmIukh4WgWfMRmvcMpHhFo9eCcdTcWAnGBYoRmjYQk/ukz0/fYdg518GtBwv4+nqAXrqMRWOvXr/3ygIuvXwMS5nBFz8/q37Okh43jBW4ehL1t6DL5Kp3qEo+fv0svHpuDr/+s4Rvbiwq42gy+n37vMAHFwaIHcJXNwd4okbIQKpOxNH7IDFnlYXNssOVRJ23JIIDkWZN9UIHMYOTMZAyDZYbceWFj1hSFAvToxH7SFJKOFUTn5KNFjlx4rMn7SBFXWhvC00KcrE62pBJEwMqbWAIx3BNkJkh0ITwAp3B81sAH10coOeSHKzhIrh4hiDMNWiUMy2fZ0xGSuA0u/iEkSwK+Sy89FwHn737jHaDqexcySUJyo0aC51yhm5KKJvMxZTrZMNYi8bckmGNJ/K0n66NmyNvGzgh9wI5xd8a3mIlcP0vjXHpSxnX7gsEZ7e0LJFS36peGGVjPwtF2ThiIrVJoN/3Brj6/QGsYtKA3lwG+PLD0/D+a7OkzHjwfKCqvIbLO+y6J7rG3E8iGTW9bc7ZOikTy77px+4Jal9TADLygdp8A8dRE9p9UXoSNB6qDPdPYIgzRRq8S1vNRJlD7bYzNZI9ZY0n6hnZfwSy9++Uk6ZuPfCTlBgGr3hWeeqCy8patpWaxP1DiA8eAq+OHPiJ7NKLxpsf0IasM0AWMv21wyynpmf7Y4h/PlT0j5MOA6IcncguVtJRDUdFefPOY9jbP4Jf7h1A3/cWeG+ewuSe3Pr7EH57cQsOV0vo/1gAPzqsrac6ye5J7ldm2d4ppQlrul759i5QveGCX81VRsd3Py31e+Aysem6xmt7Swa3bB22MOBAEoHDhJVVEzbI+6kefKrXtvcTTHWW4hc9AYKmjP6rGNrrbTQ4CbjU/XbIepmtydslFoiH2xF5d9w72V09lNKe//8OXM6YHIncD5r/lyls/6Bqdvx/Va2PRtFaexJ4GvyJkGm438Hx1f8AJh4R12ZzfzQAAAAASUVORK5CYII=" />
+              </a>
+              <a href="https://github.com/1Panel-dev/1Panel" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/-1Panel-0854C1?style=plastic&logo=1panel&logoColor=white" />
+              </a>
+              <a href="https://cloud.tencent.com/" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/-腾讯云-73d13d?style=plastic&color=white&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAZ5JREFUeJzl0jFIAlEYB/AXBonYGAZBo5DQVluLEMENDmGCQ9juIA0RODYEBjVFRFCQFAQZSOESkYWTEEFFFJg6BCkEYaBxCkfX/737pNdxR9YWHfw4ePf593vfe4z93Semd8EARCBOQmLtF2F9kAAVdBO+NguunwSmoQV1WIBxUGCd1vi31U63GadOjsFn8d0HD1QTEmvfbPUaKqIj+7oA7SJiv/V8sZelqjMs8VZiS40jtvXitQ3c0fthEqZhDNxyUDcEoQy6pAJR8f0zyA1R0ECXlGEEHDwwAI8Usk8h/F0HFRahB8VOWIYmNGANYnAihXp54DnLl2p4z5lGMAFXcMuyT0MoPoQW3MOw1LUL5ik0yaiTC/CYAvkoRtlpdYrtvm9SWA78NjPlgc/8h5rRpTSrrzNL0swuxQFYH5KDajQeeEczVExFg7BH/3wjurAPU6gux2joTSiAX3RqbCEldWZ9hYz58atToJEEjfuXL67QierigA7UV+lKaHSyVtrXp0kH42wfgAfCsM0ytTQ+ZOGsA/zKbEBYdPs/nw/C2a0L8jqk0gAAAABJRU5ErkJggg==" />
+              </a>
+              <a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/-VSCode-bae7ff?style=plastic&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAnBJREFUeJyV1ctvElEUwOFj0yYs0Kiphh1UHjEu/DNM46px6c6kiZr0FV5FwIKISLXWsHJhxWoaa6pxeNRCLbWLxoXlMZRHumBhF2266IKBWbRNY65n7sgAA1p6ky8EhvnlnsskAJx2udYUXRPfAwrPj31DlGf0UX5AzZQVp+7Q5VhVgTPhBkfiEEzLxBDhCUZ3MfpJH672a0OVi53H7GtKsCee0Zh9hYBxSQzWhPkDHVMNdBZ7kLiEkXUaEtiWaVAf4luIN7xklVS7ZYurMJCgkUZji0TP8C0wVjShPbQN08VbGO6WYtb4VcTCeJw0scaPMfjuX8FteFEg1HRhB1+t4E/3gnGxHyyxdbDGiMw+fm4FY/Sy7nOVyAFM5adgqlCRogJ/Zh5MsS3hnMDSwLxUQoO1AdoHhfU8fw+VEZF400R4NGAsQs8LTF8XwLSoazxe7UKVyIlXJvMKmMzdRqSJbxNHXD2CkYgPzNFz8t9L+xEjMuKV0cgFGAmP0xGFnflzdU9zx2gefDlNZ0EhNhpxIw6GQ+J4j5K/6e6axeDJ5g1wsT214JUPFSIHdBwhJpyVEBSYV+bAmy22RL3ZEhr8f3AotCuFhkO/8P0A/fbj7DX0DZE2AuDOqPrmKkQOg8xNGPqy9ZcB7jJd0iF52F4a9bCkhT250fceIzLijfeZs1S75WLP425mpZArI7KlWmL14EkLx8NIEHFS0JokmtmK3GFnQbrTn0p4mPbBRPoAnPhoWTaI5i1XhzFNkHvVeVAcvwecqUFwpI6kYJDb07zhGPXrsu7kQLs1znafsafvKNzFknqm7FHPcNcxJv0F/AFTVF3IIKxnFgAAAABJRU5ErkJggg==" />
+              </a>
+
+              <a href="" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/-Edge-ffffff?style=plastic&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAA69JREFUeJxt1HtsU1UcB/C7wmra0d4xtsR/JBg1UbNX67oyiIJhqFX3KHs5XnMxBBSHBscIurZ04bGFQIZbQS3dwO4fMZAoQR5DJgzGbXtXin2sK7TrNu0YkmUhyogJ/ry/09273a0n+abtTc+n33PO7aWoBCO37/7zKkfsYxU7djqHHfZlOfzjmOx+9vec28y5bMeF3SrnSVWiuaKR3T2h0Lgeb85zPGLUzIPJ3BvDgMnuvQuZN3wkWX23INf56+P822eDq4O2PYXB1hcTYuqrD5M1zNR+rWvq77zeCVBfj5Hw4AzaD2qmG7TO07AmaHuqi1rOFkf2vTS/GWLsE0CMz1yUb4ng654uKPQeg6LwIagYPxjYOPbFEgHEZQrNuu/Dq2dCJJm/3IX5y+4XQN3AESi91wTVYwbYONZgKx3ckkwOAPcMgfSmq7D4q25R8Npz7deEdghqHD+JwA9GGmDLo12Tm2J1K6ms34Y/Wdbpm8TJiww3Ie0gC2mH7syE+8yjL19wkENB8A2PVQTWjO+C2on6Zmqp3fsjQnIDC/IDg6A8HCZZ0haNpz06lHHkzrH0pt7OZR09o/yBIPi2v0UEbn5Qz1AyM+uXmvwEmw1iUo19Yblun5Lf66W2S9qsnp/Dr93qBK2rHQp9B0AXaISSezsJWjny2Z9UstH/l7QpBJjZ6KKdl/9LKTrcNvtueOVilzzn5olWxDTO/bDSbYR3AvUkiFb+seMStcA8FONBAeWWr9BbYC6oZlroPGeLFTGtq4FklacO1nq3wXuRbU/eDX9URknMw+4FhiDgsnlUtvUcARVVp66lHe1M4kGt98s3Czx7RjVMHWDynbVPV7g/hNWBTf++FarpWuuryaAkeyM/COA0Kttgj4PV9ilFZUe+CPRuZxBazq4HTIGnKrZqYL21gF2XQb4kMQzUSMxDk4gSmAMVFR1xkHtVVtlHZqM4sInWpVetcNdmahlTiuhvt9AUSpU0DvbwIEZoiPA0qiw/UU5XWGWJngOKEkv6Yl3zs8KFJFPkfTwcHnxm+xURKMDltiBd9p2dLm7bTestdXTR0WZaf/w8XdIeSF1jekHUMskY+VSyd+gfBBc2uElL5bpvZzDuPR8OmcLgj9KlllG6+Osd82onb3VLuaZmHuVb8iiPkebTofXfPESMu/mlibYivvzGweUSc7QXDwqbzm0Xb8hB8aUmfrjOHWQLOJg05g5M+vn1qKz2TCil+vvzyjKrkS6x5KQWtcoTzf0fWcHY/VNz5JgAAAAASUVORK5CYII=" />
+              </a>
+              <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/-Github-181717?style=plastic&logo=github&logoColor=white" />
+              </a>
+              <a href="https://docs.github.com/zh/actions" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/-CodePen-000000?style=plastic&logo=codepen&logoColor=white" />
+              </a>
+              <a href="https://www.iconfont.cn/" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/-Iconfont-white?style=plastic&color=white&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAMAAADzN3VRAAABUFBMVEUAAAAMYGYMYGYMYGYMYGYMYmcMZWsMYWcMYGYMYGYMYWcMZ2wMYGYMYGYMYGYMYGYMYGYMYGYOY2sKd3kfbHELaW0XZ20MY2gMYWYMYGYMYGYMYGYMYGYMYGY6foMzen8A+eX///8eHh4C39AFubAD2coEwbcmpfMwjPMbve4D0sUNqLQFvLMJlpYJgoIKfX4QYnIdJSUB8N4B7NoEyr4fg71/rK8Gs6pyo6Ztn6MHnZgIk5EJiYgTZX0QU1hIS0s2gfgrmfQhsPEVyu0Q1urp6ekL4ekVxec0cOHE2Nodpdq30NLNzc0HzssbncuMtLcPoK+CpqkhaKQHpZ9imZ2cnJwdZppXkZWUlJQPfo5EhYoQd4guf4MfeX0mb30Ld3obcngNaXJeXl4WPkEpKSnN3uDS0tKuyswhhsTCwsKZpqeNnZ5Ni48LcHQPVlxTU1Op44VdAAAAIHRSTlMAclaBJeTRrjAL+uqYjEcdGRP+9Obe1cnBtqJqXj749orDC6kAAAF1SURBVCjPbdFXW8IwFIDhtGUj4lZENCkte++995Ipewnu9f/vDFAVhO/yvO2TPDlgLRW1D3Z2eGqWyneB+MILmfPDHUJZIYQW2Taojp1YnMdbR/EELrjIJeD9E6EZrgoIN4EIOjhxBIm/8QFJ8ZkfcXr5FHnAfS81G6tdq2F1zrhbNZr5y/+ujsqZVFJfmaoxsNOKPpnKlCUkAKKT5sSY1Se07jGWj2dtQp81TvwnIkA10dtnv6CN62wsNIR1cW2hH3lFbQJc3qKofWZz62J3GsjUYzr30cx+jzx7C/miaXsknMNiqufCETtNL4Voo5c5TUdrI5sasrZRLUrT8xJ6VwLeWR6VOq008lkghFYPSrc6j6h4Jse3vn5AuKchi8UwLCJc/oYEOFLS8/kHITVcpA4N/L6ehHvxvZBJs5yvTGOyUL9r1sD1GIEYcImk3jVo8NdWJLoIsNzcEFRs7E5MCCwNxsQErOdKMdhMTsqECqEMr4brG71CRLmxzEuHAAAAAElFTkSuQmCC" />
+              </a>
+
+              <a href="https://fontawesome.com/" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/-Font_Awesome-538DD7?style=plastic&logo=fontawesome&logoColor=white" />
+              </a>
+            </div>
+            <div class="w-200 flex flex-wrap px-2.5 mt-4 animated fadeIn gap-x-3 gap-y-4">    
+
+              <a href="https://ubuntu.com/" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/-Ubuntu-E95420?style=plastic&logo=ubuntu&logoColor=white" />
+              </a>
+              <a href="https://docs.docker.com/engine/" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/-Docker-2496ED?style=plastic&logo=docker&logoColor=white" />
+              </a>
+              <a href="" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/-NPM-CB3837?style=plastic&logo=npm&logoColor=white" />
+              </a>
+              
+              <a href="https://git-scm.com/" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/-GIT-F05032?style=plastic&logo=git&logoColor=white" />
+              </a>
+              
+              <a href="https://www.jsdelivr.com/" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/-jsDelivr-E84D3D?style=plastic&logo=jsdelivr&logoColor=white" />
+              </a>
+              <a href="https://docs.github.com/zh/actions" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/-Github_Actions-2088FF?style=plastic&logo=githubactions&logoColor=white" />
+              </a>
+              <a href="https://www.usememos.com/" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/-Memos-000000?style=plastic&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAArpJREFUeJydlG1IU3EUxkXbrglmujkppAwFQZhIQhhIMVhgQkV+kJQEpcAQqQ++hJolw8AKiz4olmIlJDZIhNEHUZQyCbJIshdsILHQosTVYJsvuKc9xxa17S7pw9n937t7f+c85zz/f5SipDhjFYMnOBRtslx1urTf63+Fohi+Rf26QXDodbtRU9OInp67MBh2hfwfLvxAV1igVqOHyXQYd3rv4drVGzCbC/zPdP8PjNuaiLra87jefhP19RcwOjqG3Nz9/ud6KFp1cFggqys7eQqDg0Oorq6Bw/FJ7vv7B9DR0YWMDCO2xGzfPDAmJkFkVlWdQ3l5JSYmnmJlxY2+vvtoarokPW1utiBhW8rmgJREqS0trWhouIj5eQfW1pYlZmc/oLu7F21t7QIPlh8CZI/OVJ4VeXW1jSLb43FhfX0ZgA8+36pcCRwfGxf5f0JDgKmpezA9/UoGwH5NPHmMtVUv5ubsGBkZgdv9QxK8e/teZFeUn/5r+iFA+o2Zjx09IXCjca9UZLG0ISdnHyYnn0l17C2BpaVlkYFZWdniPcomjIMh0Ot1+6f9UQZiNh8RKIfFPiclpYYH0i55eSap5sGAFVNTz/Hl84L0jzK55iAKC4twvKgEVutD2GyPkJmZrQ5kdm634eFhsQqH4HItwW6flUHRj8XFZaKAVd/q6kFiYoQKCeR0mZlVEfjduYgXL6fEQiUlFTJVVsUk3EFpaZnqPWTjmZU+dC4tilxC6UFe6UM6QK/fiZmZ19LH9PQsdWB8/A6xB6dI2bRJAMpgEsreAL7B5dYr8o0qMDAYbjOampOl5EA/2Tf6kwcHE9LY/Cbi1uPGP3igAJ2dt8XYrIogShwasklwr7OPwUea6vEVOCSio+OQn39IrMJtyXtGxNPG//OVi/CR7NJokiS4Vn9vI2JjDQs/Af6n8x+fXieiAAAAAElFTkSuQmCC" />
+              </a>
+              <a href="https://docs.github.com/zh/actions" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.shields.io/badge/-Nginx_Proxy_Manager-F15833?style=plastic&logo=nginxproxymanager&logoColor=white" />
+              </a>
+            </div>  
         </div>
         <th:block th:replace="~{modules/common/footer :: footer}" />
       </div>

@@ -144,12 +144,6 @@ function tagDataHandle() {
           },
           onHover: (event, elements, chart) => {
             event.native.target.style.cursor = elements.length > 0? 'pointer' : 'default';
-            if (elements.length > 0) {
-                // 鼠标悬停时进行缩放，增强交互感
-                event.native.target.style.transform = 'scale(1.1)';
-            } else {
-                event.native.target.style.transform = 'scale(1)';
-            }
           },
         }
     };
