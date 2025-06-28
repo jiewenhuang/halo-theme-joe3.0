@@ -790,6 +790,7 @@ spec:
                   value: ''
                   validation: 'required'
         - $formkit: radio
+          if: '$get(enable_banner).value === true'
           name: banner_direction
           id: banner_direction
           key: banner_direction
@@ -801,11 +802,13 @@ spec:
             - value: vertical
               label: 垂直
         - $formkit: checkbox
+          if: '$get(enable_banner).value === true'
           name: enable_banner_loop
           id: enable_banner_loop
           key: enable_banner_loop
           label: 循环播放
         - $formkit: radio
+          if: '$get(enable_banner).value === true'
           name: banner_effect
           id: banner_effect
           key: banner_effect
@@ -827,27 +830,32 @@ spec:
             - value: 'creative'
               label: 创意性
         - $formkit: checkbox
+          if: '$get(enable_banner).value === true'
           name: enable_banner_handle
           id: enable_banner_handle
           key: enable_banner_handle
           label: 允许手动控制
           help: '如果关闭，将隐藏切换按钮且不能通过鼠标和键盘进行切换'
         - $formkit: checkbox
+          if: '$get(enable_banner).value === true'
           name: enable_banner_switch_button
           id: enable_banner_switch_button
           key: enable_banner_switch_button
           label: 展示左右切换按钮
         - $formkit: checkbox
+          if: '$get(enable_banner).value === true'
           name: enable_banner_pagination
           id: enable_banner_pagination
           key: enable_banner_pagination
           label: 展示分页器
         - $formkit: checkbox
+          if: '$get(enable_banner).value === true'
           name: enable_banner_autoplay
           id: enable_banner_autoplay
           key: enable_banner_autoplay
           label: 自动切换
         - $formkit: number
+          if: '$get(enable_banner_autoplay).value === true'
           name: banner_delay
           id: banner_delay
           key: banner_delay
@@ -855,6 +863,7 @@ spec:
           value: '3500'
           help: '设置轮播图切换的间隔时间，默认3500（仅在自动切换开启时生效，单位：毫秒）'
         - $formkit: number
+          if: '$get(enable_banner_autoplay).value === true'
           name: banner_speed
           id: banner_speed
           key: banner_speed
@@ -862,6 +871,7 @@ spec:
           value: 500
           help: '设置轮播图的切换速度，默认500（单位：毫秒）'
         - $formkit: attachment
+          if: '$get(enable_banner).value === true'
           name: banner_lazyload_img
           id: banner_lazyload_img
           key: banner_lazyload_img
@@ -2097,6 +2107,7 @@ spec:
           key: enable_share_link
           label: 链接分享
         - $formkit: textarea
+          if: '$get(enable_share_link).value === true'
           name: share_link_template
           id: share_link_template
           key: share_link_template
