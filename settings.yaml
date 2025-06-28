@@ -3108,6 +3108,7 @@ spec:
           key: check_baidu_collect
           label: 检查百度收录情况
         - $formkit: text
+          if: '$get(check_baidu_collect).value == true'
           name: baidu_token
           id: baidu_token
           key: baidu_token
