@@ -138,14 +138,14 @@ spec:
           label: 外部资源地址
           value: ''
           help: '如果你的资源地址是https://example.com/assets/js/min/index.min.js，那么这里填写https://example.com'
-        - $formkit: text
+        - $formkit: color
           name: mode_color_light
           id: mode_color_light
           key: mode_color_light
           label: 主题色（浅色）
           value: '#fb6c28'
           help: '浅色主题色色值，默认#fb6c28'
-        - $formkit: text
+        - $formkit: color
           name: mode_color_dark
           id: mode_color_dark
           key: mode_color_dark
@@ -611,19 +611,6 @@ spec:
               label: 固定的彩带
             - value: balloon
               label: 上升的气球
-        - $formkit: text
-          name: loading_bar_height
-          id: loading_bar_height
-          key: loading_bar_height
-          label: 加载条高度
-          value: '3px'
-          help: '设置全局加载条的高度，默认为 3px，填 0 相当于不显示'
-        - $formkit: text
-          name: loading_bar_color
-          id: loading_bar_color
-          key: loading_bar_color
-          label: 加载条颜色
-          value: ''
         - $formkit: checkbox
           name: enable_loading_bar
           id: enable_loading_bar
@@ -631,12 +618,28 @@ spec:
           label: 开启页面加载条
           help: '是否开启页面顶部的加载条'
         - $formkit: text
+          if: '$get(enable_loading_bar).value'
+          name: loading_bar_height
+          id: loading_bar_height
+          key: loading_bar_height
+          label: 加载条高度
+          value: '3px'
+          help: '设置全局加载条的高度，默认为 3px，填 0 相当于不显示'
+        - $formkit: color
+          if: '$get(enable_loading_bar).value'
+          name: loading_bar_color
+          id: loading_bar_color
+          key: loading_bar_color
+          label: 加载条颜色
+          value: '#fb6c28'
+        - $formkit: color
           name: scrollbar_color
           id: scrollbar_color
           key: scrollbar_color
           label: 滚动条颜色
-          value: '#c0c4cc'
+          value: '#fb6c28'
         - $formkit: text
+          if: '$get(enable_loading_bar).value'
           name: scrollbar_width
           id: scrollbar_width
           key: scrollbar_width
@@ -1993,14 +1996,14 @@ spec:
           label: 启用文章浏览进度条
           help: '文章页底部是否展示浏览进度条'
 
-        - $formkit: textarea
+        - $formkit: color
           name: progress_bar_bgc
           id: progress_bar_bgc
           key: progress_bar_bgc
           if: '$get(enable_progress_bar).value === true'
           label: 进度条背景色
-          value: ''
-          help: '浏览进度条的背景色，接受任何合法的颜色值（为空将使用默认背景色）'
+          value: '#fb6c28'
+          help: '浏览进度条的背景色'
         - $formkit: checkbox
           name: enable_toc
           id: enable_toc
