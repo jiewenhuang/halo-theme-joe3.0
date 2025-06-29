@@ -177,14 +177,20 @@
           </th:block>
         </div>
         <!--    action-->
-        <th:block th:replace="~{modules/common/actions :: actions}" />
+        <th:block
+          th:with="contributor = ${contributorFinder.getContributor(singlePage.status.contributors[0])}"
+        >
+          <th:block
+            th:replace="~{modules/common/actions :: actions_edit(contributor=${contributor.name})}"
+          />
+        </th:block>
         <th:block th:replace="~{modules/common/footer :: footer}" />
       </div>
       <script>
         // 等待文档加载完成
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener('DOMContentLoaded', function () {
           // 获取文章内容
-          const postContent = document.getElementById("singlePage-inner").innerText || "";
+          const postContent = document.getElementById('singlePage-inner').innerText || '';
 
           // 使用正则表达式匹配中文、数字和字母
           const matches = postContent.match(/[\u4e00-\u9fa5a-zA-Z0-9]/g);
@@ -193,9 +199,8 @@
           const wordCount = matches ? matches.length : 0;
 
           // 更新字数统计显示
-          document.getElementById("wordCount").innerText = `${wordCount} 字`;
+          document.getElementById('wordCount').innerText = `${wordCount} 字`;
         });
-
       </script>
       <th:block th:replace="~{modules/macro/tail :: tail}" />
     </body>
