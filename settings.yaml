@@ -1537,6 +1537,20 @@ spec:
               label: 左侧
             - value: right
               label: 右侧
+        - $formkit: number
+          name: set_newest_post_num
+          id: set_newest_post_num
+          key: set_newest_post_num
+          label: 最新文章数
+          value: '5'
+          help: '全局设置'
+        - $formkit: number
+          name: set_hot_post_num
+          id: set_hot_post_num
+          key: set_hot_post_num
+          label: 热门文章数
+          value: '5'
+          help: '全局设置'
         - $formkit: select
           name: enable_tags_aside
           label: 标签页侧边栏
