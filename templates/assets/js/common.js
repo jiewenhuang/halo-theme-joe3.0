@@ -990,19 +990,13 @@ const commonContext = {
 		commonContext.loadingBar.hide();
 	},
 
-	//友链随机传送
+	/* 友链随机跳转 */
 	travelling() {
 		/**
-		 * 模拟一个本地存储的工具类，用于设置和获取带过期时间的项
+		 * 定义一个对象用于本地存储
 		 */
 		const saveToLocal = {
-			/**
-			 * 设置项到本地存储，包括过期时间
-			 * @param {string} key - 存储的键名
-			 * @param {any} value - 存储的值
-			 * @param {number} expirationMinutes - 过期时间（分钟）
-			 */
-			set: function(key, value, expirationMinutes) {
+			set: function (key, value, expirationMinutes) {
 				const now = new Date();
 				const item = {
 					value: value,
@@ -1010,12 +1004,7 @@ const commonContext = {
 				};
 				localStorage.setItem(key, JSON.stringify(item));
 			},
-			/**
-			 * 从本地存储获取项，如果项已过期则删除该项并返回null
-			 * @param {string} key - 存储的键名
-			 * @returns {any|null} - 存储的值或null
-			 */
-			get: function(key) {
+			get: function (key) {
 				const itemStr = localStorage.getItem(key);
 				if (!itemStr) {
 					return null;
@@ -1029,27 +1018,34 @@ const commonContext = {
 				return item.value;
 			}
 		};
-
 		/**
-		 * 获取链接数据的函数，从API获取并存储到本地
+		 * 从 HTML 中获取链接数据
+		 * @returns {Array} 包含链接数据的数组
 		 */
-		function getLinks() {
-			const links = "/apis/api.plugin.halo.run/v1alpha1/plugins/PluginLinks/links?keyword=";
-			fetch(links)
-				.then(res => res.json())
-				.then(json => {
-					// 将获取的链接数据存储到本地，并设置过期时间
-					saveToLocal.set('links-data', JSON.stringify(json.items), 10 / (60 * 24));
-					// 渲染链接数据
-					renderer(json.items);
-				});
+		function getLinksFromHTML() {
+			const links = [];
+			const friendItems = document.querySelectorAll('.joe_detail__friends-item');
+			friendItems.forEach(item => {
+				const link = {
+					spec: {
+						url: item.querySelector('a').getAttribute('href'),
+						displayName: item.querySelector('.sub-text').innerText,
+					},
+					metadata: {
+						annotations: {
+							link_enable_show: 'true'
+						}
+					}
+				};
+				links.push(link);
+			});
+			return links;
 		}
-
 		/**
-		 * 从数组中获取指定数量的项
-		 * @param {Array} arr - 原数组
-		 * @param {number} num - 需要获取的数量
-		 * @returns {Array|null} - 获取的项数组或null
+		 * 随机获取数组中的指定数量的元素
+		 * @param {Array} arr - 输入的数组
+		 * @param {number} num - 需要获取的元素数量
+		 * @returns {Array|null} - 返回包含指定数量元素的新数组，如果num大于数组长度则返回null
 		 */
 		function getArrayItems(arr, num) {
 			if (num > arr.length) {
@@ -1058,51 +1054,37 @@ const commonContext = {
 			const shuffled = arr.sort(() => 0.5 - Math.random());
 			return shuffled.slice(0, num);
 		}
-
 		/**
-		 * 渲染链接数据到页面
-		 * @param {Array} data - 链接数据数组
+		 * 渲染器函数，用于处理数据并响应点击事件
+		 * @param {Array} data - 包含链接项的数据数组
 		 */
 		function renderer(data) {
-			const linksData = data;
 			const actionItem = document.querySelector('.joe_action_item.random');
-		// 	判断元数据是否存在
-			if(!actionItem){
+			if (!actionItem) {
 				return;
 			}
-			actionItem.addEventListener('click', function() {
-				if (linksData.length > 0) {
-					// 随机获取一个链接项
-					const randomFriendLinks = getArrayItems(linksData, 1);
-					const name = randomFriendLinks[0].spec.displayName;
-					const link = randomFriendLinks[0].spec.url;
+			actionItem.addEventListener('click', function () {
+				if (data.length > 0) {
+					const randomFriendLinks = getArrayItems(data, 1);
+					const selectedLink = randomFriendLinks[0];
+					const link = selectedLink.spec.url;
+					const name = selectedLink.spec.displayName;
 					const msg = "即将跳转到：「" + name + "」";
-					// 显示成功消息
 					Qmsg.success(msg);
-
-					// 设置定时器，延迟跳转
 					setTimeout(() => {
 						window.open(link, '_blank');
 					}, 3000);
 				}
-			})
+			});
 		}
-
 		/**
-		 * 初始化函数，检查本地是否有链接数据，没有则从API获取
+		 * 初始化函数
+		 * 该函数在初始化时会从 HTML 获取链接的数据并渲染
 		 */
 		function init() {
-			const data = saveToLocal.get('links-data');
-			if (data) {
-				// 如果本地有数据，则渲染
-				renderer(JSON.parse(data));
-			} else {
-				// 如果本地没有数据，则从API获取
-				getLinks();
-			}
+			const linksData = getLinksFromHTML();
+			renderer(linksData);
 		}
-
-		// 执行初始化函数
 		init();
 	},
 };
