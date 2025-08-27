@@ -1,0 +1,37 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**' # 监听 docs 目录中的所有文件变化
+  workflow_dispatch: # 手动触发
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 检出代码
+      - uses: actions/checkout@v4
+
+      # 使用官方的 Bun 安装 Action
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      # 进入 docs 目录并安装依赖
+      - name: Install dependencies
+        run: |
+          cd docs
+          bun install
+
+      # 进入 docs 目录并构建项目
+      - name: Build
+        run: |
+          cd docs
+          bun run docs:build
+
+      # 部署到 Halo
+      - name: Deploy to Halo
+        run: |
+          npx halo-static-pages-deploy-cli deploy -e ${{ secrets.ENDPOINT }} -i ${{ secrets.ID }} -t ${{ secrets.PAT }} -f docs/docs/.vitepress/dist

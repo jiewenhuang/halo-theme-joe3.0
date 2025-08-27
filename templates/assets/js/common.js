@@ -434,39 +434,61 @@ const commonContext = {
 		$(".joe_aside__item.timelife .joe_aside__item-contain").html(htmlStr);
 	},
 	/* 激活侧边栏天气 */
+	// initWeather() {
+	// 	if (
+	// 		Joe.isMobile ||
+    //   !ThemeConfig.enable_weather ||
+    //   !ThemeConfig.weather_key ||
+    //   !$("#he-plugin-simple").length
+	// 	)
+	// 		return;
+	// 	window.WIDGET = {
+	// 		CONFIG: {
+	// 			modules: "120",
+	// 			background: "5",
+	// 			tmpColor: "FFFFFF",
+	// 			tmpSize: "13",
+	// 			cityColor: "FFFFFF",
+	// 			citySize: "13",
+	// 			aqiColor: "FFFFFF",
+	// 			aqiSize: "13",
+	// 			weatherIconSize: "13",
+	// 			alertIconSize: "13",
+	// 			padding: "5px 5px 4px 5px",
+	// 			shadow: "0",
+	// 			language: "auto",
+	// 			borderRadius: "4",
+	// 			fixed: "true",
+	// 			vertical: "top",
+	// 			horizontal: "left",
+	// 			key: ThemeConfig.weather_key,
+	// 		},
+	// 	};
+	// 	$.getScript(
+	// 		"https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"
+	// 	);
+	// },
+	/* 激活侧边栏天气 */
 	initWeather() {
 		if (
 			Joe.isMobile ||
-      !ThemeConfig.enable_weather ||
-      !ThemeConfig.weather_key ||
-      !$("#he-plugin-simple").length
+	  !ThemeConfig.enable_weather ||
+	  !ThemeConfig.weather_token ||
+	  !$("#tp-weather-widget").length
 		)
 			return;
-		window.WIDGET = {
-			CONFIG: {
-				modules: "120",
-				background: "5",
-				tmpColor: "FFFFFF",
-				tmpSize: "13",
-				cityColor: "FFFFFF",
-				citySize: "13",
-				aqiColor: "FFFFFF",
-				aqiSize: "13",
-				weatherIconSize: "13",
-				alertIconSize: "13",
-				padding: "5px 5px 4px 5px",
-				shadow: "0",
-				language: "auto",
-				borderRadius: "4",
-				fixed: "true",
-				vertical: "top",
-				horizontal: "left",
-				key: ThemeConfig.weather_key,
-			},
-		};
-		$.getScript(
-			"https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"
-		);
+		(function(a,h,g,f,e,d,c,b){b=function(){d=h.createElement(g);c=h.getElementsByTagName(g)[0];d.src=e;d.charset="utf-8";d.async=1;c.parentNode.insertBefore(d,c)};a["SeniverseWeatherWidgetObject"]=f;a[f]||(a[f]=function(){(a[f].q=a[f].q||[]).push(arguments)});a[f].l=+new Date();if(a.attachEvent){a.attachEvent("onload",b)}else{a.addEventListener("load",b,false)}}(window,document,"script","SeniverseWeatherWidget","//cdn.sencdn.com/widget2/static/js/bundle.js?t="+parseInt((new Date().getTime() / 100000000).toString(),10)));
+		window.SeniverseWeatherWidget('show', {
+		flavor: "slim",
+		location: "WX4FBXXFKE4F",
+		geolocation: true,
+		language: "zh-Hans",
+		unit: "c",
+		theme: "auto",
+		token: ThemeConfig.weather_token,
+		hover: "disabled",
+		container: "tp-weather-widget"
+		});
 	},
 	/* 全局图片预览（文章、日志页等） */
 	initGallery() {

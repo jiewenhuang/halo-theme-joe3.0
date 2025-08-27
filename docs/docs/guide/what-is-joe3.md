@@ -1,7 +1,9 @@
 
 <h1 align="center"> Halo Theme Joe3  </h1>
 
-<p class="badge-row" align="center">
+<p class="badge-row" align="center" style="
+    display: flex;
+    justify-content: center;">
   <a href="https://halo.run" target="_blank">
     <img src="https://img.shields.io/badge/dynamic/yaml?label=Halo&query=%24.spec.require&url=https://raw.githubusercontent.com/jiewenhuang/halo-theme-joe3.0/main/theme.yaml&color=113,195,71" alt="Halo"/>
   </a>
@@ -45,9 +47,9 @@
 - [x] 显示字数统计
 - [x] 显示相关文章
 - [X] [评论系统](https://github.com/halo-sigs/plugin-comment-widget)
-- [x] [友情链接](https://github.com/halo-sigs/plugin-links)  
-- [x] [瞬时](https://github.com/halo-sigs/plugin-moments)  
-- [x] [图库](https://github.com/halo-sigs/plugin-photos)  
+- [x] [友情链接](https://github.com/halo-sigs/plugin-links)
+- [x] [瞬时](https://github.com/halo-sigs/plugin-moments)
+- [x] [图库](https://github.com/halo-sigs/plugin-photos)
 - [x] 其他功能
 
 ## 主题配置
@@ -125,42 +127,7 @@ establish a secure connection to it.
 {"status":true,"message":"success","data":{"token":"2|1bJbwlqBfnggmOMEZqXT5XusaIwqiZjCDs7r1Ob5"}}
 ```
 
-### 博主信息
-
-#### 展示天气信息
-
->注意：天气的文字颜色为白色，考虑到用户使用的背景不同，如果不合适，请自行通过代码注入修改字体颜色以适配自己的博客
-
-改配置项配置博主信息是否展示天气信息
-
-#### 天气插件token
-
-由于和风天气插件已经停止服务，所以将其替换为心知天气插件
-
-1. 注册账号
-
-前往[心知天气官网](https://www.seniverse.com/)注册账号并登录控制台
-
-2. 添加产品
-
-具体操作如下图所示：
-
-![添加产品](docs/joe3_20240915184016.webp)
-
-3. 配置插件并获取token
-
-前往该[网站](https://www.seniverse.com/widgetv3)配置插件，目前该网站在控制台中不可见，不知道是不是也要停止服务了😅
-
-首先配置插件：
-
-![配置插件](docs/joe3_20240915185024.webp)
-
-其次点击生成代码获取token：
-
-![获取token](docs/joe3_20240915185129.webp)
-
 ## 预览
-
 WIP
 ## TODO
 - [ ] 优化图库
@@ -203,10 +170,10 @@ WIP
 <br>
 
 ### 交流群
-QQ群号（929708466）欢迎大家前来交流分享  
+QQ群号（929708466）欢迎大家前来交流分享
 
-![QQ群](https://www.jiewen.run/upload/IMG_3508(20240717-140309).JPG)  
+![QQ群](https://www.jiewen.run/upload/IMG_3508(20240717-140309).JPG)
 
-### TinyTale小程序  
+### TinyTale小程序
 [TinyTale Halo微信小程序正式版发布](https://www.jiewen.run/archives/TinyTale-formal-edition)
 ![TinyTale](https://www.jiewen.run/upload/111.png)

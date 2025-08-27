@@ -1207,7 +1207,7 @@ spec:
           id: enable_weather
           label: 展示天气信息
           value: false
-          help: '是否展示简约版天气信息，必须配置正确的appKey后才可生效'
+          help: '是否展示简约版天气信息，必须配置正确的token后才可生效'
           options:
             - value: true
               label: 开启
@@ -1215,10 +1215,10 @@ spec:
               label: 关闭
         - $formkit: text
           if: '$get(enable_weather).value === true'
-          name: weather_key
-          label: 天气插件appKey
+          name: weather_token
+          label: 天气插件token
           value: ''
-          help: '用于初始化天气插件，请通过 https://widget.qweather.com/create-simple 生成自己的插件，然后复制其中的key值填到这里'
+          help: '用于初始化天气插件，请通过 https://www.seniverse.com/widgetv3 生成自己的插件，然后复制其中的token值填到这里'
         - $formkit: select
           name: avatar_frame
           label: 头像框

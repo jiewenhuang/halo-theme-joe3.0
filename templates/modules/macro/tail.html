@@ -131,6 +131,7 @@
         SearchWidget.open();
       });
     </script>
+
     <!--    大图配置-->
     <script th:inline="javascript" th:if="${theme.config.beauty.enable_big_banner}">
       // 以下配置参数均为默认值
@@ -172,5 +173,6 @@
       const loading = document.querySelector('.joe_load_container');
       ob.observe(loading);
     </script>
+    <halo:footer />
   </th:block>
 </html>
