@@ -1165,6 +1165,8 @@ spec:
                   value: linkedin
                 - label: Twitter
                   value: twitter
+                - label: X
+                  value: x
                 - label: Slack
                   value: slack
                 - label: Discord
