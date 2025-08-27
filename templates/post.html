@@ -4,8 +4,10 @@
   xmlns:th="http://www.thymeleaf.org"
   th:replace="~{modules/layout :: html(title = ${post.spec.title}+'-'+${site.title},htmlType = post,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
 >
-  <th:block th:fragment="content"
-            th:with="days=${(new java.util.Date().getTime()-post.status.lastModifyTime.toEpochMilli())/86400000}">
+  <th:block
+    th:fragment="content"
+    th:with="days=${(new java.util.Date().getTime()-post.status.lastModifyTime.toEpochMilli())/86400000}"
+  >
     <body>
       <div id="Joe">
         <!--          navbar-->
@@ -149,11 +151,17 @@
                             <th:block
                               th:if="${theme.config.post.passage_tips_content != null} and ${theme.config.post.passage_tips_content != ''}"
                             >
-                              <th:block th:if="${days} >= ${theme.config.post.days}">本文最后更新于[[${#dates.format(post.status.lastModifyTime,'yyyy-MM-dd')}]]，若内容或图片失效，请留言反馈。</th:block>
+                              <th:block th:if="${days} >= ${theme.config.post.days}"
+                                >本文最后更新于[[${#dates.format(post.status.lastModifyTime,'yyyy-MM-dd')}]]，若内容或图片失效，请留言反馈。</th:block
+                              >
                               [[${theme.config.post.passage_tips_content}]]
                             </th:block>
-                            <th:block th:if="${theme.config.post.passage_tips_content == null} or ${theme.config.post.passage_tips_content == ''}">
-                              <th:block th:if="${days} >= ${theme.config.post.days}">本文最后更新于[[${#dates.format(post.status.lastModifyTime,'yyyy-MM-dd')}]]，若内容或图片失效，请留言反馈。</th:block>
+                            <th:block
+                              th:if="${theme.config.post.passage_tips_content == null} or ${theme.config.post.passage_tips_content == ''}"
+                            >
+                              <th:block th:if="${days} >= ${theme.config.post.days}"
+                                >本文最后更新于[[${#dates.format(post.status.lastModifyTime,'yyyy-MM-dd')}]]，若内容或图片失效，请留言反馈。</th:block
+                              >
                               部分素材来自网络，若不小心影响到您的利益，请联系我们删除。
                             </th:block>
                           </div>
@@ -161,13 +169,19 @@
                         <th:block th:if="${theme.config.post.days_type} != true">
                           <div class="content">
                             <th:block
-                                    th:if="${theme.config.post.passage_tips_content != null} and ${theme.config.post.passage_tips_content != ''}"
+                              th:if="${theme.config.post.passage_tips_content != null} and ${theme.config.post.passage_tips_content != ''}"
                             >
-                              <th:block th:if="${days} >= ${theme.config.post.days}">本文最后更新于[[${days}]]天前，若内容或图片失效，请留言反馈。</th:block>
+                              <th:block th:if="${days} >= ${theme.config.post.days}"
+                                >本文最后更新于[[${days}]]天前，若内容或图片失效，请留言反馈。</th:block
+                              >
                               [[${theme.config.post.passage_tips_content}]]
                             </th:block>
-                            <th:block th:if="${theme.config.post.passage_tips_content == null} or ${theme.config.post.passage_tips_content == ''}">
-                              <th:block th:if="${days} >= ${theme.config.post.days}">本文最后更新于[[${days}]]天前，若内容或图片失效，请留言反馈。</th:block>
+                            <th:block
+                              th:if="${theme.config.post.passage_tips_content == null} or ${theme.config.post.passage_tips_content == ''}"
+                            >
+                              <th:block th:if="${days} >= ${theme.config.post.days}"
+                                >本文最后更新于[[${days}]]天前，若内容或图片失效，请留言反馈。</th:block
+                              >
                               部分素材来自网络，若不小心影响到您的利益，请联系我们删除。
                             </th:block>
                           </div>
@@ -317,8 +331,14 @@
         </th:block>
         <th:block
           th:if="${theme.config.post.enable_mobile_toc} or ${theme.config.theme.enable_back2top} or ${theme.config.basic.theme_mode == 'user'}"
+          Add
+          commentMore
+          actions
+          th:with="contributor = ${contributorFinder.getContributor(post.status.contributors[post.status.contributors.size()-1])}"
         >
-          <th:block th:replace="~{modules/common/actions :: actions}" />
+          <th:block
+            th:replace="~{modules/common/actions :: actions_edit(contributor=${contributor.name})}"
+          />
         </th:block>
         <th:block th:if="${theme.config.footer.enable_footer}">
           <th:block th:replace="~{modules/common/footer :: footer}" />
@@ -326,9 +346,9 @@
       </div>
       <script>
         // 等待文档加载完成
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener('DOMContentLoaded', function () {
           // 获取文章内容
-          const postContent = document.getElementById("post-inner").innerText || "";
+          const postContent = document.getElementById('post-inner').innerText || '';
 
           // 使用正则表达式匹配中文、数字和字母
           const matches = postContent.match(/[\u4e00-\u9fa5a-zA-Z0-9]/g);
@@ -337,9 +357,8 @@
           const wordCount = matches ? matches.length : 0;
 
           // 更新字数统计显示
-          document.getElementById("wordCount").innerText = `${wordCount} 字`;
+          document.getElementById('wordCount').innerText = `${wordCount} 字`;
         });
-
       </script>
       <th:block th:replace="~{modules/macro/tail :: tail}" />
     </body>
