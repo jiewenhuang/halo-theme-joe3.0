@@ -6650,6 +6650,27 @@ body {
 
 .katex-block {
   overflow-x: hidden;
+  text-align: center;
+}
+
+// 确保公式居中显示
+.katex-display {
+  text-align: center;
+}
+
+// 处理独占一行的行内公式（应该居中显示）
+p > .math-inline:only-child,
+p > .math.math-inline:only-child {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+// 通用的数学公式块居中
+.math-display,
+.katex-display,
+p:has(> .katex:only-child) {
+  text-align: center;
 }
 
 .canvas-backdrop {
