@@ -59,6 +59,45 @@
     <script th:src="${source_link+'/assets/js/min/common.min.js?v='+theme.spec.version}"></script>
     <th:block th:if="${htmlType == 'post'} or ${htmlType == 'journals'} or ${htmlType == 'sheet'}">
       <script th:src="${source_link+'/assets/lib/prism/prism.min.js'}"></script>
+      <!-- Mermaid.js for diagram rendering -->
+      <script th:src="${source_link+'/assets/lib/mermaid/mermaid.min.js'}"></script>
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          // 检查 Mermaid 是否可用
+          if (typeof mermaid !== 'undefined') {
+            console.log('初始化 Mermaid...');
+
+            // 初始化 Mermaid
+            mermaid.initialize({
+              startOnLoad: true,
+              theme: 'default',
+              securityLevel: 'loose',
+              themeVariables: {
+                darkMode: document.documentElement.getAttribute('data-mode') === 'dark',
+              },
+            });
+
+            // 手动处理 Mermaid 代码块（如果文本绘图插件没有处理）
+            setTimeout(function () {
+              const mermaidBlocks = document.querySelectorAll('pre.language-mermaid');
+              if (mermaidBlocks.length > 0) {
+                console.log('发现 Mermaid 代码块，手动处理...');
+                mermaidBlocks.forEach(function (block) {
+                  const container = document.createElement('div');
+                  container.className = 'mermaid';
+                  container.textContent = block.textContent;
+                  block.parentNode.replaceChild(container, block);
+                });
+
+                // 重新初始化
+                mermaid.init();
+              }
+            }, 1000);
+          } else {
+            console.warn('Mermaid 库未加载');
+          }
+        });
+      </script>
     </th:block>
     <th:block th:if="${htmlType == 'index'}">
       <script th:src="${source_link+'/assets/js/min/index.min.js?v='+theme.spec.version}"></script>

@@ -4888,11 +4888,34 @@ body {
       padding: 10px;
       background: #f9f9f9;
       border-radius: var(--radius-inner);
+      text-align: center;
 
       svg {
         display: block;
         margin: 0 auto;
+        max-width: 100%;
+        height: auto;
       }
+    }
+
+    /* 暗黑模式下的 Mermaid 样式 */
+    [data-mode="dark"] .mermaid {
+      background: #2d2d2d;
+      color: #ffffff;
+    }
+
+    /* 代码块中的 Mermaid */
+    pre.language-mermaid {
+      background: #f9f9f9;
+      border-radius: var(--radius-inner);
+      padding: 15px;
+      margin: 10px 0;
+      text-align: center;
+    }
+
+    [data-mode="dark"] pre.language-mermaid {
+      background: #2d2d2d;
+      color: #ffffff;
     }
 
     .owo_image {
