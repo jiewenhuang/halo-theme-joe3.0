@@ -2492,6 +2492,12 @@ spec:
           key: enable_photos_effect
           label: 开启展示动画
           help: '是否开启图片展示出来时的动画效果'
+        - $formkit: checkbox
+          name: disable_photos_all_page
+          id: disable_photos_all_page
+          key: disable_photos_all_page
+          label: "是否移除'全部'页面"
+          help: "是否移除'全部'页面"
         - $formkit: text
           name: photos_title
           id: photos_title
