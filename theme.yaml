@@ -2,6 +2,10 @@ apiVersion: theme.halo.run/v1alpha1
 kind: Theme
 metadata:
   name: theme-Joe3
+  annotations:
+    # Add supports for Halo App Store
+    # https://www.halo.run/store/apps/app-ZxiPb
+    'store.halo.run/app-id': 'app-ZxiPb'
 spec:
   displayName: Theme Joe3
   author:
