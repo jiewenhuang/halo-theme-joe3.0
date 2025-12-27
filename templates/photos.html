@@ -20,11 +20,18 @@
               </div>
               <nav class="joe_photos__filter">
                 <ul>
-                  <li data-sjslink="*" class="active">
+                  <li
+                    data-sjslink="*"
+                    class="active"
+                    th:unless="${theme.config.photos?.disable_photos_all_page}"
+                  >
                     <a>全部</a>
                   </li>
-                  <th:block th:each="group : ${groups}">
-                    <li th:data-sjslink="${group.metadata.name}">
+                  <th:block th:each="group, groupStat : ${groups}">
+                    <li
+                      th:data-sjslink="${group.metadata.name}"
+                      th:classappend="${((theme.config.photos?.disable_photos_all_page ?: false) and groupStat.index == 0)? 'active' : ''}"
+                    >
                       <a>[[${group.spec.displayName}]]</a>
                     </li>
                   </th:block>

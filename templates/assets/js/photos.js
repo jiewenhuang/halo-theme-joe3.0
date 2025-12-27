@@ -6,6 +6,13 @@ $(document).ready(function(){
             columnWidth: '.grid-item'
         }
     });
+    $grid.isotope({
+        filter: function () {
+            const filterValue = $('.joe_photos__filter li.active').attr('data-sjslink')
+            const sjselValue = $(this).attr('data-sjsel');
+            return filterValue === '*' || sjselValue === filterValue;
+        }
+    });
     let page = Number(document.querySelector('#image-grid').getAttribute('data-index'))+1
     const totalPage = document.querySelector('#image-grid').getAttribute('data-total')
 
