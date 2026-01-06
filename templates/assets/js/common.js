@@ -33,14 +33,13 @@ const commonContext = {
 					$icon_dark[`${local_theme === "light" ? "remove" : "add"}Class`](
 						"active"
 					);
-					// var commentElement = document.querySelector("halo\\:comment"); // 使用反斜杠转义冒号
-					// commentElement.setAttribute("colorScheme", "'" + local_theme + "'");
 				} else {
 					theme = "dark";
 					$icon_light.removeClass("active");
 					$icon_dark.addClass("active");
 				}
 				$html.attr("data-mode", theme);
+				$html.attr("data-color-scheme", theme);
 				localStorage.setItem("data-mode", theme);
 				commonContext.initCommentTheme();
 			} catch (err) {
@@ -99,14 +98,6 @@ const commonContext = {
 	},
 	/* 初始化评论主题 */
 	initCommentTheme() {
-		const comments = document.getElementsByTagName("halo-comment");
-		const curMode = document.querySelector("html").getAttribute("data-mode");
-		// 黑夜模式下
-		for (let i = 0; i < comments.length; i++) {
-			const shadowDom = comments[i].shadowRoot.getElementById("halo-comment");
-			$(shadowDom)[`${curMode === "light" ? "remove" : "add"}Class`]("dark");
-		}
-
 		const bgaOpts = Joe.bloggerGenerateAvatarOpts;
 		if (
 			(bgaOpts.textColor && /var\(--([\w-]+)\)/.test(bgaOpts.textColor))

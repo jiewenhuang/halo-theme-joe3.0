@@ -62,6 +62,7 @@
             localStorage.removeItem('data-mode');
           }
           document.querySelector('html').setAttribute('data-mode', curMode);
+          document.documentElement.setAttribute('data-color-scheme', curMode);
         } catch (e) {
           console.log(e);
         }
