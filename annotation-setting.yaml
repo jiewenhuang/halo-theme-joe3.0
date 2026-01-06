@@ -7,160 +7,119 @@ spec:
     group: content.halo.run
     kind: Post
   formSchema:
-    - $formkit: "select"
-      name: "enable_aside"
-      label: "是否启用侧边栏"
-      value: "true"
+    - $formkit: 'switch'
+      name: 'enable_aside'
+      label: '是否启用侧边栏'
+      value: 'true'
+      onValue: 'true'
+      offValue: 'false'
+    - $formkit: 'switch'
+      name: 'enable_page_meta'
+      label: '是否展示页面元信息（即顶部的字数、阅读量等数据）'
+      value: 'true'
+      onValue: 'true'
+      offValue: 'false'
+    - $formkit: 'switch'
+      name: 'enable_passage_tips'
+      label: '是否展示温馨提示'
+      value: 'true'
+      onValue: 'true'
+      offValue: 'false'
+    - $formkit: 'switch'
+      name: 'enable_collect_check'
+      label: '是否启用百度收录检查'
+      value: 'true'
+      onValue: 'true'
+      offValue: 'false'
+    - $formkit: 'switch'
+      name: 'enable_read_limit'
+      label: '是否开启登陆后评论可见'
+      value: 'false'
+      onValue: 'true'
+      offValue: 'false'
+    - $formkit: 'switch'
+      name: 'use_raw_content'
+      label: '是否渲染原始内容'
+      value: 'false'
+      onValue: 'true'
+      offValue: 'false'
+    - $formkit: 'switch'
+      name: 'enable_comment'
+      label: '是否启用评论功能'
+      value: 'true'
+      onValue: 'true'
+      offValue: 'false'
+    - $formkit: 'switch'
+      name: 'enable_toc'
+      label: '是否启用 Toc 目录'
+      value: 'true'
+      onValue: 'true'
+      offValue: 'false'
+    - $formkit: 'text'
+      name: 'toc_depth'
+      label: 'Toc 目录默认展开层级 0~6，对应标题层级 h1 ～ h6'
+      value: '0'
+    - $formkit: 'text'
+      name: 'img_max_width'
+      label: '图片最大宽度'
+      value: '100%'
+    - $formkit: 'select'
+      name: 'img_align'
+      label: '图片对齐方式'
+      value: 'center'
       options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-    - $formkit: "select"
-      name: "enable_page_meta"
-      label: "是否展示页面元信息（即顶部的字数、阅读量等数据）"
-      value: "true"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-    - $formkit: "select"
-      name: "enable_passage_tips"
-      label: "是否展示温馨提示"
-      value: "true"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-    - $formkit: "select"
-      name: "enable_collect_check"
-      label: "是否启用百度收录检查"
-      value: "true"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-    - $formkit: "select"
-      name: "enable_read_limit"
-      label: "是否开启登陆后评论可见"
-      value: "false"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-    - $formkit: "select"
-      name: "use_raw_content"
-      label: "是否渲染原始内容"
-      value: "false"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-    - $formkit: "select"
-      name: "enable_comment"
-      label: "是否启用评论功能"
-      value: "true"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-    - $formkit: "select"
-      name: "enable_toc"
-      label: "是否启用 Toc 目录"
-      value: "true"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-    - $formkit: "text"
-      name: "toc_depth"
-      label: "Toc 目录默认展开层级 0~6，对应标题层级 h1 ～ h6"
-      value: "0"
-    - $formkit: "text"
-      name: "img_max_width"
-      label: "图片最大宽度"
-      value: "100%"
-    - $formkit: "select"
-      name: "img_align"
-      label: "图片对齐方式"
-      value: "center"
-      options:
-        - value: "center"
+        - value: 'center'
           label: 居中
-        - value: "left"
+        - value: 'left'
           label: 左对齐
-        - value: "right"
+        - value: 'right'
           label: 右对齐
-    - $formkit: "select"
-      name: "enable_copy"
-      label: "是否允许复制内容"
-      value: "true"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-    - $formkit: "select"
-      name: "enable_donate"
-      label: "是否启用打赏（必须配置好相应二维码）"
-      value: "true"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-    - $formkit: "select"
-      name: "enable_share"
-      label: "是否启用分享"
-      value: "true"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-    - $formkit: "select"
-      name: "enable_like"
-      label: "是否启用点赞"
-      value: "true"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-    - $formkit: "select"
-      name: "enable_fold_long_code"
-      label: "是否开启长代码块自动折叠"
-      value: "true"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
+    - $formkit: 'switch'
+      name: 'enable_copy'
+      label: '是否允许复制内容'
+      value: 'true'
+      onValue: 'true'
+      offValue: 'false'
+    - $formkit: 'switch'
+      name: 'enable_donate'
+      label: '是否启用打赏（必须配置好相应二维码）'
+      value: 'true'
+      onValue: 'true'
+      offValue: 'false'
+    - $formkit: 'switch'
+      name: 'enable_share'
+      label: '是否启用分享'
+      value: 'true'
+      onValue: 'true'
+      offValue: 'false'
+    - $formkit: 'switch'
+      name: 'enable_like'
+      label: '是否启用点赞'
+      value: 'true'
+      onValue: 'true'
+      offValue: 'false'
+    - $formkit: 'switch'
+      name: 'enable_fold_long_code'
+      label: '是否开启长代码块自动折叠'
+      value: 'true'
+      onValue: 'true'
+      offValue: 'false'
 
 ---
-
 apiVersion: v1alpha1
 kind: AnnotationSetting
 metadata:
   generateName: annotation-setting-
 spec:
   targetRef:
-    group: ""
+    group: ''
     kind: MenuItem
   formSchema:
-    - $formkit: "text"
-      name: "icon"
-      label: "图标"
+    - $formkit: 'text'
+      name: 'icon'
+      label: '图标'
 
 ---
-
 apiVersion: v1alpha1
 kind: AnnotationSetting
 metadata:
@@ -170,137 +129,98 @@ spec:
     group: content.halo.run
     kind: SinglePage
   formSchema:
-    - $formkit: "select"
-      name: "enable_aside"
-      label: "是否启用侧边栏"
-      value: "true"
+    - $formkit: 'switch'
+      name: 'enable_aside'
+      label: '是否启用侧边栏'
+      value: 'true'
+      onValue: 'true'
+      offValue: 'false'
+    - $formkit: 'switch'
+      name: 'enable_page_meta'
+      label: '是否展示页面元信息（即顶部的字数、阅读量等数据）'
+      value: 'true'
+      onValue: 'true'
+      offValue: 'false'
+    - $formkit: 'switch'
+      name: 'enable_passage_tips'
+      label: '是否展示温馨提示'
+      value: 'true'
+      onValue: 'true'
+      offValue: 'false'
+    - $formkit: 'switch'
+      name: 'enable_collect_check'
+      label: '是否启用百度收录检查'
+      value: 'true'
+      onValue: 'true'
+      offValue: 'false'
+    - $formkit: 'switch'
+      name: 'enable_read_limit'
+      label: '是否开启登陆后评论可见'
+      value: 'false'
+      onValue: 'true'
+      offValue: 'false'
+    - $formkit: 'switch'
+      name: 'use_raw_content'
+      label: '是否渲染原始内容'
+      value: 'false'
+      onValue: 'true'
+      offValue: 'false'
+    - $formkit: 'switch'
+      name: 'enable_comment'
+      label: '是否启用评论功能'
+      value: 'true'
+      onValue: 'true'
+      offValue: 'false'
+    - $formkit: 'switch'
+      name: 'enable_toc'
+      label: '是否启用 Toc 目录'
+      value: 'true'
+      onValue: 'true'
+      offValue: 'false'
+    - $formkit: 'text'
+      name: 'toc_depth'
+      label: 'Toc 目录默认展开层级 0~6，对应标题层级 h1 ～ h6'
+      value: '0'
+    - $formkit: 'text'
+      name: 'img_max_width'
+      label: '图片最大宽度'
+      value: '100%'
+    - $formkit: 'select'
+      name: 'img_align'
+      label: '图片对齐方式'
+      value: 'center'
       options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-    - $formkit: "select"
-      name: "enable_page_meta"
-      label: "是否展示页面元信息（即顶部的字数、阅读量等数据）"
-      value: "true"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-    - $formkit: "select"
-      name: "enable_passage_tips"
-      label: "是否展示温馨提示"
-      value: "true"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-    - $formkit: "select"
-      name: "enable_collect_check"
-      label: "是否启用百度收录检查"
-      value: "true"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-    - $formkit: "select"
-      name: "enable_read_limit"
-      label: "是否开启登陆后评论可见"
-      value: "false"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-    - $formkit: "select"
-      name: "use_raw_content"
-      label: "是否渲染原始内容"
-      value: "false"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-    - $formkit: "select"
-      name: "enable_comment"
-      label: "是否启用评论功能"
-      value: "true"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-    - $formkit: "select"
-      name: "enable_toc"
-      label: "是否启用 Toc 目录"
-      value: "true"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-    - $formkit: "text"
-      name: "toc_depth"
-      label: "Toc 目录默认展开层级 0~6，对应标题层级 h1 ～ h6"
-      value: "0"
-    - $formkit: "text"
-      name: "img_max_width"
-      label: "图片最大宽度"
-      value: "100%"
-    - $formkit: "select"
-      name: "img_align"
-      label: "图片对齐方式"
-      value: "center"
-      options:
-        - value: "center"
+        - value: 'center'
           label: 居中
-        - value: "left"
+        - value: 'left'
           label: 左对齐
-        - value: "right"
+        - value: 'right'
           label: 右对齐
-    - $formkit: "select"
-      name: "enable_copy"
-      label: "是否允许复制内容"
-      value: "true"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-    - $formkit: "select"
-      name: "enable_share"
-      label: "是否启用分享"
-      value: "true"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-    - $formkit: "select"
-      name: "enable_like"
-      label: "是否启用点赞"
-      value: "true"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-    - $formkit: "select"
-      name: "enable_fold_long_code"
-      label: "是否开启长代码块自动折叠"
-      value: "true"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-
-
+    - $formkit: 'switch'
+      name: 'enable_copy'
+      label: '是否允许复制内容'
+      value: 'true'
+      onValue: 'true'
+      offValue: 'false'
+    - $formkit: 'switch'
+      name: 'enable_share'
+      label: '是否启用分享'
+      value: 'true'
+      onValue: 'true'
+      offValue: 'false'
+    - $formkit: 'switch'
+      name: 'enable_like'
+      label: '是否启用点赞'
+      value: 'true'
+      onValue: 'true'
+      offValue: 'false'
+    - $formkit: 'switch'
+      name: 'enable_fold_long_code'
+      label: '是否开启长代码块自动折叠'
+      value: 'true'
+      onValue: 'true'
+      offValue: 'false'
 ---
-
 apiVersion: v1alpha1
 kind: AnnotationSetting
 metadata:
@@ -310,23 +230,18 @@ spec:
     group: core.halo.run
     kind: LinkGroup
   formSchema:
-    - $formkit: "text"
-      name: "link_group_sort_seq"
-      label: "链接分类排序序号，数字越大越靠前，如果<=0，则按照默认排序方式进行排序"
-      value: "0"
-    - $formkit: "select"
-      name: "link_group_enable_show"
-      label: "是否显示"
-      value: "true"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
-
+    - $formkit: 'text'
+      name: 'link_group_sort_seq'
+      label: '链接分类排序序号，数字越大越靠前，如果<=0，则按照默认排序方式进行排序'
+      value: '0'
+    - $formkit: 'switch'
+      name: 'link_group_enable_show'
+      label: '是否显示'
+      value: 'true'
+      onValue: 'true'
+      offValue: 'false'
 
 ---
-
 apiVersion: v1alpha1
 kind: AnnotationSetting
 metadata:
@@ -336,16 +251,13 @@ spec:
     group: core.halo.run
     kind: Link
   formSchema:
-    - $formkit: "text"
-      name: "link_sort_seq"
-      label: "同一分类内链接排序序号，数字越大越靠前，如果<=0，则按照默认排序方式进行排序"
-      value: "0"
-    - $formkit: "select"
-      name: "link_enable_show"
-      label: "是否显示"
-      value: "true"
-      options:
-        - value: "true"
-          label: 是
-        - value: "false"
-          label: 否
+    - $formkit: 'text'
+      name: 'link_sort_seq'
+      label: '同一分类内链接排序序号，数字越大越靠前，如果<=0，则按照默认排序方式进行排序'
+      value: '0'
+    - $formkit: 'switch'
+      name: 'link_enable_show'
+      label: '是否显示'
+      value: 'true'
+      onValue: 'true'
+      offValue: 'false'
