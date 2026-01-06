@@ -1042,7 +1042,7 @@ spec:
       label: 博主信息
       formSchema:
         - $formkit: switch
-          value: false
+          value: true
           name: show_blogger
           id: show_blogger
           key: show_blogger
@@ -1546,7 +1546,7 @@ spec:
       label: 侧边栏
       formSchema:
         - $formkit: switch
-          value: false
+          value: true
           name: enable_aside
           id: enable_aside
           key: enable_aside
@@ -1580,63 +1580,63 @@ spec:
           help: '全局设置'
 
         - $formkit: switch
-          value: false
+          value: true
           name: enable_tags_aside
           id: enable_tags_aside
           key: enable_tags_aside
           label: 标签页侧边栏
           help: '标签页右侧是否展示侧边栏'
         - $formkit: switch
-          value: false
+          value: true
           name: enable_categories_aside
           id: enable_categories_aside
           key: enable_categories_aside
           label: 分类页侧边栏
           help: '分类页右侧是否展示侧边栏'
         - $formkit: switch
-          value: false
+          value: true
           name: enable_archives_aside
           id: enable_archives_aside
           key: enable_archives_aside
           label: 归档页侧边栏
           help: '归档页右侧是否展示侧边栏'
         - $formkit: switch
-          value: false
+          value: true
           name: enable_post_aside
           id: enable_post_aside
           key: enable_post_aside
           label: 文章页侧边栏
           help: '文章页右侧是否展示侧边栏（关闭后，TOC 目录也就没有了）'
         - $formkit: switch
-          value: false
+          value: true
           name: enable_journals_aside
           id: enable_journals_aside
           key: enable_journals_aside
           label: 日志页侧边栏
           help: '日志页右侧是否展示侧边栏'
         - $formkit: switch
-          value: false
+          value: true
           name: enable_photos_aside
           id: enable_photos_aside
           key: enable_photos_aside
           label: 相册页侧边栏
           help: '相册页右侧是否展示侧边栏'
         - $formkit: switch
-          value: false
+          value: true
           name: enable_links_aside
           id: enable_links_aside
           key: enable_links_aside
           label: 友链页侧边栏
           help: '友链页右侧是否展示侧边栏'
         - $formkit: switch
-          value: false
+          value: true
           name: enable_friends_aside
           id: enable_friends_aside
           key: enable_friends_aside
           label: 朋友圈侧边栏
           help: '朋友圈右侧是否展示侧边栏'
         - $formkit: switch
-          value: false
+          value: true
           name: enable_sheet_aside
           id: enable_sheet_aside
           key: enable_sheet_aside
@@ -2071,7 +2071,7 @@ spec:
           key: enable_progress_bar
           label: 启用文章浏览进度条
           help: '文章页底部是否展示浏览进度条'
-          value: false
+          value: true
         - $formkit: color
           name: progress_bar_bgc
           id: progress_bar_bgc
@@ -2086,14 +2086,14 @@ spec:
           key: enable_toc
           label: 文章TOC目录
           help: '可通过后台配置文章元属性 enable_toc 来启用/关闭单个文章的 Toc 目录'
-          value: false
+          value: true
         - $formkit: switch
           name: enable_mobile_toc
           id: enable_mobile_toc
           key: enable_mobile_toc
           label: 移动端文章TOC目录
           help: '是否启用移动端的TOC目录'
-          value: false
+          value: true
         - $formkit: text
           name: toc_depth
           id: toc_depth
@@ -2107,7 +2107,7 @@ spec:
           key: enable_relate_post
           label: 展示相关文章
           help: '在右侧展示相关文章模块'
-          value: false
+          value: true
         - $formkit: text
           if: '$get(enable_relate_post).value === true'
           name: relate_post_max
@@ -2127,19 +2127,19 @@ spec:
           id: enable_comment
           key: enable_comment
           label: 文章评论
-          value: false
+          value: true
         - $formkit: switch
           name: enable_like
           id: enable_like
           key: enable_like
           label: 文章点赞
-          value: false
+          value: true
         - $formkit: switch
           name: enable_share
           id: enable_share
           key: enable_share
           label: 文章分享
-          value: false
+          value: true
         - $formkit: switch
           name: enable_copy
           id: enable_copy
@@ -2172,30 +2172,31 @@ spec:
           id: enable_share_weixin
           key: enable_share_weixin
           label: 微信分享
-          value: false
+          value: true
         - $formkit: switch
           name: enable_share_qq
           id: enable_share_qq
           key: enable_share_qq
           label: QQ分享
-          value: false
+          value: true
         - $formkit: switch
           name: enable_share_qzone
           id: enable_share_qzone
           key: enable_share_qzone
           label: QQ空间分享
-          value: false
+          value: true
         - $formkit: switch
           name: enable_share_weibo
           id: enable_share_weibo
           key: enable_share_weibo
           label: 微博分享
-          value: false
+          value: true
         - $formkit: switch
           name: enable_share_link
           id: enable_share_link
           key: enable_share_link
           label: 链接分享
+          value: true
         - $formkit: textarea
           if: '$get(enable_share_link).value === true'
           name: share_link_template
@@ -2988,7 +2989,7 @@ spec:
           id: enable_footer
           key: enable_footer
           label: 启用页脚
-          value: false
+          value: true
         - $formkit: radio
           if: '$get(enable_footer).value == true'
           name: footer_position
@@ -3066,6 +3067,7 @@ spec:
           key: enable_powerby
           label: 展示 PowerBy
           help: '为了尊重作者的权益，建议展示'
+          value: true
         - $formkit: select
           if: '$get(enable_footer).value == true'
           name: driven_by
