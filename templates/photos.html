@@ -1,6 +1,6 @@
 <!doctype html>
 <html
-  lang="en"
+  th:lang="${#locale.toLanguageTag}"
   xmlns:th="http://www.thymeleaf.org"
   th:replace="~{modules/layout :: html(title = ${theme.config.photos.photos_title?:'我的图库'}+'-'+${site.title},htmlType = photos,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
 >

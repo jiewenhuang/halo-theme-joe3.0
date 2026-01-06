@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html th:lang="${#locale.toLanguageTag}" xmlns:th="https://www.thymeleaf.org">
   <th:block th:fragment="post_item">
     <li
       th:class="'joe_list__item default ' + ${htmlType == 'index' ? 'animated wow' : ''} + ${htmlType == 'index' ? ' data-wow-delay=&quot;0.' + iteration.index + 's&quot;' : ''}"

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html th:lang="${#locale.toLanguageTag}" xmlns:th="https://www.thymeleaf.org">
   <th:block th:fragment="post_num">
     <th:block th:if="${htmlType == 'tags'}">
       <em class="post-nums" th:text="|${tag.status.visiblePostCount ?: 0 }篇|"></em>

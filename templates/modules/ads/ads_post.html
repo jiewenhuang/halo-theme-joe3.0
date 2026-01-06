@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html th:lang="${#locale.toLanguageTag}" xmlns:th="https://www.thymeleaf.org">
   <th:block th:fragment="ads_post(kind, data)">
     <section class="joe_advert-large">
       <th:block th:if="${kind == 'img'}">

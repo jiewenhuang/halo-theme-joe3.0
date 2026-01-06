@@ -1,6 +1,6 @@
 <!doctype html>
 <html
-  lang="en"
+  th:lang="${#locale.toLanguageTag}"
   xmlns:th="http://www.thymeleaf.org"
   th:replace="~{modules/layout :: html(title = ${theme.config.friends.friends_title ?: '朋友圈'}+'-'+${site.title},htmlType = friends,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
 >
@@ -32,7 +32,7 @@
                 th:classappend="${theme.config.friends.enable_friend_effect ? 'effects':''}"
               >
                 <th:block
-                  th:each="postInfo, iteration: ${friends.items}" 
+                  th:each="postInfo, iteration: ${friends.items}"
                   th:with="spec = ${postInfo.spec}"
                 >
                   <li
@@ -40,29 +40,29 @@
                     th:data-wow-delay="'0.'+${iteration.index}+'s'"
                     th:data-cid="${postInfo.metadata.name}"
                   >
-                    <p class="joe_friend_info" >
-                      <img 
-                          class="joe_friend_info_logo"
-                          th:src="${spec.logo}"
-                          th:alt="${spec.author}"
+                    <p class="joe_friend_info">
+                      <img
+                        class="joe_friend_info_logo"
+                        th:src="${spec.logo}"
+                        th:alt="${spec.author}"
                       />
-                      <a 
-                        class="joe_friend_info_author" 
-                        th:text="${spec.author}" th:href="${spec.authorUrl}">
+                      <a
+                        class="joe_friend_info_author"
+                        th:text="${spec.author}"
+                        th:href="${spec.authorUrl}"
+                      >
                       </a>
-                      <span 
-                        class="joe_friend_info_pubDate" 
-                        th:text="${#dates.format(spec.pubDate, 'yyyy-MM-dd')}">
+                      <span
+                        class="joe_friend_info_pubDate"
+                        th:text="${#dates.format(spec.pubDate, 'yyyy-MM-dd')}"
+                      >
                       </span>
                     </p>
                     <div class="joe_friend_block">
                       <div class="joe_friend_body">
                         <h2 class="joe_friend_content_title">
-                          <a 
-                            target="_blank" 
-                            th:href="${spec.postLink}" 
-                            th:text="${spec.title}"></a
-                        ></h2>
+                          <a target="_blank" th:href="${spec.postLink}" th:text="${spec.title}"></a>
+                        </h2>
                         <div class="joe_friend_content_description">
                           <th:block th:text="${spec.description}"></th:block>
                         </div>

@@ -1,196 +1,199 @@
 <!doctype html>
 <html
-        lang="en"
-        xmlns:th="http://www.thymeleaf.org"
-        th:replace="~{modules/layout :: html(title = ${site.title},htmlType = sheet,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
+  th:lang="${#locale.toLanguageTag}"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{modules/layout :: html(title = ${site.title},htmlType = sheet,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
 >
-<th:block th:fragment="content">
-  <body>
-  <div id="Joe">
-    <th:block th:replace="~{modules/macro/navbar :: navbar}" />
-    <div
-            class="joe_container joe_main_container page-sheet"
-            th:classappend="|${theme.config.theme.enable_show_in_up ? 'animated showInUp':''} ${theme.config.aside.aside_position == 'left' ? 'revert':''}|"
-    >
-      <div class="joe_main">
+  <th:block th:fragment="content">
+    <body>
+      <div id="Joe">
+        <th:block th:replace="~{modules/macro/navbar :: navbar}" />
         <div
-                class="joe_detail"
-                th:with="contributor = ${contributorFinder.getContributor(singlePage.status.contributors[0])}"
+          class="joe_container joe_main_container page-sheet"
+          th:classappend="|${theme.config.theme.enable_show_in_up ? 'animated showInUp':''} ${theme.config.aside.aside_position == 'left' ? 'revert':''}|"
         >
-          <h1
-                  class="joe_detail__title"
-                  th:classappend="${theme.config.post.enable_title_shadow ? 'txt-shadow':''}"
-          >
-            [[${singlePage.spec.title}]]
-          </h1>
-          <th:block
-                  th:if="${theme.config.post.enable_page_meta} and ${#annotations.getOrDefault(singlePage, 'enable_page_meta', 'true')}"
-          >
-            <div class="joe_detail__count">
-              <div class="joe_detail__count-information">
-                <img
-                        width="35"
-                        height="35"
-                        class="avatar lazyload"
-                        th:src="${theme.config.blogger.lazyload_avatar}"
-                        th:data-src="${contributor.avatar ?: (theme.config.blogger.default_avatar ?: '/themes/theme-Joe3/assets/img/transparent-placeholder.png')}"
-                        th:alt="${contributor.displayName}"
-                        onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')"
-                        onerror="Joe.errorImg(this, 'ErrAvatarImg')"
-                />
-                <div class="meta">
-                  <div class="author">
-                    <a
-                            class="link"
-                            th:href="${contributor.permalink}"
-                            th:title="${contributor.displayName}"
-                    >[[${contributor.displayName}]]</a
-                    >
-                  </div>
-                  <div class="item">
-                        <span class="text"
-                        >[[${#dates.format(singlePage.spec.publishTime,'yyyy-MM-dd')}]]</span
+          <div class="joe_main">
+            <div
+              class="joe_detail"
+              th:with="contributor = ${contributorFinder.getContributor(singlePage.status.contributors[0])}"
+            >
+              <h1
+                class="joe_detail__title"
+                th:classappend="${theme.config.post.enable_title_shadow ? 'txt-shadow':''}"
+              >
+                [[${singlePage.spec.title}]]
+              </h1>
+              <th:block
+                th:if="${theme.config.post.enable_page_meta} and ${#annotations.getOrDefault(singlePage, 'enable_page_meta', 'true')}"
+              >
+                <div class="joe_detail__count">
+                  <div class="joe_detail__count-information">
+                    <img
+                      width="35"
+                      height="35"
+                      class="avatar lazyload"
+                      th:src="${theme.config.blogger.lazyload_avatar}"
+                      th:data-src="${contributor.avatar ?: (theme.config.blogger.default_avatar ?: '/themes/theme-Joe3/assets/img/transparent-placeholder.png')}"
+                      th:alt="${contributor.displayName}"
+                      onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')"
+                      onerror="Joe.errorImg(this, 'ErrAvatarImg')"
+                    />
+                    <div class="meta">
+                      <div class="author">
+                        <a
+                          class="link"
+                          th:href="${contributor.permalink}"
+                          th:title="${contributor.displayName}"
+                          >[[${contributor.displayName}]]</a
                         >
-                    <span class="line">/</span>
-                    <th:block
-                            th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}"
-                    >
-                      <span class="text">[[${singlePage.stats.comment}]] 评论</span>
-                    </th:block>
-                    <th:block
-                            th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}"
-                    >
+                      </div>
+                      <div class="item">
+                        <span class="text"
+                          >[[${#dates.format(singlePage.spec.publishTime,'yyyy-MM-dd')}]]</span
+                        >
+                        <span class="line">/</span>
+                        <th:block
+                          th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}"
+                        >
+                          <span class="text">[[${singlePage.stats.comment}]] 评论</span>
+                        </th:block>
+                        <th:block
+                          th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}"
+                        >
                           <span
-                                  class="text waline-comment-count"
-                                  th:data-path="@{${singlePage.status.permalink}}"
-                          >0</span
+                            class="text waline-comment-count"
+                            th:data-path="@{${singlePage.status.permalink}}"
+                            >0</span
                           >&nbsp;评论
-                    </th:block>
-                    <span class="line">/</span>
-                    <span class="text">[[${singlePage.stats.visit}]] 阅读</span>
-                    <span class="line">/</span>
-                    <th:block
-                            th:with="wordCount = ${#strings.length(singlePage.content.content)}"
-                    >
-                      <span class="text">[[${wordCount}]] 字</span>
-                    </th:block>
-                    <th:block
-                            th:if="${#annotations.getOrDefault(singlePage, 'enable_collect_check', 'true')} and ${theme.config.other.check_baidu_collect}"
-                    >
-                      <span class="line">/</span>
-                      <span class="text" id="joe_baidu_record">正在检测是否收录...</span>
-                    </th:block>
+                        </th:block>
+                        <span class="line">/</span>
+                        <span class="text">[[${singlePage.stats.visit}]] 阅读</span>
+                        <span class="line">/</span>
+                        <th:block
+                          th:with="wordCount = ${#strings.length(singlePage.content.content)}"
+                        >
+                          <span class="text">[[${wordCount}]] 字</span>
+                        </th:block>
+                        <th:block
+                          th:if="${#annotations.getOrDefault(singlePage, 'enable_collect_check', 'true')} and ${theme.config.other.check_baidu_collect}"
+                        >
+                          <span class="line">/</span>
+                          <span class="text" id="joe_baidu_record">正在检测是否收录...</span>
+                        </th:block>
+                      </div>
+                    </div>
                   </div>
+                  <time
+                    class="joe_detail__count-created"
+                    th:datetime="${#dates.format(singlePage.spec.publishTime,'MM/dd')}"
+                    >[[${#dates.format(singlePage.spec.publishTime,'MM/dd')}]]</time
+                  >
                 </div>
-              </div>
-              <time
-                      class="joe_detail__count-created"
-                      th:datetime="${#dates.format(singlePage.spec.publishTime,'MM/dd')}"
-              >[[${#dates.format(singlePage.spec.publishTime,'MM/dd')}]]</time
-              >
-            </div>
-          </th:block>
-          <article
-                  th:class="'joe_detail__article animated fadeIn '+${#annotations.getOrDefault(singlePage, 'img_align', 'center')+'-img'}"
-                  th:classappend="|${#annotations.getOrDefault(singlePage, 'enable_read_limit', 'false') == 'true' ?'limited': ''} ${(#annotations.getOrDefault(singlePage, 'enable_copy', 'true') == 'false' or theme.config.post.enable_copy != true) ? 'uncopy' : ''} ${theme.config.post.enable_indent ? 'indent':''} ${(theme.config.code_block.enable_code_line_number == true and theme.config.code_block.enable_code_newline !=true) ? 'line-numbers':''} ${theme.config.code_block.enable_single_code_select == true ? 'single_code_select': ''}|"
-          >
-            <div class="joe_leaving tpl">
-              <th:block
-                      th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}"
-              >
-                <ul class="joe_leaving-list">
-                  <li th:each="result : ${commentFinder.list(null,1,20)}"
-                      th:with="message_name = ${singlePage.metadata.name}"
-                      class="item">
-                    <th:block th:if="${theme.config.leaving.message_source}">
-                      <div class="user">
-                        <img
-                                class="avatar lazyload"
-                                th:src="${theme.config.blogger.lazyload_avatar}"
-                                alt="用户头像"
-                                th:data-src="${result.owner.avatar ?: (theme.config.blogger.default_avatar ?: '/themes/theme-Joe3/assets/img/transparent-placeholder.png')}"
-                                th:data-text-avatar="${result.spec.owner.displayName}"
-                                onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')"
-                                onerror="Joe.errorImg(this, 'ErrAvatarImg')"
-                        />
-                        <div class="nickname" th:text="${result.spec.owner.displayName}"></div>
-                        <div
-                                class="date"
-                                th:text="${#dates.format(result.metadata.creationTimestamp, 'yyyy-MM-dd')}"
-                        ></div>
-                      </div>
-                      <div class="wrapper">
-                        <div
-                                class="content leaving-content"
-                                th:utext="${result.spec.content}"
-                        ></div>
-                      </div>
-                    </th:block>
-                    <th:block th:if="${theme.config.leaving.message_source != true} and ${result.spec.subjectRef.name} == ${message_name}">
-                      <div class="user">
-                        <img
-                                class="avatar lazyload"
-                                th:src="${theme.config.blogger.lazyload_avatar}"
-                                alt="用户头像"
-                                th:data-src="${result.owner.avatar ?: (theme.config.blogger.default_avatar ?: '/themes/theme-Joe3/assets/img/transparent-placeholder.png')}"
-                                th:data-text-avatar="${result.spec.owner.displayName}"
-                                onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')"
-                                onerror="Joe.errorImg(this, 'ErrAvatarImg')"
-                        />
-                        <div class="nickname" th:text="${result.spec.owner.displayName}"></div>
-                        <div
-                                class="date"
-                                th:text="${#dates.format(result.metadata.creationTimestamp, 'yyyy-MM-dd')}"
-                        ></div>
-                      </div>
-                      <div class="wrapper">
-                        <div
-                                class="content leaving-content"
-                                th:utext="${result.spec.content}"
-                        ></div>
-                      </div>
-                    </th:block>
-                  </li>
-                </ul>
               </th:block>
-              <th:block
-                      th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}"
+              <article
+                th:class="'joe_detail__article animated fadeIn '+${#annotations.getOrDefault(singlePage, 'img_align', 'center')+'-img'}"
+                th:classappend="|${#annotations.getOrDefault(singlePage, 'enable_read_limit', 'false') == 'true' ?'limited': ''} ${(#annotations.getOrDefault(singlePage, 'enable_copy', 'true') == 'false' or theme.config.post.enable_copy != true) ? 'uncopy' : ''} ${theme.config.post.enable_indent ? 'indent':''} ${(theme.config.code_block.enable_code_line_number == true and theme.config.code_block.enable_code_newline !=true) ? 'line-numbers':''} ${theme.config.code_block.enable_single_code_select == true ? 'single_code_select': ''}|"
               >
-                <ul class="joe_leaving-list" id="waline-leaving"></ul>
-                <style>
-                  .joe_leaving-list img {
-                    display: inline-block;
-                    height: 24px;
-                    max-width: 100%;
-                  }
-                </style>
-                <script type="module" th:inline="javascript">
-                  import { RecentComments } from /*[[${theme.config.basic.waline.waline_js_leaving}]]*/ '';
-                  const serverURL = /*[[${theme.config.basic.waline.waline_serverURL}]]*/ '';
-                  const path = window.location.pathname;
+                <div class="joe_leaving tpl">
+                  <th:block
+                    th:if="${theme.config.basic.comment_option == 'default'} or ${#strings.trim(theme.config.basic.waline.waline_serverURL) ==''}"
+                  >
+                    <ul class="joe_leaving-list">
+                      <li
+                        th:each="result : ${commentFinder.list(null,1,20)}"
+                        th:with="message_name = ${singlePage.metadata.name}"
+                        class="item"
+                      >
+                        <th:block th:if="${theme.config.leaving.message_source}">
+                          <div class="user">
+                            <img
+                              class="avatar lazyload"
+                              th:src="${theme.config.blogger.lazyload_avatar}"
+                              alt="用户头像"
+                              th:data-src="${result.owner.avatar ?: (theme.config.blogger.default_avatar ?: '/themes/theme-Joe3/assets/img/transparent-placeholder.png')}"
+                              th:data-text-avatar="${result.spec.owner.displayName}"
+                              onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')"
+                              onerror="Joe.errorImg(this, 'ErrAvatarImg')"
+                            />
+                            <div class="nickname" th:text="${result.spec.owner.displayName}"></div>
+                            <div
+                              class="date"
+                              th:text="${#dates.format(result.metadata.creationTimestamp, 'yyyy-MM-dd')}"
+                            ></div>
+                          </div>
+                          <div class="wrapper">
+                            <div
+                              class="content leaving-content"
+                              th:utext="${result.spec.content}"
+                            ></div>
+                          </div>
+                        </th:block>
+                        <th:block
+                          th:if="${theme.config.leaving.message_source != true} and ${result.spec.subjectRef.name} == ${message_name}"
+                        >
+                          <div class="user">
+                            <img
+                              class="avatar lazyload"
+                              th:src="${theme.config.blogger.lazyload_avatar}"
+                              alt="用户头像"
+                              th:data-src="${result.owner.avatar ?: (theme.config.blogger.default_avatar ?: '/themes/theme-Joe3/assets/img/transparent-placeholder.png')}"
+                              th:data-text-avatar="${result.spec.owner.displayName}"
+                              onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')"
+                              onerror="Joe.errorImg(this, 'ErrAvatarImg')"
+                            />
+                            <div class="nickname" th:text="${result.spec.owner.displayName}"></div>
+                            <div
+                              class="date"
+                              th:text="${#dates.format(result.metadata.creationTimestamp, 'yyyy-MM-dd')}"
+                            ></div>
+                          </div>
+                          <div class="wrapper">
+                            <div
+                              class="content leaving-content"
+                              th:utext="${result.spec.content}"
+                            ></div>
+                          </div>
+                        </th:block>
+                      </li>
+                    </ul>
+                  </th:block>
+                  <th:block
+                    th:if="${theme.config.basic.comment_option == 'waline'} and ${#strings.trim(theme.config.basic.waline.waline_serverURL) !=''}"
+                  >
+                    <ul class="joe_leaving-list" id="waline-leaving"></ul>
+                    <style>
+                      .joe_leaving-list img {
+                        display: inline-block;
+                        height: 24px;
+                        max-width: 100%;
+                      }
+                    </style>
+                    <script type="module" th:inline="javascript">
+                      import { RecentComments } from /*[[${theme.config.basic.waline.waline_js_leaving}]]*/ '';
+                      const serverURL = /*[[${theme.config.basic.waline.waline_serverURL}]]*/ '';
+                      const path = window.location.pathname;
 
-                  const url = serverURL + '/api/comment?path=' + path + '&pageSize=100';
+                      const url = serverURL + '/api/comment?path=' + path + '&pageSize=100';
 
-                  fetch(url).then(async (response) => {
-                    const data = await response.json();
-                    console.log(data.data.data);
-                    const comments = data.data.data;
-                    document.getElementById('waline-leaving').innerHTML = comments
-                            .map((comment) => {
-                              const timestamp = new Date(comment.time);
+                      fetch(url).then(async (response) => {
+                        const data = await response.json();
+                        console.log(data.data.data);
+                        const comments = data.data.data;
+                        document.getElementById('waline-leaving').innerHTML = comments
+                          .map((comment) => {
+                            const timestamp = new Date(comment.time);
 
-                              // 获取年、月、日、时、分、秒
-                              const year = timestamp.getFullYear();
-                              const month = timestamp.getMonth() + 1; // 月份是从0开始的，所以要加1
-                              const day = timestamp.getDate();
-                              const hours = timestamp.getHours();
-                              const minutes = timestamp.getMinutes();
-                              const seconds = timestamp.getSeconds();
-
+                            // 获取年、月、日、时、分、秒
+                            const year = timestamp.getFullYear();
+                            const month = timestamp.getMonth() + 1; // 月份是从0开始的，所以要加1
+                            const day = timestamp.getDate();
+                            const hours = timestamp.getHours();
+                            const minutes = timestamp.getMinutes();
+                            const seconds = timestamp.getSeconds();
 
                             // 构建日期时间字符串
                             const commentTime = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
-                              return `<li class="item">
+                            return `<li class="item">
               <div class="user">
                 <img class="avatar lazyload" src="${ThemeConfig.lazyload_avatar}" alt="用户头像"
                      data-src="${comment.avatar || '/themes/theme-Joe3/assets/img/transparent-placeholder.png'}" data-text-avatar="${comment.nick}" onload="Joe.loadedPlaceholderReplaceImg(this, 'AvatarImg')" onerror="Joe.errorImg(this, 'ErrAvatarImg')" />
@@ -201,82 +204,82 @@
                 <div class="content leaving-content" >${comment.comment}</div>
               </div>
             </li>`;
-                            })
-                            .join('');
-                    const leaving = document.createElement('script');
-                    leaving.src = /*[[@{/assets/js/min/leaving.min.js}]]*/ '';
-                    leaving.type = 'module';
-                    document.body.appendChild(leaving);
-                  });
-                </script>
-              </th:block>
+                          })
+                          .join('');
+                        const leaving = document.createElement('script');
+                        leaving.src = /*[[@{/assets/js/min/leaving.min.js}]]*/ '';
+                        leaving.type = 'module';
+                        document.body.appendChild(leaving);
+                      });
+                    </script>
+                  </th:block>
 
-              <div class="joe_leaving-none tpl">暂无留言，期待第一个脚印。</div>
+                  <div class="joe_leaving-none tpl">暂无留言，期待第一个脚印。</div>
+                </div>
+              </article>
             </div>
-          </article>
-        </div>
-        <th:block
-                th:if="${theme.config.other.enable_clean_mode != true} and ${theme.config.post.enable_comment}"
-        >
-          <div class="joe_comment">
             <th:block
-                    th:if="${#annotations.getOrDefault(singlePage, 'enable_comment', 'true') != 'true'}"
+              th:if="${theme.config.other.enable_clean_mode != true} and ${theme.config.post.enable_comment}"
             >
-              <div class="joe_comment__close">
-                <svg
-                        class="joe_comment__close-icon"
-                        viewBox="0 0 1024 1024"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
+              <div class="joe_comment">
+                <th:block
+                  th:if="${#annotations.getOrDefault(singlePage, 'enable_comment', 'true') != 'true'}"
                 >
-                  <path
-                          d="M512.307.973c282.317 0 511.181 201.267 511.181 449.587a402.842 402.842 0 0 1-39.27 173.26 232.448 232.448 0 0 0-52.634-45.977c16.384-39.782 25.293-82.688 25.293-127.283 0-211.098-199.117-382.157-444.621-382.157-245.555 0-444.57 171.06-444.57 382.157 0 133.427 79.514 250.88 200.039 319.18v107.982l102.041-65.127a510.157 510.157 0 0 0 142.49 20.122l19.405-.359c19.405-.716 38.758-2.508 57.958-5.427l3.584 13.415a230.607 230.607 0 0 0 22.323 50.688l-20.633 3.328a581.478 581.478 0 0 1-227.123-12.288L236.646 982.426c-19.66 15.001-35.635 7.168-35.635-17.664v-157.39C79.411 725.198 1.024 595.969 1.024 450.56 1.024 202.24 229.939.973 512.307.973zm318.464 617.011c97.485 0 176.794 80.435 176.794 179.2S928.256 976.23 830.77 976.23c-97.433 0-176.742-80.281-176.742-179.046 0-98.816 79.309-179.149 176.742-179.149zM727.757 719.002a131.174 131.174 0 0 0-25.754 78.182c0 71.885 57.805 130.406 128.768 130.406 28.877 0 55.552-9.625 77.056-26.01zm103.014-52.327c-19.712 0-39.117 4.557-56.678 13.312L946.33 854.58c8.499-17.305 13.158-36.864 13.158-57.395 0-71.987-57.805-130.509-128.717-130.509zM512.307 383.13l6.861.358a67.072 67.072 0 0 1 59.853 67.072l-.307 6.86a67.072 67.072 0 0 1-66.407 60.57l-6.81-.358a67.072 67.072 0 0 1-59.852-67.072 67.072 67.072 0 0 1 66.662-67.43zm266.752 0l6.861.358a67.072 67.072 0 0 1 59.853 67.072l-.307 6.86a67.072 67.072 0 0 1-66.407 60.57l-6.81-.358a67.072 67.072 0 0 1-59.852-67.072h-.051l.307-6.86a67.072 67.072 0 0 1 66.406-60.57zm-533.504 0l6.861.358a67.072 67.072 0 0 1 59.853 67.072l-.307 6.86a67.072 67.072 0 0 1-66.407 60.57l-6.81-.358a67.072 67.072 0 0 1-59.852-67.072 67.072 67.072 0 0 1 66.662-67.43z"
-                  />
-                </svg>
-                <span>博主关闭了当前页面的评论</span>
-              </div>
-            </th:block>
-            <th:block
-                    th:if="${#annotations.getOrDefault(singlePage, 'enable_comment', 'true') == 'true'}"
-            >
-              <th:block
-                      th:replace="~{modules/macro/comment :: comment(name=${singlePage.metadata.name}, kind='SinglePage')}"
-              />
-            </th:block>
-          </div>
-        </th:block>
-        <th:block
-                th:if="${theme.config.other.enable_clean_mode == true} or ${theme.config.post.enable_comment !=true}"
-        >
-          <div class="joe_comment">
-            <div class="joe_comment__close">
-              <svg
+                  <div class="joe_comment__close">
+                    <svg
                       class="joe_comment__close-icon"
                       viewBox="0 0 1024 1024"
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"
                       height="18"
-              >
-                <path
+                    >
+                      <path
                         d="M512.307.973c282.317 0 511.181 201.267 511.181 449.587a402.842 402.842 0 0 1-39.27 173.26 232.448 232.448 0 0 0-52.634-45.977c16.384-39.782 25.293-82.688 25.293-127.283 0-211.098-199.117-382.157-444.621-382.157-245.555 0-444.57 171.06-444.57 382.157 0 133.427 79.514 250.88 200.039 319.18v107.982l102.041-65.127a510.157 510.157 0 0 0 142.49 20.122l19.405-.359c19.405-.716 38.758-2.508 57.958-5.427l3.584 13.415a230.607 230.607 0 0 0 22.323 50.688l-20.633 3.328a581.478 581.478 0 0 1-227.123-12.288L236.646 982.426c-19.66 15.001-35.635 7.168-35.635-17.664v-157.39C79.411 725.198 1.024 595.969 1.024 450.56 1.024 202.24 229.939.973 512.307.973zm318.464 617.011c97.485 0 176.794 80.435 176.794 179.2S928.256 976.23 830.77 976.23c-97.433 0-176.742-80.281-176.742-179.046 0-98.816 79.309-179.149 176.742-179.149zM727.757 719.002a131.174 131.174 0 0 0-25.754 78.182c0 71.885 57.805 130.406 128.768 130.406 28.877 0 55.552-9.625 77.056-26.01zm103.014-52.327c-19.712 0-39.117 4.557-56.678 13.312L946.33 854.58c8.499-17.305 13.158-36.864 13.158-57.395 0-71.987-57.805-130.509-128.717-130.509zM512.307 383.13l6.861.358a67.072 67.072 0 0 1 59.853 67.072l-.307 6.86a67.072 67.072 0 0 1-66.407 60.57l-6.81-.358a67.072 67.072 0 0 1-59.852-67.072 67.072 67.072 0 0 1 66.662-67.43zm266.752 0l6.861.358a67.072 67.072 0 0 1 59.853 67.072l-.307 6.86a67.072 67.072 0 0 1-66.407 60.57l-6.81-.358a67.072 67.072 0 0 1-59.852-67.072h-.051l.307-6.86a67.072 67.072 0 0 1 66.406-60.57zm-533.504 0l6.861.358a67.072 67.072 0 0 1 59.853 67.072l-.307 6.86a67.072 67.072 0 0 1-66.407 60.57l-6.81-.358a67.072 67.072 0 0 1-59.852-67.072 67.072 67.072 0 0 1 66.662-67.43z"
-                />
-              </svg>
-              <span>博主关闭了所有页面的评论</span>
-            </div>
+                      />
+                    </svg>
+                    <span>博主关闭了当前页面的评论</span>
+                  </div>
+                </th:block>
+                <th:block
+                  th:if="${#annotations.getOrDefault(singlePage, 'enable_comment', 'true') == 'true'}"
+                >
+                  <th:block
+                    th:replace="~{modules/macro/comment :: comment(name=${singlePage.metadata.name}, kind='SinglePage')}"
+                  />
+                </th:block>
+              </div>
+            </th:block>
+            <th:block
+              th:if="${theme.config.other.enable_clean_mode == true} or ${theme.config.post.enable_comment !=true}"
+            >
+              <div class="joe_comment">
+                <div class="joe_comment__close">
+                  <svg
+                    class="joe_comment__close-icon"
+                    viewBox="0 0 1024 1024"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                  >
+                    <path
+                      d="M512.307.973c282.317 0 511.181 201.267 511.181 449.587a402.842 402.842 0 0 1-39.27 173.26 232.448 232.448 0 0 0-52.634-45.977c16.384-39.782 25.293-82.688 25.293-127.283 0-211.098-199.117-382.157-444.621-382.157-245.555 0-444.57 171.06-444.57 382.157 0 133.427 79.514 250.88 200.039 319.18v107.982l102.041-65.127a510.157 510.157 0 0 0 142.49 20.122l19.405-.359c19.405-.716 38.758-2.508 57.958-5.427l3.584 13.415a230.607 230.607 0 0 0 22.323 50.688l-20.633 3.328a581.478 581.478 0 0 1-227.123-12.288L236.646 982.426c-19.66 15.001-35.635 7.168-35.635-17.664v-157.39C79.411 725.198 1.024 595.969 1.024 450.56 1.024 202.24 229.939.973 512.307.973zm318.464 617.011c97.485 0 176.794 80.435 176.794 179.2S928.256 976.23 830.77 976.23c-97.433 0-176.742-80.281-176.742-179.046 0-98.816 79.309-179.149 176.742-179.149zM727.757 719.002a131.174 131.174 0 0 0-25.754 78.182c0 71.885 57.805 130.406 128.768 130.406 28.877 0 55.552-9.625 77.056-26.01zm103.014-52.327c-19.712 0-39.117 4.557-56.678 13.312L946.33 854.58c8.499-17.305 13.158-36.864 13.158-57.395 0-71.987-57.805-130.509-128.717-130.509zM512.307 383.13l6.861.358a67.072 67.072 0 0 1 59.853 67.072l-.307 6.86a67.072 67.072 0 0 1-66.407 60.57l-6.81-.358a67.072 67.072 0 0 1-59.852-67.072 67.072 67.072 0 0 1 66.662-67.43zm266.752 0l6.861.358a67.072 67.072 0 0 1 59.853 67.072l-.307 6.86a67.072 67.072 0 0 1-66.407 60.57l-6.81-.358a67.072 67.072 0 0 1-59.852-67.072h-.051l.307-6.86a67.072 67.072 0 0 1 66.406-60.57zm-533.504 0l6.861.358a67.072 67.072 0 0 1 59.853 67.072l-.307 6.86a67.072 67.072 0 0 1-66.407 60.57l-6.81-.358a67.072 67.072 0 0 1-59.852-67.072 67.072 67.072 0 0 1 66.662-67.43z"
+                    />
+                  </svg>
+                  <span>博主关闭了所有页面的评论</span>
+                </div>
+              </div>
+            </th:block>
           </div>
-        </th:block>
+          <th:block
+            th:if="${theme.config.aside.enable_sheet_aside} and ${#annotations.getOrDefault(singlePage, 'enable_aside', 'true') == 'true'}"
+          >
+            <th:block th:replace="~{modules/common/aside :: aside}" />
+          </th:block>
+        </div>
+        <th:block th:replace="~{modules/common/actions :: actions}" />
+        <th:block th:replace="~{modules/common/footer :: footer}" />
       </div>
-      <th:block
-              th:if="${theme.config.aside.enable_sheet_aside} and ${#annotations.getOrDefault(singlePage, 'enable_aside', 'true') == 'true'}"
-      >
-        <th:block th:replace="~{modules/common/aside :: aside}" />
-      </th:block>
-    </div>
-    <th:block th:replace="~{modules/common/actions :: actions}" />
-    <th:block th:replace="~{modules/common/footer :: footer}" />
-  </div>
-  <th:block th:replace="~{modules/macro/tail :: tail}" />
-  </body>
-</th:block>
+      <th:block th:replace="~{modules/macro/tail :: tail}" />
+    </body>
+  </th:block>
 </html>

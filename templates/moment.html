@@ -1,6 +1,6 @@
 <!doctype html>
 <html
-  lang="en"
+  th:lang="${#locale.toLanguageTag}"
   xmlns:th="http://www.thymeleaf.org"
   th:replace="~{modules/layout :: html(title = ${theme.config.journals.journals_title ?: '我的动态'}+'-'+${site.title},htmlType = journals,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
 >

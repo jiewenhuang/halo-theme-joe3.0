@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html th:lang="${#locale.toLanguageTag}" xmlns:th="http://www.thymeleaf.org">
   <th:block th:fragment="footer">
     <footer
       class="joe_footer"
@@ -11,7 +11,8 @@
       >
         <div class="item">
           <p>
-            © [[${#strings.substring(theme.config.footer.custom_birthday, 0, 4)}]] - [[${#dates.format(new java.util.Date().getTime(), 'yyyy')}]]<a
+            © [[${#strings.substring(theme.config.footer.custom_birthday, 0, 4)}]] -
+            [[${#dates.format(new java.util.Date().getTime(), 'yyyy')}]]<a
               th:href="${site.url}"
               target="_blank"
               rel="noopener noreferrer"

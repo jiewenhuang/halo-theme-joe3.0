@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html th:lang="${#locale.toLanguageTag}" xmlns:th="https://www.thymeleaf.org">
   <th:block
     th:fragment="links"
     th:with="source_link=${(#strings.trim(theme.config.basic.source_link) !='' && theme.config.basic.enable_source_link)? theme.config.basic.source_link : '/themes/theme-Joe3'}"

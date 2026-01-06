@@ -1,6 +1,6 @@
 <!doctype html>
 <html
-  lang="en"
+  th:lang="${#locale.toLanguageTag}"
   xmlns:th="http://www.thymeleaf.org"
   th:replace="~{modules/layout :: html(title = ${theme.config.archives.archives_title ?: '文章归档'}+'-'+${site.title},htmlType = archives,header = null,leftSidebar = true,content = ~{::content}, head = null, footer = null)}"
 >

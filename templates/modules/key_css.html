@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html th:lang="${#locale.toLanguageTag}" xmlns:th="http://www.thymeleaf.org">
   <th:block th:fragment="key_css">
     <style th:inline="text">
       [# th:if="${theme.config.other.rip_mode}"]
