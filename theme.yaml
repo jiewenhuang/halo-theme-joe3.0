@@ -18,7 +18,7 @@ spec:
   settingName: 'theme-Joe-setting'
   configMapName: 'theme-Joe-configMap'
   version: '1.4.0'
-  require: '>=2.19.0'
+  require: '>=2.22.2'
   customTemplates:
     page:
       - name: 留言板

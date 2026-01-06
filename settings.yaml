@@ -152,7 +152,8 @@ spec:
           label: 主题色（暗黑）
           value: '#9999ff'
           help: '暗黑主题色色值，默认#9999ff'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_background_light
           id: enable_background_light
           key: enable_background_light
@@ -166,7 +167,8 @@ spec:
           label: 背景图（浅色模式）
           help: '设置浅色模式下的背景图（建议webp格式），为空则只显示默认背景色'
           value: ''
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_background_dark
           id: enable_background_dark
           key: enable_background_dark
@@ -187,7 +189,8 @@ spec:
           label: 内容区最大宽度
           value: 1320
           help: '限制内容区域的宽度，单位px,默认1320px'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_random_img_api
           id: enable_random_img_api
           key: enable_random_img_api
@@ -255,18 +258,20 @@ spec:
               label: 加载
             - value: false
               label: 分页
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_auto_ajax
           id: enable_auto_ajax
           key: enable_auto_ajax
           label: 是否开启自动加载
           help: '开启后滑到底部自动加载文章(默认关闭)'
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: enable_post_thumbnail
           id: enable_post_thumbnail
           key: enable_post_thumbnail
           label: 开启文章缩略图
           help: '是否展示首页文章列表的缩略图'
+          value: false
         - $formkit: attachment
           name: lazyload_thumbnail
           id: lazyload_thumbnail
@@ -288,13 +293,15 @@ spec:
           label: 文章错误缺省图
           value: '/themes/theme-Joe3/assets/img/default_thumbnail.png'
           help: '文章图片加载出错时生效，可使用占位图服务（350*200）'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_index_list_effect
           id: enable_index_list_effect
           key: enable_index_list_effect
           label: 开启列表动画效果
           help: '是否开启首页列表动画效果'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_hot_category
           id: enable_hot_category
           key: enable_hot_category
@@ -611,7 +618,8 @@ spec:
               label: 固定的彩带
             - value: balloon
               label: 上升的气球
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_loading_bar
           id: enable_loading_bar
           key: enable_loading_bar
@@ -646,7 +654,8 @@ spec:
           label: 滚动条宽度
           value: '8px'
           help: '设置全局滚动条的宽度，默认为 8px，填 0 相当于不显示'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_offscreen_tip
           id: enable_offscreen_tip
           key: enable_offscreen_tip
@@ -682,24 +691,27 @@ spec:
               label: 当前页
             - value: new
               label: 新标签
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_show_in_up
           id: enable_show_in_up
           key: enable_show_in_up
           label: 开启模块缓入效果（全局）
           help: '开启后，当页面载入时，页面中的模块会有缓入动画'
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: enable_back2top
           id: enable_back2top
           key: enable_back2top
           label: 开启返回顶部
           help: '是否开启返回顶部功能'
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: enable_back2top_smooth
           id: enable_back2top_smooth
           key: enable_back2top_smooth
           label: 平滑返回顶部
           help: '点击返回顶部按钮后，是否平滑的返回顶部，关闭后则没有任何过渡效果'
+          value: false
         - $formkit: select
           name: web_font
           id: web_font
@@ -717,11 +729,12 @@ spec:
     - group: carousel
       label: 轮播图
       formSchema:
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_banner
           id: enable_banner
           key: enable_banner
           label: 启用轮播图
+          value: false
         - $formkit: repeater
           name: banner_data_group
           id: banner_data_group
@@ -804,7 +817,8 @@ spec:
               label: 水平
             - value: vertical
               label: 垂直
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           if: '$get(enable_banner).value === true'
           name: enable_banner_loop
           id: enable_banner_loop
@@ -832,26 +846,30 @@ spec:
               label: 卡片式
             - value: 'creative'
               label: 创意性
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           if: '$get(enable_banner).value === true'
           name: enable_banner_handle
           id: enable_banner_handle
           key: enable_banner_handle
           label: 允许手动控制
           help: '如果关闭，将隐藏切换按钮且不能通过鼠标和键盘进行切换'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           if: '$get(enable_banner).value === true'
           name: enable_banner_switch_button
           id: enable_banner_switch_button
           key: enable_banner_switch_button
           label: 展示左右切换按钮
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           if: '$get(enable_banner).value === true'
           name: enable_banner_pagination
           id: enable_banner_pagination
           key: enable_banner_pagination
           label: 展示分页器
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           if: '$get(enable_banner).value === true'
           name: enable_banner_autoplay
           id: enable_banner_autoplay
@@ -884,7 +902,8 @@ spec:
     - group: beauty
       label: 美化
       formSchema:
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_big_banner
           id: enable_big_banner
           key: enable_big_banner
@@ -905,14 +924,16 @@ spec:
           label: 图片或者api地址
           value: 'http://imgapi.xl0408.top/index.php'
           help: '填写图片地址或者随机图api地址'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_big_banner_hitokoto
           id: enable_big_banner_hitokoto
           key: enable_big_banner_hitokoto
           if: '$get(enable_big_banner).value === true'
           label: 是否启用一言
           help: 更多设置自行修改（/templates/modules/macro/tail.html）
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_big_banner_video
           id: enable_big_banner_video
           key: enable_big_banner_video
@@ -948,29 +969,33 @@ spec:
           key: menu
           label: 选择导航展示菜单
           value: ''
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_fixed_header
           id: enable_fixed_header
           key: enable_fixed_header
           label: 导航条吸顶
           help: '开启后，当页面滚动时，导航条会始终固定在可视区域顶部（默认只在向上滚动时显示，移动端强制吸顶展示）'
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: nav_login
           id: nav_login
           key: nav_login
           label: 导航栏登入按钮
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: enable_full_header
           id: enable_full_header
           key: enable_full_header
           label: 100%宽度
           help: '导航条宽度是否100%，默认和内容区域宽度一致'
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: show_logo
           id: show_logo
           key: show_logo
           label: 展示博客LOGO
           help: '导航条是否展示博客LOGO'
+          value: false
         - $formkit: text
           name: logo_link
           id: logo_link
@@ -985,40 +1010,46 @@ spec:
           label: LOGO圆角值
           value: '4px'
           help: '导航栏博客LOGO的圆角值，像素或百分比，默认4px'
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_navbar_icon
           id: enable_navbar_icon
           key: enable_navbar_icon
           label: 开启菜单图标
           help: '导航条菜单默认展示后台配置的图标，若不需要可以在这里统一关闭'
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: enable_icon_animate
           id: enable_icon_animate
           key: enable_icon_animate
           label: 菜单图标悬浮动画
           help: '导航条菜单默认展示后台配置的图标，若不需要可以在这里统一关闭'
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: enable_active_shadow
           id: enable_active_shadow
           key: enable_active_shadow
           label: 文字阴影效果
           help: '是否开启当前选中项的文字阴影效果（默认关闭以节省性能）'
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: enable_glass_blur
           id: enable_glass_blur
           key: enable_glass_blur
           label: 毛玻璃效果
           help: '是否开启导航条毛玻璃效果（默认关闭以节省性能，仅在“导航条吸顶”开启时生效）'
+          value: false
     - group: blogger
       label: 博主信息
       formSchema:
-        - $formkit: checkbox
+        - $formkit: switch
+          value: true
           name: show_blogger
           id: show_blogger
           key: show_blogger
           label: 展示博主信息
           help: '不展示的情况下，下面配置均无效'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_day_words
           id: enable_day_words
           key: enable_day_words
@@ -1031,7 +1062,8 @@ spec:
           label: 博主显示昵称
           value: ''
           help: '默认使用网站title'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_blogger_level
           id: enable_blogger_level
           key: enable_blogger_level
@@ -1104,13 +1136,15 @@ spec:
               label: 分类+文章+评论
             - value: D
               label: 标签+文章+评论
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_social
           id: enable_social
           key: enable_social
           label: 展示社交账号
           help: '是否展示社交账号'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_mobile_social
           id: enable_mobile_social
           key: enable_mobile_social
@@ -1218,7 +1252,8 @@ spec:
               key: socials_icon
               label: svg代码或者图片(如果使用图片请输入完整img标签)
               validation: 'required'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_weather
           id: enable_weather
           key: enable_weather
@@ -1322,7 +1357,8 @@ spec:
               label: 向日葵
             - value: 'swirl-heart'
               label: 上升的心
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_strips
           id: enable_strips
           key: enable_strips
@@ -1331,49 +1367,57 @@ spec:
     - group: code_block
       label: 代码块
       formSchema:
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_code_title
           id: enable_code_title
           key: enable_code_title
           label: 代码标题
           help: '开启代码块的标题，默认显示语言类型，也可自定义标题'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_code_hr
           id: enable_code_hr
           key: enable_code_hr
           label: 标题分隔线
           help: '是否展示标题和内容之间的分割线，不展示时会更加简洁'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_code_macdot
           id: enable_code_macdot
           key: enable_code_macdot
           label: mac彩点
           help: '是否展示左上角的mac风格彩点'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_code_copy
           id: enable_code_copy
           key: enable_code_copy
           label: 代码复制
           help: '开启代码块复制按钮'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_code_line_number
           id: enable_code_line_number
           key: enable_code_line_number
           label: 代码行号
           help: '开启代码块行号功能（“自动换行” 开启时无效）'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_code_newline
           id: enable_code_newline
           key: enable_code_newline
           label: 自动换行
           help: '当代码长度超过容器宽度时是否自动换行，开启后将不会出现横向滚动条，且不会展示代码行号（代码自动换行后看起来可能不会很美观，请根据个人需要配置）'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_code_expander
           id: enable_code_expander
           key: enable_code_expander
           label: 代码折叠
           help: '开启代码块折叠功能'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_fold_long_code
           id: enable_fold_long_code
           key: enable_fold_long_code
@@ -1466,13 +1510,15 @@ spec:
               label: 'xonokai'
             - value: 'z-touch'
               label: 'z-touch'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: show_tools_when_hover
           id: show_tools_when_hover
           key: show_tools_when_hover
           label: 仅悬浮时显示操作按钮
           help: '是否仅在鼠标悬浮到当前代码块时才显示相关操作按钮，不显示时会更加简洁'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: false
           name: enable_single_code_select
           id: enable_single_code_select
           key: enable_single_code_select
@@ -1499,7 +1545,8 @@ spec:
     - group: aside
       label: 侧边栏
       formSchema:
-        - $formkit: checkbox
+        - $formkit: switch
+          value: true
           name: enable_aside
           id: enable_aside
           key: enable_aside
@@ -1532,55 +1579,64 @@ spec:
           value: '5'
           help: '全局设置'
 
-        - $formkit: checkbox
+        - $formkit: switch
+          value: true
           name: enable_tags_aside
           id: enable_tags_aside
           key: enable_tags_aside
           label: 标签页侧边栏
           help: '标签页右侧是否展示侧边栏'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: true
           name: enable_categories_aside
           id: enable_categories_aside
           key: enable_categories_aside
           label: 分类页侧边栏
           help: '分类页右侧是否展示侧边栏'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: true
           name: enable_archives_aside
           id: enable_archives_aside
           key: enable_archives_aside
           label: 归档页侧边栏
           help: '归档页右侧是否展示侧边栏'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: true
           name: enable_post_aside
           id: enable_post_aside
           key: enable_post_aside
           label: 文章页侧边栏
           help: '文章页右侧是否展示侧边栏（关闭后，TOC 目录也就没有了）'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: true
           name: enable_journals_aside
           id: enable_journals_aside
           key: enable_journals_aside
           label: 日志页侧边栏
           help: '日志页右侧是否展示侧边栏'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: true
           name: enable_photos_aside
           id: enable_photos_aside
           key: enable_photos_aside
           label: 相册页侧边栏
           help: '相册页右侧是否展示侧边栏'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: true
           name: enable_links_aside
           id: enable_links_aside
           key: enable_links_aside
           label: 友链页侧边栏
           help: '友链页右侧是否展示侧边栏'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: true
           name: enable_friends_aside
           id: enable_friends_aside
           key: enable_friends_aside
           label: 朋友圈侧边栏
           help: '朋友圈右侧是否展示侧边栏'
-        - $formkit: checkbox
+        - $formkit: switch
+          value: true
           name: enable_sheet_aside
           id: enable_sheet_aside
           key: enable_sheet_aside
@@ -1930,12 +1986,13 @@ spec:
     - group: post
       label: 文章页
       formSchema:
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_title_shadow
           id: enable_title_shadow
           key: enable_title_shadow
           label: 标题阴影
           help: '是否为文章页标题应用文字阴影'
+          value: false
         - $formkit: text
           name: post_author_link
           id: post_author_link
@@ -1943,18 +2000,20 @@ spec:
           label: 文章页作者跳转链接
           value: ''
           help: '留空则跳转作者文章归档'
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_page_meta
           id: enable_page_meta
           key: enable_page_meta
           label: 页面元数据
           help: '是否展示文章页/自定义页顶部的页面元数据（点赞、阅读、字数等）'
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: enable_passage_tips
           id: enable_passage_tips
           key: enable_passage_tips
           label: 温馨提示
           help: '是否展示文章页顶部的温馨提示'
+          value: false
         - $formkit: text
           if: '$get(enable_passage_tips).value === true'
           name: days
@@ -2006,13 +2065,13 @@ spec:
           label: 图片最大宽度
           value: 100%
           help: '设置文章内容区域图片的最大宽度，接受一切有效的宽度值，需带单位（默认为 100%，也可通过页面元数据 img_max_width 配置，但小屏幕下最大宽度会被强制设为 100%）'
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_progress_bar
           id: enable_progress_bar
           key: enable_progress_bar
           label: 启用文章浏览进度条
           help: '文章页底部是否展示浏览进度条'
-
+          value: true
         - $formkit: color
           name: progress_bar_bgc
           id: progress_bar_bgc
@@ -2021,20 +2080,20 @@ spec:
           label: 进度条背景色
           value: '#fb6c28'
           help: '浏览进度条的背景色'
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_toc
           id: enable_toc
           key: enable_toc
           label: 文章TOC目录
           help: '可通过后台配置文章元属性 enable_toc 来启用/关闭单个文章的 Toc 目录'
-
-        - $formkit: checkbox
+          value: true
+        - $formkit: switch
           name: enable_mobile_toc
           id: enable_mobile_toc
           key: enable_mobile_toc
           label: 移动端文章TOC目录
           help: '是否启用移动端的TOC目录'
-
+          value: true
         - $formkit: text
           name: toc_depth
           id: toc_depth
@@ -2042,12 +2101,13 @@ spec:
           label: TOC目录默认展开层级
           value: '0'
           help: 'TOC目录自动展开的标题层级（1~6级标题，仅对有多级目录的文章生效），默认为 0，不展开子目录'
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_relate_post
           id: enable_relate_post
           key: enable_relate_post
           label: 展示相关文章
           help: '在右侧展示相关文章模块'
+          value: true
         - $formkit: text
           if: '$get(enable_relate_post).value === true'
           name: relate_post_max
@@ -2056,38 +2116,44 @@ spec:
           label: 相关文章最大条数
           value: '5'
           help: '相关文章模块展示的最大文章数，默认5条'
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_edit
           id: enable_edit
           key: enable_edit
           label: 文章编辑
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: enable_comment
           id: enable_comment
           key: enable_comment
           label: 文章评论
-        - $formkit: checkbox
+          value: true
+        - $formkit: switch
           name: enable_like
           id: enable_like
           key: enable_like
           label: 文章点赞
-        - $formkit: checkbox
+          value: true
+        - $formkit: switch
           name: enable_share
           id: enable_share
           key: enable_share
           label: 文章分享
-        - $formkit: checkbox
+          value: true
+        - $formkit: switch
           name: enable_copy
           id: enable_copy
           key: enable_copy
           label: 文章可复制
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: enable_indent
           id: enable_indent
           key: enable_indent
           label: 首行缩进
           help: '开启后，文章页中的p标签将首行缩进2个字符，可通过元数据 enable_indent 为某篇文章单独配置（由于文章内容格式不可控，无法保证展示效果，不建议开启）'
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: enable_copy_right_text
           id: enable_copy_right_text
           key: enable_copy_right_text
@@ -2101,31 +2167,36 @@ spec:
           label: 自定义版权文案
           value: ''
           help: '文章页复制内容时追加的自定义版权文字（如无特殊需要不建议设置，使用默认的即可。若真的要设置，请不要填写表情等特殊内容，否则可能导致网站崩溃）【支持使用变量 {postUrl}、{postTitle}、{postAuthor}、{postDescription}、{BlogTitle}、{BlogUrl}】'
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_share_weixin
           id: enable_share_weixin
           key: enable_share_weixin
           label: 微信分享
-        - $formkit: checkbox
+          value: true
+        - $formkit: switch
           name: enable_share_qq
           id: enable_share_qq
           key: enable_share_qq
           label: QQ分享
-        - $formkit: checkbox
+          value: true
+        - $formkit: switch
           name: enable_share_qzone
           id: enable_share_qzone
           key: enable_share_qzone
           label: QQ空间分享
-        - $formkit: checkbox
+          value: true
+        - $formkit: switch
           name: enable_share_weibo
           id: enable_share_weibo
           key: enable_share_weibo
           label: 微博分享
-        - $formkit: checkbox
+          value: true
+        - $formkit: switch
           name: enable_share_link
           id: enable_share_link
           key: enable_share_link
           label: 链接分享
+          value: true
         - $formkit: textarea
           if: '$get(enable_share_link).value === true'
           name: share_link_template
@@ -2141,11 +2212,12 @@ spec:
           label: 许可协议文案
           value: ''
           help: '自定义文章页底部版权模块中的“作品采用”文案，为空则使用默认文案，一般不用设置'
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_donate
           id: enable_donate
           key: enable_donate
           label: 开启打赏
+          value: false
         - $formkit: attachment
           if: '$get(enable_donate).value === true'
           name: qrcode_zfb
@@ -2199,12 +2271,13 @@ spec:
               label: 标签
             - value: card
               label: 卡片
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_tags_post_num
           id: enable_tags_post_num
           key: enable_tags_post_num
           label: 展示文章数
           help: '是否展示标签下的文章数'
+          value: false
     - group: categories
       label: 分类页
       formSchema:
@@ -2227,12 +2300,13 @@ spec:
               label: 标签
             - value: card
               label: 卡片
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_categories_post_num
           id: enable_categories_post_num
           key: enable_categories_post_num
           label: 展示文章数
           help: '是否展示分类下的文章数'
+          value: false
     - group: archives
       label: 归档页
       formSchema:
@@ -2274,21 +2348,22 @@ spec:
               label: 年
             - value: month
               label: 月
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_archives_category
           id: enable_archives_category
           key: enable_archives_category
           label: 展示分类数据
-
+          value: false
     - group: journals
       label: 日志页
       formSchema:
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_journal_effect
           id: enable_journal_effect
           key: enable_journal_effect
           label: 开启缓入动画
           help: '是否开启日志块缓入动画'
+          value: false
         - $formkit: text
           name: journals_title
           id: journals_title
@@ -2461,17 +2536,19 @@ spec:
               label: 'slideOutRight'
             - value: 'slideOutUp'
               label: 'slideOutUp'
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_journal_add
           id: enable_journal_add
           key: enable_journal_add
           label: 展示新增日志按钮
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: enable_like_journal
           id: enable_like_journal
           key: enable_like_journal
           label: 开启日志点赞
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: enable_comment_journal
           id: enable_comment_journal
           key: enable_comment_journal
@@ -2486,12 +2563,13 @@ spec:
     - group: photos
       label: 相册页
       formSchema:
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_photos_effect
           id: enable_photos_effect
           key: enable_photos_effect
           label: 开启展示动画
           help: '是否开启图片展示出来时的动画效果'
+          value: false
         - $formkit: text
           name: photos_title
           id: photos_title
@@ -2522,13 +2600,14 @@ spec:
           label: 友链默认 logo
           value: '/themes/theme-Joe3/assets/img/default_links_logo.png'
           help: '用于友链 logo 未设置或加载出错时显示的图片，设置为空，会随机根据当前博主名字随机生成一张首字符的渐变色图片'
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_links_comment
           id: enable_links_comment
           key: enable_links_comment
           label: 开启友链评论
           help: '是否开启友链评论功能'
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: enable_links_random
           id: enable_links_random
           key: enable_links_random
@@ -2572,23 +2651,25 @@ spec:
     - group: friends
       label: 朋友圈
       formSchema:
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_friend_effect
           id: enable_friend_effect
           key: enable_friend_effect
           label: 开启缓入动画
           help: '是否开启朋友圈列表缓入动画'
+          value: false
         - $formkit: text
           name: friends_title
           id: friends_title
           key: friends_title
           label: 朋友圈标题
           value: '朋友圈'
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_friend_add
           id: enable_friend_add
           key: enable_friend_add
           label: 展示新增订阅按钮
+          value: false
         - $formkit: select
           name: friend_list_effect_class
           id: friend_list_effect_class
@@ -2765,11 +2846,12 @@ spec:
     - group: ads
       label: 广告
       formSchema:
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_ads
           id: enable_ads
           key: enable_ads
           label: 开启广告
+          value: false
         - $formkit: select
           if: '$get(enable_ads).value == true'
           name: enable_ads_top
@@ -2902,11 +2984,12 @@ spec:
     - group: footer
       label: 页脚
       formSchema:
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_footer
           id: enable_footer
           key: enable_footer
           label: 启用页脚
+          value: true
         - $formkit: radio
           if: '$get(enable_footer).value == true'
           name: footer_position
@@ -2947,13 +3030,14 @@ spec:
               label: '后台页脚'
             - value: both
               label: '主题页脚 + 后台页脚'
-        - $formkit: checkbox
+        - $formkit: switch
           if: '$get(enable_footer).value == true'
           name: enable_birthday
           id: enable_birthday
           key: enable_birthday
           label: 展示博客运行时间
           help: '实时展示博客运行时长，以博客实际的安装时间为基准计算（默认关闭以节省性能）'
+          value: false
         - $formkit: text
           if: '$get(enable_birthday).value == true'
           name: custom_birthday
@@ -2962,25 +3046,28 @@ spec:
           label: 自定义博客起始时间
           value: '2021/11/11 06:30'
           help: '自定义博客的起始时间/安装时间，作为计算博客运行时间的参照值，请严格按照示例格式填写，否则将导致报错（示例：2021/11/11 06:30）'
-        - $formkit: checkbox
+        - $formkit: switch
           if: '$get(enable_footer).value == true'
           name: enable_icp
           id: enable_icp
           key: enable_icp
           label: 展示 ICP
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           if: '$get(enable_footer).value == true'
           name: enable_police
           id: enable_police
           key: enable_police
           label: 展示公网安备
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           if: '$get(enable_footer).value == true'
           name: enable_powerby
           id: enable_powerby
           key: enable_powerby
           label: 展示 PowerBy
           help: '为了尊重作者的权益，建议展示'
+          value: true
         - $formkit: select
           if: '$get(enable_footer).value == true'
           name: driven_by
@@ -3021,19 +3108,21 @@ spec:
           key: driven_by_custom_img
           if: "$get(driven_by).value === 'custom'"
           label: 图片地址
-        - $formkit: checkbox
+        - $formkit: switch
           if: '$get(enable_footer).value == true'
           name: enable_rss
           id: enable_rss
           key: enable_rss
           label: 展示 RSS
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           if: '$get(enable_footer).value == true'
           name: enable_sitemap
           id: enable_sitemap
           key: enable_sitemap
           label: 展示站点地图
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           if: '$get(enable_footer).value == true'
           name: enable_busuanzi
           id: enable_busuanzi
@@ -3109,31 +3198,35 @@ spec:
           value: ''
           help: '已废弃，此设置项将在未来版本移除，请使用 Halo 自带的代码注入代替，https://docs.halo.run/user-guide/settings#%E4%BB%A3%E7%A0%81%E6%B3%A8%E5%85%A5'
           language: javascript
-        - $formkit: checkbox
+        - $formkit: switch
           name: show_loaded_time
           id: show_loaded_time
           key: show_loaded_time
           label: 控制台输出页面加载耗时
+          value: false
     - group: other
       label: 其他
       formSchema:
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_debug
           id: enable_debug
           key: enable_debug
           label: 调试模式
           help: '调试模式开启后，页面会展示 vconsole 的绿色调试按钮，便于排查移动端的线上问题'
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: rip_mode
           id: rip_mode
           key: rip_mode
           label: RIP模式
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: enable_clean_mode
           id: enable_clean_mode
           key: enable_clean_mode
           label: 绿色模式
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: check_baidu_collect
           id: check_baidu_collect
           key: check_baidu_collect
@@ -3146,9 +3239,10 @@ spec:
           label: 百度推送Token
           value: ''
           help: '文章页未收录时会自动将当前链接推送给百度加快收录，Token在百度收录平台注册账号获取（必须启用“检查百度收录”并填入token才生效），https://ziyuan.baidu.com/linksubmit'
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_console_theme
           id: enable_console_theme
           key: enable_console_theme
           label: 控制台输出主题信息
           help: 是否在控制台输出主题相关信息
+          value: false
