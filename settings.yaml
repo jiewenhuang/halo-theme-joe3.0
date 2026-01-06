@@ -1665,9 +1665,13 @@ spec:
           key: enable_outpost_aside
           label: 非文章页侧边栏
           value:
-            - template_aside: 'enable_blogger'
-            - template_aside: 'enable_newest_post'
-            - template_aside: 'enable_tag_cloud'
+            - template_aside: enable_blogger
+            - template_aside: enable_newest_post
+            - template_aside: enable_tag_cloud
+              aside_tag_cloud:
+                tag_cloud_type: 3d
+                tag_cloud_num_type: num
+                tag_cloud_num: '15'
           itemLabels:
             - type: 'text'
               label: '$value.template_aside'
@@ -1849,7 +1853,6 @@ spec:
               key: aside_tag_cloud
               if: $value.template_aside === 'enable_tag_cloud'
               label: 标签云
-              value: []
               help: '数据不同，不能在这里选择分类云'
               children:
                 - $formkit: select
