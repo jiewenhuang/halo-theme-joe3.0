@@ -735,20 +735,26 @@ spec:
           key: enable_banner
           label: 启用轮播图
           value: false
-        - $formkit: repeater
+        - $formkit: array
           name: banner_data_group
           id: banner_data_group
           key: banner_data_group
           if: '$get(enable_banner).value === true'
           label: 轮播图数据设置
           value: []
+          itemLabels:
+            - type: 'image'
+              label: '$value.data_by_custom.banner_img'
+            - type: 'text'
+              label: '$value.banner_section_type'
+            - type: 'text'
+              label: '$value.data_by_custom.banner_title'
           children:
-            - $formkit: radio
+            - $formkit: select
               name: banner_section_type
               id: banner_section_type
               key: banner_section_type
               label: 模块类型
-              value:
               options:
                 - label: 已有文章
                   value: post
@@ -824,7 +830,7 @@ spec:
           id: enable_banner_loop
           key: enable_banner_loop
           label: 循环播放
-        - $formkit: radio
+        - $formkit: select
           if: '$get(enable_banner).value === true'
           name: banner_effect
           id: banner_effect
@@ -963,7 +969,7 @@ spec:
     - group: navbar
       label: 导航
       formSchema:
-        - $formkit: menuRadio
+        - $formkit: menuSelect
           name: menu
           id: menu
           key: menu
@@ -1162,13 +1168,18 @@ spec:
               label: 默认
             - value: custom
               label: 自定义
-        - $formkit: repeater
+        - $formkit: array
           name: socials
           id: socials
           key: socials
           if: "$get(option_social_data).value === 'default'"
           label: 社交信息
           value: []
+          itemLabels:
+            - type: 'text'
+              label: '$value.socials_select'
+            - type: 'text'
+              label: '$value.socialUrl'
           children:
             - $formkit: select
               name: socials_select
@@ -1227,12 +1238,17 @@ spec:
               label: 链接
               help: '邮箱填邮箱号，QQ填QQ号，其他填跳转链接'
               validation: 'required'
-        - $formkit: repeater
+        - $formkit: array
           name: custom_socials
           id: custom_socials
           key: custom_socials
           if: "$get(option_social_data).value === 'custom'"
           label: 自定义社交信息
+          itemLabels:
+            - type: 'text'
+              label: '$value.socials_name'
+            - type: 'text'
+              label: '$value.socials_url'
           children:
             - $formkit: text
               name: socials_name
@@ -1642,7 +1658,7 @@ spec:
           key: enable_sheet_aside
           label: 自定义页侧边栏
           help: '自定义页面右侧是否展示侧边栏，默认关闭。开启后，所有自定义页面都会展示侧边栏（若部分页面不想展示，可以配置对应页面的元数据 enable_aside 为 false ）'
-        - $formkit: repeater
+        - $formkit: array
           if: '$get(enable_sheet_aside).value == true'
           name: enable_outpost_aside
           id: enable_outpost_aside
@@ -1652,6 +1668,9 @@ spec:
             - template_aside: 'enable_blogger'
             - template_aside: 'enable_newest_post'
             - template_aside: 'enable_tag_cloud'
+          itemLabels:
+            - type: 'text'
+              label: '$value.template_aside'
           children:
             - $formkit: select
               name: template_aside
@@ -1719,7 +1738,7 @@ spec:
               label: 打赏数据
               value: []
               children:
-                - $formkit: repeater
+                - $formkit: array
                   name: reward_list
                   id: reward_list
                   key: reward_list
@@ -1727,6 +1746,13 @@ spec:
                   min: 1
                   label: 打赏列表
                   value: []
+                  itemLabels:
+                    - type: 'image'
+                      label: '$value.reward_url'
+                    - type: 'text'
+                      label: '$value.reward_label'
+                    - type: 'text'
+                      label: '$value.reward_type'
                   children:
                     - $formkit: text
                       name: reward_label
@@ -2617,7 +2643,7 @@ spec:
           id: links_group_default_sort
           key: links_group_default_sort
           label: 链接分类默认排序方式
-          value: 'link_group_create_time_asc'
+          value: 'links_group_create_time_asc'
           help: '设置友链分类默认排序方式，如果链接分类排序序号<=0，则按照默认排序方式进行排序'
           options:
             - value: 'links_group_create_time_asc'
@@ -2631,7 +2657,7 @@ spec:
           id: links_default_sort
           key: links_default_sort
           label: 同一分类内链接默认排序方式
-          value: 'link_create_time_asc'
+          value: 'links_create_time_asc'
           help: '设置同一分类内友链默认排序方式，如果同一分类内链接排序序号<=0，则按照默认排序方式进行排序'
           options:
             - value: 'links_create_time_asc'
@@ -2866,15 +2892,21 @@ spec:
               label: 图片
             - value: code
               label: 自定义代码
-        - $formkit: repeater
+        - $formkit: array
           if: '$get(enable_ads).value == true'
           name: ads_top
           id: ads_top
           key: ads_top
           label: 文章顶部广告图片
           max: 1
-          min: 1
           value: []
+          itemLabels:
+            - type: 'image'
+              label: '$value.ads_img'
+            - type: 'text'
+              label: '$value.ads_url'
+            - type: 'code'
+              label: '$value.ads_code'
           children:
             - $formkit: attachment
               name: ads_img
@@ -2909,15 +2941,21 @@ spec:
               label: 图片
             - value: code
               label: 自定义代码
-        - $formkit: repeater
+        - $formkit: array
           if: '$get(enable_ads).value == true'
           name: ads_bottom
           id: ads_bottom
           key: ads_bottom
           label: 文章底部广告图片
           max: 1
-          min: 1
           value: []
+          itemLabels:
+            - type: 'image'
+              label: '$value.ads_img'
+            - type: 'text'
+              label: '$value.ads_url'
+            - type: 'code'
+              label: '$value.ads_code'
           children:
             - $formkit: attachment
               name: ads_img
@@ -2952,15 +2990,21 @@ spec:
               label: 图片
             - value: code
               label: 自定义代码
-        - $formkit: repeater
+        - $formkit: array
           if: '$get(enable_ads).value == true'
           name: ads_aside
           id: ads_aside
           key: ads_aside
           label: 文章侧边栏广告图片
           max: 1
-          min: 1
           value: []
+          itemLabels:
+            - type: 'image'
+              label: '$value.ads_img'
+            - type: 'text'
+              label: '$value.ads_url'
+            - type: 'code'
+              label: '$value.ads_code'
           children:
             - $formkit: attachment
               name: ads_img
@@ -3002,7 +3046,7 @@ spec:
               label: 默认位置
             - value: fixed
               label: 底部固定
-        - $formkit: radio
+        - $formkit: switch
           if: '$get(enable_footer).value == true'
           name: enable_full_footer
           id: enable_full_footer
