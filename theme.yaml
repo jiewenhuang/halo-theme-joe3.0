@@ -10,15 +10,15 @@ spec:
   displayName: Theme Joe3
   author:
     name: Jiewenhuang
-    website: 'https://halo.run'
-  description: Halo2.0主题 Joe3
+    website: 'https://www.jiewen.run'
+  description: Halo 2.0主题 Joe3
   logo: 'https://wmimg.com/i/70/2023/08/64d3c41d5bde2.webp'
-  website: 'https://www.jiewen.run'
+  homepage: 'https://www.jiewen.run'
   repo: 'https://github.com/jiewenhuang/halo-theme-joe3.0'
   settingName: 'theme-Joe-setting'
   configMapName: 'theme-Joe-configMap'
-  version: '1.4.0'
-  require: '>=2.22.2'
+  version: '1.5.0'
+  requires: '>=2.22.2'
   customTemplates:
     page:
       - name: 留言板
