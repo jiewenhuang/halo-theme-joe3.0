@@ -682,24 +682,27 @@ spec:
               label: 当前页
             - value: new
               label: 新标签
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_show_in_up
           id: enable_show_in_up
           key: enable_show_in_up
           label: 开启模块缓入效果（全局）
           help: '开启后，当页面载入时，页面中的模块会有缓入动画'
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: enable_back2top
           id: enable_back2top
           key: enable_back2top
           label: 开启返回顶部
           help: '是否开启返回顶部功能'
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: enable_back2top_smooth
           id: enable_back2top_smooth
           key: enable_back2top_smooth
           label: 平滑返回顶部
           help: '点击返回顶部按钮后，是否平滑的返回顶部，关闭后则没有任何过渡效果'
+          value: false
         - $formkit: select
           name: web_font
           id: web_font
@@ -717,11 +720,12 @@ spec:
     - group: carousel
       label: 轮播图
       formSchema:
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_banner
           id: enable_banner
           key: enable_banner
           label: 启用轮播图
+          value: false
         - $formkit: repeater
           name: banner_data_group
           id: banner_data_group
@@ -948,29 +952,33 @@ spec:
           key: menu
           label: 选择导航展示菜单
           value: ''
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_fixed_header
           id: enable_fixed_header
           key: enable_fixed_header
           label: 导航条吸顶
           help: '开启后，当页面滚动时，导航条会始终固定在可视区域顶部（默认只在向上滚动时显示，移动端强制吸顶展示）'
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: nav_login
           id: nav_login
           key: nav_login
           label: 导航栏登入按钮
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: enable_full_header
           id: enable_full_header
           key: enable_full_header
           label: 100%宽度
           help: '导航条宽度是否100%，默认和内容区域宽度一致'
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: show_logo
           id: show_logo
           key: show_logo
           label: 展示博客LOGO
           help: '导航条是否展示博客LOGO'
+          value: false
         - $formkit: text
           name: logo_link
           id: logo_link
@@ -985,30 +993,34 @@ spec:
           label: LOGO圆角值
           value: '4px'
           help: '导航栏博客LOGO的圆角值，像素或百分比，默认4px'
-        - $formkit: checkbox
+        - $formkit: switch
           name: enable_navbar_icon
           id: enable_navbar_icon
           key: enable_navbar_icon
           label: 开启菜单图标
           help: '导航条菜单默认展示后台配置的图标，若不需要可以在这里统一关闭'
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: enable_icon_animate
           id: enable_icon_animate
           key: enable_icon_animate
           label: 菜单图标悬浮动画
           help: '导航条菜单默认展示后台配置的图标，若不需要可以在这里统一关闭'
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: enable_active_shadow
           id: enable_active_shadow
           key: enable_active_shadow
           label: 文字阴影效果
           help: '是否开启当前选中项的文字阴影效果（默认关闭以节省性能）'
-        - $formkit: checkbox
+          value: false
+        - $formkit: switch
           name: enable_glass_blur
           id: enable_glass_blur
           key: enable_glass_blur
           label: 毛玻璃效果
           help: '是否开启导航条毛玻璃效果（默认关闭以节省性能，仅在“导航条吸顶”开启时生效）'
+          value: false
     - group: blogger
       label: 博主信息
       formSchema:
