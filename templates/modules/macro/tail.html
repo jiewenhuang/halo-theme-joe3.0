@@ -102,23 +102,6 @@
     </th:block>
 
     <!-- ===== 引入脚本 end =====-->
-
-    <th:block
-      th:if="${theme.config.custom.custom_external_js_body != null} and ${theme.config.custom.custom_external_js_body != ''}"
-    >
-      <!-- 自定义外部js -->
-      <script th:src="${theme.config.custom.custom_external_js_body}"></script>
-    </th:block>
-    <th:block
-      th:if="${theme.config.custom.custom_js_body != null} and ${#strings.trim(theme.config.custom.custom_js_body) != ''}"
-    >
-      <!-- 自定义js -->
-      <script
-        type="text/javascript"
-        th:inline="javascript"
-        th:utext="${theme.config.custom.custom_js_body}"
-      ></script>
-    </th:block>
     <th:block th:if="${theme.config.other.enable_debug}">
       <!-- vconsole -->
       <script th:src="${source_link+'/assets/lib/vconsole/vconsole.min.js'}"></script>

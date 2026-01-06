@@ -3197,35 +3197,21 @@ spec:
           label: 字体图标链接
           value: ''
           help: '填入iconfont生成的图标链接，无需link标签，将插入head标签尾部'
-        - $formkit: text
-          name: external_css
-          id: external_css
-          key: external_css
-          label: 外部CSS链接
-          value: ''
-          help: '已废弃，此设置项将在未来版本移除，请使用 Halo 自带的代码注入代替，https://docs.halo.run/user-guide/settings#%E4%BB%A3%E7%A0%81%E6%B3%A8%E5%85%A5'
         - $formkit: code
           name: custom_css
           id: custom_css
           key: custom_css
           label: 自定义CSS
           value: ''
-          help: '已废弃，此设置项将在未来版本移除，请使用 Halo 自带的代码注入代替，https://docs.halo.run/user-guide/settings#%E4%BB%A3%E7%A0%81%E6%B3%A8%E5%85%A5'
+          help: '已不再生效，请使用 Halo 自带的代码注入代替，https://docs.halo.run/user-guide/settings#%E4%BB%A3%E7%A0%81%E6%B3%A8%E5%85%A5'
           language: css
-        - $formkit: text
-          name: custom_external_js_head
-          id: custom_external_js_head
-          key: custom_external_js_head
-          label: 外部JS链接（head）
-          value: ''
-          help: '已废弃，此设置项将在未来版本移除，请使用 Halo 自带的代码注入代替，https://docs.halo.run/user-guide/settings#%E4%BB%A3%E7%A0%81%E6%B3%A8%E5%85%A5'
         - $formkit: code
           name: custom_js_head
           id: custom_js_head
           key: custom_js_head
           label: 自定义JS（head）
           value: ''
-          help: '已废弃，此设置项将在未来版本移除，请使用 Halo 自带的代码注入代替，https://docs.halo.run/user-guide/settings#%E4%BB%A3%E7%A0%81%E6%B3%A8%E5%85%A5'
+          help: '已不再生效，请使用 Halo 自带的代码注入代替，https://docs.halo.run/user-guide/settings#%E4%BB%A3%E7%A0%81%E6%B3%A8%E5%85%A5'
           language: javascript
         - $formkit: text
           name: custom_external_js_body
@@ -3233,14 +3219,14 @@ spec:
           key: custom_external_js_body
           label: 外部JS链接（body）
           value: ''
-          help: '已废弃，此设置项将在未来版本移除，请使用 Halo 自带的代码注入代替，https://docs.halo.run/user-guide/settings#%E4%BB%A3%E7%A0%81%E6%B3%A8%E5%85%A5'
+          help: '已不再生效，请使用 Halo 自带的代码注入代替，https://docs.halo.run/user-guide/settings#%E4%BB%A3%E7%A0%81%E6%B3%A8%E5%85%A5'
         - $formkit: code
           name: custom_js_body
           id: custom_js_body
           key: custom_js_body
           label: 自定义JS（body）
           value: ''
-          help: '已废弃，此设置项将在未来版本移除，请使用 Halo 自带的代码注入代替，https://docs.halo.run/user-guide/settings#%E4%BB%A3%E7%A0%81%E6%B3%A8%E5%85%A5'
+          help: '已不再生效，请使用 Halo 自带的代码注入代替，https://docs.halo.run/user-guide/settings#%E4%BB%A3%E7%A0%81%E6%B3%A8%E5%85%A5'
           language: javascript
         - $formkit: switch
           name: show_loaded_time

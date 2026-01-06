@@ -176,9 +176,5 @@
       as="style"
       th:href="${source_link+'/assets/css/min/beauty.min.css?v='+theme.spec.version}"
     />
-    <style
-      th:if="${theme.config.custom.custom_css != null and theme.config.custom.custom_css != ''}"
-      th:utext="${theme.config.custom.custom_css}"
-    ></style>
   </th:block>
 </html>
