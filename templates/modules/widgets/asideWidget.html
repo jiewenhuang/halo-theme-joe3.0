@@ -144,8 +144,6 @@
                 </div>
               </div>
               <div class="reply">
-                <!--        <th:block th:with="post = ${postFinder.getByName(postMate.name)}">-->
-
                 <th:block
                   th:if="${result.spec.subjectRef.kind == 'SinglePage'}  and ${result.spec.subjectRef.name != 'links'}"
                 >
@@ -153,28 +151,27 @@
                     th:with="singlePage = ${singlePageFinder.getByName(result.spec.subjectRef.name)}"
                   >
                     <a class="link aside-reply-content" th:href="@{${singlePage.status.permalink}}">
-                      <p>[[${result.spec.content}]]</p>
+                      <p th:utext="${result.spec.content}"></p>
                     </a>
                   </th:block>
                 </th:block>
                 <th:block th:if="${result.spec.subjectRef.kind == 'Plugin'}">
                   <a class="link aside-reply-content" th:href="@{/links}">
-                    <p>[[${result.spec.content}]]</p>
+                    <p th:utext="${result.spec.content}"></p>
                   </a>
                 </th:block>
                 <th:block th:if="${result.spec.subjectRef.kind == 'Post'}">
                   <th:block th:with="post = ${postFinder.getByName(result.spec.subjectRef.name)}">
                     <a class="link aside-reply-content" th:href="@{${post.status.permalink}}">
-                      <p>[[${result.spec.content}]]</p>
+                      <p th:utext="${result.spec.content}"></p>
                     </a>
                   </th:block>
                 </th:block>
                 <th:block th:if="${result.spec.subjectRef.kind == 'Moment'}">
                   <a class="link aside-reply-content" th:href="@{/moments}">
-                    <p>[[${result.spec.content}]]</p>
+                    <p th:utext="${result.spec.content}"></p>
                   </a>
                 </th:block>
-                <!--        </th:block>-->
               </div>
             </li>
           </th:block>
