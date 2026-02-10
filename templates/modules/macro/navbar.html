@@ -20,12 +20,32 @@
               class="joe_header__above-logo"
               th:href="${logoLink == ''?site.url:logoLink}"
             >
-              <img
-                th:style="'border-radius:'+${theme.config.navbar.logo_radius} ?:'4px'"
-                th:src="${site.logo}"
-                th:alt="${site.title}"
-                onerror="Joe.errorImg(this, 'ErrAvatarImg')"
-              />
+              <th:block th:if="${not theme.config.navbar.enable_darkmode_logo}">
+                <!-- 未开启暗黑模式独立图标，使用默认logo -->
+                <img
+                  th:style="'border-radius:'+${theme.config.navbar.logo_radius} ?:'4px'"
+                  th:src="${site.logo}"
+                  th:alt="${site.title}"
+                  onerror="Joe.errorImg(this, 'ErrAvatarImg')"
+                />
+              </th:block>
+              <th:block th:if="${theme.config.navbar.enable_darkmode_logo}">
+                <!-- 开启暗黑模式独立图标，根据模式切换显示 -->
+                <img
+                  class="logo-light-mode"
+                  th:style="'border-radius:'+${theme.config.navbar.logo_radius} ?:'4px'"
+                  th:src="${site.logo}"
+                  th:alt="${site.title}"
+                  onerror="Joe.errorImg(this, 'ErrAvatarImg')"
+                />
+                <img
+                  class="logo-dark-mode"
+                  th:style="'border-radius:'+${theme.config.navbar.logo_radius} ?:'4px'"
+                  th:src="${theme.config.navbar.darkmode_logo}"
+                  th:alt="${site.title}"
+                  onerror="Joe.errorImg(this, 'ErrAvatarImg')"
+                />
+              </th:block>
             </a>
           </th:block>
           <nav

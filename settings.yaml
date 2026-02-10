@@ -1002,6 +1002,22 @@ spec:
           label: 展示博客LOGO
           help: '导航条是否展示博客LOGO'
           value: false
+        - $formkit: switch
+          if: '$get(show_logo).value == true'
+          value: false
+          name: enable_darkmode_logo
+          id: enable_darkmode_logo
+          key: enable_darkmode_logo
+          label: 开启暗黑模式图标
+          help: '需要配置好暗黑模式导航图标后才有效'
+        - $formkit: attachment
+          if: '$get(enable_darkmode_logo).value == true'
+          name: darkmode_logo
+          id: darkmode_logo
+          key: darkmode_logo
+          label: 图标（暗黑模式）
+          help: '设置暗黑模式下的图标（建议webp格式），为空则只显示默认图标'
+          value: ''
         - $formkit: text
           name: logo_link
           id: logo_link

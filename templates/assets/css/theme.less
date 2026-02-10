@@ -237,3 +237,24 @@ html {
     }
   }
 }
+
+// 导航栏 Logo 切换（浅色/暗黑模式）
+.joe_header__above-logo {
+  .logo-light-mode {
+    display: block;
+  }
+  .logo-dark-mode {
+    display: none;
+  }
+}
+
+html[data-mode="dark"] {
+  .joe_header__above-logo {
+    .logo-light-mode {
+      display: none;
+    }
+    .logo-dark-mode {
+      display: block;
+    }
+  }
+}
