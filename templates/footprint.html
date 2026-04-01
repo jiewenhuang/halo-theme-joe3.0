@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html
+    lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+    th:replace="~{modules/layout :: html(title = '足迹 - ' + ${site.title}, htmlType = 'footprint', header = null, leftSidebar = true, content = ~{::content}, head = ~{::head}, footer = null)}"
+>
+<th:block th:fragment="head">
+  <!-- 引入足迹插件样式 -->
+  <link rel="stylesheet" type="text/css" th:href="@{/plugins/footprint/assets/static/css/footprint.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/plugins/footprint/assets/static/font/result.css}" />
+  <!-- 引入高德地图API -->
+  <script type="text/javascript">
+    window._AMapSecurityConfig = {
+      securityJsCode: /*[[${settings?.gaoDeKey ?: ''}]]*/''
+    }
+  </script>
+  <script th:if="${settings != null and settings.gaoDeKey != null}" type="text/javascript" th:src="|https://webapi.amap.com/maps?v=2.0&key=${settings.gaoDeKey}|"></script>
+  <!-- 引入足迹插件JS -->
+  <script type="text/javascript" th:src="@{/plugins/footprint/assets/static/js/footprint.js}"></script>
+  <!-- 注入配置信息 -->
+  <script th:inline="javascript">
+    window.FOOTPRINT_CONFIG = {
+      amapKey: /*[[${settings?.gaoDeKey ?: ''}]]*/'',
+      footprints: [],
+      title: /*[[${settings?.title ?: '足迹'}]]*/ '足迹',
+      logoName: /*[[${settings?.logoName ?: '足迹'}]]*/ '足迹',
+      describe: /*[[${settings?.describe ?: '描述'}]]*/ '描述',
+      hsla: /*[[${settings?.hsla ?: '200, 100%, 50%'}]]*/ '200, 100%, 50%',
+      mapStyle: /*[[${settings?.mapStyle ?: 'amap://styles/normal'}]]*/ 'amap://styles/normal'
+    };
+  </script>
+</th:block>
+<th:block th:fragment="content">
+  <body>
+    <div id="Joe">
+      <th:block th:replace="~{modules/macro/navbar :: navbar}" />
+      <!-- 路书显示区域  -->
+      <div class="relative w-full" id="footprint-page">
+        <div class="footprint-container"  style="height: calc(100vh - 133px);">
+          <!-- 地图容器 -->
+          <div id="footprint-map"  style="height: calc(100vh - 133px);"></div>
+
+          <!-- 左下角Logo和文字 -->
+          <div class="logo-container">
+            <h1 class="footprint-logo" th:text="${settings?.logoName ?: '足迹'}">足迹<span class="logo-version">2024</span></h1>
+            <p class="footprint-slogan" th:text="${settings?.describe ?: '每一处足迹都充满了故事'}">每一处足迹都充满了故事，那是对人生的思考和无限的风光。</p>
+          </div>
+
+          <!-- 底部控制栏 -->
+          <div class="map-controls">
+            <!-- 图层选择器 -->
+            <div class="likcc-layer-selector">
+              <button class="likcc-layer-btn active" data-type="normal">
+                <svg class="likcc-layer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <path d="M9 9h6v6H9z"></path>
+                </svg>
+                <span>标准图</span>
+              </button>
+              <button class="likcc-layer-btn" data-type="satellite">
+                <svg class="likcc-layer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+                <span>卫星图</span>
+              </button>
+            </div>
+
+            <!-- 功能开关 -->
+            <div class="likcc-feature-toggles">
+              <label class="likcc-toggle-item">
+                <input type="checkbox" data-type="road">
+                <div class="likcc-toggle-switch">
+                  <div class="likcc-toggle-slider"></div>
+                </div>
+                <div class="likcc-toggle-content">
+                  <svg class="likcc-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 7v10a4 4 0 004 4h10a4 4 0 004-4V7a4 4 0 00-4-4H7a4 4 0 00-4 4z"></path>
+                    <path d="M9 12h6"></path>
+                  </svg>
+                  <span class="likcc-toggle-label">路网</span>
+                </div>
+              </label>
+
+              <label class="likcc-toggle-item">
+                <input type="checkbox" data-type="traffic">
+                <div class="likcc-toggle-switch">
+                  <div class="likcc-toggle-slider"></div>
+                </div>
+                <div class="likcc-toggle-content">
+                  <svg class="likcc-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                  </svg>
+                  <span class="likcc-toggle-label">路况</span>
+                </div>
+              </label>
+            </div>
+
+            <!-- 缩放控制 -->
+            <div class="likcc-zoom-controls">
+              <button class="likcc-zoom-btn" id="zoom-out">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="M21 21l-4.35-4.35"></path>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+              </button>
+              <button class="likcc-zoom-btn" id="zoom-in">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="M21 21l-4.35-4.35"></path>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+              </button>
+            </div>
+
+            <!-- 比例尺 -->
+            <div class="likcc-scale-display">
+              <div class="likcc-scale-bar"></div>
+              <span class="likcc-scale-text" id="scale-text">1000 公里</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <th:block th:replace="~{modules/common/footer :: footer}" />
+    </div>
+    <th:block th:replace="~{modules/macro/tail :: tail}" />
+  </body>
+</th:block>
+</html>
