@@ -665,7 +665,7 @@
   <th:block th:fragment="matrix">
     <a
       class="matrix"
-      th:href="${socials.socialUrl}"
+      th:href="${#strings.startsWith(socials.socialUrl, 'http') ? socials.socialUrl : 'https://matrix.to/#/' + socials.socialUrl}"
       target="_blank"
       title="Matrix"
       rel="noopener noreferrer nofollow"
