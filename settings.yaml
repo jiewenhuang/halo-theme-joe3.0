@@ -1231,6 +1231,8 @@ spec:
                   value: steam
                 - label: GitLab
                   value: gitlab
+                - label: Matrix
+                  value: matrix
             - $formkit: text
               name: socialUrl
               id: socialUrl
