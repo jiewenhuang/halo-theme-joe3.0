@@ -1231,12 +1231,14 @@ spec:
                   value: steam
                 - label: GitLab
                   value: gitlab
+                - label: Matrix
+                  value: matrix
             - $formkit: text
               name: socialUrl
               id: socialUrl
               key: socialUrl
               label: 链接
-              help: '邮箱填邮箱号，QQ填QQ号，其他填跳转链接'
+              help: '邮箱填邮箱号，QQ填QQ号，Matrix填@用户名:服务器，其他填跳转链接'
               validation: 'required'
         - $formkit: array
           name: custom_socials
