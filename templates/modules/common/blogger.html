@@ -6,8 +6,9 @@
         width="100%"
         height="120"
         class="image lazyload"
-        th:data-src="${theme.config.blogger.author_bg}"
-        th:src="@{/assets/img/author_bg.jpg}"
+        th:with="author_bg = ${theme.config.blogger.author_bg ?: #theme.assets('/img/author_bg.jpg')}"
+        th:data-src="${author_bg}"
+        th:src="${author_bg}"
         alt="博主栏壁纸"
         onerror="Joe.errorImg(this)"
       />
